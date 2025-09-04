@@ -5,12 +5,35 @@
 
 import { useState } from 'react'
 import { Course, Difficulty } from '@/domain/entities/course'
+
+// Type for plain course data that can be serialized
+type CourseData = {
+  id: { value: string }
+  title: string
+  description: string
+  slug: string
+  price: {
+    amount: number
+    currency: string
+    formatted: string
+  }
+  duration: {
+    minutes: number
+    formatted: string
+  }
+  difficulty: Difficulty
+  published: boolean
+  featured: boolean
+  learningObjectives: string[]
+  prerequisites: string[]
+  difficultyLevel: string
+}
 import { CourseCard } from './course-card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
 export interface CourseCatalogProps {
-  courses: Course[]
+  courses: CourseData[]
   onEnroll?: (courseId: string) => void
   showFilters?: boolean
   className?: string

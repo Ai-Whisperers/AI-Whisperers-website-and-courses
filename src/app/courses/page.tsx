@@ -2,6 +2,10 @@
 // Complete course catalog with filtering and search
 
 import { CourseCatalog } from '@/components/course/course-catalog'
+import { Course, Difficulty } from '@/domain/entities/course'
+import { CourseId } from '@/domain/value-objects/course-id'
+import { Money } from '@/domain/value-objects/money'
+import { Duration } from '@/domain/value-objects/duration'
 
 export const metadata = {
   title: 'AI Courses - Master Artificial Intelligence | AI Whisperers',
@@ -11,29 +15,60 @@ export const metadata = {
 export default async function CoursesPage() {
   // Mock data for initial deployment
   const courses = [
-    {
-      id: 'course-1',
+    new Course({
+      id: new CourseId('course-1'),
       title: 'AI Foundations',
       description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
       slug: 'ai-foundations',
-      price: { amount: 29900, currency: 'USD', formatted: '$299.00' },
-      duration: { minutes: 720, formatted: '12 hours' },
-      difficulty: 'BEGINNER',
+      price: new Money(29900, 'USD'),
+      duration: new Duration(720, 'minutes'),
+      difficulty: Difficulty.BEGINNER,
       published: true,
       featured: true,
-    },
-    {
-      id: 'course-2',
+      learningObjectives: ['Understand AI fundamentals', 'Build basic AI models'],
+      prerequisites: ['Basic programming knowledge'],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }),
+    new Course({
+      id: new CourseId('course-2'),
       title: 'Applied AI', 
       description: 'Build practical AI applications using modern tools and APIs.',
       slug: 'applied-ai',
-      price: { amount: 59900, currency: 'USD', formatted: '$599.00' },
-      duration: { minutes: 900, formatted: '15 hours' },
-      difficulty: 'INTERMEDIATE',
+      price: new Money(59900, 'USD'),
+      duration: new Duration(900, 'minutes'),
+      difficulty: Difficulty.INTERMEDIATE,
       published: true,
       featured: true,
-    }
+      learningObjectives: ['Build AI applications', 'Use modern AI APIs'],
+      prerequisites: ['Completed AI Foundations', 'Python knowledge'],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
   ]
+
+  // Convert Course entities to plain objects for client component
+  const coursesData = courses.map(course => ({
+    id: { value: course.id.value },
+    title: course.title,
+    description: course.description,
+    slug: course.slug,
+    price: {
+      amount: course.price.amount,
+      currency: course.price.currency,
+      formatted: course.price.formatUSD()
+    },
+    duration: {
+      minutes: course.duration.minutes,
+      formatted: course.duration.formatHumanReadable()
+    },
+    difficulty: course.difficulty,
+    published: course.published,
+    featured: course.featured,
+    learningObjectives: course.learningObjectives,
+    prerequisites: course.prerequisites,
+    difficultyLevel: course.getDifficultyLevel()
+  }))
 
   return (
     <div className="container mx-auto py-12 px-4">
@@ -48,11 +83,11 @@ export default async function CoursesPage() {
       </div>
       
       <CourseCatalog 
-        courses={courses} 
+        courses={coursesData} 
         showFilters={true}
       />
       
-      {courses.length === 0 && (
+      {coursesData.length === 0 && (
         <div className="text-center py-24">
           <h2 className="text-2xl font-semibold mb-4">
             Courses Coming Soon

@@ -1,29 +1,19 @@
 // API Route: Health Check
-// Health check endpoint with database connectivity verification
+// Health check endpoint for application status
 
 import { NextResponse } from 'next/server'
-import { prisma } from '@/infrastructure/database/prisma-client'
 
 export async function GET() {
   try {
-    // Test database connection
-    await prisma.$connect()
-    const dbStatus = await prisma.$queryRaw`SELECT 1 as test`
-    
     return NextResponse.json({
       status: 'healthy',
       timestamp: new Date().toISOString(),
       services: {
         application: 'running',
-        api: 'operational',
-        database: 'connected'
+        api: 'operational'
       },
       version: '0.1.0',
-      environment: process.env.NODE_ENV || 'development',
-      database: {
-        connected: true,
-        query_test: dbStatus ? 'passed' : 'failed'
-      }
+      environment: process.env.NODE_ENV || 'development'
     })
   } catch (error) {
     return NextResponse.json(
@@ -33,13 +23,10 @@ export async function GET() {
         timestamp: new Date().toISOString(),
         services: {
           application: 'running',
-          api: 'operational', 
-          database: 'disconnected'
+          api: 'operational'
         }
       },
       { status: 503 }
     )
-  } finally {
-    await prisma.$disconnect()
   }
 }

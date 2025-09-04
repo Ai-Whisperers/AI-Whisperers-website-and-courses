@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 // Generate metadata from content
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPageContent('services')
+  const content = await getPageContent('servicios')
   
   return {
     title: content.meta.title,
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ServicesPageRoute() {
   // Load content from YAML file
-  const content = await getPageContent('services')
+  const content = await getPageContent('servicios')
   
   return <ServicesPage content={content} />
 }

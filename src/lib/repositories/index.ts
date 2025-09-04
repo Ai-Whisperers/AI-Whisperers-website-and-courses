@@ -1,15 +1,14 @@
 // Repository Index
 // Centralized exports for all repository implementations
+// Note: Currently using in-memory implementations since database is removed
 
-export { PrismaCourseRepository } from '../../infrastructure/database/prisma-course-repository'
-export { PrismaUserRepository } from '../../infrastructure/database/prisma-user-repository'
-export { prisma } from '../../infrastructure/database/prisma-client'
-
-// Repository factory functions
+// Repository factory functions would be implemented here when adding persistent storage
 export function createCourseRepository() {
-  return new PrismaCourseRepository(prisma)
+  // TODO: Implement in-memory or file-based course repository
+  throw new Error('Course repository not implemented without database')
 }
 
 export function createUserRepository() {
-  return new PrismaUserRepository(prisma)
+  // TODO: Implement in-memory or file-based user repository  
+  throw new Error('User repository not implemented without database')
 }

@@ -4,14 +4,35 @@
 'use client'
 
 import Link from 'next/link'
-import { Course } from '@/domain/entities/course'
+// Type for plain course data that can be serialized
+type CourseData = {
+  id: { value: string }
+  title: string
+  description: string
+  slug: string
+  price: {
+    amount: number
+    currency: string
+    formatted: string
+  }
+  duration: {
+    minutes: number
+    formatted: string
+  }
+  difficulty: string
+  published: boolean
+  featured: boolean
+  learningObjectives: string[]
+  prerequisites: string[]
+  difficultyLevel: string
+}
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { formatCurrency, formatDuration, truncateText } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 
 export interface CourseCardProps {
-  course: Course
+  course: CourseData
   showEnrollButton?: boolean
   onEnroll?: (courseId: string) => void
   className?: string
@@ -49,7 +70,7 @@ export function CourseCard({
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
           <Badge className={getDifficultyColor(course.difficulty)}>
-            {course.getDifficultyLevel()}
+            {course.difficultyLevel}
           </Badge>
           {course.featured && (
             <Badge variant="secondary">Featured</Badge>
@@ -73,9 +94,9 @@ export function CourseCard({
       <CardContent className="flex-grow">
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>{formatDuration(course.duration.minutes)}</span>
+            <span>{course.duration.formatted}</span>
             <span className="font-semibold text-primary">
-              {course.isFree() ? 'Free' : formatCurrency(course.price.amount)}
+              {course.price.amount === 0 ? 'Free' : course.price.formatted}
             </span>
           </div>
 
@@ -102,13 +123,13 @@ export function CourseCard({
 
       <CardFooter className="pt-4">
         <div className="w-full space-y-2">
-          {showEnrollButton && course.canEnroll() && (
+          {showEnrollButton && course.published && (
             <Button 
               onClick={handleEnrollClick}
               className="w-full"
               size="lg"
             >
-              {course.isFree() ? 'Enroll Free' : `Enroll for ${formatCurrency(course.price.amount)}`}
+              {course.price.amount === 0 ? 'Enroll Free' : `Enroll for ${course.price.formatted}`}
             </Button>
           )}
           

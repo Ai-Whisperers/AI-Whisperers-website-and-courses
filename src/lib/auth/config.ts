@@ -2,17 +2,11 @@
 // NextAuth.js configuration following security best practices
 
 import { NextAuthOptions } from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import EmailProvider from 'next-auth/providers/email'
-import { prisma } from '@/infrastructure/database/prisma-client'
-import { User, UserRole } from '@/domain/entities/user'
-import { UserId } from '@/domain/value-objects/user-id'
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
-  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -38,7 +32,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   session: {
-    strategy: 'database',
+    strategy: 'jwt',
   },
 
   pages: {
@@ -49,13 +43,21 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async session({ session, user }) {
-      if (session.user && user) {
-        session.user.id = user.id
-        session.user.role = (user as any).role || UserRole.STUDENT
-        session.user.emailVerified = user.emailVerified
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.sub!
+        session.user.role = (token.role as string) || 'STUDENT'
+        session.user.emailVerified = token.emailVerified as Date
       }
       return session
+    },
+
+    async jwt({ token, user, account, profile }) {
+      if (user) {
+        token.role = 'STUDENT' // Default role since we don't have database
+        token.emailVerified = new Date() // Assume email is verified for OAuth providers
+      }
+      return token
     },
 
     async signIn({ user, account, profile, email, credentials }) {
