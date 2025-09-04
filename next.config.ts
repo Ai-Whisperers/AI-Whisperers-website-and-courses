@@ -6,10 +6,19 @@ const nextConfig: NextConfig = {
   
   // Image optimization configuration
   images: {
-    domains: [
-      'ui-avatars.com', // External avatar service
-      'aiparaguay.com', // Production domain
-      'localhost'      // Development
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.onrender.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 86400, // 24 hours
@@ -62,7 +71,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
               "font-src 'self' fonts.gstatic.com",
-              "img-src 'self' data: blob: ui-avatars.com",
+              "img-src 'self' data: blob: ui-avatars.com *.onrender.com",
               "connect-src 'self' vitals.vercel-insights.com",
             ].join('; ')
           }
@@ -86,7 +95,7 @@ const nextConfig: NextConfig = {
   // Environment-specific configurations
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NODE_ENV === 'production' 
-      ? 'https://aiparaguay.com' 
+      ? process.env.RENDER_EXTERNAL_URL || 'https://your-app-name.onrender.com'
       : 'http://localhost:3000',
   },
 

@@ -1,0 +1,42 @@
+# Render.com Blueprint for AI Whisperers Platform
+# This file automates the deployment of both web service and database
+
+services:
+  - type: web
+    name: ai-whisperers-web
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        fromService:
+          type: web
+          name: ai-whisperers-web
+          property: host
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ai-whisperers-db
+          property: connectionString
+      # Optional environment variables (set manually in dashboard)
+      # - key: GOOGLE_CLIENT_ID
+      #   value: your-google-client-id
+      # - key: GOOGLE_CLIENT_SECRET
+      #   value: your-google-client-secret
+      # - key: GITHUB_CLIENT_ID
+      #   value: your-github-client-id
+      # - key: GITHUB_CLIENT_SECRET
+      #   value: your-github-client-secret
+
+databases:
+  - name: ai-whisperers-db
+    databaseName: aiwhisperers
+    user: aiwhisperers_user
+    plan: starter
+    region: oregon
+    postgresMajorVersion: 14
