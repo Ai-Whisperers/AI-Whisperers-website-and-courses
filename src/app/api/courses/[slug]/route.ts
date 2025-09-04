@@ -52,17 +52,6 @@ export async function GET(
   } catch (error) {
     console.error(`Failed to fetch course ${params.slug}:`, error)
     
-    if (error instanceof CourseNotFoundError) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Course not found',
-          message: `Course with slug '${params.slug}' does not exist`
-        },
-        { status: 404 }
-      )
-    }
-
     return NextResponse.json(
       {
         success: false,
