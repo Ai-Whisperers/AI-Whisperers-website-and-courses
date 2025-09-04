@@ -6,6 +6,25 @@ meta:
     - "data protection"
     - "personal information"
     - "GDPR compliance"
+  language: "en"
+
+navigation:
+  brand:
+    text: "AI Whisperers"
+  items:
+    - text: "Home"
+      href: "/"
+    - text: "Services"
+      href: "/services"
+    - text: "Courses"
+      href: "/courses"
+    - text: "About"
+      href: "/about"
+    - text: "Contact"
+      href: "/contact"
+  cta:
+    text: "Get Started"
+    variant: "default"
 
 hero:
   title: "Privacy Policy"
@@ -47,3 +66,8 @@ sections:
     content: |
       If you have questions about this Privacy Policy or our data practices, 
       please contact us at privacy@aiwhisperers.com or through our support channels.
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. All rights reserved."

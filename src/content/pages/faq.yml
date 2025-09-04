@@ -7,6 +7,25 @@ meta:
     - "course information"
     - "enrollment"
     - "support"
+  language: "en"
+
+navigation:
+  brand:
+    text: "AI Whisperers"
+  items:
+    - text: "Home"
+      href: "/"
+    - text: "Services"
+      href: "/services"
+    - text: "Courses"
+      href: "/courses"
+    - text: "About"
+      href: "/about"
+    - text: "Contact"
+      href: "/contact"
+  cta:
+    text: "Get Started"
+    variant: "default"
 
 hero:
   title: "Frequently Asked Questions"
@@ -39,3 +58,8 @@ categories:
         answer: "Yes, our platform is fully responsive and works on all devices including smartphones and tablets."
       - question: "Do I get a certificate upon completion?"
         answer: "Yes, you'll receive a verifiable certificate of completion that you can add to your LinkedIn profile."
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. All rights reserved."

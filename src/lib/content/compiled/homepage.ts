@@ -17,6 +17,37 @@ export const homepageContent: PageContent = {
     ],
     "language": "en"
   },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
   "hero": {
     "title": "Master AI with World-Class Education",
     "subtitle": "Transform your career with comprehensive AI courses from beginner to expert",
@@ -83,7 +114,13 @@ export const homepageContent: PageContent = {
       "content": "Applied AI course helped me integrate AI into our products. The real-world projects were incredibly valuable.",
       "rating": 5
     }
-  ]
+  ],
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
 } as const;
 
 export default homepageContent;

@@ -16,6 +16,37 @@ export const faqContent: PageContent = {
     ],
     "language": "en"
   },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
   "hero": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about our AI courses and platform"
@@ -72,7 +103,13 @@ export const faqContent: PageContent = {
         }
       ]
     }
-  ]
+  ],
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
 } as const;
 
 export default faqContent;

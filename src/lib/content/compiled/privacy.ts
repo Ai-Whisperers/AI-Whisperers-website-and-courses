@@ -15,6 +15,37 @@ export const privacyContent: PageContent = {
     ],
     "language": "en"
   },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
   "hero": {
     "title": "Privacy Policy",
     "subtitle": "Your privacy is important to us",
@@ -45,7 +76,13 @@ export const privacyContent: PageContent = {
       "title": "Contact Us",
       "content": "If you have questions about this Privacy Policy or our data practices, \nplease contact us at privacy@aiwhisperers.com or through our support channels.\n"
     }
-  ]
+  ],
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
 } as const;
 
 export default privacyContent;
