@@ -12,7 +12,7 @@ import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
 
 interface CoursePageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 async function getCourseBySlug(slug: string) {
@@ -35,7 +35,8 @@ async function getCourseBySlug(slug: string) {
 }
 
 export async function generateMetadata({ params }: CoursePageProps) {
-  const course = await getCourseBySlug(params.slug)
+  const resolvedParams = await params
+  const course = await getCourseBySlug(resolvedParams.slug)
   
   if (!course) {
     return {
@@ -56,7 +57,8 @@ export async function generateMetadata({ params }: CoursePageProps) {
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
-  const course = await getCourseBySlug(params.slug)
+  const resolvedParams = await params
+  const course = await getCourseBySlug(resolvedParams.slug)
   
   if (!course || !course.canEnroll()) {
     notFound()

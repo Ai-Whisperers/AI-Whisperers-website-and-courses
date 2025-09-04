@@ -5,8 +5,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  const resolvedParams = await params
+  
   try {
     // Mock course data for initial deployment
     const mockCourses: Record<string, any> = {
@@ -31,14 +33,14 @@ export async function GET(
       }
     }
     
-    const course = mockCourses[params.slug]
+    const course = mockCourses[resolvedParams.slug]
     
     if (!course) {
       return NextResponse.json(
         {
           success: false,
           error: 'Course not found',
-          message: `Course with slug '${params.slug}' does not exist`
+          message: `Course with slug '${resolvedParams.slug}' does not exist`
         },
         { status: 404 }
       )
@@ -50,7 +52,7 @@ export async function GET(
     })
 
   } catch (error) {
-    console.error(`Failed to fetch course ${params.slug}:`, error)
+    console.error(`Failed to fetch course ${resolvedParams.slug}:`, error)
     
     return NextResponse.json(
       {

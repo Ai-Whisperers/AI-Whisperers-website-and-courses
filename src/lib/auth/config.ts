@@ -6,30 +6,63 @@ import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import EmailProvider from 'next-auth/providers/email'
 
-export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    
-    GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    }),
-    
-    EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
+// Environment variable validation
+function validateEnvVar(name: string, value: string | undefined): string {
+  if (!value || value.trim() === '') {
+    throw new Error(`Missing required environment variable: ${name}`)
+  }
+  return value.trim()
+}
+
+// Build providers array dynamically based on available environment variables
+function buildProviders() {
+  const providers = []
+  
+  try {
+    if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+      providers.push(GoogleProvider({
+        clientId: validateEnvVar('GOOGLE_CLIENT_ID', process.env.GOOGLE_CLIENT_ID),
+        clientSecret: validateEnvVar('GOOGLE_CLIENT_SECRET', process.env.GOOGLE_CLIENT_SECRET),
+      }))
+    }
+  } catch (error) {
+    console.warn('Google OAuth not configured:', error)
+  }
+  
+  try {
+    if (process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET) {
+      providers.push(GitHubProvider({
+        clientId: validateEnvVar('GITHUB_CLIENT_ID', process.env.GITHUB_CLIENT_ID),
+        clientSecret: validateEnvVar('GITHUB_CLIENT_SECRET', process.env.GITHUB_CLIENT_SECRET),
+      }))
+    }
+  } catch (error) {
+    console.warn('GitHub OAuth not configured:', error)
+  }
+  
+  try {
+    if (process.env.EMAIL_SERVER_HOST && process.env.EMAIL_FROM) {
+      providers.push(EmailProvider({
+        server: {
+          host: process.env.EMAIL_SERVER_HOST,
+          port: process.env.EMAIL_SERVER_PORT,
+          auth: {
+            user: process.env.EMAIL_SERVER_USER,
+            pass: process.env.EMAIL_SERVER_PASSWORD,
+          },
         },
-      },
-      from: process.env.EMAIL_FROM,
-    }),
-  ],
+        from: process.env.EMAIL_FROM,
+      }))
+    }
+  } catch (error) {
+    console.warn('Email provider not configured:', error)
+  }
+  
+  return providers
+}
+
+export const authOptions: NextAuthOptions = {
+  providers: buildProviders(),
 
   session: {
     strategy: 'jwt',

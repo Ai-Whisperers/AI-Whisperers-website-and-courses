@@ -14,11 +14,12 @@ import type { Language } from '@/lib/i18n/types'
 export async function getPageContent(pageName: string, language?: Language): Promise<PageContent> {
   try {
     // Use EnhancedContentLoader to support $use references
-    const rawContent = await EnhancedContentLoader.loadPageContent(pageName, language || 'en') as any
+    const rawContent = await EnhancedContentLoader.loadPageContent(pageName, language || 'en')
     
-    // Validate that the content has required structure
-    if (!rawContent || !rawContent.meta) {
-      console.warn(`Content for ${pageName} is missing required structure, using fallback`)
+    // Type-safe validation of content structure
+    if (!isValidPageContent(rawContent)) {
+      console.warn(`Content for ${pageName} failed validation, using fallback. Received:`, 
+        typeof rawContent === 'object' ? Object.keys(rawContent || {}) : typeof rawContent)
       return getFallbackPageContent(pageName)
     }
     
@@ -30,6 +31,7 @@ export async function getPageContent(pageName: string, language?: Language): Pro
   } catch (error) {
     console.error(`Failed to load page content for ${pageName} (${language}):`, error)
     console.error('Error details:', error instanceof Error ? error.message : String(error))
+    console.error('Stack trace:', error instanceof Error ? error.stack : 'No stack trace available')
     
     // Return fallback content structure to prevent crashes
     return getFallbackPageContent(pageName)
@@ -70,6 +72,30 @@ export async function getAllPagesContent(): Promise<Record<string, PageContent>>
     console.error('Failed to load all pages content:', error)
     return {}
   }
+}
+
+/**
+ * Type-safe validation for page content structure
+ */
+function isValidPageContent(content: unknown): content is Record<string, any> {
+  if (!content || typeof content !== 'object') {
+    return false
+  }
+  
+  const contentObj = content as Record<string, any>
+  
+  // Check for minimum required structure
+  if (!contentObj.meta || typeof contentObj.meta !== 'object') {
+    return false
+  }
+  
+  // Meta object should have at least title and description
+  const meta = contentObj.meta as Record<string, any>
+  if (typeof meta.title !== 'string' || typeof meta.description !== 'string') {
+    return false
+  }
+  
+  return true
 }
 
 /**

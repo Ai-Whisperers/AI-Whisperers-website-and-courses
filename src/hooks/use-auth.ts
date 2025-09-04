@@ -7,6 +7,26 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { UserRole } from '@/domain/entities/user'
 
+// Extended NextAuth user type with our custom properties
+declare module 'next-auth' {
+  interface User {
+    id: string
+    role?: UserRole
+    emailVerified?: Date
+  }
+  
+  interface Session {
+    user: {
+      id: string
+      name?: string | null
+      email?: string | null
+      image?: string | null
+      role?: UserRole
+      emailVerified?: Date
+    }
+  }
+}
+
 export interface AuthUser {
   id: string
   email: string
@@ -19,12 +39,12 @@ export function useAuth() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const user = session?.user ? {
-    id: session.user.id!,
-    email: session.user.email!,
-    name: session.user.name,
-    role: (session.user as any).role || UserRole.STUDENT,
-    emailVerified: (session.user as any).emailVerified,
+  const user = session?.user && session.user.id && session.user.email ? {
+    id: session.user.id,
+    email: session.user.email,
+    name: session.user.name ?? undefined,
+    role: session.user.role ?? UserRole.STUDENT,
+    emailVerified: session.user.emailVerified,
   } as AuthUser : null
 
   const isLoading = status === 'loading'

@@ -126,15 +126,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // Performance optimizations
-  experimental: {
-    optimizePackageImports: [
-      'lucide-react',
-      'framer-motion',
-      '@radix-ui/react-slot'
-    ],
-  },
-  
   // Skip middleware URL normalization
   skipMiddlewareUrlNormalize: true,
 };
