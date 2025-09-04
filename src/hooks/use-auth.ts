@@ -33,19 +33,32 @@ export interface AuthUser {
   name?: string
   role: UserRole
   emailVerified?: Date
+  // Domain entity methods for UI compatibility
+  canAccessAdmin(): boolean
+  canManageCourses(): boolean
+  isAdmin(): boolean
+  isInstructor(): boolean
 }
 
 export function useAuth() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const user = session?.user && session.user.id && session.user.email ? {
-    id: session.user.id,
-    email: session.user.email,
-    name: session.user.name ?? undefined,
-    role: session.user.role ?? UserRole.STUDENT,
-    emailVerified: session.user.emailVerified,
-  } as AuthUser : null
+  const user = session?.user && session.user.id && session.user.email ? (() => {
+    const role = session.user.role ?? UserRole.STUDENT
+    return {
+      id: session.user.id,
+      email: session.user.email,
+      name: session.user.name ?? undefined,
+      role,
+      emailVerified: session.user.emailVerified,
+      // Domain entity methods for UI compatibility
+      isAdmin: () => role === UserRole.ADMIN,
+      isInstructor: () => role === UserRole.INSTRUCTOR,
+      canAccessAdmin: () => role === UserRole.ADMIN,
+      canManageCourses: () => role === UserRole.INSTRUCTOR || role === UserRole.ADMIN,
+    } satisfies AuthUser
+  })() : null
 
   const isLoading = status === 'loading'
   const isAuthenticated = status === 'authenticated'

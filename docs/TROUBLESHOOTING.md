@@ -98,7 +98,32 @@ export function AboutPage({ content }: AboutPageProps) {
 }
 ```
 
-### **4. NextAuth Configuration Error**
+### **4. Authentication Interface Missing Methods** 
+**Error**: `Property 'canAccessAdmin' does not exist on type 'AuthUser'`
+**Files**: `src/components/layout/navigation.tsx:71,161`
+**Impact**: Guaranteed runtime crashes when admin features accessed
+
+**Solution**: ✅ **FIXED**
+```typescript
+// Added missing methods to AuthUser interface
+export interface AuthUser {
+  // ... existing properties
+  canAccessAdmin(): boolean
+  canManageCourses(): boolean  
+  isAdmin(): boolean
+  isInstructor(): boolean
+}
+
+// Implemented in useAuth hook
+const user = {
+  // ... user properties
+  isAdmin: () => role === UserRole.ADMIN,
+  canAccessAdmin: () => role === UserRole.ADMIN,
+  canManageCourses: () => role === UserRole.INSTRUCTOR || role === UserRole.ADMIN,
+}
+```
+
+### **5. NextAuth Configuration Error**
 **Error**: `Object literal may only specify known properties, and 'signUp' does not exist`
 **File**: `src/lib/auth/config.ts:73`
 
