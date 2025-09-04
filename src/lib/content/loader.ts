@@ -99,7 +99,7 @@ export class ContentLoader {
       const basePath = pathParts.join('.');
       
       // Try language-specific file first
-      const languagePath = path.join(process.cwd(), 'content', `${basePath}.${language}.${extension}`);
+      const languagePath = path.join(process.cwd(), 'src', 'content', `${basePath}.${language}.${extension}`);
       
       if (fs.existsSync(languagePath)) {
         return languagePath;
@@ -107,7 +107,7 @@ export class ContentLoader {
     }
     
     // Default to standard path
-    return path.join(process.cwd(), 'content', contentPath);
+    return path.join(process.cwd(), 'src', 'content', contentPath);
   }
   
   /**
@@ -116,7 +116,7 @@ export class ContentLoader {
    */
   public async getAvailablePages(): Promise<string[]> {
     try {
-      const pagesDirectory = path.join(process.cwd(), 'content', 'pages');
+      const pagesDirectory = path.join(process.cwd(), 'src', 'content', 'pages');
       const files = await fs.promises.readdir(pagesDirectory);
       
       return files

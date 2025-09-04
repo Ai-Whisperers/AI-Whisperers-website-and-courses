@@ -14,9 +14,22 @@ import type { Language } from '@/lib/i18n/types'
 export async function getPageContent(pageName: string, language?: Language): Promise<PageContent> {
   try {
     // Use EnhancedContentLoader to support $use references
-    return await EnhancedContentLoader.loadPageContent(pageName, language || 'en') as PageContent
+    const rawContent = await EnhancedContentLoader.loadPageContent(pageName, language || 'en') as any
+    
+    // Validate that the content has required structure
+    if (!rawContent || !rawContent.meta) {
+      console.warn(`Content for ${pageName} is missing required structure, using fallback`)
+      return getFallbackPageContent(pageName)
+    }
+    
+    // Merge with fallback to ensure all required properties exist
+    const fallback = getFallbackPageContent(pageName)
+    const content = mergeContentWithFallback(rawContent, fallback)
+    
+    return content
   } catch (error) {
     console.error(`Failed to load page content for ${pageName} (${language}):`, error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     
     // Return fallback content structure to prevent crashes
     return getFallbackPageContent(pageName)
@@ -56,6 +69,23 @@ export async function getAllPagesContent(): Promise<Record<string, PageContent>>
   } catch (error) {
     console.error('Failed to load all pages content:', error)
     return {}
+  }
+}
+
+/**
+ * Merge loaded content with fallback to ensure all required properties exist
+ */
+function mergeContentWithFallback(content: any, fallback: PageContent): PageContent {
+  return {
+    meta: content.meta || fallback.meta,
+    navigation: content.navigation || fallback.navigation,
+    hero: content.hero || fallback.hero,
+    features: content.features || fallback.features,
+    stats: content.stats || fallback.stats,
+    contact: content.contact || fallback.contact,
+    footer: content.footer || fallback.footer,
+    // Preserve any additional properties from the loaded content
+    ...content
   }
 }
 
