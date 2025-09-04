@@ -2,103 +2,49 @@
 // RESTful API for specific course details
 
 import { NextRequest, NextResponse } from 'next/server'
+import { CourseService } from '@/lib/services/course.service'
+import { createCourseRepository } from '@/lib/repositories'
+import { CourseNotFoundError } from '@/domain/errors/domain-errors'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
-    // Mock course data for initial deployment
-    // TODO: Replace with actual database queries after successful deployment
-    const mockCourses: Record<string, any> = {
-      'ai-foundations': {
-        id: 'course-1',
-        title: 'AI Foundations',
-        description: 'Learn the fundamentals of artificial intelligence with hands-on projects and real-world applications. Perfect for beginners with no prior AI experience.',
-        slug: 'ai-foundations',
-        price: {
-          amount: 29900,
-          currency: 'USD',
-          formatted: '$299.00'
-        },
-        duration: {
-          minutes: 720,
-          formatted: '12 hours'
-        },
-        difficulty: 'BEGINNER',
-        difficultyLevel: 'Beginner Friendly',
-        published: true,
-        featured: true,
-        learningObjectives: [
-          'Understand AI concepts and terminology',
-          'Learn about machine learning basics',
-          'Explore AI applications in various industries',
-          'Build your first AI project'
-        ],
-        prerequisites: [
-          'Basic computer literacy',
-          'High school mathematics',
-          'No programming experience required'
-        ],
-        canEnroll: true,
-        isFree: false,
-        isAdvanced: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
+    const courseService = new CourseService(createCourseRepository())
+    const course = await courseService.getCourseBySlug(params.slug)
+
+    // Transform domain entity to JSON-serializable format
+    const courseData = {
+      id: course.id.value,
+      title: course.title,
+      description: course.description,
+      slug: course.slug,
+      price: {
+        amount: course.price.amount,
+        currency: course.price.currency,
+        formatted: course.price.formatUSD()
       },
-      'applied-ai': {
-        id: 'course-2',
-        title: 'Applied AI',
-        description: 'Build practical AI applications using modern tools and APIs. Learn to integrate AI into real-world projects.',
-        slug: 'applied-ai',
-        price: {
-          amount: 59900,
-          currency: 'USD',
-          formatted: '$599.00'
-        },
-        duration: {
-          minutes: 900,
-          formatted: '15 hours'
-        },
-        difficulty: 'INTERMEDIATE',
-        difficultyLevel: 'Intermediate Level',
-        published: true,
-        featured: true,
-        learningObjectives: [
-          'Build AI applications with APIs',
-          'Integrate AI into existing systems',
-          'Deploy AI solutions to production',
-          'Work with popular AI frameworks'
-        ],
-        prerequisites: [
-          'Basic programming knowledge',
-          'Completion of AI Foundations course',
-          'Understanding of web development basics'
-        ],
-        canEnroll: true,
-        isFree: false,
-        isAdvanced: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
-      }
-    }
-
-    const course = mockCourses[params.slug]
-
-    if (!course) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Course not found',
-          message: `Course with slug '${params.slug}' does not exist`
-        },
-        { status: 404 }
-      )
+      duration: {
+        minutes: course.duration.minutes,
+        formatted: course.duration.formatHumanReadable()
+      },
+      difficulty: course.difficulty,
+      difficultyLevel: course.getDifficultyLevel(),
+      published: course.published,
+      featured: course.featured,
+      learningObjectives: course.learningObjectives,
+      prerequisites: course.prerequisites,
+      canEnroll: course.canEnroll(),
+      isFree: course.isFree(),
+      isAdvanced: course.isAdvanced(),
+      createdAt: course.createdAt,
+      updatedAt: course.updatedAt
     }
 
     return NextResponse.json({
       success: true,
-      course: course
+      course: courseData
     })
 
   } catch (error) {

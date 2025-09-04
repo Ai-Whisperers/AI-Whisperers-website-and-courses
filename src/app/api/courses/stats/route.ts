@@ -2,25 +2,21 @@
 // Administrative endpoint for course analytics
 
 import { NextResponse } from 'next/server'
+import { CourseService } from '@/lib/services/course.service'
+import { createCourseRepository } from '@/lib/repositories'
 
 export async function GET() {
   try {
-    // Mock statistics for initial deployment
-    // TODO: Replace with actual database queries after successful deployment
-    const mockStats = {
-      totalCourses: 4,
-      publishedCourses: 4,
-      featuredCourses: 2,
-      draftCourses: 0
-    }
+    const courseService = new CourseService(createCourseRepository())
+    const stats = await courseService.getCourseStats()
 
     return NextResponse.json({
       success: true,
       stats: {
-        total: mockStats.totalCourses,
-        published: mockStats.publishedCourses,
-        featured: mockStats.featuredCourses,
-        draft: mockStats.draftCourses
+        total: stats.totalCourses,
+        published: stats.publishedCourses,
+        featured: stats.featuredCourses,
+        draft: stats.totalCourses - stats.publishedCourses
       }
     })
 

@@ -3,7 +3,8 @@
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-// Import removed for initial deployment
+import { CourseService } from '@/lib/services/course.service'
+import { createCourseRepository } from '@/lib/repositories'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -16,41 +17,12 @@ interface CoursePageProps {
 }
 
 async function getCourseBySlug(slug: string) {
-  // Mock data for initial deployment
-  // TODO: Replace with actual API call after successful deployment
-  const mockCourses: Record<string, any> = {
-    'ai-foundations': {
-      title: 'AI Foundations',
-      description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
-      slug: 'ai-foundations',
-      price: { amount: 29900, formatted: '$299.00' },
-      duration: { formatted: '12 hours' },
-      difficulty: 'BEGINNER',
-      published: true,
-      learningObjectives: [
-        'Understand AI concepts and terminology',
-        'Learn machine learning basics',
-        'Build your first AI project'
-      ],
-      prerequisites: ['Basic computer literacy']
-    },
-    'applied-ai': {
-      title: 'Applied AI',
-      description: 'Build practical AI applications using modern tools and APIs.',
-      slug: 'applied-ai',
-      price: { amount: 59900, formatted: '$599.00' },
-      duration: { formatted: '15 hours' },
-      difficulty: 'INTERMEDIATE',
-      published: true,
-      learningObjectives: [
-        'Build AI applications with APIs',
-        'Deploy AI solutions to production'
-      ],
-      prerequisites: ['Basic programming knowledge']
-    }
+  const courseService = new CourseService(createCourseRepository())
+  try {
+    return await courseService.getCourseBySlug(slug)
+  } catch (error) {
+    return null
   }
-  
-  return mockCourses[slug] || null
 }
 
 export async function generateMetadata({ params }: CoursePageProps) {
