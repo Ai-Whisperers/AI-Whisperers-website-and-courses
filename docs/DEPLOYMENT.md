@@ -379,9 +379,15 @@ ANALYZE=true npm run build
 
 1. **Environment Variables**: Never commit secrets to repository
 2. **HTTPS Only**: Automatic SSL certificate from Render
-3. **Security Headers**: Configured in next.config.ts
-4. **Content Security Policy**: XSS protection enabled
-5. **OAuth Security**: Secure OAuth provider configuration
+3. **Security Headers**: Comprehensive security headers configured in next.config.ts
+4. **Content Security Policy**: Enhanced secure CSP configuration
+   - **Removed unsafe-eval**: Prevents arbitrary code execution vulnerabilities
+   - **Removed unsafe-inline for scripts**: Blocks inline script injection attacks
+   - **Added object-src 'none'**: Prevents object/embed injection
+   - **Added base-uri 'self'**: Prevents base tag injection attacks
+   - **Added form-action 'self'**: Restricts form submissions to same origin
+   - **Maintains style flexibility**: Keeps unsafe-inline for styles (Tailwind CSS compatibility)
+5. **OAuth Security**: Secure OAuth provider configuration with environment validation
 
 ### Security Checklist
 

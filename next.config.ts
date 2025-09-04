@@ -63,16 +63,19 @@ const nextConfig: NextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
           },
-          // Content Security Policy
+          // Content Security Policy (Secure Configuration)
           {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-              "style-src 'self' 'unsafe-inline' fonts.googleapis.com",
+              "script-src 'self'", // Removed unsafe-eval and unsafe-inline for security
+              "style-src 'self' 'unsafe-inline' fonts.googleapis.com", // Keep unsafe-inline for Tailwind CSS
               "font-src 'self' fonts.gstatic.com",
               "img-src 'self' data: blob: ui-avatars.com *.onrender.com",
               "connect-src 'self' vitals.vercel-insights.com",
+              "object-src 'none'", // Additional security - prevent object/embed injection
+              "base-uri 'self'", // Prevent base tag injection attacks
+              "form-action 'self'", // Restrict form submissions to same origin
             ].join('; ')
           }
         ],
