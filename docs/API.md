@@ -1,99 +1,86 @@
-# AI Whisperers - API Documentation
+# AI Whisperers - API Documentation (Database-Free)
 
-## 📋 API Overview
+## 📋 API Overview (Updated)
 
-The AI Whisperers platform provides a comprehensive REST API following RESTful principles and clean architecture patterns. All endpoints return JSON responses and implement proper HTTP status codes and error handling.
+The AI Whisperers platform provides a **simplified REST API** optimized for stateless operation without database dependencies. All endpoints use mock data and in-memory operations, making the system highly reliable and deployment-friendly.
 
-### Base URL
+### Base URLs
 - **Development**: `http://localhost:3000/api`
-- **Production**: `https://your-domain.com/api`
+- **Production**: `https://your-app-name.onrender.com/api`
 
 ### Authentication
-Most endpoints require authentication using NextAuth.js session cookies. Protected endpoints will return `401 Unauthorized` if not authenticated.
+Authentication is handled via **NextAuth.js JWT tokens**. Protected endpoints validate JWT tokens without database lookups.
 
-### Response Format
-All API responses follow a consistent format:
+### Response Format Standards
 
+**Success Response**:
 ```json
 {
   "success": true,
   "data": {},
-  "message": "Optional success message",
-  "pagination": {} // For paginated responses
+  "message": "Optional success message"
 }
 ```
 
-### Error Format
-Error responses follow this structure:
-
+**Error Response**:
 ```json
 {
   "success": false,
   "error": "Error type",
-  "message": "Human-readable error message",
-  "details": {} // Optional error details
+  "message": "Human readable error message"
 }
 ```
 
-## 🔐 Authentication Endpoints
+## 🔍 API Endpoints
 
-### NextAuth.js Integration
+### Health Check API
 
-Authentication is handled by NextAuth.js at `/api/auth/*`. The following endpoints are automatically available:
+#### `GET /api/health`
+**Purpose**: Application health monitoring and status verification
 
-- `GET /api/auth/session` - Get current session
-- `GET /api/auth/signin` - Sign in page
-- `POST /api/auth/signin/:provider` - Sign in with provider
-- `GET /api/auth/signout` - Sign out
-- `POST /api/auth/signout` - Sign out (POST)
-- `GET /api/auth/callback/:provider` - OAuth callback
-
-### Session Response
+**Response**:
 ```json
 {
-  "user": {
-    "id": "clx1x2x3x4x5x6x7x8x9x0",
-    "email": "user@example.com",
-    "name": "John Doe",
-    "image": "https://example.com/avatar.jpg",
-    "role": "STUDENT",
-    "emailVerified": "2024-01-01T00:00:00.000Z"
+  "status": "healthy",
+  "timestamp": "2025-09-04T12:00:00.000Z",
+  "services": {
+    "application": "running",
+    "api": "operational"
   },
-  "expires": "2024-02-01T00:00:00.000Z"
+  "version": "0.1.0",
+  "environment": "production"
 }
 ```
 
-## 📚 Course Management API
+**Status Codes**:
+- `200`: Application healthy
+- `503`: Application unhealthy
 
-### Get All Courses
-
-**Endpoint**: `GET /api/courses`
-
-**Description**: Retrieve a list of all courses with optional filtering.
-
-**Query Parameters**:
-- `published` (boolean): Filter by published status
-- `featured` (boolean): Get only featured courses
-- `difficulty` (string): Filter by difficulty level (BEGINNER, INTERMEDIATE, ADVANCED, EXPERT)
-
-**Example Request**:
+**Usage**:
 ```bash
-GET /api/courses?published=true&difficulty=BEGINNER
+curl https://your-app.onrender.com/api/health
 ```
 
-**Success Response** (200):
+**Implementation**: `src/app/api/health/route.ts`
+
+### Course API
+
+#### `GET /api/courses`
+**Purpose**: Get list of available courses
+
+**Response**:
 ```json
 {
   "success": true,
   "courses": [
     {
-      "id": "clx1x2x3x4x5x6x7x8x9x0",
+      "id": "course-1", 
       "title": "AI Foundations",
       "description": "Learn the fundamentals of artificial intelligence",
       "slug": "ai-foundations",
       "price": {
         "amount": 29900,
-        "currency": "USD",
+        "currency": "USD", 
         "formatted": "$299.00"
       },
       "duration": {
@@ -101,60 +88,29 @@ GET /api/courses?published=true&difficulty=BEGINNER
         "formatted": "12 hours"
       },
       "difficulty": "BEGINNER",
-      "difficultyLevel": "Beginner Friendly",
       "published": true,
-      "featured": true,
-      "learningObjectives": [
-        "Understand AI concepts and terminology",
-        "Learn about machine learning basics",
-        "Explore AI applications in various industries"
-      ],
-      "prerequisites": [
-        "Basic computer literacy",
-        "High school mathematics"
-      ],
-      "canEnroll": true,
-      "isFree": false,
-      "isAdvanced": false,
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-15T00:00:00.000Z"
+      "featured": true
     }
-  ],
-  "count": 1
+  ]
 }
 ```
 
-**Error Response** (500):
-```json
-{
-  "success": false,
-  "error": "Failed to fetch courses",
-  "message": "Database connection error"
-}
-```
+**Implementation**: `src/app/api/courses/route.ts`
 
-### Get Course by Slug
+#### `GET /api/courses/[slug]`
+**Purpose**: Get specific course details by slug
 
-**Endpoint**: `GET /api/courses/[slug]`
+**Parameters**:
+- `slug` (path): Course slug identifier (e.g., "ai-foundations")
 
-**Description**: Retrieve detailed information about a specific course by its slug.
-
-**Path Parameters**:
-- `slug` (string): The course slug (e.g., "ai-foundations")
-
-**Example Request**:
-```bash
-GET /api/courses/ai-foundations
-```
-
-**Success Response** (200):
+**Response (Success)**:
 ```json
 {
   "success": true,
   "course": {
-    "id": "clx1x2x3x4x5x6x7x8x9x0",
-    "title": "AI Foundations",
-    "description": "Comprehensive introduction to artificial intelligence...",
+    "id": "course-1",
+    "title": "AI Foundations", 
+    "description": "Learn the fundamentals of artificial intelligence with hands-on projects.",
     "slug": "ai-foundations",
     "price": {
       "amount": 29900,
@@ -163,511 +119,392 @@ GET /api/courses/ai-foundations
     },
     "duration": {
       "minutes": 720,
-      "formatted": "12 hours"
+      "formatted": "12 hours"  
     },
     "difficulty": "BEGINNER",
     "difficultyLevel": "Beginner Friendly",
     "published": true,
     "featured": true,
     "learningObjectives": [
-      "Understand AI concepts and terminology",
-      "Learn about machine learning basics"
+      "Understand AI concepts",
+      "Learn ML basics"
     ],
     "prerequisites": [
       "Basic computer literacy"
     ],
-    "modules": [
-      {
-        "id": "mod_1",
-        "title": "Introduction to AI",
-        "description": "Overview of artificial intelligence",
-        "order": 1,
-        "duration": 180,
-        "lessons": [
-          {
-            "id": "lesson_1",
-            "title": "What is AI?",
-            "description": "Definition and history of AI",
-            "order": 1,
-            "duration": 45,
-            "lessonType": "TEXT"
-          }
-        ]
-      }
-    ],
+    "canEnroll": true,
+    "isFree": false,
+    "isAdvanced": false,
     "createdAt": "2024-01-01T00:00:00.000Z",
     "updatedAt": "2024-01-15T00:00:00.000Z"
   }
 }
 ```
 
-**Error Response** (404):
+**Response (Not Found)**:
 ```json
 {
   "success": false,
   "error": "Course not found",
-  "message": "No course found with slug 'invalid-slug'"
+  "message": "Course with slug 'invalid-slug' does not exist"
 }
 ```
 
-### Get Course Statistics
+**Status Codes**:
+- `200`: Course found and returned
+- `404`: Course not found
+- `500`: Server error
 
-**Endpoint**: `GET /api/courses/stats`
+**Usage**:
+```bash
+curl https://your-app.onrender.com/api/courses/ai-foundations
+```
 
-**Description**: Get aggregated statistics about courses.
+**Implementation**: `src/app/api/courses/[slug]/route.ts`
 
-**Success Response** (200):
+#### `GET /api/courses/stats`
+**Purpose**: Get course statistics and metrics
+
+**Response**:
 ```json
 {
   "success": true,
   "stats": {
     "totalCourses": 4,
     "publishedCourses": 4,
-    "totalDuration": 3930,
-    "averageDuration": 982.5,
-    "difficultyBreakdown": {
+    "totalDuration": "65+ hours",
+    "averagePrice": "$749",
+    "difficulties": {
       "BEGINNER": 1,
-      "INTERMEDIATE": 1,
+      "INTERMEDIATE": 2, 
       "ADVANCED": 1,
-      "EXPERT": 1
-    },
-    "totalValue": 399600,
-    "averagePrice": 99900
+      "EXPERT": 0
+    }
   }
 }
 ```
 
-## 🎓 User Enrollment API (Future Implementation)
+**Implementation**: `src/app/api/courses/stats/route.ts`
 
-### Enroll in Course
+### Content API
 
-**Endpoint**: `POST /api/enrollments`
-**Authentication**: Required
+#### `GET /api/content/[pageName]`
+**Purpose**: Get compiled page content for dynamic loading
 
-**Request Body**:
-```json
-{
-  "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-  "paymentMethod": "paypal",
-  "paymentId": "PAYPAL-TRANSACTION-ID"
-}
-```
+**Parameters**:
+- `pageName` (path): Page content name (e.g., "homepage", "about")
+- `language` (query, optional): Language code (default: "en")
 
-**Success Response** (201):
-```json
-{
-  "success": true,
-  "enrollment": {
-    "id": "enr_1x2x3x4x5x6x7x8x9x0",
-    "userId": "user_1x2x3x4x5x6x7x8x9x0",
-    "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-    "status": "ACTIVE",
-    "enrolledAt": "2024-01-15T00:00:00.000Z",
-    "progressPercentage": 0,
-    "course": {
-      "title": "AI Foundations",
-      "slug": "ai-foundations"
-    }
-  },
-  "message": "Successfully enrolled in course"
-}
-```
-
-### Get User Enrollments
-
-**Endpoint**: `GET /api/enrollments`
-**Authentication**: Required
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "enrollments": [
-    {
-      "id": "enr_1x2x3x4x5x6x7x8x9x0",
-      "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-      "status": "ACTIVE",
-      "enrolledAt": "2024-01-15T00:00:00.000Z",
-      "progressPercentage": 45,
-      "lastAccessedAt": "2024-01-20T10:30:00.000Z",
-      "course": {
-        "title": "AI Foundations",
-        "slug": "ai-foundations",
-        "difficulty": "BEGINNER"
-      }
-    }
-  ],
-  "count": 1
-}
-```
-
-## 📈 Progress Tracking API (Future Implementation)
-
-### Update Lesson Progress
-
-**Endpoint**: `POST /api/progress`
-**Authentication**: Required
-
-**Request Body**:
-```json
-{
-  "lessonId": "lesson_1x2x3x4x5x6x7x8x9x0",
-  "completed": true,
-  "timeSpent": 300
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "progress": {
-    "id": "prog_1x2x3x4x5x6x7x8x9x0",
-    "lessonId": "lesson_1x2x3x4x5x6x7x8x9x0",
-    "completed": true,
-    "completedAt": "2024-01-20T15:30:00.000Z",
-    "timeSpent": 300
-  },
-  "courseProgress": {
-    "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-    "completedLessons": 5,
-    "totalLessons": 12,
-    "progressPercentage": 42
-  }
-}
-```
-
-### Get User Progress
-
-**Endpoint**: `GET /api/progress`
-**Authentication**: Required
-
-**Query Parameters**:
-- `courseId` (string, optional): Filter by specific course
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "progress": [
-    {
-      "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-      "courseTitle": "AI Foundations",
-      "progressPercentage": 42,
-      "completedLessons": 5,
-      "totalLessons": 12,
-      "timeSpent": 1800,
-      "lastAccessedAt": "2024-01-20T15:30:00.000Z",
-      "lessons": [
-        {
-          "lessonId": "lesson_1",
-          "lessonTitle": "What is AI?",
-          "completed": true,
-          "completedAt": "2024-01-18T10:00:00.000Z",
-          "timeSpent": 300
-        }
-      ]
-    }
-  ]
-}
-```
-
-## 🛒 Payment API (Future Implementation)
-
-### Create Payment Intent
-
-**Endpoint**: `POST /api/payments/create-intent`
-**Authentication**: Required
-
-**Request Body**:
-```json
-{
-  "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-  "paymentMethod": "paypal"
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "paymentIntent": {
-    "id": "pay_1x2x3x4x5x6x7x8x9x0",
-    "clientSecret": "pi_1x2x3x4x5x6x7x8x9x0_secret_xyz",
-    "amount": 29900,
-    "currency": "USD",
-    "status": "requires_payment_method"
-  }
-}
-```
-
-### Verify Payment
-
-**Endpoint**: `POST /api/payments/verify`
-**Authentication**: Required
-
-**Request Body**:
-```json
-{
-  "paymentId": "PAYPAL-PAYMENT-ID",
-  "paymentMethod": "paypal"
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "payment": {
-    "id": "pay_1x2x3x4x5x6x7x8x9x0",
-    "status": "COMPLETED",
-    "amount": 29900,
-    "currency": "USD",
-    "processedAt": "2024-01-20T16:00:00.000Z"
-  },
-  "message": "Payment verified successfully"
-}
-```
-
-## 📧 Content Management API
-
-### Get Dynamic Content
-
-**Endpoint**: `GET /api/content/[pageName]`
-
-**Description**: Retrieve dynamic content for pages (testimonials, FAQ, etc.)
-
-**Path Parameters**:
-- `pageName` (string): The page identifier (e.g., "testimonials", "faq")
-
-**Success Response** (200):
+**Response (Success)**:
 ```json
 {
   "success": true,
   "content": {
-    "pageId": "testimonials",
-    "data": [
-      {
-        "id": "testimonial_1",
-        "name": "Sarah Johnson",
-        "role": "Data Scientist",
-        "company": "Tech Corp",
-        "content": "This course transformed my understanding of AI...",
-        "rating": 5,
-        "avatar": "/images/testimonials/sarah.jpg"
-      }
-    ],
-    "lastUpdated": "2024-01-20T12:00:00.000Z"
+    "meta": {
+      "title": "Homepage - AI Whisperers",
+      "description": "Master AI with world-class education",
+      "keywords": ["AI courses", "artificial intelligence"],
+      "language": "en"
+    },
+    "hero": {
+      "title": "Master AI with World-Class Education",
+      "subtitle": "Transform your career with comprehensive AI courses",
+      "description": "Learn artificial intelligence through hands-on projects"
+    },
+    // ... complete page content structure
   }
 }
 ```
 
-## 👥 User Management API (Admin Only)
-
-### Get All Users
-
-**Endpoint**: `GET /api/admin/users`
-**Authentication**: Required (Admin role)
-
-**Query Parameters**:
-- `role` (string, optional): Filter by user role
-- `limit` (number, optional): Limit results (default: 20)
-- `offset` (number, optional): Offset for pagination (default: 0)
-
-**Success Response** (200):
+**Response (Not Found)**:
 ```json
 {
-  "success": true,
-  "users": [
-    {
-      "id": "user_1x2x3x4x5x6x7x8x9x0",
-      "email": "student@example.com",
-      "name": "John Student",
-      "role": "STUDENT",
-      "emailVerified": "2024-01-01T00:00:00.000Z",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "enrollmentCount": 2,
-      "lastActive": "2024-01-20T10:30:00.000Z"
-    }
-  ],
-  "pagination": {
-    "total": 150,
-    "limit": 20,
-    "offset": 0,
-    "hasMore": true
-  }
+  "success": false,
+  "error": "Content not found", 
+  "message": "No content found for page: invalid-page"
 }
 ```
 
-## 📊 Analytics API (Admin Only)
-
-### Get Course Analytics
-
-**Endpoint**: `GET /api/admin/analytics/courses`
-**Authentication**: Required (Admin role)
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "analytics": {
-    "totalEnrollments": 1250,
-    "activeStudents": 850,
-    "courseCompletionRate": 78.5,
-    "averageProgressPerCourse": 65.2,
-    "topCourses": [
-      {
-        "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-        "title": "AI Foundations",
-        "enrollments": 450,
-        "completionRate": 82.3,
-        "averageRating": 4.8
-      }
-    ],
-    "revenueByMonth": [
-      {
-        "month": "2024-01",
-        "revenue": 125000,
-        "enrollments": 125
-      }
-    ]
-  }
-}
-```
-
-## 🚨 Error Codes Reference
-
-### HTTP Status Codes
-
-- **200 OK**: Request successful
-- **201 Created**: Resource created successfully
-- **400 Bad Request**: Invalid request data
-- **401 Unauthorized**: Authentication required
-- **403 Forbidden**: Insufficient permissions
-- **404 Not Found**: Resource not found
-- **409 Conflict**: Resource conflict (e.g., duplicate enrollment)
-- **422 Unprocessable Entity**: Validation error
-- **500 Internal Server Error**: Server error
-
-### Custom Error Types
-
-```json
-{
-  "VALIDATION_ERROR": "Request validation failed",
-  "AUTHENTICATION_ERROR": "Authentication required or invalid",
-  "AUTHORIZATION_ERROR": "Insufficient permissions",
-  "RESOURCE_NOT_FOUND": "Requested resource not found",
-  "DUPLICATE_RESOURCE": "Resource already exists",
-  "PAYMENT_ERROR": "Payment processing failed",
-  "EXTERNAL_SERVICE_ERROR": "External service unavailable"
-}
-```
-
-## 📝 Rate Limiting
-
-### Default Limits
-- **Authenticated users**: 100 requests per minute
-- **Anonymous users**: 20 requests per minute
-- **Admin endpoints**: 200 requests per minute
-
-### Rate Limit Headers
-```
-X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 95
-X-RateLimit-Reset: 1642694400
-```
-
-## 🧪 Testing Endpoints
-
-### Health Check
-
-**Endpoint**: `GET /api/health`
-
-**Success Response** (200):
-```json
-{
-  "success": true,
-  "status": "healthy",
-  "timestamp": "2024-01-20T16:00:00.000Z",
-  "services": {
-    "database": "connected",
-    "authentication": "active",
-    "external_apis": "operational"
-  }
-}
-```
-
-## 📋 API Versioning
-
-### Current Version
-- **Version**: v1 (implicit, no version prefix required)
-- **Compatibility**: Backward compatible changes only
-
-### Future Versioning
-When breaking changes are needed, versioning will be implemented:
-- **URL-based**: `/api/v2/courses`
-- **Header-based**: `Accept: application/vnd.aiwhisperers.v2+json`
-
-## 🔍 Request/Response Examples
-
-### CURL Examples
-
-**Get all published courses:**
+**Usage**:
 ```bash
-curl -X GET "https://your-domain.com/api/courses?published=true" \
-  -H "Accept: application/json"
+curl https://your-app.onrender.com/api/content/homepage
+curl https://your-app.onrender.com/api/content/servicios?language=es
 ```
 
-**Get course by slug:**
-```bash
-curl -X GET "https://your-domain.com/api/courses/ai-foundations" \
-  -H "Accept: application/json"
+**Implementation**: `src/app/api/content/[pageName]/route.ts`
+
+### Authentication API
+
+#### `POST /api/auth/*`
+**Purpose**: NextAuth.js authentication endpoints
+
+**Endpoints**:
+- `/api/auth/signin` - Sign in page
+- `/api/auth/signout` - Sign out 
+- `/api/auth/session` - Get current session
+- `/api/auth/providers` - Get available providers
+- `/api/auth/callback/*` - OAuth callbacks
+
+**Authentication Flow**:
+```
+1. User visits /auth/signin
+2. Selects provider (Google, GitHub, Email)  
+3. Redirected to provider for authentication
+4. Provider redirects to /api/auth/callback/[provider]
+5. JWT token created and stored in session cookie
+6. User redirected to application with authenticated session
 ```
 
-**Create enrollment (authenticated):**
-```bash
-curl -X POST "https://your-domain.com/api/enrollments" \
-  -H "Content-Type: application/json" \
-  -H "Cookie: next-auth.session-token=your-session-token" \
-  -d '{
-    "courseId": "clx1x2x3x4x5x6x7x8x9x0",
-    "paymentMethod": "paypal",
-    "paymentId": "PAYPAL-TRANSACTION-ID"
-  }'
+**Session Response**:
+```json
+{
+  "user": {
+    "id": "user-123",
+    "name": "John Doe", 
+    "email": "john@example.com",
+    "role": "STUDENT",
+    "emailVerified": "2025-09-04T12:00:00.000Z"
+  },
+  "expires": "2025-10-04T12:00:00.000Z"
+}
 ```
 
-### JavaScript SDK Example
+**Implementation**: `src/app/api/auth/[...nextauth]/route.ts`
+
+## 🛠️ API Implementation Details
+
+### Mock Data System
+
+**Course Data**: All course endpoints use predefined mock data
+**Location**: Defined inline in API route files
+**Benefits**:
+- **Reliability**: No database connection failures
+- **Performance**: Instant response times
+- **Development**: Easy to modify and test
+
+**Mock Course Example**:
+```typescript
+const mockCourses: Record<string, any> = {
+  'ai-foundations': {
+    id: 'course-1',
+    title: 'AI Foundations',
+    // ... complete course object
+  }
+}
+```
+
+### Content Loading Integration
+
+**Content API** integrates with build-time compiled content:
+```typescript
+// Uses pre-compiled content modules
+import { getCompiledPageContent } from '@/lib/content/compiled'
+
+export async function GET(request, { params }) {
+  const content = getCompiledPageContent(params.pageName)
+  return NextResponse.json({ success: true, content })
+}
+```
+
+### Error Handling Pattern
+
+**Consistent Error Handling** across all endpoints:
 
 ```typescript
-// Course API client
-class CourseAPI {
-  private baseUrl = '/api'
-  
-  async getCourses(filters?: CourseFilters): Promise<Course[]> {
-    const params = new URLSearchParams(filters)
-    const response = await fetch(`${this.baseUrl}/courses?${params}`)
-    const data = await response.json()
-    
-    if (!data.success) {
-      throw new Error(data.message)
-    }
-    
-    return data.courses
-  }
-  
-  async getCourseBySlug(slug: string): Promise<Course> {
-    const response = await fetch(`${this.baseUrl}/courses/${slug}`)
-    const data = await response.json()
-    
-    if (!data.success) {
-      throw new Error(data.message)
-    }
-    
-    return data.course
-  }
+try {
+  // API logic
+  return NextResponse.json({ success: true, data })
+} catch (error) {
+  console.error('API Error:', error)
+  return NextResponse.json(
+    { 
+      success: false, 
+      error: 'Internal error',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    },
+    { status: 500 }
+  )
 }
 ```
+
+## 🔒 Security Implementation
+
+### API Security Features
+
+1. **Environment Validation**: Safe environment variable access
+2. **Input Validation**: Basic input sanitization 
+3. **Error Handling**: Secure error messages without information leakage
+4. **CORS Configuration**: Proper cross-origin request handling
+5. **Security Headers**: Comprehensive security headers via Next.js config
+
+### Authentication Security
+
+**JWT Token Security**:
+- **Signing**: Secure JWT signing with NEXTAUTH_SECRET
+- **Expiration**: Configurable token expiration
+- **Stateless**: No server-side session storage required
+- **Provider Security**: OAuth provider validation
+
+**Session Management**:
+```typescript
+// Session structure (JWT payload)
+{
+  user: {
+    id: string,
+    email: string,
+    name?: string,
+    role: UserRole,
+    emailVerified?: Date
+  },
+  expires: string
+}
+```
+
+### Input Validation
+
+**Basic Validation Patterns**:
+```typescript
+// Language validation example
+const language = searchParams.get('language')
+const validLanguages = ['en', 'es', 'gn'] 
+const selectedLanguage = validLanguages.includes(language) ? language : 'en'
+```
+
+**Recommendations for Enhancement**:
+- Add Zod schema validation for request bodies
+- Implement rate limiting for API endpoints
+- Add request logging for monitoring
+
+## 📊 API Performance
+
+### Response Times (Expected)
+
+- **Health Check**: <50ms
+- **Course List**: <100ms (mock data)
+- **Course Details**: <50ms (mock data lookup)
+- **Content API**: <100ms (static import)
+- **Authentication**: <200ms (JWT processing)
+
+### Caching Strategy
+
+**Static Content**: Compiled content cached in memory after first import
+**Mock Data**: In-memory objects, no caching needed
+**Authentication**: JWT tokens cached in browser cookies
+
+### Monitoring
+
+**Health Check Integration**: Use `/api/health` for:
+- Uptime monitoring
+- Performance tracking
+- Deployment verification
+- Service health dashboards
+
+## 🧪 API Testing
+
+### Manual Testing
+
+**Health Check**:
+```bash
+curl -i https://your-app.onrender.com/api/health
+# Expected: 200 OK with JSON health status
+```
+
+**Course List**:
+```bash
+curl -i https://your-app.onrender.com/api/courses
+# Expected: 200 OK with courses array
+```
+
+**Course Details**:
+```bash  
+curl -i https://your-app.onrender.com/api/courses/ai-foundations
+# Expected: 200 OK with course object
+
+curl -i https://your-app.onrender.com/api/courses/invalid-slug
+# Expected: 404 Not Found
+```
+
+**Content API**:
+```bash
+curl -i https://your-app.onrender.com/api/content/homepage
+# Expected: 200 OK with page content
+
+curl -i https://your-app.onrender.com/api/content/servicios
+# Expected: 200 OK with Spanish content
+```
+
+### Automated Testing
+
+**Test Command**: `npm test`
+**Test Files**: `src/__tests__/api/` (to be created)
+
+**Test Coverage Recommendations**:
+- API endpoint response validation
+- Error handling verification  
+- Authentication flow testing
+- Content compilation testing
+
+## 🔮 Future API Enhancements
+
+### Planned Improvements
+
+1. **Request Validation**: Zod schema validation for all inputs
+2. **Rate Limiting**: API rate limiting for production use
+3. **Logging**: Structured logging for monitoring and debugging
+4. **Caching**: Advanced caching strategies for performance
+5. **Versioning**: API versioning for backward compatibility
+
+### Optional Persistence Layer
+
+**Future Database Integration** (when needed):
+- Current mock data can be easily replaced with database queries
+- API structure designed to accommodate persistence layer
+- Domain entities ready for database integration
+- Repository pattern prepared for data layer addition
+
+### Advanced Features (Future)
+
+1. **User Progress Tracking**: API for course progress (requires persistence)
+2. **Payment Processing**: Stripe/PayPal integration endpoints
+3. **Email Notifications**: Course enrollment and completion emails
+4. **Analytics API**: Usage statistics and learning analytics
+5. **Admin API**: Course management and user administration
 
 ---
 
-*This API documentation is automatically updated with code changes and reflects the current implementation. For real-time API testing, use the built-in development tools or Postman collection.*
+## 📚 API Development Guidelines
+
+### Adding New Endpoints
+
+1. **Create Route File**: Add `src/app/api/endpoint/route.ts`
+2. **Export HTTP Methods**: Export GET, POST, etc. as needed
+3. **Use Consistent Patterns**: Follow existing error handling patterns
+4. **Add Documentation**: Document endpoint in this file
+5. **Test Functionality**: Verify with manual and automated tests
+
+### Modifying Existing Endpoints
+
+1. **Preserve Compatibility**: Maintain existing response structures
+2. **Add Validation**: Enhance input validation as needed
+3. **Error Handling**: Ensure proper error responses
+4. **Update Documentation**: Keep this API doc current
+5. **Test Changes**: Verify all existing functionality still works
+
+### Best Practices
+
+1. **TypeScript**: Use proper TypeScript types for all parameters
+2. **Error Handling**: Always use try/catch with proper error responses
+3. **Validation**: Validate inputs before processing
+4. **Consistency**: Follow established patterns for new endpoints
+5. **Security**: Validate environment variables and user inputs
+
+---
+
+## 🔗 Related Documentation
+
+- **Authentication**: [Authentication System Documentation](./AUTHENTICATION.md)
+- **Content System**: [Content System Documentation](./CONTENT_SYSTEM.md)
+- **Deployment**: [Deployment Guide](./DEPLOYMENT.md)
+- **Development**: [Development Workflow](./DEVELOPMENT_WORKFLOW.md)
+
+*This API documentation reflects the current database-free architecture as of September 4, 2025, with mock data endpoints and build-time content integration.*

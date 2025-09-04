@@ -1,573 +1,417 @@
-# AI Whisperers - Render.com Deployment Guide
+# AI Whisperers - Deployment Guide (Node.js Only)
 
-## 🚀 Deployment Overview
+## 🚀 Deployment Overview (Updated)
 
-This guide provides comprehensive instructions for deploying the AI Whisperers educational platform to **Render.com**. The platform requires a web service for the Next.js application and a PostgreSQL database.
+This guide provides comprehensive instructions for deploying the AI Whisperers educational platform to **Render.com** using the new **Node.js-only architecture**. No database or external services are required.
 
-### Deployment Architecture
+### Deployment Architecture (Simplified)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    RENDER.COM SERVICES                 │
+│                    RENDER.COM DEPLOYMENT                │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
-│  ┌─────────────────┐    ┌─────────────────┐           │
-│  │   Web Service   │    │   PostgreSQL    │           │
-│  │   (Next.js)     │────│    Database     │           │
-│  │                 │    │                 │           │
-│  │ • Next.js App   │    │ • Course Data   │           │
-│  │ • API Routes    │    │ • User Data     │           │
-│  │ • Static Assets │    │ • Session Data  │           │
-│  └─────────────────┘    └─────────────────┘           │
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │                  WEB SERVICE                        │ │
+│  │                   (Node.js)                         │ │
+│  │                                                     │ │
+│  │ • Next.js Application (Standalone Mode)             │ │
+│  │ • API Routes (/api/*)                              │ │
+│  │ • Static Assets (Compiled Content)                  │ │
+│  │ • JWT Authentication (No Database)                  │ │
+│  │ • Health Check Endpoint (/api/health)               │ │
+│  └─────────────────────────────────────────────────────┘ │
 │                                                         │
-│  ┌─────────────────────────────────────────────────────┐│
-│  │              External Integrations               ││
-│  │                                                   ││
-│  │ • NextAuth.js (OAuth Providers)                   ││
-│  │ • Email Service (Optional: ConvertKit/Resend)     ││
-│  │ • Payment Processing (Optional: PayPal/Stripe)    ││
-│  │ • AI Services (Optional: OpenAI/Anthropic)        ││
-│  └─────────────────────────────────────────────────────┘│
+│  ┌─────────────────────────────────────────────────────┐ │
+│  │              EXTERNAL INTEGRATIONS                  │ │
+│  │                   (Optional)                        │ │
+│  │                                                     │ │
+│  │ • OAuth Providers (Google, GitHub)                  │ │
+│  │ • Email Service (Magic Link Authentication)         │ │
+│  │ • AI Services (OpenAI, Anthropic) [Future]          │ │
+│  └─────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 📋 Prerequisites
+**Key Simplifications:**
+- ✅ **No Database Required**: Eliminated PostgreSQL dependency
+- ✅ **Single Service**: One web service handles everything
+- ✅ **Self-contained**: All content bundled with application
+- ✅ **Zero External Dependencies**: Works without external services
+
+## 📋 Prerequisites (Minimal)
 
 ### Required Accounts
-1. **GitHub Account**: Source code repository
-2. **Render Account**: Cloud deployment platform
-3. **OAuth Providers** (one or more):
-   - Google Cloud Console (Google OAuth)
-   - GitHub Developer Settings (GitHub OAuth)
+1. **GitHub Account**: For source code repository
+2. **Render Account**: For cloud deployment platform
 
-### Optional Service Accounts
-- **Email Service**: ConvertKit, Resend, or SMTP
-- **Payment Processing**: PayPal Developer, Stripe
-- **AI Services**: OpenAI API, Anthropic Claude API
+### Optional Accounts (For Full Functionality)
+3. **Google Cloud Console**: For Google OAuth (optional)
+4. **GitHub Developer Settings**: For GitHub OAuth (optional)
 
-## 🗄️ Database Setup
+**Note**: The application works without any OAuth providers - users can still access all content and features.
 
-### Step 1: Create PostgreSQL Database
+### System Requirements
+- **Git**: For repository access
+- **Modern Browser**: For accessing deployed application
+- **Environment Variables**: OAuth credentials (optional)
 
-1. **Log in to Render Dashboard**
-   - Navigate to [render.com](https://render.com)
-   - Sign in or create account
+## 🚀 Quick Deployment (Render.com)
 
-2. **Create New PostgreSQL Service**
-   ```
-   Dashboard → New → PostgreSQL
-   ```
+### Method 1: Blueprint Deployment (Recommended)
 
-3. **Configure Database Settings**
-   ```
-   Name: aiwhisperers-db
-   Database: aiwhisperers_production
-   User: aiwhisperers_user
-   Region: Choose closest to your users
-   PostgreSQL Version: 14
-   Plan: Starter ($7/month) or higher
-   ```
+**One-Click Deploy**: Use our `render.yaml` blueprint for instant deployment.
 
-4. **Save Database Configuration**
-   - Render will provision the database
-   - Note the connection details provided
-
-5. **Copy Database URL**
-   ```
-   Internal Database URL: 
-   postgresql://username:password@hostname:port/database
-   
-   External Database URL:
-   postgresql://username:password@external-hostname:port/database
-   ```
-
-### Step 2: Database Configuration Notes
-
-- **Internal URL**: Use for Render web services (faster, no external traffic)
-- **External URL**: Use for local development and external tools
-- **Automatic Backups**: Enabled by default
-- **Connection Pooling**: Available in paid plans
-
-## 🌐 Web Service Deployment
-
-### Step 1: Prepare Repository
-
-1. **Ensure Repository is Public** (or upgrade Render plan for private repos)
-   
-2. **Create Production Environment File**
+1. **Fork Repository**:
    ```bash
-   # Create .env.production (do not commit)
-   # This is for reference only - set in Render dashboard
+   # Fork the repository on GitHub
+   https://github.com/Ai-Whisperers/AI-Whisperers-website-and-courses/fork
    ```
 
-3. **Verify Build Scripts**
-   ```json
-   {
-     "scripts": {
-       "build": "next build",
-       "start": "next start",
-       "db:generate": "prisma generate",
-       "db:push": "prisma db push",
-       "db:migrate": "prisma migrate deploy",
-       "db:seed": "tsx prisma/seed.ts"
-     }
-   }
-   ```
+2. **Deploy on Render**:
+   - Go to [Render Dashboard](https://dashboard.render.com/)
+   - Click "New" → "Blueprint"
+   - Connect your GitHub account
+   - Select your forked repository
+   - Click "Deploy"
 
-### Step 2: Create Web Service
+3. **Automatic Setup**: Render will automatically:
+   - Create web service
+   - Install Node.js dependencies
+   - Run content compilation
+   - Build Next.js application
+   - Deploy to production URL
 
-1. **Navigate to Render Dashboard**
-   ```
-   Dashboard → New → Web Service
-   ```
+### Method 2: Manual Service Creation
 
-2. **Connect GitHub Repository**
-   ```
-   Connect Repository: Ai-Whisperers/AI-Whisperers-website-and-courses
-   Branch: main
-   ```
+1. **Create Web Service**:
+   - Go to Render Dashboard → "New" → "Web Service"
+   - Connect GitHub repository
+   - Configure service:
 
-3. **Configure Build Settings**
-   ```
-   Name: aiwhisperers-web
-   Runtime: Node
-   Build Command: npm install && npm run build
-   Start Command: npm start
-   Plan: Starter ($7/month) or higher
-   ```
+```yaml
+Service Configuration:
+├── Name: ai-whisperers-web
+├── Runtime: Node
+├── Branch: main
+├── Build Command: npm run build
+├── Start Command: npm start
+└── Instance Type: Starter ($7/month)
+```
 
-### Step 3: Environment Variables Configuration
-
-Set the following environment variables in Render dashboard:
-
-#### Required Variables
-
+2. **Environment Variables** (Set in Render Dashboard):
 ```bash
-# Database Configuration
-DATABASE_URL=postgresql://username:password@hostname:port/database
-# Use the Internal Database URL from Step 1
-
-# NextAuth Configuration
-NEXTAUTH_SECRET=your-very-secure-random-secret-string-here
+# Required
+NEXTAUTH_SECRET=your-generated-secret-here
 NEXTAUTH_URL=https://your-app-name.onrender.com
 
-# Basic Security
-NODE_ENV=production
-```
-
-#### OAuth Provider Variables
-
-**Google OAuth:**
-```bash
+# Optional OAuth Providers
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-```
-
-**GitHub OAuth:**
-```bash
-GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_ID=your-github-client-id  
 GITHUB_CLIENT_SECRET=your-github-client-secret
 ```
 
-#### Optional Service Variables
+3. **Deploy**: Click "Deploy" to start deployment
 
-**Email Service (ConvertKit example):**
+## 🔧 Build Process Details
+
+### Render Build Commands
+
+**Build Command**: `npm run build`
 ```bash
-CONVERTKIT_API_KEY=your-convertkit-api-key
-EMAIL_FROM=noreply@yourdomain.com
+# This command automatically:
+1. npm install                    # Install dependencies
+2. npm run prebuild              # Compile YAML content to TypeScript
+3. next build                    # Build Next.js application with compiled content
 ```
 
-**Payment Processing (PayPal example):**
+**Start Command**: `npm start`
 ```bash
-PAYPAL_CLIENT_ID=your-paypal-client-id
-PAYPAL_CLIENT_SECRET=your-paypal-client-secret
-PAYPAL_ENVIRONMENT=production
+# This command:
+1. Starts Next.js production server
+2. Serves static assets and API routes
+3. Handles authentication and content
 ```
 
-**AI Services:**
-```bash
-OPENAI_API_KEY=your-openai-api-key
-ANTHROPIC_API_KEY=your-anthropic-api-key
+### Build Process Flow
+
+```
+1. Git Push → Trigger Render Build
+2. Install Dependencies → npm install
+3. Content Compilation → YAML → TypeScript modules  
+4. Next.js Build → Static generation with compiled content
+5. Docker Container → Standalone Next.js application
+6. Health Check → /api/health endpoint verification
+7. Live Deployment → Production URL available
 ```
 
-### Step 4: Deploy Application
+### Build Environment
 
-1. **Trigger Initial Deploy**
-   - Render will automatically deploy on repository connection
-   - Monitor build logs for any issues
+**Node.js Version**: Automatically detected from package.json engines
+**Memory**: 4GB (sufficient for Next.js build)
+**Build Time**: ~3-5 minutes typical
+**Bundle Size**: Optimized standalone mode
 
-2. **Build Process Overview**
-   ```bash
-   # Render executes these commands:
-   npm ci                    # Install dependencies
-   npm run db:generate      # Generate Prisma client
-   npm run build           # Build Next.js application
-   npm start              # Start production server
+## 🛠️ Environment Configuration
+
+### Required Environment Variables
+
+#### **NEXTAUTH_SECRET** (Required)
+- **Purpose**: JWT token signing secret
+- **Generation**: Use Render's "Generate Value" feature
+- **Format**: 32+ character random string
+- **Security**: Keep this secret and unique per environment
+
+#### **NEXTAUTH_URL** (Required)
+- **Purpose**: Base URL for NextAuth.js callbacks
+- **Production**: `https://your-app-name.onrender.com`
+- **Development**: `http://localhost:3000`
+- **Auto-configuration**: Use Render's service URL feature
+
+### Optional Environment Variables
+
+#### **OAuth Providers** (For Authentication)
+
+**Google OAuth**:
+- `GOOGLE_CLIENT_ID`: From Google Cloud Console
+- `GOOGLE_CLIENT_SECRET`: From Google Cloud Console
+- **Setup**: [Google OAuth Setup Guide](https://console.cloud.google.com)
+
+**GitHub OAuth**:
+- `GITHUB_CLIENT_ID`: From GitHub Developer Settings
+- `GITHUB_CLIENT_SECRET`: From GitHub Developer Settings
+- **Setup**: [GitHub OAuth Apps](https://github.com/settings/applications/new)
+
+**Email Provider** (Magic Links):
+- `EMAIL_SERVER_HOST`: SMTP server hostname
+- `EMAIL_SERVER_PORT`: SMTP port (usually 587)
+- `EMAIL_SERVER_USER`: SMTP username
+- `EMAIL_SERVER_PASSWORD`: SMTP password
+- `EMAIL_FROM`: From email address
+
+### Environment Variable Setup in Render
+
+1. **Navigate to Service**: Go to your service in Render Dashboard
+2. **Environment Tab**: Click "Environment" in sidebar
+3. **Add Variables**: Click "Add Environment Variable"
+4. **Required Setup**:
    ```
-
-3. **Monitor Deployment Status**
-   - Check build logs for errors
-   - Verify successful deployment
-   - Note the assigned URL (e.g., `https://aiwhisperers-web.onrender.com`)
-
-## 🔧 Post-Deployment Configuration
-
-### Step 1: Database Migration and Seeding
-
-1. **Access Render Shell** (if available) or use local connection:
-   ```bash
-   # Connect to production database locally
-   export DATABASE_URL="your-external-database-url"
-   
-   # Run migrations
-   npx prisma migrate deploy
-   
-   # Seed database with course content
-   npm run db:seed
+   NEXTAUTH_SECRET → Generate Value
+   NEXTAUTH_URL → Use Service URL
    ```
+5. **Optional Setup**: Add OAuth credentials as needed
 
-2. **Verify Database Setup**
-   ```bash
-   # Check if tables were created
-   npx prisma studio
-   # Open Prisma Studio to verify data
-   ```
+## 📊 Deployment Verification
 
-### Step 2: OAuth Provider Configuration
+### Health Check System
 
-#### Google OAuth Setup
+**Endpoint**: `https://your-app-name.onrender.com/api/health`
 
-1. **Google Cloud Console**
-   - Go to [console.cloud.google.com](https://console.cloud.google.com)
-   - Create new project or select existing
-
-2. **Enable Google+ API**
-   ```
-   APIs & Services → Library → Google+ API → Enable
-   ```
-
-3. **Create OAuth Credentials**
-   ```
-   APIs & Services → Credentials → Create Credentials → OAuth 2.0 Client IDs
-   
-   Application Type: Web application
-   Name: AI Whisperers Production
-   
-   Authorized JavaScript origins:
-   https://your-app-name.onrender.com
-   
-   Authorized redirect URIs:
-   https://your-app-name.onrender.com/api/auth/callback/google
-   ```
-
-4. **Copy Client Credentials**
-   - Add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` to Render environment variables
-
-#### GitHub OAuth Setup
-
-1. **GitHub Developer Settings**
-   - Go to GitHub → Settings → Developer settings → OAuth Apps
-
-2. **Create New OAuth App**
-   ```
-   Application name: AI Whisperers
-   Homepage URL: https://your-app-name.onrender.com
-   Authorization callback URL: 
-   https://your-app-name.onrender.com/api/auth/callback/github
-   ```
-
-3. **Generate Client Secret**
-   - Add `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` to Render environment variables
-
-### Step 3: Domain Configuration (Optional)
-
-#### Custom Domain Setup
-
-1. **Add Custom Domain in Render**
-   ```
-   Service Settings → Custom Domains → Add Custom Domain
-   Domain: yourdomain.com
-   ```
-
-2. **Configure DNS**
-   ```
-   # Add CNAME record in your DNS provider:
-   CNAME: www.yourdomain.com → your-app-name.onrender.com
-   ```
-
-3. **Update Environment Variables**
-   ```bash
-   NEXTAUTH_URL=https://yourdomain.com
-   ```
-
-4. **Update OAuth Providers**
-   - Update callback URLs in Google Cloud Console
-   - Update callback URLs in GitHub OAuth App settings
-
-## 🔍 Monitoring and Maintenance
-
-### Health Checks
-
-Render automatically monitors your application. You can also implement custom health checks:
-
-1. **Add Health Check Endpoint** (`src/app/api/health/route.ts`):
-   ```typescript
-   export async function GET() {
-     try {
-       // Check database connection
-       await prisma.$queryRaw`SELECT 1`
-       
-       return Response.json({
-         status: 'healthy',
-         timestamp: new Date().toISOString(),
-         services: {
-           database: 'connected',
-           authentication: 'active'
-         }
-       })
-     } catch (error) {
-       return Response.json(
-         { status: 'unhealthy', error: error.message },
-         { status: 500 }
-       )
-     }
-   }
-   ```
-
-2. **Configure Health Check in Render**
-   ```
-   Service Settings → Health Check Path: /api/health
-   ```
-
-### Logging and Monitoring
-
-1. **Application Logs**
-   - Available in Render dashboard under "Logs"
-   - Aggregated from all service instances
-
-2. **Database Monitoring**
-   - PostgreSQL metrics available in Render dashboard
-   - Monitor connection count, query performance
-
-3. **External Monitoring** (Optional)
-   - Sentry for error tracking
-   - Uptime monitoring services
-   - Performance monitoring tools
-
-## 🚨 Troubleshooting
-
-### Common Deployment Issues
-
-#### Build Failures
-
-**Issue**: Dependencies not installing
-```bash
-# Solution: Clear npm cache and reinstall
-npm ci --no-cache
-```
-
-**Issue**: Prisma client generation fails
-```bash
-# Solution: Ensure DATABASE_URL is set during build
-# Add to build command: npm run db:generate
-```
-
-**Issue**: Next.js build errors
-```bash
-# Solution: Check for TypeScript errors locally
-npm run build
-npx tsc --noEmit
-```
-
-#### Runtime Issues
-
-**Issue**: Database connection errors
-```
-Error: P1001: Can't reach database server
-```
-
-**Solution**: 
-- Verify DATABASE_URL is correct
-- Use Internal Database URL for Render services
-- Check database service is running
-
-**Issue**: NextAuth authentication errors
-```
-Error: NEXTAUTH_URL is not set
-```
-
-**Solution**:
-- Set NEXTAUTH_URL to your Render service URL
-- Ensure NEXTAUTH_SECRET is set to secure random string
-
-**Issue**: OAuth provider errors
-```
-Error: OAuth callback mismatch
-```
-
-**Solution**:
-- Verify OAuth callback URLs match your domain
-- Update OAuth provider settings when domain changes
-
-### Performance Optimization
-
-#### Database Performance
-
-1. **Connection Pooling**
-   ```typescript
-   // In production, use connection pooling
-   const prisma = new PrismaClient({
-     datasources: {
-       db: {
-         url: process.env.DATABASE_URL + '?connection_limit=5'
-       }
-     }
-   })
-   ```
-
-2. **Query Optimization**
-   - Use Prisma's `select` to limit returned fields
-   - Implement proper pagination
-   - Add database indexes for frequent queries
-
-#### Application Performance
-
-1. **Static Generation**
-   ```typescript
-   // Use ISR for course catalog pages
-   export const revalidate = 3600 // Revalidate every hour
-   ```
-
-2. **Image Optimization**
-   ```typescript
-   // Use Next.js Image component
-   import Image from 'next/image'
-   ```
-
-3. **Bundle Optimization**
-   ```javascript
-   // next.config.ts
-   module.exports = {
-     experimental: {
-       optimizeCss: true,
-       optimizeServerReact: true
-     }
-   }
-   ```
-
-## 📊 Scaling Considerations
-
-### Horizontal Scaling
-
-When traffic increases:
-
-1. **Upgrade Render Plan**
-   - Move from Starter to Professional
-   - Enable autoscaling
-   - Multiple instances for high availability
-
-2. **Database Scaling**
-   - Upgrade to higher PostgreSQL plan
-   - Consider read replicas for heavy read workloads
-   - Implement query optimization
-
-3. **CDN Integration**
-   - Render includes basic CDN
-   - Consider Cloudflare for advanced features
-   - Optimize static asset delivery
-
-### Monitoring Scaling Needs
-
-1. **Key Metrics**
-   - Response times
-   - Database query performance
-   - Memory and CPU usage
-   - Error rates
-
-2. **Scaling Triggers**
-   - Response time > 2 seconds
-   - CPU usage > 80% sustained
-   - Memory usage > 85%
-   - Database connection pool exhaustion
-
-## 🔐 Security Configuration
-
-### Production Security Checklist
-
-- [ ] **HTTPS Enabled**: Render provides automatic HTTPS
-- [ ] **Environment Variables**: All secrets stored securely
-- [ ] **Database Security**: PostgreSQL with authentication
-- [ ] **CORS Configuration**: Properly configured for your domain
-- [ ] **Rate Limiting**: Implement API rate limiting
-- [ ] **Input Validation**: All inputs validated with Zod
-- [ ] **SQL Injection Protection**: Using Prisma ORM
-- [ ] **XSS Protection**: React's built-in protection
-
-### Security Headers
-
-Add security headers in `next.config.ts`:
-
-```typescript
-const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          }
-        ]
-      }
-    ]
-  }
+**Expected Response**:
+```json
+{
+  "status": "healthy",
+  "timestamp": "2025-09-04T...",
+  "services": {
+    "application": "running",
+    "api": "operational"
+  },
+  "version": "0.1.0",
+  "environment": "production"
 }
 ```
 
-## 📈 Cost Optimization
+### Deployment Checklist
 
-### Render.com Pricing
+**Pre-deployment**:
+- [ ] Content compilation works locally (`npm run compile-content`)
+- [ ] Build completes successfully (`npm run build`)
+- [ ] Environment variables configured
+- [ ] OAuth providers setup (optional)
 
-**Web Service (Starter Plan - $7/month)**:
-- 0.5 CPU, 512 MB RAM
-- Automatic deployments
-- Custom domains
-- HTTPS certificates
+**Post-deployment**:
+- [ ] Health check returns 200 status
+- [ ] Homepage loads correctly
+- [ ] Authentication system working (if configured)
+- [ ] All content pages accessible
+- [ ] No console errors in browser
 
-**PostgreSQL (Starter Plan - $7/month)**:
-- 1 GB RAM, 1 CPU
-- 1 GB SSD storage
-- Automated backups
-- Connection pooling (paid plans)
+### Performance Monitoring
 
-**Total Minimum Cost**: ~$14/month for production deployment
+**Render Metrics**: Available in Render Dashboard
+- **Response Time**: Should be <500ms for most pages
+- **Memory Usage**: Expected ~100-200MB
+- **CPU Usage**: Low (stateless application)
+- **Error Rate**: Should be <1%
 
-### Cost Optimization Tips
+## 🐛 Troubleshooting Deployment Issues
 
-1. **Right-size Resources**
-   - Start with Starter plans
-   - Monitor usage and upgrade as needed
-   - Use autoscaling to handle traffic spikes
+### Common Build Failures
 
-2. **Optimize Database Usage**
-   - Implement query optimization
-   - Use proper indexing
-   - Clean up old data regularly
+#### **1. Content Compilation Errors**
+```
+Error: Failed to compile content
+```
+**Cause**: Invalid YAML syntax in content files
+**Solution**: 
+```bash
+# Check YAML syntax locally
+npm run compile-content
+# Fix any YAML errors reported
+```
 
-3. **Monitor Costs**
-   - Review Render billing monthly
-   - Set up usage alerts
-   - Optimize for your usage patterns
+#### **2. Environment Variable Missing**
+```
+Error: Missing required environment variable: NEXTAUTH_SECRET
+```
+**Solution**: Add missing environment variable in Render Dashboard
+
+#### **3. Build Timeout**
+```
+Build exceeded time limit
+```
+**Cause**: Build taking too long
+**Solution**: Check for infinite loops in build scripts, verify package.json scripts
+
+### Common Runtime Issues
+
+#### **1. Authentication Not Working**
+**Cause**: Missing or incorrect environment variables
+**Debugging**:
+```bash
+# Check environment variables in Render logs
+# Verify OAuth provider configuration
+# Test with minimal auth providers
+```
+
+#### **2. Content Not Loading**
+**Cause**: Content compilation failed silently
+**Solution**:
+```bash
+# Check build logs for content compilation output
+# Verify compiled content files exist in deployed bundle
+```
+
+#### **3. Performance Issues**
+**Cause**: Large bundle size or inefficient code
+**Solution**:
+```bash
+# Enable bundle analysis
+ANALYZE=true npm run build
+# Optimize imports and dependencies
+```
+
+## 🔄 Deployment Workflow
+
+### Development to Production
+
+1. **Local Development**:
+   ```bash
+   git clone [repository]
+   npm install
+   npm run compile-content
+   npm run dev
+   ```
+
+2. **Content Updates**:
+   ```bash
+   # Edit content files
+   vim src/content/pages/homepage.yml
+   
+   # Test compilation
+   npm run compile-content
+   
+   # Test build
+   npm run build
+   ```
+
+3. **Deployment**:
+   ```bash
+   git add .
+   git commit -m "Update content"
+   git push origin main
+   # Automatic deployment triggered on Render
+   ```
+
+4. **Verification**:
+   - Check deployment status in Render Dashboard
+   - Verify health check endpoint
+   - Test application functionality
+
+### Rollback Procedure
+
+**If Deployment Fails**:
+1. **Check Render Logs**: Identify specific failure point
+2. **Local Testing**: Reproduce issue locally if possible
+3. **Rollback**: Revert to previous working commit
+   ```bash
+   git revert HEAD
+   git push origin main
+   ```
+4. **Fix and Redeploy**: Address issue and redeploy
+
+### Multi-Environment Setup (Optional)
+
+**Preview Deployments**: Render automatically creates preview deployments for pull requests
+**Production Branch**: main branch deploys to production
+**Development Branch**: Can be configured for staging deployment
+
+## 💰 Deployment Costs (Render.com)
+
+### Service Costs
+- **Web Service**: $7/month (Starter plan)
+- **Bandwidth**: 100GB included
+- **Build Minutes**: 500 minutes/month included
+- **SSL Certificate**: Free (automatic HTTPS)
+
+### Cost Optimizations
+- **No Database Costs**: $0/month (eliminated)
+- **Single Service**: Minimal infrastructure overhead
+- **Efficient Bundle**: Standalone mode reduces resource usage
+- **Static Assets**: Optimized for fast delivery
+
+**Total Monthly Cost**: ~$7/month for production deployment
+
+## 🔒 Security Considerations
+
+### Deployment Security
+
+1. **Environment Variables**: Never commit secrets to repository
+2. **HTTPS Only**: Automatic SSL certificate from Render
+3. **Security Headers**: Configured in next.config.ts
+4. **Content Security Policy**: XSS protection enabled
+5. **OAuth Security**: Secure OAuth provider configuration
+
+### Security Checklist
+
+**Pre-deployment**:
+- [ ] No secrets in repository (.env not committed)
+- [ ] Environment variables configured securely
+- [ ] OAuth redirect URLs match deployment URL
+- [ ] Security headers configured
+
+**Post-deployment**:
+- [ ] HTTPS working correctly
+- [ ] No security warnings in browser console  
+- [ ] Authentication working securely
+- [ ] No sensitive data in error messages
 
 ---
 
-*This deployment guide ensures a production-ready AI Whisperers platform on Render.com with proper security, monitoring, and scalability considerations. Follow the checklist to ensure all components are properly configured.*
+## 📚 Additional Resources
+
+### Render.com Resources
+- [Render Documentation](https://render.com/docs)
+- [Node.js Deployment Guide](https://render.com/docs/deploy-node-express-app)
+- [Environment Variables](https://render.com/docs/environment-variables)
+
+### Next.js Deployment Resources  
+- [Next.js Deployment Documentation](https://nextjs.org/docs/deployment)
+- [Standalone Mode](https://nextjs.org/docs/advanced-features/output-file-tracing)
+
+### OAuth Setup Guides
+- [Google OAuth Setup](https://developers.google.com/identity/protocols/oauth2)
+- [GitHub OAuth Setup](https://docs.github.com/en/developers/apps/building-oauth-apps)
+
+*This deployment guide accurately reflects the current Node.js-only architecture as of September 4, 2025, after removal of database dependencies and implementation of build-time content compilation.*
