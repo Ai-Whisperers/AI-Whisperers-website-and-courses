@@ -1,0 +1,55 @@
+meta:
+  title: "Servicios - Educación y Consultoría en IA | AI Whisperers"
+  description: "Cursos completos de educación en IA y servicios de consultoría para transformar tu negocio con inteligencia artificial."
+  keywords:
+    - "servicios IA"
+    - "consultoría IA"
+    - "cursos inteligencia artificial"
+    - "transformación empresarial"
+    - "implementación IA"
+
+hero:
+  title: "Servicios de Educación y Consultoría en IA"
+  subtitle: "Transforma tu negocio y carrera con inteligencia artificial"
+  description: "Ofrecemos servicios completos de educación y consultoría en IA diseñados para ayudar a individuos y organizaciones a aprovechar el poder de la inteligencia artificial."
+
+services:
+  - title: "Cursos Básicos de IA"
+    description: "Cursos completos desde nivel principiante hasta experto"
+    features:
+      - "4 niveles completos de cursos"
+      - "65+ horas de contenido"
+      - "Proyectos prácticos"
+      - "Certificaciones industriales"
+    price: "Desde $299"
+    cta: "Ver Cursos"
+    
+  - title: "Entrenamiento Corporativo en IA"
+    description: "Programas de entrenamiento en IA personalizados para tu organización"
+    features:
+      - "Currículos adaptados"
+      - "Talleres para equipos"
+      - "Soporte de implementación"
+      - "Consultoría continua"
+    price: "Precio Personalizado"
+    cta: "Contactar Ventas"
+    
+  - title: "Consultoría en IA"
+    description: "Implementación estratégica de IA para tu negocio"
+    features:
+      - "Desarrollo de estrategia IA"
+      - "Evaluación tecnológica"
+      - "Hojas de ruta de implementación"
+      - "Optimización de rendimiento"
+    price: "Desde $5,000"
+    cta: "Programar Consulta"
+
+benefits:
+  - title: "Experiencia Comprobada"
+    description: "Nuestros instructores son profesionales con experiencia real en IA"
+  - title: "Enfoque Práctico"
+    description: "Aprende a través de proyectos prácticos y aplicaciones comerciales reales"
+  - title: "Aprendizaje Flexible"
+    description: "Cursos a tu ritmo y acuerdos flexibles de consultoría"
+  - title: "Soporte Continuo"
+    description: "Apoyo continuo y actualizaciones mientras evoluciona la tecnología IA"

@@ -1,0 +1,60 @@
+meta:
+  title: "AI Whisperers - Master AI with World-Class Education"
+  description: "Comprehensive AI courses from beginner to expert. Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction."
+  keywords:
+    - "AI courses"
+    - "artificial intelligence"
+    - "machine learning"
+    - "AI education"
+    - "programming"
+    - "technology"
+  language: "en"
+
+hero:
+  title: "Master AI with World-Class Education"
+  subtitle: "Transform your career with comprehensive AI courses from beginner to expert"
+  description: "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Join thousands of students already mastering AI."
+  cta:
+    primary: "Start Learning Today"
+    secondary: "View Courses"
+
+features:
+  - title: "Expert-Led Courses"
+    description: "Learn from industry professionals with real-world AI experience"
+    icon: "graduation-cap"
+  - title: "Hands-On Projects"
+    description: "Build practical AI applications and add them to your portfolio"
+    icon: "code"
+  - title: "Career Support"
+    description: "Get job placement assistance and career guidance"
+    icon: "briefcase"
+  - title: "Community Access"
+    description: "Join our exclusive community of AI practitioners"
+    icon: "users"
+
+courses:
+  featured:
+    - id: "ai-foundations"
+      title: "AI Foundations"
+      description: "Perfect starting point for AI beginners"
+      duration: "12 hours"
+      price: "$299"
+      level: "Beginner"
+    - id: "applied-ai"
+      title: "Applied AI"
+      description: "Build practical AI applications"
+      duration: "15 hours"
+      price: "$599"
+      level: "Intermediate"
+
+testimonials:
+  - name: "Sarah Johnson"
+    role: "Data Scientist"
+    company: "TechCorp"
+    content: "The AI Foundations course transformed my understanding of artificial intelligence. The hands-on approach made complex concepts easy to grasp."
+    rating: 5
+  - name: "Michael Chen"
+    role: "Software Engineer"
+    company: "StartupXYZ"
+    content: "Applied AI course helped me integrate AI into our products. The real-world projects were incredibly valuable."
+    rating: 5

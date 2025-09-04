@@ -1,0 +1,49 @@
+meta:
+  title: "Privacy Policy | AI Whisperers"
+  description: "Learn how we protect your privacy and handle your personal information on our AI education platform."
+  keywords:
+    - "privacy policy"
+    - "data protection"
+    - "personal information"
+    - "GDPR compliance"
+
+hero:
+  title: "Privacy Policy"
+  subtitle: "Your privacy is important to us"
+  lastUpdated: "September 2025"
+
+sections:
+  - title: "Information We Collect"
+    content: |
+      We collect information you provide directly to us, such as when you create an account, 
+      enroll in courses, or contact us for support. This includes your name, email address, 
+      and payment information.
+
+  - title: "How We Use Your Information"
+    content: |
+      We use your information to provide our educational services, process payments, 
+      communicate with you about your courses, and improve our platform. We do not 
+      sell your personal information to third parties.
+
+  - title: "Data Security"
+    content: |
+      We implement appropriate security measures to protect your personal information 
+      against unauthorized access, alteration, disclosure, or destruction. All payment 
+      processing is handled by secure, PCI-compliant payment processors.
+
+  - title: "Your Rights"
+    content: |
+      You have the right to access, update, or delete your personal information. 
+      You can manage your account settings or contact us to exercise these rights. 
+      We comply with GDPR and other applicable privacy regulations.
+
+  - title: "Cookies and Tracking"
+    content: |
+      We use cookies and similar technologies to enhance your experience, analyze usage, 
+      and provide personalized content. You can control cookie preferences in your 
+      browser settings.
+
+  - title: "Contact Us"
+    content: |
+      If you have questions about this Privacy Policy or our data practices, 
+      please contact us at privacy@aiwhisperers.com or through our support channels.

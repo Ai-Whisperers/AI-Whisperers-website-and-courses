@@ -1,0 +1,72 @@
+meta:
+  title: "Contact Us - Get in Touch | AI Whisperers"
+  description: "Contact the AI Whisperers team for course information, support, or partnership opportunities."
+  keywords:
+    - "contact AI Whisperers"
+    - "course support"
+    - "AI education help"
+    - "partnership opportunities"
+
+hero:
+  title: "Get in Touch"
+  subtitle: "We're here to help with your AI learning journey"
+  description: "Have questions about our courses or need assistance? Our team is ready to help you succeed."
+
+contact:
+  email: "info@aiwhisperers.com"
+  phone: "+1 (555) 123-4567"
+  address: 
+    street: "123 Innovation Drive"
+    city: "Tech Valley"
+    state: "CA"
+    zip: "94000"
+    country: "USA"
+
+departments:
+  - title: "Course Support"
+    email: "support@aiwhisperers.com"
+    description: "Technical support and course assistance"
+    
+  - title: "Sales & Enrollment"
+    email: "sales@aiwhisperers.com"
+    description: "Course information and enrollment assistance"
+    
+  - title: "Corporate Training"
+    email: "corporate@aiwhisperers.com"
+    description: "Custom training programs for organizations"
+    
+  - title: "Partnerships"
+    email: "partnerships@aiwhisperers.com"
+    description: "Business partnerships and collaboration opportunities"
+
+office_hours:
+  monday_friday: "9:00 AM - 6:00 PM PST"
+  saturday: "10:00 AM - 2:00 PM PST"
+  sunday: "Closed"
+
+social:
+  twitter: "https://twitter.com/aiwhisperers"
+  linkedin: "https://linkedin.com/company/aiwhisperers"
+  github: "https://github.com/aiwhisperers"
+  youtube: "https://youtube.com/aiwhisperers"
+
+form:
+  title: "Send us a message"
+  subtitle: "Fill out the form below and we'll get back to you within 24 hours"
+  fields:
+    - name: "name"
+      label: "Full Name"
+      type: "text"
+      required: true
+    - name: "email"
+      label: "Email Address"
+      type: "email"
+      required: true
+    - name: "subject"
+      label: "Subject"
+      type: "text"
+      required: true
+    - name: "message"
+      label: "Message"
+      type: "textarea"
+      required: true
