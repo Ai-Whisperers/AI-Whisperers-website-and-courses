@@ -1,0 +1,137 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/servicios.yml
+
+import type { PageContent } from '@/types/content';
+
+export const serviciosContent: PageContent = {
+  "meta": {
+    "title": "Servicios - Educación y Consultoría en IA | AI Whisperers",
+    "description": "Cursos completos de educación en IA y servicios de consultoría para transformar tu negocio con inteligencia artificial.",
+    "keywords": [
+      "servicios IA",
+      "consultoría IA",
+      "cursos inteligencia artificial",
+      "transformación empresarial",
+      "implementación IA"
+    ],
+    "language": "es"
+  },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Inicio",
+        "href": "/"
+      },
+      {
+        "text": "Servicios",
+        "href": "/servicios"
+      },
+      {
+        "text": "Cursos",
+        "href": "/courses"
+      },
+      {
+        "text": "Sobre Nosotros",
+        "href": "/sobre-nosotros"
+      },
+      {
+        "text": "Contacto",
+        "href": "/contacto"
+      }
+    ],
+    "cta": {
+      "text": "Comenzar",
+      "variant": "default"
+    }
+  },
+  "hero": {
+    "title": "Servicios de Educación y Consultoría en IA",
+    "subtitle": "Transforma tu negocio y carrera con inteligencia artificial",
+    "description": "Ofrecemos servicios completos de educación y consultoría en IA diseñados para ayudar a individuos y organizaciones a aprovechar el poder de la inteligencia artificial."
+  },
+  "services": [
+    {
+      "title": "Cursos Básicos de IA",
+      "description": "Cursos completos desde nivel principiante hasta experto",
+      "features": [
+        "4 niveles completos de cursos",
+        "65+ horas de contenido",
+        "Proyectos prácticos",
+        "Certificaciones industriales"
+      ],
+      "price": "Desde $299",
+      "cta": "Ver Cursos"
+    },
+    {
+      "title": "Entrenamiento Corporativo en IA",
+      "description": "Programas de entrenamiento en IA personalizados para tu organización",
+      "features": [
+        "Currículos adaptados",
+        "Talleres para equipos",
+        "Soporte de implementación",
+        "Consultoría continua"
+      ],
+      "price": "Precio Personalizado",
+      "cta": "Contactar Ventas"
+    },
+    {
+      "title": "Consultoría en IA",
+      "description": "Implementación estratégica de IA para tu negocio",
+      "features": [
+        "Desarrollo de estrategia IA",
+        "Evaluación tecnológica",
+        "Hojas de ruta de implementación",
+        "Optimización de rendimiento"
+      ],
+      "price": "Desde $5,000",
+      "cta": "Programar Consulta"
+    }
+  ],
+  "benefits": [
+    {
+      "title": "Experiencia Comprobada",
+      "description": "Nuestros instructores son profesionales con experiencia real en IA"
+    },
+    {
+      "title": "Enfoque Práctico",
+      "description": "Aprende a través de proyectos prácticos y aplicaciones comerciales reales"
+    },
+    {
+      "title": "Aprendizaje Flexible",
+      "description": "Cursos a tu ritmo y acuerdos flexibles de consultoría"
+    },
+    {
+      "title": "Soporte Continuo",
+      "description": "Apoyo continuo y actualizaciones mientras evoluciona la tecnología IA"
+    }
+  ],
+  "cta": {
+    "title": "¿Listo para Comenzar tu Viaje en IA?",
+    "description": "Elige el servicio que mejor se adapte a tus necesidades y comienza a transformar tu carrera o negocio con IA.",
+    "button": "Comenzar Hoy"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Ponte en contacto con nosotros",
+    "primaryCta": {
+      "text": "WhatsApp",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Email",
+      "variant": "outline"
+    },
+    "info": []
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. Todos los derechos reservados."
+  }
+} as const;
+
+export default serviciosContent;

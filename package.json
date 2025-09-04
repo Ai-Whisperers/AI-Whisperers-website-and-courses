@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:stable": "next dev",
-    "build": "npm install && next build",
+    "prebuild": "node scripts/compile-content.js",
+    "build": "npm install && npm run prebuild && next build",
     "start": "next start",
+    "compile-content": "node scripts/compile-content.js",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",

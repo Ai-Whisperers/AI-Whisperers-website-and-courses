@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useLanguage } from '@/lib/i18n/context'
-import { getCachedPageContent } from '@/lib/content/client'
+// Removed client-side content loading - now uses server-side compiled content
 import type { PageContent } from '@/types/content'
 
 interface DynamicPageWrapperProps {

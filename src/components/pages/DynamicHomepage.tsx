@@ -9,7 +9,7 @@ import { AnimatedBackground, FloatingElements, TypewriterText } from "@/componen
 import { NewsletterSignup } from "@/components/interactive/NewsletterSignup"
 import { FloatingThemeSelector } from "@/components/ui/ThemeSelector"
 import { useLanguage } from '@/lib/i18n/context'
-import { getCachedPageContent } from '@/lib/content/client'
+// Removed client-side content loading - now uses server-side compiled content
 import type { PageContent } from "@/types/content"
 
 interface DynamicHomepageProps {
