@@ -13,7 +13,38 @@ export const sobre_nosotrosContent: PageContent = {
       "misión",
       "instructores IA"
     ],
-    "language": "en"
+    "language": "es"
+  },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Inicio",
+        "href": "/"
+      },
+      {
+        "text": "Servicios",
+        "href": "/servicios"
+      },
+      {
+        "text": "Cursos",
+        "href": "/courses"
+      },
+      {
+        "text": "Sobre Nosotros",
+        "href": "/sobre-nosotros"
+      },
+      {
+        "text": "Contacto",
+        "href": "/contacto"
+      }
+    ],
+    "cta": {
+      "text": "Comenzar",
+      "variant": "default"
+    }
   },
   "hero": {
     "title": "Sobre AI Whisperers",
@@ -68,6 +99,12 @@ export const sobre_nosotrosContent: PageContent = {
     "coursesCompleted": "25,000+",
     "satisfaction": "98%",
     "jobPlacement": "85%"
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. Todos los derechos reservados."
   }
 } as const;
 

@@ -6,6 +6,25 @@ meta:
     - "equipo educación IA"
     - "misión"
     - "instructores IA"
+  language: "es"
+
+navigation:
+  brand:
+    text: "AI Whisperers"
+  items:
+    - text: "Inicio"
+      href: "/"
+    - text: "Servicios"
+      href: "/servicios"
+    - text: "Cursos"
+      href: "/courses"
+    - text: "Sobre Nosotros"
+      href: "/sobre-nosotros"
+    - text: "Contacto"
+      href: "/contacto"
+  cta:
+    text: "Comenzar"
+    variant: "default"
 
 hero:
   title: "Sobre AI Whisperers"
@@ -54,3 +73,8 @@ stats:
   coursesCompleted: "25,000+"
   satisfaction: "98%"
   jobPlacement: "85%"
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. Todos los derechos reservados."

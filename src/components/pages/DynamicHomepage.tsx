@@ -16,34 +16,13 @@ interface DynamicHomepageProps {
   content: PageContent
 }
 
-export function DynamicHomepage({ content: initialContent }: DynamicHomepageProps) {
+export function DynamicHomepage({ content }: DynamicHomepageProps) {
   const { language, isLoading: languageLoading } = useLanguage()
-  const [content, setContent] = useState<PageContent>(initialContent)
-  const [isLoadingContent, setIsLoadingContent] = useState(false)
+  // Note: Content is now server-side compiled and provided via props
+  // Language switching would require page navigation to different routes
 
-  useEffect(() => {
-    if (languageLoading) return
-
-    // If the current content language matches the selected language, no need to reload
-    if (content.meta.language === language) return
-
-    setIsLoadingContent(true)
-
-    getCachedPageContent('homepage', language)
-      .then(newContent => {
-        setContent(newContent)
-      })
-      .catch(error => {
-        console.error('Failed to load content for language:', language, error)
-        // Keep current content if loading fails
-      })
-      .finally(() => {
-        setIsLoadingContent(false)
-      })
-  }, [language, languageLoading, content.meta.language])
-
-  // Show loading state while language is being determined or content is loading
-  if (languageLoading || isLoadingContent) {
+  // Show loading state while language is being determined
+  if (languageLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
         <div className="text-center">

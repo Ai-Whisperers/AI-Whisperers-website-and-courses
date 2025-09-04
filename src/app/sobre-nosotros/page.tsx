@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 // Generate metadata from content
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPageContent('about')
+  const content = await getPageContent('sobre-nosotros')
   
   return {
     title: content.meta.title,
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function AboutUsPage() {
   // Load content from YAML file (default language for SSR)
-  const content = await getPageContent('about')
+  const content = await getPageContent('sobre-nosotros')
   
   return <AboutPage content={content} />
 }

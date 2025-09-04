@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 // Generate metadata from content
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPageContent('contact')
+  const content = await getPageContent('contacto')
   
   return {
     title: content.meta.title,
@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPageRoute() {
   // Load content from YAML file
-  const content = await getPageContent('contact')
+  const content = await getPageContent('contacto')
   
   return <ContactPage content={content} />
 }

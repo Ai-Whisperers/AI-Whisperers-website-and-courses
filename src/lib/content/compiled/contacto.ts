@@ -13,7 +13,38 @@ export const contactoContent: PageContent = {
       "ayuda educación AI",
       "oportunidades asociación"
     ],
-    "language": "en"
+    "language": "es"
+  },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Inicio",
+        "href": "/"
+      },
+      {
+        "text": "Servicios",
+        "href": "/servicios"
+      },
+      {
+        "text": "Cursos",
+        "href": "/courses"
+      },
+      {
+        "text": "Sobre Nosotros",
+        "href": "/sobre-nosotros"
+      },
+      {
+        "text": "Contacto",
+        "href": "/contacto"
+      }
+    ],
+    "cta": {
+      "text": "Comenzar",
+      "variant": "default"
+    }
   },
   "hero": {
     "title": "Ponte en Contacto",
@@ -77,6 +108,12 @@ export const contactoContent: PageContent = {
         "required": true
       }
     ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. Todos los derechos reservados."
   }
 } as const;
 
