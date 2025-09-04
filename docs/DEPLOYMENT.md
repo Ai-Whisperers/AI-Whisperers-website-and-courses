@@ -131,7 +131,7 @@ This guide provides comprehensive instructions for deploying the AI Whisperers e
    ```
    Name: aiwhisperers-web
    Runtime: Node
-   Build Command: npm ci && npm run build
+   Build Command: npm install && npm run build
    Start Command: npm start
    Plan: Starter ($7/month) or higher
    ```

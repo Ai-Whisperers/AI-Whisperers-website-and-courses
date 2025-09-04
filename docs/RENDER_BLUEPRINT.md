@@ -80,7 +80,7 @@ services:
     name: ai-whisperers-web
     runtime: node
     plan: starter
-    buildCommand: npm ci && npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     

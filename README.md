@@ -40,7 +40,7 @@ A comprehensive AI education platform combining modern web development with **$1
    **Or manual deployment**:
    ```
    Render Dashboard → New → Web Service → Connect AI-Whisperers repo
-   Build Command: npm ci && npm run build
+   Build Command: npm install && npm run build
    Start Command: npm start
    Health Check Path: /api/health
    ```
