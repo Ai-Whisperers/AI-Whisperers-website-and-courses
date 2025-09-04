@@ -53,30 +53,50 @@ export const privacyContent: PageContent = {
   },
   "sections": [
     {
+      "id": "information-collection",
       "title": "Information We Collect",
       "content": "We collect information you provide directly to us, such as when you create an account, \nenroll in courses, or contact us for support. This includes your name, email address, \nand payment information.\n"
     },
     {
+      "id": "information-use",
       "title": "How We Use Your Information",
       "content": "We use your information to provide our educational services, process payments, \ncommunicate with you about your courses, and improve our platform. We do not \nsell your personal information to third parties.\n"
     },
     {
+      "id": "data-security",
       "title": "Data Security",
       "content": "We implement appropriate security measures to protect your personal information \nagainst unauthorized access, alteration, disclosure, or destruction. All payment \nprocessing is handled by secure, PCI-compliant payment processors.\n"
     },
     {
+      "id": "user-rights",
       "title": "Your Rights",
       "content": "You have the right to access, update, or delete your personal information. \nYou can manage your account settings or contact us to exercise these rights. \nWe comply with GDPR and other applicable privacy regulations.\n"
     },
     {
+      "id": "cookies-tracking",
       "title": "Cookies and Tracking",
       "content": "We use cookies and similar technologies to enhance your experience, analyze usage, \nand provide personalized content. You can control cookie preferences in your \nbrowser settings.\n"
     },
     {
+      "id": "contact-privacy",
       "title": "Contact Us",
       "content": "If you have questions about this Privacy Policy or our data practices, \nplease contact us at privacy@aiwhisperers.com or through our support channels.\n"
     }
   ],
+  "contact": {
+    "title": "Privacy Questions?",
+    "description": "Contact our privacy team for any questions about data handling.",
+    "methods": {
+      "email": "privacy@aiwhisperers.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Innovation Drive, Tech Valley, CA 94000",
+      "response_time": "We respond within 48 hours"
+    }
+  },
+  "compliance": {
+    "title": "Compliance & Certifications",
+    "content": "We comply with **GDPR**, **CCPA**, and other major privacy regulations. Our platform is designed with **privacy-by-design** principles."
+  },
   "footer": {
     "brand": {
       "text": "AI Whisperers"

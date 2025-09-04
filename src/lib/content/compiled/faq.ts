@@ -53,7 +53,9 @@ export const faqContent: PageContent = {
   },
   "categories": [
     {
+      "id": "general",
       "title": "Course Information",
+      "icon": "BookOpen",
       "questions": [
         {
           "question": "What AI courses do you offer?",
@@ -70,7 +72,9 @@ export const faqContent: PageContent = {
       ]
     },
     {
+      "id": "enrollment",
       "title": "Enrollment & Payment",
+      "icon": "CreditCard",
       "questions": [
         {
           "question": "How do I enroll in a course?",
@@ -87,7 +91,9 @@ export const faqContent: PageContent = {
       ]
     },
     {
+      "id": "support",
       "title": "Technical Support",
+      "icon": "HelpCircle",
       "questions": [
         {
           "question": "What if I need help with the course content?",
@@ -104,6 +110,23 @@ export const faqContent: PageContent = {
       ]
     }
   ],
+  "contact": {
+    "title": "Still Have Questions?",
+    "description": "Can't find the answer you're looking for? Our support team is here to help.",
+    "cta": {
+      "primary": {
+        "text": "Contact Support"
+      },
+      "secondary": {
+        "text": "Schedule Call"
+      }
+    },
+    "info": {
+      "email": "support@aiwhisperers.com",
+      "phone": "+1 (555) 123-4567",
+      "hours": "Monday-Friday: 9 AM - 6 PM PST"
+    }
+  },
   "footer": {
     "brand": {
       "text": "AI Whisperers"
