@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:stable": "next dev",
-    "prebuild": "node scripts/compile-content.js",
-    "build": "npm install && npm run prebuild && next build",
+    "build": "npm install && node scripts/compile-content.js && next build",
     "start": "next start",
     "compile-content": "node scripts/compile-content.js",
     "lint": "next lint",
