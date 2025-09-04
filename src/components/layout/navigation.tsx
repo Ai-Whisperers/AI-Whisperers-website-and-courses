@@ -1,0 +1,205 @@
+// Navigation Component
+// Main site navigation with authentication integration
+
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { useAuth } from '@/hooks/use-auth'
+import { useTranslation } from '@/lib/i18n/use-translation'
+import { Button } from '@/components/ui/button'
+import { LanguageSelector } from '@/components/ui/language-selector'
+import { cn } from '@/lib/utils'
+
+export function Navigation() {
+  const pathname = usePathname()
+  const { user, isAuthenticated, logout } = useAuth()
+  const { t } = useTranslation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const navigationItems = [
+    { href: '/', label: t('nav.home') },
+    { href: '/courses', label: t('nav.courses') },
+    { href: '/about', label: t('nav.about') },
+    { href: '/blog', label: t('nav.blog') },
+    { href: '/contact', label: t('nav.contact') },
+  ]
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(href)
+  }
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="font-bold text-xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+              AI Whisperers
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  isActive(item.href)
+                    ? 'text-primary'
+                    : 'text-muted-foreground'
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right Side - Auth + Language */}
+          <div className="flex items-center space-x-4">
+            <LanguageSelector variant="compact" />
+            
+            {isAuthenticated ? (
+              <div className="hidden md:flex items-center space-x-3">
+                {user?.canAccessAdmin() && (
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link href="/admin">Admin</Link>
+                  </Button>
+                )}
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/dashboard">{t('nav.dashboard')}</Link>
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => logout()}
+                >
+                  {t('nav.signOut')}
+                </Button>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center space-x-3">
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/auth/signin">{t('nav.signIn')}</Link>
+                </Button>
+                <Button size="sm" asChild>
+                  <Link href="/auth/signin">Get Started</Link>
+                </Button>
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-border">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'block px-3 py-2 text-sm font-medium rounded-md transition-colors',
+                    isActive(item.href)
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground hover:text-primary hover:bg-accent'
+                  )}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              
+              <div className="border-t border-border pt-3 mt-3">
+                {isAuthenticated ? (
+                  <div className="space-y-1">
+                    <Link
+                      href="/dashboard"
+                      className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('nav.dashboard')}
+                    </Link>
+                    {user?.canAccessAdmin() && (
+                      <Link
+                        href="/admin"
+                        className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Admin
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => {
+                        logout()
+                        setIsMobileMenuOpen(false)
+                      }}
+                      className="block w-full text-left px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
+                    >
+                      {t('nav.signOut')}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-1">
+                    <Link
+                      href="/auth/signin"
+                      className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {t('nav.signIn')}
+                    </Link>
+                    <Link
+                      href="/auth/signin"
+                      className="block px-3 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-md"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}
