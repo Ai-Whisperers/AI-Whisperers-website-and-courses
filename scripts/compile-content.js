@@ -10,8 +10,9 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
-const CONTENT_DIR = path.join(__dirname, '..', 'src', 'content', 'pages');
-const OUTPUT_DIR = path.join(__dirname, '..', 'src', 'lib', 'content', 'compiled');
+// Use process.cwd() for more predictable path resolution across environments
+const CONTENT_DIR = path.join(process.cwd(), 'src', 'content', 'pages');
+const OUTPUT_DIR = path.join(process.cwd(), 'src', 'lib', 'content', 'compiled');
 
 /**
  * Ensure output directory exists
