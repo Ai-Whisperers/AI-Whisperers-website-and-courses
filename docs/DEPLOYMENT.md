@@ -128,10 +128,10 @@ GITHUB_CLIENT_SECRET=your-github-client-secret
 
 **Start Command**: `npm start`
 ```bash
-# This command:
-1. Starts Next.js production server
-2. Serves static assets and API routes
-3. Handles authentication and content
+# This command (for standalone mode):
+1. Starts standalone Next.js server (node .next/standalone/server.js)
+2. Serves static assets and API routes with optimized performance
+3. Handles authentication and content with minimal footprint
 ```
 
 ### Build Process Flow
