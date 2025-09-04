@@ -2,49 +2,51 @@
 // RESTful API for specific course details
 
 import { NextRequest, NextResponse } from 'next/server'
-import { CourseService } from '@/lib/services/course.service'
-import { createCourseRepository } from '@/lib/repositories'
-import { CourseNotFoundError } from '@/domain/errors/domain-errors'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { slug: string } }
 ) {
   try {
-    const courseService = new CourseService(createCourseRepository())
-    const course = await courseService.getCourseBySlug(params.slug)
-
-    // Transform domain entity to JSON-serializable format
-    const courseData = {
-      id: course.id.value,
-      title: course.title,
-      description: course.description,
-      slug: course.slug,
-      price: {
-        amount: course.price.amount,
-        currency: course.price.currency,
-        formatted: course.price.formatUSD()
-      },
-      duration: {
-        minutes: course.duration.minutes,
-        formatted: course.duration.formatHumanReadable()
-      },
-      difficulty: course.difficulty,
-      difficultyLevel: course.getDifficultyLevel(),
-      published: course.published,
-      featured: course.featured,
-      learningObjectives: course.learningObjectives,
-      prerequisites: course.prerequisites,
-      canEnroll: course.canEnroll(),
-      isFree: course.isFree(),
-      isAdvanced: course.isAdvanced(),
-      createdAt: course.createdAt,
-      updatedAt: course.updatedAt
+    // Mock course data for initial deployment
+    const mockCourses: Record<string, any> = {
+      'ai-foundations': {
+        id: 'course-1',
+        title: 'AI Foundations',
+        description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
+        slug: 'ai-foundations',
+        price: { amount: 29900, currency: 'USD', formatted: '$299.00' },
+        duration: { minutes: 720, formatted: '12 hours' },
+        difficulty: 'BEGINNER',
+        difficultyLevel: 'Beginner Friendly',
+        published: true,
+        featured: true,
+        learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
+        prerequisites: ['Basic computer literacy'],
+        canEnroll: true,
+        isFree: false,
+        isAdvanced: false,
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-15')
+      }
+    }
+    
+    const course = mockCourses[params.slug]
+    
+    if (!course) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Course not found',
+          message: `Course with slug '${params.slug}' does not exist`
+        },
+        { status: 404 }
+      )
     }
 
     return NextResponse.json({
       success: true,
-      course: courseData
+      course: course
     })
 
   } catch (error) {

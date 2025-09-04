@@ -2,62 +2,74 @@
 // RESTful API for course management following clean architecture
 
 import { NextRequest, NextResponse } from 'next/server'
-import { CourseService } from '@/lib/services/course.service'
-import { createCourseRepository } from '@/lib/repositories'
 import { Difficulty } from '@/domain/entities/course'
 
 export async function GET(request: NextRequest) {
   try {
-    const courseService = new CourseService(createCourseRepository())
     const { searchParams } = new URL(request.url)
     const published = searchParams.get('published') === 'true'
     const featured = searchParams.get('featured') === 'true'
     const difficulty = searchParams.get('difficulty') as Difficulty | null
 
-    let courses
+    // Mock course data for initial deployment
+    const mockCourses = [
+      {
+        id: 'course-1',
+        title: 'AI Foundations',
+        description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
+        slug: 'ai-foundations',
+        price: { amount: 29900, currency: 'USD', formatted: '$299.00' },
+        duration: { minutes: 720, formatted: '12 hours' },
+        difficulty: 'BEGINNER',
+        difficultyLevel: 'Beginner Friendly',
+        published: true,
+        featured: true,
+        learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
+        prerequisites: ['Basic computer literacy'],
+        canEnroll: true,
+        isFree: false,
+        isAdvanced: false,
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-15')
+      },
+      {
+        id: 'course-2',
+        title: 'Applied AI',
+        description: 'Build practical AI applications using modern tools and APIs.',
+        slug: 'applied-ai',
+        price: { amount: 59900, currency: 'USD', formatted: '$599.00' },
+        duration: { minutes: 900, formatted: '15 hours' },
+        difficulty: 'INTERMEDIATE',
+        difficultyLevel: 'Intermediate Level', 
+        published: true,
+        featured: true,
+        learningObjectives: ['Build AI applications', 'Deploy AI solutions'],
+        prerequisites: ['Basic programming knowledge'],
+        canEnroll: true,
+        isFree: false,
+        isAdvanced: false,
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-15')
+      }
+    ]
 
-    if (featured) {
-      courses = await courseService.getFeaturedCourses()
-    } else if (difficulty) {
-      courses = await courseService.getCoursesByDifficulty(difficulty)
-    } else if (published) {
-      courses = await courseService.getPublishedCourses()
-    } else {
-      courses = await courseService.getAllCourses()
+    // Filter courses based on query parameters
+    let filteredCourses = mockCourses
+
+    if (published) {
+      filteredCourses = filteredCourses.filter(course => course.published)
     }
-
-    // Transform domain entities to JSON-serializable format
-    const coursesData = courses.map(course => ({
-      id: course.id.value,
-      title: course.title,
-      description: course.description,
-      slug: course.slug,
-      price: {
-        amount: course.price.amount,
-        currency: course.price.currency,
-        formatted: course.price.formatUSD()
-      },
-      duration: {
-        minutes: course.duration.minutes,
-        formatted: course.duration.formatHumanReadable()
-      },
-      difficulty: course.difficulty,
-      difficultyLevel: course.getDifficultyLevel(),
-      published: course.published,
-      featured: course.featured,
-      learningObjectives: course.learningObjectives,
-      prerequisites: course.prerequisites,
-      canEnroll: course.canEnroll(),
-      isFree: course.isFree(),
-      isAdvanced: course.isAdvanced(),
-      createdAt: course.createdAt,
-      updatedAt: course.updatedAt
-    }))
+    if (featured) {
+      filteredCourses = filteredCourses.filter(course => course.featured)
+    }
+    if (difficulty) {
+      filteredCourses = filteredCourses.filter(course => course.difficulty === difficulty)
+    }
 
     return NextResponse.json({
       success: true,
-      courses: coursesData,
-      count: coursesData.length
+      courses: filteredCourses,
+      count: filteredCourses.length
     })
 
   } catch (error) {
