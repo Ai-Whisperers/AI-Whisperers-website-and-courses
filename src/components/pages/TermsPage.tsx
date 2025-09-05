@@ -42,8 +42,28 @@ interface TermsContent {
 }
 
 export function TermsPage({ content }: TermsPageProps) {
-  const termsContent = content as unknown as TermsContent
-  const { hero, sections, contact, updates } = termsContent
+  // Safe content validation instead of unsafe casting
+  const isValidTermsContent = (content: any): content is TermsContent => {
+    return content && 
+           content.hero && 
+           content.sections && 
+           Array.isArray(content.sections) &&
+           content.contact &&
+           content.updates
+  }
+
+  if (!isValidTermsContent(content)) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Content Loading Error</h1>
+          <p className="text-gray-600">Terms content structure is invalid. Please check content configuration.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const { hero, sections, contact, updates } = content as TermsContent
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">

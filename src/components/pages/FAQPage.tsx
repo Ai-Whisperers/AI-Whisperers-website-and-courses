@@ -51,8 +51,27 @@ export function FAQPage({ content }: FAQPageProps) {
   const [openQuestions, setOpenQuestions] = useState<Set<number>>(new Set())
   const [searchTerm, setSearchTerm] = useState('')
 
-  const faqContent = content as unknown as FAQContent
-  const { hero, categories, contact } = faqContent
+  // Safe content validation instead of unsafe casting
+  const isValidFAQContent = (content: any): content is FAQContent => {
+    return content && 
+           content.hero && 
+           content.categories && 
+           Array.isArray(content.categories) &&
+           content.contact
+  }
+
+  if (!isValidFAQContent(content)) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Content Loading Error</h1>
+          <p className="text-gray-600">FAQ content structure is invalid. Please check content configuration.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const { hero, categories, contact } = content as FAQContent
 
   const toggleQuestion = (index: number) => {
     const newOpenQuestions = new Set(openQuestions)

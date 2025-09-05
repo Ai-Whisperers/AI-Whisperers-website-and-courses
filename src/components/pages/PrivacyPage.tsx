@@ -41,8 +41,28 @@ interface PrivacyContent {
 }
 
 export function PrivacyPage({ content }: PrivacyPageProps) {
-  const privacyContent = content as unknown as PrivacyContent
-  const { hero, sections, contact, compliance } = privacyContent
+  // Safe content validation instead of unsafe casting
+  const isValidPrivacyContent = (content: any): content is PrivacyContent => {
+    return content && 
+           content.hero && 
+           content.sections && 
+           Array.isArray(content.sections) &&
+           content.contact &&
+           content.compliance
+  }
+
+  if (!isValidPrivacyContent(content)) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Content Loading Error</h1>
+          <p className="text-gray-600">Privacy content structure is invalid. Please check content configuration.</p>
+        </div>
+      </div>
+    )
+  }
+
+  const { hero, sections, contact, compliance } = content as PrivacyContent
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
