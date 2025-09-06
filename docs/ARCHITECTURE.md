@@ -1,5 +1,13 @@
 # AI Whisperers - Current Architecture Documentation
 
+> **📊 NEW: Complete Architectural Analysis Available**  
+> For comprehensive codebase mapping, dependency graphs, and detailed modular analysis, see:
+> - **[Dependency Architecture & Graph System](./DEPENDENCY_ARCHITECTURE.md)** - Complete dependency mapping (106 relationships)
+> - **[Modular Architecture Guide](./MODULAR_ARCHITECTURE.md)** - Module boundaries and quality metrics (Grade A-)
+> - **[Local Reports](../local-reports/README.md)** - Raw analysis data and detailed reports
+>
+> **Architecture Quality Score: A- (92%)** | **Zero Circular Dependencies** ✅ | **100% Coverage**
+
 ## 🏗️ Architectural Overview (Updated September 2025)
 
 The AI Whisperers platform implements a **modern, database-free architecture** optimized for deployment reliability, performance, and maintainability. This represents a major evolution from the original database-centric design to a simplified, stateless architecture.

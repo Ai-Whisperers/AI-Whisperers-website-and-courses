@@ -2,6 +2,8 @@
 
 > **🚀 Production-Ready Educational Platform** - Deploy to Render.com in minutes
 
+> **🤖 For Claude AI:** [Read CLAUDE.md first](./CLAUDE.md) - Essential context & architecture instructions for AI assistance
+
 A comprehensive AI education platform combining modern web development with **$150,000+ worth of premium course content**. Built with enterprise-grade architecture patterns and ready for immediate deployment.
 
 [![Architecture](https://img.shields.io/badge/Architecture-Hexagonal%20%2B%20Clean-blue)](#architecture)
