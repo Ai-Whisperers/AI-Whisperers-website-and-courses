@@ -56,10 +56,6 @@ const nextConfig: NextConfig = {
             value: 'SAMEORIGIN'
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
           },
@@ -68,9 +64,9 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self'", // Removed unsafe-eval and unsafe-inline for security
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // Required for Next.js in production
               "style-src 'self' 'unsafe-inline' fonts.googleapis.com", // Keep unsafe-inline for Tailwind CSS
-              "font-src 'self' fonts.gstatic.com",
+              "font-src 'self' fonts.gstatic.com data:",
               "img-src 'self' data: blob: ui-avatars.com *.onrender.com",
               "connect-src 'self' vitals.vercel-insights.com",
               "object-src 'none'", // Additional security - prevent object/embed injection
@@ -78,6 +74,16 @@ const nextConfig: NextConfig = {
               "form-action 'self'", // Restrict form submissions to same origin
             ].join('; ')
           }
+        ],
+      },
+      // Selective nosniff for non-static content
+      {
+        source: '/((?!_next/static/).*)',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
         ],
       },
     ]
@@ -98,7 +104,7 @@ const nextConfig: NextConfig = {
   // Environment-specific configurations
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NODE_ENV === 'production' 
-      ? process.env.RENDER_EXTERNAL_URL || 'https://your-app-name.onrender.com'
+      ? process.env.RENDER_EXTERNAL_URL || 'https://ai-whisperers-website-and-courses.onrender.com'
       : 'http://localhost:3000',
   },
 
