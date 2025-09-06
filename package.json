@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:stable": "next dev",
     "build": "npm install && node scripts/compile-content.js && next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start",
     "start:dev": "next start",
     "compile-content": "node scripts/compile-content.js",
     "lint": "next lint",

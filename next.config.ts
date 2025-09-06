@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable static exports for better performance
-  output: 'standalone',
+  // Use standard Next.js output for proper static file handling
+  // output: 'standalone', // Disabled - causing static file serving issues
   
   // Image optimization configuration
   images: {
@@ -137,6 +137,9 @@ const nextConfig: NextConfig = {
   
   // Skip middleware URL normalization
   skipMiddlewareUrlNormalize: true,
+  
+  // Ensure proper static file serving
+  trailingSlash: false,
 };
 
 export default nextConfig;
