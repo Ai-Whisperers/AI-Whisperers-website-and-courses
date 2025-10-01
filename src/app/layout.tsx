@@ -17,6 +17,15 @@ export const metadata: Metadata = {
   description: 'Comprehensive AI courses from beginner to expert. Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction.',
   keywords: ['AI courses', 'artificial intelligence', 'machine learning', 'AI education', 'programming', 'technology'],
   authors: [{ name: 'AI Whisperers' }],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+  },
   openGraph: {
     title: 'AI Whisperers - Master AI with World-Class Education',
     description: 'Comprehensive AI courses from beginner to expert',
