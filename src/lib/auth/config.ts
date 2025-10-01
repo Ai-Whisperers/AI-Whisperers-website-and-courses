@@ -5,9 +5,7 @@ import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import { PrismaClient } from '@/generated/prisma'
-
-const prisma = new PrismaClient()
+import { prisma } from '@/lib/db/prisma'
 
 // Environment variable validation
 function validateEnvVar(name: string, value: string | undefined): string {

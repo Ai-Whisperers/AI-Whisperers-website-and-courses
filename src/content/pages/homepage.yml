@@ -29,12 +29,28 @@ navigation:
     variant: "default"
 
 hero:
-  title: "Master AI with World-Class Education"
-  subtitle: "Transform your career with comprehensive AI courses from beginner to expert"
+  headline: "Master AI with World-Class Education"
+  subheadline: "Transform your career with comprehensive AI courses from beginner to expert"
   description: "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Join thousands of students already mastering AI."
-  cta:
-    primary: "Start Learning Today"
-    secondary: "View Courses"
+  location: "🌍 Available Worldwide - Learn at Your Own Pace"
+  primaryCta:
+    text: "Start Learning Today"
+    href: "/courses"
+    variant: "default"
+  secondaryCta:
+    text: "View Courses"
+    href: "/courses"
+    variant: "outline"
+  benefits:
+    - icon: "Zap"
+      title: "Fast Track Learning"
+      description: "Accelerated curriculum designed for busy professionals"
+    - icon: "Award"
+      title: "Industry Recognition"
+      description: "Certificates recognized by leading tech companies"
+    - icon: "Users"
+      title: "Expert Community"
+      description: "Connect with AI practitioners worldwide"
 
 features:
   - title: "Expert-Led Courses"
@@ -76,6 +92,36 @@ testimonials:
     company: "StartupXYZ"
     content: "Applied AI course helped me integrate AI into our products. The real-world projects were incredibly valuable."
     rating: 5
+
+stats:
+  title: "Trusted by Students Worldwide"
+  description: "Join thousands of professionals advancing their careers through AI education"
+  company:
+    - value: "10,000+"
+      description: "Students Enrolled"
+    - value: "95%"
+      description: "Completion Rate"
+    - value: "4.9/5"
+      description: "Average Rating"
+
+contact:
+  title: "Ready to Start Your AI Journey?"
+  description: "Get in touch with our team to find the perfect course for your goals"
+  primaryCta:
+    text: "Schedule Consultation"
+    href: "/contact"
+    variant: "default"
+  secondaryCta:
+    text: "Browse Courses"
+    href: "/courses"
+    variant: "outline"
+  info:
+    - type: "email"
+      label: "Email"
+      value: "contact@aiwhisperers.com"
+    - type: "web"
+      label: "Website"
+      value: "aiwhisperers.com"
 
 footer:
   brand:

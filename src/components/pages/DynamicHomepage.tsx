@@ -18,8 +18,24 @@ interface DynamicHomepageProps {
 
 export function DynamicHomepage({ content }: DynamicHomepageProps) {
   const { language, isLoading: languageLoading } = useLanguage()
+  const [debugInfo, setDebugInfo] = useState<string | null>(null)
+
   // Note: Content is now server-side compiled and provided via props
   // Language switching would require page navigation to different routes
+
+  // Debug logging
+  useEffect(() => {
+    console.log('[DynamicHomepage] Rendering with content:', {
+      hasContent: !!content,
+      contentKeys: content ? Object.keys(content) : [],
+      navigation: !!content?.navigation,
+      hero: !!content?.hero,
+      features: !!content?.features,
+      stats: !!content?.stats,
+      contact: !!content?.contact,
+      footer: !!content?.footer,
+    })
+  }, [content])
 
   // Show loading state while language is being determined
   if (languageLoading) {
@@ -32,15 +48,47 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
       </div>
     )
   }
+
   const { navigation, hero, features, stats, contact, footer } = content
 
-  // Add safety checks for navigation
-  if (!navigation || !hero || !features || !stats || !contact || !footer) {
+  // Add safety checks for required sections only (stats and contact are optional)
+  const requiredSections = { navigation, hero, features, footer }
+  const missingRequired = Object.entries(requiredSections)
+    .filter(([_, value]) => !value)
+    .map(([key]) => key)
+
+  if (missingRequired.length > 0) {
+    const missingParts = missingRequired
+
+    console.error('[DynamicHomepage] Missing content parts:', missingParts)
+    console.error('[DynamicHomepage] Content structure:', content)
+
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading content structure...</p>
+        <div className="text-center max-w-2xl mx-auto p-8">
+          <div className="text-red-600 text-5xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Content Structure Error</h2>
+          <p className="text-gray-600 mb-4">
+            The page content is incomplete. Missing sections: {missingParts.join(', ')}
+          </p>
+          {process.env.NODE_ENV === 'development' && (
+            <details className="text-left bg-gray-100 p-4 rounded-lg text-sm">
+              <summary className="cursor-pointer font-semibold mb-2">Debug Information</summary>
+              <pre className="overflow-auto">
+                {JSON.stringify({
+                  missingParts,
+                  availableKeys: Object.keys(content || {}),
+                  contentSample: content
+                }, null, 2)}
+              </pre>
+            </details>
+          )}
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Reload Page
+          </button>
         </div>
       </div>
     )
