@@ -4,7 +4,10 @@
 import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import GitHubProvider from 'next-auth/providers/github'
-import EmailProvider from 'next-auth/providers/email'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { PrismaClient } from '@/generated/prisma'
+
+const prisma = new PrismaClient()
 
 // Environment variable validation
 function validateEnvVar(name: string, value: string | undefined): string {
@@ -40,32 +43,22 @@ function buildProviders() {
     console.warn('GitHub OAuth not configured:', error)
   }
   
-  try {
-    if (process.env.EMAIL_SERVER_HOST && process.env.EMAIL_FROM) {
-      providers.push(EmailProvider({
-        server: {
-          host: process.env.EMAIL_SERVER_HOST,
-          port: process.env.EMAIL_SERVER_PORT,
-          auth: {
-            user: process.env.EMAIL_SERVER_USER,
-            pass: process.env.EMAIL_SERVER_PASSWORD,
-          },
-        },
-        from: process.env.EMAIL_FROM,
-      }))
-    }
-  } catch (error) {
-    console.warn('Email provider not configured:', error)
-  }
+  // EmailProvider requires a database adapter and is not compatible with JWT-only strategy
+  // Removed to maintain database-free architecture
+  // To enable email authentication, implement a database adapter first
+  // See: https://next-auth.js.org/adapters/overview
   
   return providers
 }
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma) as any,
   providers: buildProviders(),
 
   session: {
-    strategy: 'jwt',
+    strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
   },
 
   pages: {
@@ -74,26 +67,34 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: '/auth/verify-request',
   },
 
+  // Add logger for better debugging
+  logger: {
+    error(code, metadata) {
+      console.error('[NextAuth Error]', code, metadata)
+    },
+    warn(code) {
+      console.warn('[NextAuth Warning]', code)
+    },
+    debug(code, metadata) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[NextAuth Debug]', code, metadata)
+      }
+    },
+  },
+
   callbacks: {
-    async session({ session, token }) {
-      if (session.user && token) {
-        session.user.id = token.sub!
-        session.user.role = (token.role as string) || 'STUDENT'
-        session.user.emailVerified = token.emailVerified as Date
+    async session({ session, user }) {
+      // With database sessions, user comes from the database adapter
+      if (session.user && user) {
+        session.user.id = user.id
+        session.user.role = (user as any).role || 'STUDENT'
+        session.user.emailVerified = user.emailVerified
       }
       return session
     },
 
-    async jwt({ token, user, account, profile }) {
-      if (user) {
-        token.role = 'STUDENT' // Default role since we don't have database
-        token.emailVerified = new Date() // Assume email is verified for OAuth providers
-      }
-      return token
-    },
-
     async signIn({ user, account, profile, email, credentials }) {
-      // Allow sign in
+      // Allow sign in - user will be created/updated in database automatically
       return true
     },
 

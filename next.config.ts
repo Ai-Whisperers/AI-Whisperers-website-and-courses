@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Use standard Next.js output for proper static file handling
-  // output: 'standalone', // Disabled - causing static file serving issues
+  // Use standalone output for Docker deployment
+  output: 'standalone',
   
   // Image optimization configuration
   images: {

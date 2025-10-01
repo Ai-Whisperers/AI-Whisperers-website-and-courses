@@ -11,8 +11,8 @@ RUN apk add --no-cache libc6-compat python3 make g++
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install dependencies
-RUN npm ci --only=production --ignore-scripts && \
+# Install dependencies (including devDependencies needed for build)
+RUN npm ci --ignore-scripts && \
     npm cache clean --force
 
 # Stage 2: Builder

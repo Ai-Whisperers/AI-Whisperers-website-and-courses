@@ -1,8 +1,6 @@
 # Docker Compose configuration for local development
 # Provides development parity with Render deployment
 
-version: '3.8'
-
 services:
   # Main Next.js application
   app:
