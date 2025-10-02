@@ -39,26 +39,27 @@ jobs:
         context: .
         file: ./Dockerfile
         push: false
-        tags: ai-whisperers-app:${{ github.sha }}
+        load: true
+        tags: ai-whisperers-app:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-        # Prevent build artifacts from being committed
-        outputs: type=docker,dest=/dev/null
 
     - name: Move cache
       run: |
         rm -rf /tmp/.buildx-cache
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-    - name: Test health endpoint
+    - name: Run container and test health endpoint
       run: |
-        docker-compose up -d app
-        sleep 10
+        docker run -d -p 3000:3000 --name test-app ai-whisperers-app:latest
+        sleep 15
         curl -f http://localhost:3000/api/health || exit 1
-        docker-compose down
+        docker stop test-app
+        docker rm test-app
 
     - name: Clean up Docker artifacts
       if: always()
       run: |
-        docker-compose down -v --remove-orphans
+        docker stop test-app || true
+        docker rm test-app || true
         docker system prune -f
