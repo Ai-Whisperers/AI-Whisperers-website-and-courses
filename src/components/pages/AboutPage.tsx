@@ -27,7 +27,13 @@ export function AboutPage({ content }: AboutPageProps) {
       </div>
     )
   }
-  const { hero, story, mission, vision, values, team, stats, contact, footer } = content
+  const { hero, story, mission, vision, values, team, stats, contact } = content
+
+  // Handle both array and object structures defensively
+  const valuesArray = Array.isArray(values) ? values : (values as any)?.items || []
+  const teamArray = Array.isArray(team) ? team : (team as any)?.members || []
+  const valuesTitle = (values as any)?.title || "Our Values"
+  const teamTitle = (team as any)?.title || "Meet Our Team"
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
@@ -89,15 +95,15 @@ export function AboutPage({ content }: AboutPageProps) {
       )}
 
       {/* Values */}
-      {values && (
+      {values && valuesArray.length > 0 && (
         <section className="py-16 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">{values.title}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-4">{valuesTitle}</h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {values.items.map((value, index) => (
+              {valuesArray.map((value: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -105,7 +111,7 @@ export function AboutPage({ content }: AboutPageProps) {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-card p-6 rounded-lg shadow-sm text-center"
                 >
-                  <DynamicIcon name={value.icon} className="h-12 w-12 text-primary mb-4 mx-auto" />
+                  {value.icon && <DynamicIcon name={value.icon} className="h-12 w-12 text-primary mb-4 mx-auto" />}
                   <h3 className="font-semibold text-foreground mb-2">{value.title}</h3>
                   <p className="text-muted-foreground text-sm">{value.description}</p>
                 </motion.div>
@@ -116,15 +122,15 @@ export function AboutPage({ content }: AboutPageProps) {
       )}
 
       {/* Team */}
-      {team && (
+      {team && teamArray.length > 0 && (
         <section className="py-16 bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">{team.title}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-4">{teamTitle}</h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {team.members.map((member, index) => (
+              {teamArray.map((member: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -138,16 +144,18 @@ export function AboutPage({ content }: AboutPageProps) {
                   <h3 className="font-bold text-foreground mb-1">{member.name}</h3>
                   <p className="text-primary font-medium mb-3">{member.role}</p>
                   <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {member.expertise.map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="bg-primary/10 text-primary text-xs px-2 py-1 rounded"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                  {member.expertise && member.expertise.length > 0 && (
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {member.expertise.map((skill: string, skillIndex: number) => (
+                        <span
+                          key={skillIndex}
+                          className="bg-primary/10 text-primary text-xs px-2 py-1 rounded"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -157,22 +165,31 @@ export function AboutPage({ content }: AboutPageProps) {
 
       {/* Stats */}
       {stats && (
-        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-white">
+        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl font-bold mb-4">{stats.title}</h2>
-              
+              <h2 className="text-3xl font-bold mb-4">{(stats as any).title || "Our Impact"}</h2>
+
               <div className="grid md:grid-cols-4 gap-8 mt-12">
-                {stats.metrics.map((metric, index) => (
-                  <div key={index}>
-                    <div className="text-4xl font-bold text-primary-foreground/90 mb-2">{metric.value}</div>
-                    <p className="text-primary-foreground/80">{metric.description}</p>
-                  </div>
-                ))}
+                {(stats as any).metrics ? (
+                  (stats as any).metrics.map((metric: any, index: number) => (
+                    <div key={index}>
+                      <div className="text-4xl font-bold text-primary-foreground/90 mb-2">{metric.value}</div>
+                      <p className="text-primary-foreground/80">{metric.description}</p>
+                    </div>
+                  ))
+                ) : (
+                  Object.entries(stats).map(([key, value], index) => (
+                    <div key={index}>
+                      <div className="text-4xl font-bold text-primary-foreground/90 mb-2">{value as string}</div>
+                      <p className="text-primary-foreground/80">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
+                    </div>
+                  ))
+                )}
               </div>
             </motion.div>
           </div>
@@ -180,42 +197,33 @@ export function AboutPage({ content }: AboutPageProps) {
       )}
 
       {/* Contact CTA */}
-      <section className="py-16 bg-muted">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
-            {contact.title}
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            {contact.description}
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <DynamicButton 
-              content={contact.primaryCta}
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
-            />
-            <DynamicButton 
-              content={contact.secondaryCta}
-              className="px-8 py-3 text-lg"
-            />
-          </div>
-        </div>
-      </section>
+      {contact && (
+        <section className="py-16 bg-muted">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              {(contact as any).title || "Get in Touch"}
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              {(contact as any).description || "Ready to start your AI learning journey?"}
+            </p>
 
-      {/* Footer */}
-      <footer className="bg-card border-t border-border py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <DynamicIcon name="Brain" className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold text-foreground">{footer.brand.text}</span>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              {footer.copyright}
-            </div>
+            {(contact as any).primaryCta && (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <DynamicButton
+                  content={(contact as any).primaryCta}
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
+                />
+                {(contact as any).secondaryCta && (
+                  <DynamicButton
+                    content={(contact as any).secondaryCta}
+                    className="px-8 py-3 text-lg"
+                  />
+                )}
+              </div>
+            )}
           </div>
-        </div>
-      </footer>
+        </section>
+      )}
     </div>
   )
 }
