@@ -113,7 +113,7 @@ export function AboutPage({ content }: AboutPageProps) {
                 >
                   {value.icon && <DynamicIcon name={value.icon} className="h-12 w-12 text-primary mb-4 mx-auto" />}
                   <h3 className="font-semibold text-foreground mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm">{value.description}</p>
+                  <p className="text-foreground/70 text-sm">{value.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -143,7 +143,7 @@ export function AboutPage({ content }: AboutPageProps) {
                   </div>
                   <h3 className="font-bold text-foreground mb-1">{member.name}</h3>
                   <p className="text-primary font-medium mb-3">{member.role}</p>
-                  <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
+                  <p className="text-foreground/70 text-sm mb-4">{member.bio}</p>
                   {member.expertise && member.expertise.length > 0 && (
                     <div className="flex flex-wrap gap-2 justify-center">
                       {member.expertise.map((skill: string, skillIndex: number) => (
