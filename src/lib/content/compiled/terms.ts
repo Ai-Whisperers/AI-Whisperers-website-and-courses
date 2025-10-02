@@ -103,39 +103,12 @@ export const termsContent: PageContent = {
   "contact": {
     "title": "Questions About Terms?",
     "description": "If you have questions about these terms, please contact our legal team.",
-    "primaryCta": {
-      "text": "Email Legal Team",
-      "href": "mailto:legal@aiwhisperers.com",
-      "variant": "default",
-      "external": true
-    },
-    "secondaryCta": {
-      "text": "Contact Support",
-      "href": "/contact",
-      "variant": "outline"
-    },
-    "info": [
-      {
-        "type": "email",
-        "label": "Legal Email",
-        "value": "legal@aiwhisperers.com"
-      },
-      {
-        "type": "phone",
-        "label": "Phone",
-        "value": "+1 (555) 123-4567"
-      },
-      {
-        "type": "address",
-        "label": "Address",
-        "value": "123 Innovation Drive, Tech Valley, CA 94000"
-      },
-      {
-        "type": "web",
-        "label": "Business Hours",
-        "value": "Monday-Friday: 9 AM - 6 PM PST"
-      }
-    ]
+    "methods": {
+      "email": "ai.whisperer.wvdp@gmail.com",
+      "phone": "+595 981 123456",
+      "address": "Asunción Tech Hub, Asunción, 1209",
+      "business_hours": "Monday-Friday: 9 AM - 6 PM PST"
+    }
   },
   "updates": {
     "title": "Updates to Terms",

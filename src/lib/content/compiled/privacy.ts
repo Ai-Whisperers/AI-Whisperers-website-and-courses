@@ -98,39 +98,12 @@ export const privacyContent: PageContent = {
   "contact": {
     "title": "Privacy Questions?",
     "description": "Contact our privacy team for any questions about data handling.",
-    "primaryCta": {
-      "text": "Email Privacy Team",
-      "href": "mailto:privacy@aiwhisperers.com",
-      "variant": "default",
-      "external": true
-    },
-    "secondaryCta": {
-      "text": "Contact Support",
-      "href": "/contact",
-      "variant": "outline"
-    },
-    "info": [
-      {
-        "type": "email",
-        "label": "Privacy Email",
-        "value": "privacy@aiwhisperers.com"
-      },
-      {
-        "type": "phone",
-        "label": "Phone",
-        "value": "+1 (555) 123-4567"
-      },
-      {
-        "type": "address",
-        "label": "Address",
-        "value": "123 Innovation Drive, Tech Valley, CA 94000"
-      },
-      {
-        "type": "web",
-        "label": "Response Time",
-        "value": "We respond within 48 hours"
-      }
-    ]
+    "methods": {
+      "email": "ai.whisperer.wvdp@gmail.com",
+      "phone": "+595 981 123456",
+      "address": "Asunción Tech Hub, Asunción, 1209",
+      "response_time": "We respond within 48 hours"
+    }
   },
   "compliance": {
     "title": "Compliance & Certifications",

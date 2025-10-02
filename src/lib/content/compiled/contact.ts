@@ -67,11 +67,11 @@ export const contactContent: PageContent = {
         "icon": "Mail",
         "title": "Email Us",
         "description": "Get response within 24 hours",
-        "value": "info@aiwhisperers.com",
+        "value": "ai.whisperer.wvdp@gmail.com",
         "primaryMethod": true,
         "action": {
           "text": "Send Email",
-          "href": "mailto:info@aiwhisperers.com",
+          "href": "mailto:ai.whisperer.wvdp@gmail.com",
           "external": true
         }
       },
@@ -79,10 +79,10 @@ export const contactContent: PageContent = {
         "icon": "Phone",
         "title": "Call Us",
         "description": "Monday-Friday, 9AM-6PM PST",
-        "value": "+1 (555) 123-4567",
+        "value": "+595 981 123456",
         "action": {
           "text": "Call Now",
-          "href": "tel:+15551234567"
+          "href": "tel:+595 981 123456"
         }
       },
       {
@@ -111,11 +111,11 @@ export const contactContent: PageContent = {
     "title": "Visit Our Office",
     "description": "Stop by our headquarters for in-person consultations",
     "address": {
-      "street": "123 Innovation Drive",
+      "street": "Asunción Tech Hub",
       "neighborhood": "Tech Valley District",
-      "city": "Tech Valley",
-      "country": "USA",
-      "zipCode": "94000"
+      "city": "Asunción",
+      "country": "Paraguay",
+      "zipCode": "1209"
     },
     "workingHours": {
       "weekdays": "Monday - Friday: 9:00 AM - 6:00 PM PST",
@@ -190,30 +190,30 @@ export const contactContent: PageContent = {
     ]
   },
   "socialProof": {
-    "title": "Trusted by Thousands",
-    "description": "Join students and professionals who have transformed their careers with AI education",
+    "title": "Professional AI Consulting",
+    "description": "Empowering businesses with practical artificial intelligence solutions",
     "stats": [
       {
-        "value": "10,000+",
-        "label": "Students Enrolled"
+        "value": "Expert Team",
+        "label": "AI Strategy & Implementation"
       },
       {
-        "value": "95%",
-        "label": "Satisfaction Rate"
+        "value": "Global Reach",
+        "label": "Worldwide Service"
       },
       {
-        "value": "24 Hours",
-        "label": "Response Time"
+        "value": "Fast Response",
+        "label": "24-Hour Support"
       }
     ],
     "testimonials": [
       {
-        "quote": "The support team was incredibly helpful in guiding me through the course selection process.",
+        "quote": "Professional team with deep expertise in AI implementation for business transformation.",
         "author": "Sarah Johnson",
         "company": "Tech Startup Founder"
       },
       {
-        "quote": "Quick responses and knowledgeable staff. Made my learning journey smooth.",
+        "quote": "Clear communication and practical solutions that deliver real business value.",
         "author": "Michael Chen",
         "company": "Software Engineer"
       }

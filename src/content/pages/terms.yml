@@ -93,9 +93,9 @@ contact:
   title: "Questions About Terms?"
   description: "If you have questions about these terms, please contact our legal team."
   methods:
-    email: "legal@aiwhisperers.com"
-    phone: "+1 (555) 123-4567"
-    address: "123 Innovation Drive, Tech Valley, CA 94000"
+    email: "${NEXT_PUBLIC_LEGAL_EMAIL}"
+    phone: "${NEXT_PUBLIC_CONTACT_PHONE}"
+    address: "${NEXT_PUBLIC_OFFICE_STREET}, ${NEXT_PUBLIC_OFFICE_CITY}, ${NEXT_PUBLIC_OFFICE_ZIP}"
     business_hours: "Monday-Friday: 9 AM - 6 PM PST"
 
 updates:

@@ -24,19 +24,36 @@ function ensureOutputDir() {
 }
 
 /**
+ * Replace environment variable placeholders in content
+ */
+function replaceEnvVariables(content) {
+  const contentStr = JSON.stringify(content);
+  const replaced = contentStr.replace(/\$\{([A-Z_]+)\}/g, (match, envVar) => {
+    const value = process.env[envVar];
+    if (!value) {
+      console.warn(`⚠️  Environment variable ${envVar} not found, keeping placeholder`);
+      return match;
+    }
+    return value;
+  });
+  return JSON.parse(replaced);
+}
+
+/**
  * Load and parse YAML file
  */
 function loadYamlFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const parsed = yaml.load(content);
-    
+
     if (!parsed) {
       console.warn(`Warning: Empty or invalid YAML in ${filePath}`);
       return null;
     }
-    
-    return parsed;
+
+    // Replace environment variables in parsed content
+    return replaceEnvVariables(parsed);
   } catch (error) {
     console.error(`Error loading ${filePath}:`, error.message);
     return null;
@@ -182,7 +199,24 @@ export function getFallbackPageContent(pageName: string): PageContent {
  */
 async function compileContent() {
   console.log('🔨 Starting content compilation...');
-  
+
+  // Load environment variables from .env.local if it exists
+  const envPath = path.join(process.cwd(), '.env.local');
+  if (fs.existsSync(envPath)) {
+    console.log('📋 Loading environment variables from .env.local...');
+    const envContent = fs.readFileSync(envPath, 'utf-8');
+    envContent.split('\n').forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const [key, ...valueParts] = trimmed.split('=');
+        if (key && valueParts.length > 0) {
+          const value = valueParts.join('=').replace(/^["']|["']$/g, '');
+          process.env[key] = value;
+        }
+      }
+    });
+  }
+
   // Ensure output directory exists
   ensureOutputDir();
   

@@ -46,19 +46,19 @@ contactOptions:
     - icon: "Mail"
       title: "Email Us"
       description: "Get response within 24 hours"
-      value: "info@aiwhisperers.com"
+      value: "${NEXT_PUBLIC_CONTACT_EMAIL}"
       primaryMethod: true
       action:
         text: "Send Email"
-        href: "mailto:info@aiwhisperers.com"
+        href: "mailto:${NEXT_PUBLIC_CONTACT_EMAIL}"
         external: true
     - icon: "Phone"
       title: "Call Us"
       description: "Monday-Friday, 9AM-6PM PST"
-      value: "+1 (555) 123-4567"
+      value: "${NEXT_PUBLIC_CONTACT_PHONE}"
       action:
         text: "Call Now"
-        href: "tel:+15551234567"
+        href: "tel:${NEXT_PUBLIC_CONTACT_PHONE}"
     - icon: "MessageSquare"
       title: "Live Chat"
       description: "Chat with our support team"
@@ -78,11 +78,11 @@ officeInfo:
   title: "Visit Our Office"
   description: "Stop by our headquarters for in-person consultations"
   address:
-    street: "123 Innovation Drive"
+    street: "${NEXT_PUBLIC_OFFICE_STREET}"
     neighborhood: "Tech Valley District"
-    city: "Tech Valley"
-    country: "USA"
-    zipCode: "94000"
+    city: "${NEXT_PUBLIC_OFFICE_CITY}"
+    country: "${NEXT_PUBLIC_OFFICE_COUNTRY}"
+    zipCode: "${NEXT_PUBLIC_OFFICE_ZIP}"
   workingHours:
     weekdays: "Monday - Friday: 9:00 AM - 6:00 PM PST"
     saturday: "Saturday: 10:00 AM - 2:00 PM PST"
