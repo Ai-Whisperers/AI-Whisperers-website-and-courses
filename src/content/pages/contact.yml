@@ -136,20 +136,20 @@ faq:
       answer: "Absolutely! Use our booking system to schedule a free 30-minute consultation."
 
 socialProof:
-  title: "Trusted by Thousands"
-  description: "Join students and professionals who have transformed their careers with AI education"
+  title: "Professional AI Consulting"
+  description: "Empowering businesses with practical artificial intelligence solutions"
   stats:
-    - value: "10,000+"
-      label: "Students Enrolled"
-    - value: "95%"
-      label: "Satisfaction Rate"
-    - value: "24 Hours"
-      label: "Response Time"
+    - value: "Expert Team"
+      label: "AI Strategy & Implementation"
+    - value: "Global Reach"
+      label: "Worldwide Service"
+    - value: "Fast Response"
+      label: "24-Hour Support"
   testimonials:
-    - quote: "The support team was incredibly helpful in guiding me through the course selection process."
+    - quote: "Professional team with deep expertise in AI implementation for business transformation."
       author: "Sarah Johnson"
       company: "Tech Startup Founder"
-    - quote: "Quick responses and knowledgeable staff. Made my learning journey smooth."
+    - quote: "Clear communication and practical solutions that deliver real business value."
       author: "Michael Chen"
       company: "Software Engineer"
 
