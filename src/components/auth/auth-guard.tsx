@@ -81,7 +81,7 @@ export function AuthGuard({
           <CardHeader>
             <CardTitle>Access Denied</CardTitle>
             <CardDescription>
-              You don't have permission to access this content.
+              You don&apos;t have permission to access this content.
             </CardDescription>
           </CardHeader>
           <CardContent>

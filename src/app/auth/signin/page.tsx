@@ -4,8 +4,8 @@
 'use client'
 
 import { useState, Suspense } from 'react'
-import { signIn, getSession } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -56,7 +56,7 @@ function SignInForm() {
           <CardHeader>
             <CardTitle>Check your email</CardTitle>
             <CardDescription>
-              We've sent a magic link to {email}. Click the link to sign in.
+              We&apos;ve sent a magic link to {email}. Click the link to sign in.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -145,7 +145,7 @@ function SignInForm() {
           </form>
 
           <div className="text-center text-sm text-muted-foreground">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-primary hover:underline">
               Sign up
             </Link>

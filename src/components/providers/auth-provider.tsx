@@ -57,7 +57,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       refetchInterval={15 * 60} // 15 minutes instead of 5
       // Only refetch when window regains focus after being away
       refetchOnWindowFocus={true}
-      // Don't refetch when offline
+      // Don&apos;t refetch when offline
       refetchWhenOffline={false}
       // Set base path for API routes
       basePath="/api/auth"

@@ -108,21 +108,35 @@ const nextConfig: NextConfig = {
       : 'http://localhost:3000',
   },
 
-  // Bundle analyzer (for debugging bundle size)
-  ...(process.env.ANALYZE === 'true' && {
-    webpack: (config: any) => {
-      if (process.env.ANALYZE) {
-        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-        config.plugins.push(
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'server',
-            openAnalyzer: true,
-          })
-        );
-      }
-      return config;
+  // Webpack configuration
+  webpack: (config: any) => {
+    // Bundle analyzer (for debugging bundle size)
+    if (process.env.ANALYZE) {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'server',
+          openAnalyzer: true,
+        })
+      );
     }
-  }),
+
+    // Exclude Windows system directories from file watching
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [
+        '**/node_modules/**',
+        '**/.git/**',
+        '**/.next/**',
+        '**/C:/Users/*/Cookies/**',
+        '**/C:/Users/*/Application Data/**',
+        '**/C:/Users/*/Local Settings/**',
+        '**/C:/Users/*/Recent/**',
+      ],
+    };
+
+    return config;
+  },
 
   // Output file tracing root to fix lockfile warnings
   outputFileTracingRoot: __dirname,

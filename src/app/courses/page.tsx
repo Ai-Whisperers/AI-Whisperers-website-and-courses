@@ -93,7 +93,7 @@ export default async function CoursesPage() {
             Courses Coming Soon
           </h2>
           <p className="text-muted-foreground mb-8">
-            We're preparing amazing AI courses for you. Check back soon!
+            We&apos;re preparing amazing AI courses for you. Check back soon!
           </p>
         </div>
       )}

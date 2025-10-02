@@ -2,7 +2,7 @@
 // Generated from local-reports analysis - Updated September 6, 2025
 // Source: EC4RO-HGN Enhanced Graph System with 456+ vertices
 
-interface GraphVertex {
+export interface GraphVertex {
   id: string
   name: string
   description: string
@@ -23,7 +23,7 @@ interface GraphVertex {
   health?: 'Excellent' | 'Good' | 'Monitor' | 'Refactor'
 }
 
-interface GraphLevel {
+export interface GraphLevel {
   level: -1 | 0 | 1 | 2
   title: string
   description: string

@@ -11,7 +11,7 @@ export function LanguageToggler() {
 
   const currentLanguage = LANGUAGES[language]
   
-  // If there's only one language available, don't render the toggler
+  // If there's only one language available, don&apos;t render the toggler
   if (Object.keys(LANGUAGES).length <= 1) {
     return null
   }

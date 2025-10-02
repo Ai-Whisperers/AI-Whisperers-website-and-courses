@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
@@ -14,7 +13,7 @@ interface AboutPageProps {
 }
 
 export function AboutPage({ content }: AboutPageProps) {
-  const { language, isLoading: languageLoading } = useLanguage()
+  const { isLoading: languageLoading } = useLanguage()
   // Note: Content is now server-side compiled and provided via props
   // Language switching would require page navigation to different routes
 
