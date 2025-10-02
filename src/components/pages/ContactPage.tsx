@@ -10,39 +10,10 @@ interface ContactPageProps {
 }
 
 export function ContactPage({ content }: ContactPageProps) {
-  const { navigation, hero, contactOptions, officeInfo, consultationForm, faq, socialProof, footer } = content
+  const { hero, contactOptions, officeInfo, consultationForm, faq, socialProof, footer } = content
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <DynamicIcon name="Brain" className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">{navigation.brand.text}</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              {navigation.items.map((item, index) => (
-                <a 
-                  key={index}
-                  href={item.href} 
-                  className="text-gray-600 hover:text-blue-600 transition-colors"
-                >
-                  {item.text}
-                </a>
-              ))}
-              <DynamicButton 
-                content={{
-                  ...navigation.cta,
-                  variant: 'default'
-                }}
-                className="bg-blue-600 hover:bg-blue-700"
-              />
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
 
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
@@ -52,13 +23,13 @@ export function ContactPage({ content }: ContactPageProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
               {hero.headline}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-4xl mx-auto">
               {hero.subheadline}
             </p>
-            <p className="text-lg text-gray-500 mb-12 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto">
               {hero.description}
             </p>
           </motion.div>
@@ -67,11 +38,11 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Contact Options */}
       {contactOptions && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{contactOptions.title}</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-foreground mb-4">{contactOptions.title}</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 {contactOptions.description}
               </p>
             </div>
@@ -83,24 +54,24 @@ export function ContactPage({ content }: ContactPageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`bg-white border-2 rounded-lg p-6 text-center transition-all hover:shadow-md ${
-                  option.primaryMethod ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                className={`bg-card border-2 rounded-lg p-6 text-center transition-all hover:shadow-md ${
+                  option.primaryMethod ? 'border-primary bg-primary/5' : 'border-border'
                 }`}
               >
                 <DynamicIcon name={option.icon} className={`h-12 w-12 mx-auto mb-4 ${
-                  option.primaryMethod ? 'text-blue-600' : 'text-gray-600'
+                  option.primaryMethod ? 'text-primary' : 'text-muted-foreground'
                 }`} />
-                <h3 className="font-semibold text-gray-900 mb-2">{option.title}</h3>
-                <p className="text-sm text-gray-600 mb-3">{option.description}</p>
-                <p className="font-medium text-gray-900 mb-4">{option.value}</p>
+                <h3 className="font-semibold text-foreground mb-2">{option.title}</h3>
+                <p className="text-sm text-muted-foreground mb-3">{option.description}</p>
+                <p className="font-medium text-foreground mb-4">{option.value}</p>
                 <a
                   href={option.action.href}
                   target={option.action.external ? "_blank" : undefined}
                   rel={option.action.external ? "noopener noreferrer" : undefined}
                   className={`inline-block px-4 py-2 rounded text-sm font-medium transition-colors ${
                     option.primaryMethod 
-                      ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-primary text-white hover:bg-primary/90' 
+                      : 'bg-muted text-foreground hover:bg-muted/90'
                   }`}
                 >
                   {option.action.text}
@@ -114,7 +85,7 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Office Info & Form */}
       {officeInfo && consultationForm && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Office Information */}
@@ -123,13 +94,13 @@ export function ContactPage({ content }: ContactPageProps) {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">{officeInfo.title}</h2>
-                <p className="text-lg text-gray-600 mb-8">{officeInfo.description}</p>
+                <h2 className="text-3xl font-bold text-foreground mb-6">{officeInfo.title}</h2>
+                <p className="text-lg text-muted-foreground mb-8">{officeInfo.description}</p>
               
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Dirección</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-foreground mb-2">Dirección</h3>
+                  <p className="text-muted-foreground">
                     {officeInfo.address.street}<br />
                     {officeInfo.address.neighborhood}<br />
                     {officeInfo.address.city}, {officeInfo.address.country}
@@ -137,8 +108,8 @@ export function ContactPage({ content }: ContactPageProps) {
                 </div>
                 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Horarios de Atención</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-foreground mb-2">Horarios de Atención</h3>
+                  <p className="text-muted-foreground">
                     {officeInfo.workingHours.weekdays}<br />
                     {officeInfo.workingHours.saturday}<br />
                     {officeInfo.workingHours.sunday}
@@ -152,15 +123,15 @@ export function ContactPage({ content }: ContactPageProps) {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg p-8 shadow-sm"
+              className="bg-card rounded-lg p-8 shadow-sm"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">{consultationForm.title}</h2>
-              <p className="text-gray-600 mb-6">{consultationForm.description}</p>
+              <h2 className="text-2xl font-bold text-foreground mb-4">{consultationForm.title}</h2>
+              <p className="text-muted-foreground mb-6">{consultationForm.description}</p>
               
               <form className="space-y-4">
                 {consultationForm.fields.map((field, index) => (
                   <div key={index}>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-foreground mb-1">
                       {field.label}
                       {field.required && <span className="text-red-500 ml-1">*</span>}
                     </label>
@@ -168,7 +139,7 @@ export function ContactPage({ content }: ContactPageProps) {
                       <select 
                         name={field.name}
                         required={field.required}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       >
                         <option value="">Seleccionar...</option>
                         {field.options?.map((option, optionIndex) => (
@@ -181,7 +152,7 @@ export function ContactPage({ content }: ContactPageProps) {
                         placeholder={field.placeholder}
                         required={field.required}
                         rows={field.rows || 3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       />
                     ) : (
                       <input
@@ -189,7 +160,7 @@ export function ContactPage({ content }: ContactPageProps) {
                         name={field.name}
                         placeholder={field.placeholder}
                         required={field.required}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       />
                     )}
                   </div>
@@ -197,13 +168,13 @@ export function ContactPage({ content }: ContactPageProps) {
                 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium"
+                  className="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-primary/90 transition-colors font-medium"
                 >
                   {consultationForm.submitButton.text}
                 </button>
               </form>
               
-              <p className="text-xs text-gray-500 mt-4">
+              <p className="text-xs text-muted-foreground mt-4">
                 {consultationForm.privacyNote}
               </p>
             </motion.div>
@@ -214,10 +185,10 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* FAQ */}
       {faq && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-card">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{faq.title}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-4">{faq.title}</h2>
             </div>
 
           <div className="space-y-6">
@@ -227,10 +198,10 @@ export function ContactPage({ content }: ContactPageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gray-50 rounded-lg p-6"
+                className="bg-muted rounded-lg p-6"
               >
-                <h3 className="font-semibold text-gray-900 mb-2">{item.question}</h3>
-                <p className="text-gray-600">{item.answer}</p>
+                <h3 className="font-semibold text-foreground mb-2">{item.question}</h3>
+                <p className="text-muted-foreground">{item.answer}</p>
               </motion.div>
             ))}
           </div>
@@ -240,11 +211,11 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Social Proof */}
       {socialProof && (
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">{socialProof.title}</h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto">
                 {socialProof.description}
               </p>
             </div>
@@ -252,8 +223,8 @@ export function ContactPage({ content }: ContactPageProps) {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {socialProof.stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-blue-200 mb-2">{stat.value}</div>
-                <p className="text-blue-100">{stat.label}</p>
+                <div className="text-4xl font-bold text-primary-foreground/90 mb-2">{stat.value}</div>
+                <p className="text-primary-foreground/80">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -265,12 +236,12 @@ export function ContactPage({ content }: ContactPageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-blue-500/30 p-6 rounded-lg backdrop-blur-sm"
+                className="bg-primary/30 p-6 rounded-lg backdrop-blur-sm"
               >
-                <p className="text-blue-100 mb-4 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+                <p className="text-primary-foreground/80 mb-4 italic">&ldquo;{testimonial.quote}&rdquo;</p>
                 <div>
-                  <p className="font-semibold text-white">{testimonial.author}</p>
-                  <p className="text-blue-200">{testimonial.company}</p>
+                  <p className="font-semibold text-primary-foreground">{testimonial.author}</p>
+                  <p className="text-primary-foreground/90">{testimonial.company}</p>
                 </div>
               </motion.div>
             ))}
@@ -280,14 +251,14 @@ export function ContactPage({ content }: ContactPageProps) {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-card border-t border-border py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <DynamicIcon name="Brain" className="h-6 w-6 text-blue-400" />
-              <span className="text-lg font-bold">{footer.brand.text}</span>
+              <DynamicIcon name="Brain" className="h-6 w-6 text-primary" />
+              <span className="text-lg font-bold text-foreground">{footer.brand.text}</span>
             </div>
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {footer.copyright}
             </div>
           </div>
