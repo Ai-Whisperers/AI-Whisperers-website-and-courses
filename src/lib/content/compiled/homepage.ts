@@ -110,7 +110,7 @@ export const homepageContent: PageContent = {
         "title": "AI Foundations",
         "description": "Perfect starting point for AI beginners",
         "duration": "12 hours",
-        "price": "$299",
+        "price": "$79",
         "level": "Beginner"
       },
       {
@@ -118,27 +118,12 @@ export const homepageContent: PageContent = {
         "title": "Applied AI",
         "description": "Build practical AI applications",
         "duration": "15 hours",
-        "price": "$599",
+        "price": "$129",
         "level": "Intermediate"
       }
     ]
   },
-  "testimonials": [
-    {
-      "name": "Sarah Johnson",
-      "role": "Data Scientist",
-      "company": "TechCorp",
-      "content": "The AI Foundations course transformed my understanding of artificial intelligence. The hands-on approach made complex concepts easy to grasp.",
-      "rating": 5
-    },
-    {
-      "name": "Michael Chen",
-      "role": "Software Engineer",
-      "company": "StartupXYZ",
-      "content": "Applied AI course helped me integrate AI into our products. The real-world projects were incredibly valuable.",
-      "rating": 5
-    }
-  ],
+  "testimonials": [],
   "stats": {
     "title": "Comprehensive AI Education",
     "description": "Quality courses designed for professionals advancing their careers in AI",

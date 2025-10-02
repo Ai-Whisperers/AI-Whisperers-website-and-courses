@@ -64,10 +64,10 @@ export const aboutContent: PageContent = {
     }
   ],
   "stats": {
-    "studentsEnrolled": "10,000+",
-    "coursesCompleted": "25,000+",
-    "satisfaction": "98%",
-    "jobPlacement": "85%"
+    "coursesOffered": "Multiple Levels",
+    "learningFormat": "Self-Paced Online",
+    "projectBased": "Hands-On Learning",
+    "certificates": "Upon Completion"
   }
 } as const;
 

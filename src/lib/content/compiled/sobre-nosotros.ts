@@ -95,10 +95,10 @@ export const sobre_nosotrosContent: PageContent = {
     }
   ],
   "stats": {
-    "studentsEnrolled": "10,000+",
-    "coursesCompleted": "25,000+",
-    "satisfaction": "98%",
-    "jobPlacement": "85%"
+    "coursesOffered": "Múltiples Niveles",
+    "learningFormat": "Online Autogestionado",
+    "projectBased": "Aprendizaje Práctico",
+    "certificates": "Al Completar"
   },
   "footer": {
     "brand": {
