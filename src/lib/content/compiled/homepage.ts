@@ -51,7 +51,7 @@ export const homepageContent: PageContent = {
   "hero": {
     "headline": "Master AI with World-Class Education",
     "subheadline": "Transform your career with comprehensive AI courses from beginner to expert",
-    "description": "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Join thousands of students already mastering AI.",
+    "description": "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Start your AI journey today with self-paced learning.",
     "location": "🌍 Available Worldwide - Learn at Your Own Pace",
     "primaryCta": {
       "text": "Start Learning Today",
@@ -71,8 +71,8 @@ export const homepageContent: PageContent = {
       },
       {
         "icon": "Award",
-        "title": "Industry Recognition",
-        "description": "Certificates recognized by leading tech companies"
+        "title": "Course Completion",
+        "description": "Earn certificates of completion for your portfolio"
       },
       {
         "icon": "Users",
@@ -93,8 +93,8 @@ export const homepageContent: PageContent = {
       "icon": "code"
     },
     {
-      "title": "Career Support",
-      "description": "Get job placement assistance and career guidance",
+      "title": "Career Development",
+      "description": "Build practical skills and portfolio projects for your career growth",
       "icon": "briefcase"
     },
     {
@@ -140,20 +140,20 @@ export const homepageContent: PageContent = {
     }
   ],
   "stats": {
-    "title": "Trusted by Students Worldwide",
-    "description": "Join thousands of professionals advancing their careers through AI education",
+    "title": "Comprehensive AI Education",
+    "description": "Quality courses designed for professionals advancing their careers in AI",
     "company": [
       {
-        "value": "10,000+",
-        "description": "Students Enrolled"
+        "value": "Multiple Courses",
+        "description": "From Beginner to Advanced"
       },
       {
-        "value": "95%",
-        "description": "Completion Rate"
+        "value": "Self-Paced",
+        "description": "Learn at Your Speed"
       },
       {
-        "value": "4.9/5",
-        "description": "Average Rating"
+        "value": "Hands-On",
+        "description": "Project-Based Learning"
       }
     ]
   },

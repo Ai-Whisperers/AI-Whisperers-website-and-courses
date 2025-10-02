@@ -31,7 +31,7 @@ navigation:
 hero:
   headline: "Master AI with World-Class Education"
   subheadline: "Transform your career with comprehensive AI courses from beginner to expert"
-  description: "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Join thousands of students already mastering AI."
+  description: "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Start your AI journey today with self-paced learning."
   location: "🌍 Available Worldwide - Learn at Your Own Pace"
   primaryCta:
     text: "Start Learning Today"
@@ -46,8 +46,8 @@ hero:
       title: "Fast Track Learning"
       description: "Accelerated curriculum designed for busy professionals"
     - icon: "Award"
-      title: "Industry Recognition"
-      description: "Certificates recognized by leading tech companies"
+      title: "Course Completion"
+      description: "Earn certificates of completion for your portfolio"
     - icon: "Users"
       title: "Expert Community"
       description: "Connect with AI practitioners worldwide"
@@ -59,8 +59,8 @@ features:
   - title: "Hands-On Projects"
     description: "Build practical AI applications and add them to your portfolio"
     icon: "code"
-  - title: "Career Support"
-    description: "Get job placement assistance and career guidance"
+  - title: "Career Development"
+    description: "Build practical skills and portfolio projects for your career growth"
     icon: "briefcase"
   - title: "Community Access"
     description: "Join our exclusive community of AI practitioners"
@@ -94,15 +94,15 @@ testimonials:
     rating: 5
 
 stats:
-  title: "Trusted by Students Worldwide"
-  description: "Join thousands of professionals advancing their careers through AI education"
+  title: "Comprehensive AI Education"
+  description: "Quality courses designed for professionals advancing their careers in AI"
   company:
-    - value: "10,000+"
-      description: "Students Enrolled"
-    - value: "95%"
-      description: "Completion Rate"
-    - value: "4.9/5"
-      description: "Average Rating"
+    - value: "Multiple Courses"
+      description: "From Beginner to Advanced"
+    - value: "Self-Paced"
+      description: "Learn at Your Speed"
+    - value: "Hands-On"
+      description: "Project-Based Learning"
 
 contact:
   title: "Ready to Start Your AI Journey?"
