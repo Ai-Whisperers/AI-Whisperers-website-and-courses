@@ -15,84 +15,215 @@ export const contactContent: PageContent = {
     ],
     "language": "en"
   },
-  "hero": {
-    "title": "Get in Touch",
-    "subtitle": "We're here to help with your AI learning journey",
-    "description": "Have questions about our courses or need assistance? Our team is ready to help you succeed."
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
   },
-  "contact": {
-    "email": "info@aiwhisperers.com",
-    "phone": "+1 (555) 123-4567",
+  "hero": {
+    "headline": "Get in Touch",
+    "subheadline": "We're here to help with your AI learning journey",
+    "description": "Have questions about our courses or need assistance? Our team is ready to help you succeed.",
+    "location": "🌍 Available Worldwide",
+    "primaryCta": {
+      "text": "Send Message",
+      "href": "#contact-form",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View FAQ",
+      "href": "/faq",
+      "variant": "outline"
+    },
+    "benefits": []
+  },
+  "contactOptions": {
+    "title": "How to Reach Us",
+    "description": "Choose your preferred contact method",
+    "options": [
+      {
+        "icon": "Mail",
+        "title": "Email Us",
+        "description": "Get response within 24 hours",
+        "value": "info@aiwhisperers.com",
+        "primaryMethod": true,
+        "action": {
+          "text": "Send Email",
+          "href": "mailto:info@aiwhisperers.com",
+          "external": true
+        }
+      },
+      {
+        "icon": "Phone",
+        "title": "Call Us",
+        "description": "Monday-Friday, 9AM-6PM PST",
+        "value": "+1 (555) 123-4567",
+        "action": {
+          "text": "Call Now",
+          "href": "tel:+15551234567"
+        }
+      },
+      {
+        "icon": "MessageSquare",
+        "title": "Live Chat",
+        "description": "Chat with our support team",
+        "value": "Available during business hours",
+        "action": {
+          "text": "Start Chat",
+          "href": "#chat"
+        }
+      },
+      {
+        "icon": "Calendar",
+        "title": "Schedule Meeting",
+        "description": "Book a consultation call",
+        "value": "15-30 minute sessions",
+        "action": {
+          "text": "Book Now",
+          "href": "/schedule"
+        }
+      }
+    ]
+  },
+  "officeInfo": {
+    "title": "Visit Our Office",
+    "description": "Stop by our headquarters for in-person consultations",
     "address": {
       "street": "123 Innovation Drive",
+      "neighborhood": "Tech Valley District",
       "city": "Tech Valley",
-      "state": "CA",
-      "zip": "94000",
-      "country": "USA"
+      "country": "USA",
+      "zipCode": "94000"
+    },
+    "workingHours": {
+      "weekdays": "Monday - Friday: 9:00 AM - 6:00 PM PST",
+      "saturday": "Saturday: 10:00 AM - 2:00 PM PST",
+      "sunday": "Sunday: Closed"
+    },
+    "map": {
+      "embedUrl": "https://maps.google.com/placeholder"
     }
   },
-  "departments": [
-    {
-      "title": "Course Support",
-      "email": "support@aiwhisperers.com",
-      "description": "Technical support and course assistance"
-    },
-    {
-      "title": "Sales & Enrollment",
-      "email": "sales@aiwhisperers.com",
-      "description": "Course information and enrollment assistance"
-    },
-    {
-      "title": "Corporate Training",
-      "email": "corporate@aiwhisperers.com",
-      "description": "Custom training programs for organizations"
-    },
-    {
-      "title": "Partnerships",
-      "email": "partnerships@aiwhisperers.com",
-      "description": "Business partnerships and collaboration opportunities"
-    }
-  ],
-  "office_hours": {
-    "monday_friday": "9:00 AM - 6:00 PM PST",
-    "saturday": "10:00 AM - 2:00 PM PST",
-    "sunday": "Closed"
-  },
-  "social": {
-    "twitter": "https://twitter.com/aiwhisperers",
-    "linkedin": "https://linkedin.com/company/aiwhisperers",
-    "github": "https://github.com/aiwhisperers",
-    "youtube": "https://youtube.com/aiwhisperers"
-  },
-  "form": {
-    "title": "Send us a message",
-    "subtitle": "Fill out the form below and we'll get back to you within 24 hours",
+  "consultationForm": {
+    "title": "Request a Consultation",
+    "description": "Fill out the form below and we'll get back to you within 24 hours",
     "fields": [
       {
         "name": "name",
         "label": "Full Name",
         "type": "text",
-        "required": true
+        "required": true,
+        "placeholder": "John Doe"
       },
       {
         "name": "email",
         "label": "Email Address",
         "type": "email",
-        "required": true
+        "required": true,
+        "placeholder": "john@example.com"
       },
       {
         "name": "subject",
         "label": "Subject",
-        "type": "text",
-        "required": true
+        "type": "select",
+        "required": true,
+        "options": [
+          "Course Information",
+          "Technical Support",
+          "Corporate Training",
+          "Partnership Inquiry",
+          "General Question"
+        ]
       },
       {
         "name": "message",
         "label": "Message",
         "type": "textarea",
-        "required": true
+        "required": true,
+        "rows": 5,
+        "placeholder": "Tell us how we can help..."
+      }
+    ],
+    "submitButton": {
+      "text": "Send Message",
+      "loadingText": "Sending..."
+    },
+    "privacyNote": "We respect your privacy and will never share your information"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "What are your response times?",
+        "answer": "We respond to all inquiries within 24 business hours."
+      },
+      {
+        "question": "Do you offer phone support?",
+        "answer": "Yes, phone support is available Monday-Friday, 9AM-6PM PST."
+      },
+      {
+        "question": "Can I schedule a consultation?",
+        "answer": "Absolutely! Use our booking system to schedule a free 30-minute consultation."
       }
     ]
+  },
+  "socialProof": {
+    "title": "Trusted by Thousands",
+    "description": "Join students and professionals who have transformed their careers with AI education",
+    "stats": [
+      {
+        "value": "10,000+",
+        "label": "Students Enrolled"
+      },
+      {
+        "value": "95%",
+        "label": "Satisfaction Rate"
+      },
+      {
+        "value": "24 Hours",
+        "label": "Response Time"
+      }
+    ],
+    "testimonials": [
+      {
+        "quote": "The support team was incredibly helpful in guiding me through the course selection process.",
+        "author": "Sarah Johnson",
+        "company": "Tech Startup Founder"
+      },
+      {
+        "quote": "Quick responses and knowledgeable staff. Made my learning journey smooth.",
+        "author": "Michael Chen",
+        "company": "Software Engineer"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
   }
 } as const;
 

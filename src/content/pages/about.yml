@@ -91,6 +91,7 @@ team:
 
 stats:
   title: "Our Impact"
+  description: "Delivering quality AI education to learners worldwide"
   metrics:
     - value: "Multiple Levels"
       description: "Courses from Beginner to Expert"

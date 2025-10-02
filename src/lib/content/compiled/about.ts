@@ -118,6 +118,7 @@ export const aboutContent: PageContent = {
   },
   "stats": {
     "title": "Our Impact",
+    "description": "Delivering quality AI education to learners worldwide",
     "metrics": [
       {
         "value": "Multiple Levels",

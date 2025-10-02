@@ -4,42 +4,65 @@
 import type { PageContent } from '@/types/content';
 
 export const architectureContent: PageContent = {
+  "meta": {
+    "title": "System Architecture - EC4RO-HGN Visualization | AI Whisperers",
+    "description": "Explore our complete system architecture using EC4RO-HGN methodology - Extended C4 with Root Orchestration and Hierarchical Graph Navigation.",
+    "keywords": [
+      "system architecture",
+      "EC4RO-HGN",
+      "software architecture",
+      "C4 model",
+      "architecture visualization"
+    ],
+    "language": "en"
+  },
   "navigation": {
     "brand": {
-      "text": "AI Whisperers",
-      "href": "/"
+      "text": "AI Whisperers"
     },
     "items": [
       {
-        "text": "Inicio",
+        "text": "Home",
         "href": "/"
       },
       {
-        "text": "Servicios",
-        "href": "/servicios"
+        "text": "Services",
+        "href": "/services"
       },
       {
-        "text": "Sobre Nosotros",
-        "href": "/sobre-nosotros"
+        "text": "About",
+        "href": "/about"
       },
       {
-        "text": "Arquitectura",
+        "text": "Architecture",
         "href": "/architecture"
       },
       {
-        "text": "Contacto",
-        "href": "/contacto"
+        "text": "Contact",
+        "href": "/contact"
       }
     ],
     "cta": {
-      "text": "Empezar Ahora",
-      "href": "/contacto"
+      "text": "Get Started",
+      "variant": "default"
     }
   },
   "hero": {
-    "headline": "Arquitectura del Sistema",
-    "subheadline": "Visualización Interactiva EC4RO-HGN",
-    "description": "Explorar nuestra arquitectura completa del sistema utilizando la metodología EC4RO-HGN - C4 Extendido con Orquestación Raíz y Navegación Jerárquica de Grafos."
+    "headline": "System Architecture",
+    "subheadline": "EC4RO-HGN Interactive Visualization",
+    "description": "Explore our complete system architecture using EC4RO-HGN methodology - Extended C4 with Root Orchestration and Hierarchical Graph Navigation.",
+    "location": "🏗️ Live System Map",
+    "primaryCta": {
+      "text": "Explore Interactive Graph",
+      "href": "#graph",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Documentation",
+      "href": "/docs",
+      "variant": "outline"
+    },
+    "benefits": []
   },
   "methodology": {
     "title": "Metodología EC4RO-HGN",
@@ -137,20 +160,37 @@ export const architectureContent: PageContent = {
       }
     ]
   },
+  "contact": {
+    "title": "Want to Learn More About Our Architecture?",
+    "description": "Discover how we built a scalable, maintainable system using EC4RO-HGN methodology.",
+    "primaryCta": {
+      "text": "Contact Us",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Case Studies",
+      "href": "/about",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "architecture@aiwhisperers.com"
+      },
+      {
+        "type": "web",
+        "label": "Documentation",
+        "value": "Read Full Methodology"
+      }
+    ]
+  },
   "footer": {
     "brand": {
       "text": "AI Whisperers"
     },
-    "copyright": "© 2024 AI Whisperers. Todos los derechos reservados."
-  },
-  "meta": {
-    "title": "Architecture - AI Whisperers",
-    "description": "AI education and consulting services",
-    "keywords": [
-      "AI",
-      "education"
-    ],
-    "language": "en"
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
   }
 } as const;
 

@@ -109,6 +109,7 @@ team:
 
 stats:
   title: "Nuestro Impacto"
+  description: "Ofreciendo educación de calidad en IA a estudiantes en todo el mundo"
   metrics:
     - value: "Múltiples Niveles"
       description: "Cursos desde Principiante hasta Experto"

@@ -47,9 +47,21 @@ export const termsContent: PageContent = {
     }
   },
   "hero": {
-    "title": "Terms of Service",
-    "subtitle": "User agreement and platform terms",
-    "lastUpdated": "September 2025"
+    "headline": "Terms of Service",
+    "subheadline": "User agreement and platform terms",
+    "description": "Please read these terms carefully before using our platform. Last updated: September 2025.",
+    "location": "⚖️ Legally Binding Agreement",
+    "primaryCta": {
+      "text": "Contact Legal Team",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Privacy Policy",
+      "href": "/privacy",
+      "variant": "outline"
+    },
+    "benefits": []
   },
   "sections": [
     {
@@ -89,14 +101,41 @@ export const termsContent: PageContent = {
     }
   ],
   "contact": {
-    "title": "Contact Us",
-    "description": "If you have questions about these terms, please contact us:",
-    "methods": {
-      "email": "legal@aiwhisperers.com",
-      "phone": "+1 (555) 123-4567",
-      "address": "123 Innovation Drive, Tech Valley, CA 94000",
-      "business_hours": "Monday-Friday: 9 AM - 6 PM PST"
-    }
+    "title": "Questions About Terms?",
+    "description": "If you have questions about these terms, please contact our legal team.",
+    "primaryCta": {
+      "text": "Email Legal Team",
+      "href": "mailto:legal@aiwhisperers.com",
+      "variant": "default",
+      "external": true
+    },
+    "secondaryCta": {
+      "text": "Contact Support",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Legal Email",
+        "value": "legal@aiwhisperers.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567"
+      },
+      {
+        "type": "address",
+        "label": "Address",
+        "value": "123 Innovation Drive, Tech Valley, CA 94000"
+      },
+      {
+        "type": "web",
+        "label": "Business Hours",
+        "value": "Monday-Friday: 9 AM - 6 PM PST"
+      }
+    ]
   },
   "updates": {
     "title": "Updates to Terms",

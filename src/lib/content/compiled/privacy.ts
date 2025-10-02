@@ -47,9 +47,21 @@ export const privacyContent: PageContent = {
     }
   },
   "hero": {
-    "title": "Privacy Policy",
-    "subtitle": "Your privacy is important to us",
-    "lastUpdated": "September 2025"
+    "headline": "Privacy Policy",
+    "subheadline": "Your privacy is important to us",
+    "description": "Learn how we protect your privacy and handle your personal information. Last updated: September 2025.",
+    "location": "🔒 GDPR & CCPA Compliant",
+    "primaryCta": {
+      "text": "Contact Privacy Team",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Terms",
+      "href": "/terms",
+      "variant": "outline"
+    },
+    "benefits": []
   },
   "sections": [
     {
@@ -86,12 +98,39 @@ export const privacyContent: PageContent = {
   "contact": {
     "title": "Privacy Questions?",
     "description": "Contact our privacy team for any questions about data handling.",
-    "methods": {
-      "email": "privacy@aiwhisperers.com",
-      "phone": "+1 (555) 123-4567",
-      "address": "123 Innovation Drive, Tech Valley, CA 94000",
-      "response_time": "We respond within 48 hours"
-    }
+    "primaryCta": {
+      "text": "Email Privacy Team",
+      "href": "mailto:privacy@aiwhisperers.com",
+      "variant": "default",
+      "external": true
+    },
+    "secondaryCta": {
+      "text": "Contact Support",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Privacy Email",
+        "value": "privacy@aiwhisperers.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567"
+      },
+      {
+        "type": "address",
+        "label": "Address",
+        "value": "123 Innovation Drive, Tech Valley, CA 94000"
+      },
+      {
+        "type": "web",
+        "label": "Response Time",
+        "value": "We respond within 48 hours"
+      }
+    ]
   },
   "compliance": {
     "title": "Compliance & Certifications",

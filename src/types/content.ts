@@ -147,7 +147,7 @@ export interface PageContent {
     keywords: string[]
     language: string
   }
-  navigation: Navigation
+  navigation?: Navigation // Optional - usually shared globally
   hero: Hero
   services?: Service[] // Services array for direct access
   features?: {
@@ -164,8 +164,8 @@ export interface PageContent {
     }
   }
   stats?: Stats
-  contact: Contact
-  footer: Footer
+  contact?: Contact // Optional for pages that don't need contact CTAs
+  footer?: Footer // Optional - usually shared globally
   
   // About page specific fields
   story?: {

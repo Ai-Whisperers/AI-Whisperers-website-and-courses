@@ -28,55 +28,63 @@ navigation:
     variant: "default"
 
 hero:
-  title: "Frequently Asked Questions"
-  subtitle: "Find answers to common questions about our AI courses and platform"
+  headline: "Frequently Asked Questions"
+  subheadline: "Find answers to common questions about our AI courses and platform"
+  description: "Get quick answers to your questions about enrollment, course content, support, and more."
+  location: "🌍 24/7 Self-Service Support"
+  primaryCta:
+    text: "Contact Support"
+    href: "/contact"
+    variant: "default"
+  secondaryCta:
+    text: "Browse Courses"
+    href: "/courses"
+    variant: "outline"
+  benefits: []
 
-categories:
-  - id: "general"
-    title: "Course Information"
-    icon: "BookOpen"
-    questions:
-      - question: "What AI courses do you offer?"
-        answer: "We offer 4 comprehensive AI courses: AI Foundations (Beginner), Applied AI (Intermediate), AI Web Development (Advanced), and Enterprise AI Business (Expert level)."
-      - question: "How long does it take to complete a course?"
-        answer: "Course durations range from 12 to 21 hours. You can learn at your own pace, with most students completing courses within 4-8 weeks."
-      - question: "Do I need programming experience?"
-        answer: "No programming experience is required for AI Foundations. Each course builds upon the previous, with clear prerequisites listed."
-      
-  - id: "enrollment"
-    title: "Enrollment & Payment"
-    icon: "CreditCard"
-    questions:
-      - question: "How do I enroll in a course?"
-        answer: "Simply create an account, choose your course, and complete the payment process. You'll get immediate access to course materials."
-      - question: "What payment methods do you accept?"
-        answer: "We accept PayPal and major credit cards. All payments are processed securely."
-      - question: "Is there a refund policy?"
-        answer: "Yes, we offer a 30-day money-back guarantee if you're not satisfied with your course."
-      
-  - id: "support"
-    title: "Technical Support"
-    icon: "HelpCircle"
-    questions:
-      - question: "What if I need help with the course content?"
-        answer: "Our support team and community forums are available to help. You can also schedule office hours with instructors."
-      - question: "Can I access courses on mobile devices?"
-        answer: "Yes, our platform is fully responsive and works on all devices including smartphones and tablets."
-      - question: "Do I get a certificate upon completion?"
-        answer: "Yes, you'll receive a verifiable certificate of completion that you can add to your LinkedIn profile."
+faq:
+  title: "Common Questions"
+  items:
+    - question: "What AI courses do you offer?"
+      answer: "We offer 4 comprehensive AI courses: AI Foundations (Beginner), Applied AI (Intermediate), AI Web Development (Advanced), and Enterprise AI Business (Expert level)."
+    - question: "How long does it take to complete a course?"
+      answer: "Course durations range from 12 to 21 hours. You can learn at your own pace, with most students completing courses within 4-8 weeks."
+    - question: "Do I need programming experience?"
+      answer: "No programming experience is required for AI Foundations. Each course builds upon the previous, with clear prerequisites listed."
+    - question: "How do I enroll in a course?"
+      answer: "Simply create an account, choose your course, and complete the payment process. You'll get immediate access to course materials."
+    - question: "What payment methods do you accept?"
+      answer: "We accept PayPal and major credit cards. All payments are processed securely."
+    - question: "Is there a refund policy?"
+      answer: "Yes, we offer a 30-day money-back guarantee if you're not satisfied with your course."
+    - question: "What if I need help with the course content?"
+      answer: "Our support team and community forums are available to help. You can also schedule office hours with instructors."
+    - question: "Can I access courses on mobile devices?"
+      answer: "Yes, our platform is fully responsive and works on all devices including smartphones and tablets."
+    - question: "Do I get a certificate upon completion?"
+      answer: "Yes, you'll receive a verifiable certificate of completion that you can add to your LinkedIn profile."
 
 contact:
   title: "Still Have Questions?"
   description: "Can't find the answer you're looking for? Our support team is here to help."
-  cta:
-    primary:
-      text: "Contact Support"
-    secondary:
-      text: "Schedule Call"
+  primaryCta:
+    text: "Contact Support"
+    href: "/contact"
+    variant: "default"
+  secondaryCta:
+    text: "Schedule Call"
+    href: "/schedule"
+    variant: "outline"
   info:
-    email: "support@aiwhisperers.com"
-    phone: "+1 (555) 123-4567"
-    hours: "Monday-Friday: 9 AM - 6 PM PST"
+    - type: "email"
+      label: "Email"
+      value: "support@aiwhisperers.com"
+    - type: "phone"
+      label: "Phone"
+      value: "+1 (555) 123-4567"
+    - type: "web"
+      label: "Hours"
+      value: "Monday-Friday: 9 AM - 6 PM PST"
 
 footer:
   brand:

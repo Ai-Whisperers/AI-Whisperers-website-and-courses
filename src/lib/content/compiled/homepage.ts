@@ -127,7 +127,7 @@ export const homepageContent: PageContent = {
   "stats": {
     "title": "Comprehensive AI Education",
     "description": "Quality courses designed for professionals advancing their careers in AI",
-    "company": [
+    "metrics": [
       {
         "value": "Multiple Courses",
         "description": "From Beginner to Advanced"

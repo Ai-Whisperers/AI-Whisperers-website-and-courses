@@ -16,10 +16,53 @@ export const servicesContent: PageContent = {
     ],
     "language": "en"
   },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
   "hero": {
-    "title": "AI Education & Consulting Services",
-    "subtitle": "Transform your business and career with artificial intelligence",
-    "description": "We offer comprehensive AI education and consulting services designed to help individuals and organizations harness the power of artificial intelligence."
+    "headline": "AI Education & Consulting Services",
+    "subheadline": "Transform your business and career with artificial intelligence",
+    "description": "We offer comprehensive AI education and consulting services designed to help individuals and organizations harness the power of artificial intelligence.",
+    "location": "🌍 Serving Clients Worldwide",
+    "primaryCta": {
+      "text": "View Courses",
+      "href": "/courses",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Schedule Consultation",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "benefits": []
   },
   "services": [
     {
@@ -89,10 +132,37 @@ export const servicesContent: PageContent = {
       "description": "Continuous support and updates as AI technology evolves"
     }
   ],
-  "cta": {
+  "contact": {
     "title": "Ready to Start Your AI Journey?",
     "description": "Choose the service that best fits your needs and begin transforming your career or business with AI.",
-    "button": "Get Started Today"
+    "primaryCta": {
+      "text": "Get Started Today",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Pricing",
+      "href": "/courses",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "info@aiwhisperers.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
   }
 } as const;
 

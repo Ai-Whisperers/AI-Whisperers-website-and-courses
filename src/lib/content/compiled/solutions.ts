@@ -15,10 +15,53 @@ export const solutionsContent: PageContent = {
     ],
     "language": "en"
   },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Solutions",
+        "href": "/solutions"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
   "hero": {
-    "title": "AI Solutions by Department",
-    "subtitle": "Tailored AI implementations for every business function",
-    "description": "Discover how artificial intelligence can transform specific departments and functions within your organization."
+    "headline": "AI Solutions by Department",
+    "subheadline": "Tailored AI implementations for every business function",
+    "description": "Discover how artificial intelligence can transform specific departments and functions within your organization.",
+    "location": "🏢 Enterprise Solutions",
+    "primaryCta": {
+      "text": "Explore Solutions",
+      "href": "#departments",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Contact Sales",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "benefits": []
   },
   "departments": {
     "marketing": {
@@ -82,10 +125,37 @@ export const solutionsContent: PageContent = {
       ]
     }
   },
-  "cta": {
+  "contact": {
     "title": "Ready to Transform Your Department?",
     "description": "Learn how to implement AI solutions specific to your department's needs.",
-    "button": "Start Learning"
+    "primaryCta": {
+      "text": "Start Learning",
+      "href": "/courses",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Schedule Demo",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "solutions@aiwhisperers.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
   }
 } as const;
 

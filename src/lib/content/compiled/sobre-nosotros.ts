@@ -149,6 +149,7 @@ export const sobre_nosotrosContent: PageContent = {
   },
   "stats": {
     "title": "Nuestro Impacto",
+    "description": "Ofreciendo educación de calidad en IA a estudiantes en todo el mundo",
     "metrics": [
       {
         "value": "Múltiples Niveles",
