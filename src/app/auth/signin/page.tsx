@@ -14,7 +14,6 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 
 function SignInForm() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams?.get('callbackUrl') || '/dashboard'
   const error = searchParams?.get('error')
