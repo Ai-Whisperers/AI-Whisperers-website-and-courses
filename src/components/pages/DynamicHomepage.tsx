@@ -37,10 +37,10 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
   // Show loading state while language is being determined
   if (languageLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Henyhẽhína tetepy... / Cargando contenido... / Loading content...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Henyhẽhína tetepy... / Cargando contenido... / Loading content...</p>
         </div>
       </div>
     )
@@ -61,15 +61,15 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
     console.error('[DynamicHomepage] Content structure:', content)
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
         <div className="text-center max-w-2xl mx-auto p-8">
-          <div className="text-red-600 text-5xl mb-4">⚠️</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Content Structure Error</h2>
-          <p className="text-gray-600 mb-4">
+          <div className="text-destructive text-5xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-foreground mb-4">Content Structure Error</h2>
+          <p className="text-muted-foreground mb-4">
             The page content is incomplete. Missing sections: {missingParts.join(', ')}
           </p>
           {process.env.NODE_ENV === 'development' && (
-            <details className="text-left bg-gray-100 p-4 rounded-lg text-sm">
+            <details className="text-left bg-muted p-4 rounded-lg text-sm">
               <summary className="cursor-pointer font-semibold mb-2">Debug Information</summary>
               <pre className="overflow-auto">
                 {JSON.stringify({
@@ -82,7 +82,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
           )}
           <button
             onClick={() => window.location.reload()}
-            className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="mt-6 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             Reload Page
           </button>
@@ -92,42 +92,42 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <AnimatedBackground />
         <FloatingElements />
-        
+
         <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <TypewriterText 
+            <TypewriterText
               text={hero.headline}
-              className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
+              className="text-4xl md:text-6xl font-bold text-foreground mb-6"
             />
-            <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-4xl mx-auto">
               {hero.subheadline}
             </p>
-            <p className="text-lg text-gray-500 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground/80 mb-8 max-w-3xl mx-auto">
               {hero.description}
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <DynamicButton 
+              <DynamicButton
                 content={hero.primaryCta}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg"
               />
-              <DynamicButton 
+              <DynamicButton
                 content={hero.secondaryCta}
                 className="px-8 py-3 text-lg"
               />
             </div>
 
-            <div className="text-sm text-gray-500 mb-8">
+            <div className="text-sm text-muted-foreground mb-8">
               <DynamicIcon name="Globe" className="inline h-4 w-4 mr-2" />
               {hero.location}
             </div>
@@ -135,16 +135,16 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
             {/* Hero Benefits */}
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {hero.benefits?.map((benefit, index) => (
-                <motion.div 
+                <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 + (index * 0.2) }}
-                  className="bg-white p-6 rounded-lg shadow-sm border"
+                  className="bg-card p-6 rounded-lg shadow-sm border border-border"
                 >
-                  <DynamicIcon name={benefit.icon} className="h-8 w-8 text-blue-600 mb-3 mx-auto" />
-                  <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
-                  <p className="text-gray-600 text-sm">{benefit.description}</p>
+                  <DynamicIcon name={benefit.icon} className="h-8 w-8 text-primary mb-3 mx-auto" />
+                  <h3 className="font-semibold text-card-foreground mb-2">{benefit.title}</h3>
+                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -154,38 +154,38 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
 
       {/* What Makes Us Different */}
       {features?.differentiators && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{features.differentiators.title}</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold text-foreground mb-4">{features.differentiators.title}</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 {features.differentiators.description}
               </p>
             </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Nuestro Enfoque</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Nuestro Enfoque</h3>
               <div className="space-y-4">
                 {features.differentiators?.items?.map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <div className="bg-blue-100 p-2 rounded-lg">
-                      <DynamicIcon name={item.icon} className="h-5 w-5 text-blue-600" />
+                    <div className="bg-primary/10 p-2 rounded-lg">
+                      <DynamicIcon name={item.icon} className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900">{item.title}</h4>
-                      <p className="text-gray-600">{item.description}</p>
+                      <h4 className="font-semibold text-foreground">{item.title}</h4>
+                      <p className="text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                Cada equipo se va con herramientas que puede usar <span className="text-blue-600">inmediatamente</span>, no solo conocimiento teórico.
+            <div className="bg-gradient-to-br from-primary/5 to-primary/10 p-8 rounded-xl">
+              <h3 className="text-xl font-bold text-foreground mb-4">
+                Cada equipo se va con herramientas que puede usar <span className="text-primary">inmediatamente</span>, no solo conocimiento teórico.
               </h3>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 Nuestro enfoque prioritiza la habilitación de productividad práctica y el ahorro de tiempo inmediato con aplicaciones personalizadas para cada departamento.
               </p>
             </div>
@@ -196,17 +196,17 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
 
       {/* Services Section */}
       {Array.isArray(content.services) && (
-        <section className="py-16 bg-gray-50" id="servicios">
+        <section className="py-16 bg-muted/30" id="servicios">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
-              <p className="text-lg text-gray-600">Comprehensive AI solutions tailored to your business needs</p>
+              <h2 className="text-3xl font-bold text-foreground mb-4">Our Services</h2>
+              <p className="text-lg text-muted-foreground">Comprehensive AI solutions tailored to your business needs</p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {content.services.map((service, index) => {
                 const icons = ['Briefcase', 'TrendingUp', 'Calculator', 'Users']
-                const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-orange-500']
+                const colors = ['bg-chart-1', 'bg-chart-2', 'bg-chart-3', 'bg-chart-4']
                 
                 return (
                   <motion.div
@@ -214,15 +214,15 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all text-center"
+                    className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-lg transition-all text-center"
                 >
                     <div className={`w-16 h-16 ${colors[index % colors.length]} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
                       <DynamicIcon name={icons[index % icons.length]} className="h-8 w-8 text-white" />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-lg mb-2">{service.title}</h3>
-                    <p className="text-gray-600 text-sm mb-3">{service.shortDescription}</p>
-                    <div className="text-blue-600 font-semibold text-sm">{service.price}</div>
-                    <div className="text-gray-500 text-xs mt-1">{service.duration}</div>
+                    <h3 className="font-bold text-foreground text-lg mb-2">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm mb-3">{service.shortDescription}</p>
+                    <div className="text-primary font-semibold text-sm">{service.price}</div>
+                    <div className="text-muted-foreground text-xs mt-1">{service.duration}</div>
                   </motion.div>
               )
             })}
@@ -233,10 +233,10 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
 
       {/* Tools We Specialize In */}
       {features?.tools && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{features.tools.title}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-4">{features.tools.title}</h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -267,8 +267,8 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                   <div className={`w-16 h-16 ${tool.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                     <DynamicIcon name="Brain" className="h-8 w-8" />
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{tool.title}</h3>
-                  <p className="text-gray-600 text-sm">{tool.description}</p>
+                  <h3 className="font-semibold text-foreground mb-2">{tool.title}</h3>
+                  <p className="text-muted-foreground text-sm">{tool.description}</p>
                   
                   {toolUrl ? (
                     typeof toolUrl === 'string' ? (
@@ -276,7 +276,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                         href={toolUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                        className="mt-4 inline-block px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
                       >
                         Visitar {tool.title.split(' ')[0]}
                       </a>
@@ -294,7 +294,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                           href={toolUrl.secondary}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                          className="block px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary/90 transition-colors"
                         >
                           Visitar {toolUrl.secondaryLabel}
                         </a>
@@ -302,7 +302,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                     )
                   ) : (
                     <div className="mt-4">
-                      <span className="text-sm text-gray-500">Learn more about {tool.title}</span>
+                      <span className="text-sm text-muted-foreground">Learn more about {tool.title}</span>
                     </div>
                   )}
                 </motion.div>
@@ -315,7 +315,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
 
       {/* Paraguay Focus */}
       {stats && (
-        <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -323,15 +323,15 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl font-bold mb-4">{stats.title}</h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-primary-foreground/80 mb-8 max-w-3xl mx-auto">
                 {stats.description}
               </p>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {stats.company?.map((metric, index) => (
                 <div key={index}>
-                  <div className="text-4xl font-bold text-blue-200 mb-2">{metric.value}</div>
-                  <p className="text-blue-100">{metric.description}</p>
+                  <div className="text-4xl font-bold text-primary-foreground/90 mb-2">{metric.value}</div>
+                  <p className="text-primary-foreground/80">{metric.description}</p>
                 </div>
               ))}
             </div>
@@ -341,11 +341,11 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
       )}
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Stay Ahead with AI Insights</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Stay Ahead with AI Insights</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Get weekly AI industry updates, business implementation guides, and exclusive content delivered to your inbox.
             </p>
           </div>
@@ -362,19 +362,19 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-foreground mb-4">
             {contact.title}
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             {contact.description}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <DynamicButton 
               content={contact.primaryCta}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
             />
             <DynamicButton 
               content={contact.secondaryCta}
@@ -382,7 +382,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
             />
           </div>
 
-          <div className="text-sm text-gray-500 space-y-1">
+          <div className="text-sm text-muted-foreground space-y-1">
             {Array.isArray(contact.info) ? contact.info.map((info, index) => (
               <p key={index}>
                 {info.type === 'email' && '📧'} 
@@ -397,14 +397,14 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-foreground text-background py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <DynamicIcon name="Brain" className="h-6 w-6 text-blue-400" />
+              <DynamicIcon name="Brain" className="h-6 w-6 text-primary/80" />
               <span className="text-lg font-bold">{footer.brand?.text || 'AI Paraguay'}</span>
             </div>
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-background/70">
               {footer.copyright || '© 2025 AI Paraguay'}
             </div>
           </div>

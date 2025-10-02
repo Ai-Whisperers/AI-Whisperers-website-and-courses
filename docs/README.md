@@ -19,6 +19,7 @@ Welcome to the comprehensive technical documentation for the AI Whisperers educa
 ### Features & Components
 - [**Course Management**](./features/COURSES.md) - In-memory course system and mock data
 - [**User Interface**](./features/UI_COMPONENTS.md) - React components and styling system
+- [**Styling & Design System**](./STYLING.md) - Tailwind CSS architecture and design tokens
 - [**Internationalization**](./features/I18N.md) - Multi-language support implementation
 - [**Security**](./features/SECURITY.md) - Security measures and best practices
 
