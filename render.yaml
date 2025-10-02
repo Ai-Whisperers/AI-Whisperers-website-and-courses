@@ -1,13 +1,13 @@
 # Render.com Blueprint for AI Whisperers Platform
-# Node.js-only deployment without database dependencies
+# Docker deployment for proper Next.js standalone mode support
 
 services:
   - type: web
     name: ai-whisperers-web
-    runtime: node
+    runtime: docker
     plan: starter
-    buildCommand: npm run build
-    startCommand: npm start
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
