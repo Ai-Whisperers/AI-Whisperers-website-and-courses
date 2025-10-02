@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { motion } from "framer-motion"
 import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
-import { LanguageToggler } from "@/components/ui/LanguageToggler"
 import { AnimatedBackground, FloatingElements, TypewriterText } from "@/components/ui/AnimatedBackground"
 import { NewsletterSignup } from "@/components/interactive/NewsletterSignup"
 import { FloatingThemeSelector } from "@/components/ui/ThemeSelector"
@@ -17,8 +16,7 @@ interface DynamicHomepageProps {
 }
 
 export function DynamicHomepage({ content }: DynamicHomepageProps) {
-  const { language, isLoading: languageLoading } = useLanguage()
-  const [debugInfo, setDebugInfo] = useState<string | null>(null)
+  const { isLoading: languageLoading } = useLanguage()
 
   // Note: Content is now server-side compiled and provided via props
   // Language switching would require page navigation to different routes
@@ -28,7 +26,6 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
     console.log('[DynamicHomepage] Rendering with content:', {
       hasContent: !!content,
       contentKeys: content ? Object.keys(content) : [],
-      navigation: !!content?.navigation,
       hero: !!content?.hero,
       features: !!content?.features,
       stats: !!content?.stats,
@@ -49,12 +46,12 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
     )
   }
 
-  const { navigation, hero, features, stats, contact, footer } = content
+  const { hero, features, stats, contact, footer } = content
 
   // Add safety checks for required sections only (stats and contact are optional)
-  const requiredSections = { navigation, hero, features, footer }
+  const requiredSections = { hero, features, footer }
   const missingRequired = Object.entries(requiredSections)
-    .filter(([_, value]) => !value)
+    .filter(([, value]) => !value)
     .map(([key]) => key)
 
   if (missingRequired.length > 0) {
@@ -96,39 +93,6 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      {/* Navigation */}
-      <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <DynamicIcon name="Brain" className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">{navigation.brand?.text || 'AI Paraguay'}</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              {navigation.items?.map((item, index) => (
-                <a 
-                  key={index}
-                  href={item.href} 
-                  className="text-gray-600 hover:text-blue-600 transition-colors"
-                >
-                  {item.text}
-                </a>
-              ))}
-              <LanguageToggler />
-              {navigation.cta && (
-                <DynamicButton 
-                  content={{
-                    ...navigation.cta,
-                    variant: 'default'
-                  }}
-                  className="bg-blue-600 hover:bg-blue-700"
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <AnimatedBackground />

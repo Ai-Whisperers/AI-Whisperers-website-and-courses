@@ -11,6 +11,7 @@ import { useTranslation } from '@/lib/i18n/use-translation'
 import { Button } from '@/components/ui/button'
 import { LanguageSelector } from '@/components/ui/language-selector'
 import { cn } from '@/lib/utils'
+import { Brain } from 'lucide-react'
 
 export function Navigation() {
   const pathname = usePathname()
@@ -22,7 +23,6 @@ export function Navigation() {
     { href: '/', label: t('nav.home') },
     { href: '/courses', label: t('nav.courses') },
     { href: '/about', label: t('nav.about') },
-    { href: '/blog', label: t('nav.blog') },
     { href: '/contact', label: t('nav.contact') },
   ]
 
@@ -39,6 +39,7 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
+            <Brain className="h-8 w-8 text-primary" />
             <div className="font-bold text-xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               AI Whisperers
             </div>
