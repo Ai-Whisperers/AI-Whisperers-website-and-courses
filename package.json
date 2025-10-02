@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "dev:stable": "next dev",
     "build": "npm install && node scripts/compile-content.js && npx prisma generate && next build",
+    "build:docker": "node scripts/compile-content.js && npx prisma generate && next build",
     "start": "node .next/standalone/server.js",
     "start:dev": "next start",
     "compile-content": "node scripts/compile-content.js",

@@ -19,6 +19,10 @@ services:
           type: web
           name: ai-whisperers-web
           property: host
+      # Database URL for Prisma (configure in Render dashboard)
+      # Connect to your PostgreSQL database or use placeholder for build
+      # - key: DATABASE_URL
+      #   value: postgresql://user:password@host:5432/database?schema=public
       # OAuth providers (configure manually in Render dashboard)
       # - key: GOOGLE_CLIENT_ID
       #   value: your-google-client-id

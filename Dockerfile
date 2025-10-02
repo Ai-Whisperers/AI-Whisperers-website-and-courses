@@ -20,7 +20,7 @@ FROM node:22.16.0-alpine AS builder
 WORKDIR /app
 
 # Install dependencies for build
-RUN apk add --no-cache libc6-compat python3 make g++
+RUN apk add --no-cache libc6-compat python3 make g++ openssl
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
@@ -32,8 +32,14 @@ COPY . .
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build the application (runs: npm install && compile-content && next build)
-RUN npm run build
+# Provide placeholder DATABASE_URL for Prisma generation
+# Real DATABASE_URL will be set at runtime via environment variables
+ARG DATABASE_URL="postgresql://placeholder:placeholder@placeholder:5432/placeholder?schema=public"
+ENV DATABASE_URL=$DATABASE_URL
+
+# Build the application (runs: compile-content && prisma generate && next build)
+# Uses build:docker script which doesn't run npm install again
+RUN npm run build:docker
 
 # Stage 3: Runner (Production)
 FROM node:22.16.0-alpine AS runner
@@ -56,6 +62,8 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src/content ./src/content
 COPY --from=builder /app/src/lib/content/compiled ./src/lib/content/compiled
+COPY --from=builder /app/src/generated ./src/generated
+COPY --from=builder /app/prisma ./prisma
 
 # Set ownership to nextjs user
 RUN chown -R nextjs:nodejs /app
