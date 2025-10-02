@@ -135,6 +135,17 @@ const nextConfig: NextConfig = {
       ],
     };
 
+    // Add snapshot ignore patterns to prevent webpack from scanning system directories
+    config.snapshot = {
+      ...config.snapshot,
+      managedPaths: [/^(.+?[\\/]node_modules[\\/])/],
+      immutablePaths: [],
+      buildDependencies: {
+        hash: true,
+        timestamp: true,
+      },
+    };
+
     return config;
   },
 

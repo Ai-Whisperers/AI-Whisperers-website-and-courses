@@ -320,7 +320,11 @@ export function generatePageSchema(pageType: string, pageData?: Record<string, u
         }
       }
       return baseSchema
-      
+
+    case 'legal':
+      // For legal pages (terms, privacy), just return base schema
+      return baseSchema
+
     default:
       return baseSchema
   }
