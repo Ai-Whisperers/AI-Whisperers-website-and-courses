@@ -19,7 +19,7 @@ export function AboutPage({ content }: AboutPageProps) {
   // Show loading state while language is being determined
   if (languageLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-muted-foreground">Henyhẽhína tetepy... / Cargando contenido... / Loading content...</p>
@@ -36,7 +36,7 @@ export function AboutPage({ content }: AboutPageProps) {
   const teamTitle = (team as any)?.title || "Meet Our Team"
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
+    <div className="min-h-screen bg-background">
 
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
@@ -165,7 +165,7 @@ export function AboutPage({ content }: AboutPageProps) {
 
       {/* Stats */}
       {stats && (
-        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
+        <section className="py-16 glass text-primary-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -13,7 +13,7 @@ export function ContactPage({ content }: ContactPageProps) {
   const { hero, contactOptions, officeInfo, consultationForm, faq, socialProof } = content
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
+    <div className="min-h-screen bg-background">
 
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Contact Options */}
       {contactOptions && (
-        <section className="py-16 bg-card">
+        <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">{contactOptions.title}</h2>
@@ -54,8 +54,8 @@ export function ContactPage({ content }: ContactPageProps) {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`bg-card border-2 rounded-lg p-6 text-center transition-all hover:shadow-md ${
-                  option.primaryMethod ? 'border-primary bg-primary/5' : 'border-border'
+                className={`glass-card text-center ${
+                  option.primaryMethod ? 'border-2 border-foreground/30' : ''
                 }`}
               >
                 <DynamicIcon name={option.icon} className={`h-12 w-12 mx-auto mb-4 ${
@@ -68,11 +68,7 @@ export function ContactPage({ content }: ContactPageProps) {
                   href={option.action.href}
                   target={option.action.external ? "_blank" : undefined}
                   rel={option.action.external ? "noopener noreferrer" : undefined}
-                  className={`inline-block px-4 py-2 rounded text-sm font-medium transition-colors ${
-                    option.primaryMethod 
-                      ? 'bg-primary text-white hover:bg-primary/90' 
-                      : 'bg-muted text-foreground hover:bg-muted/90'
-                  }`}
+                  className="glass-button inline-block px-4 py-2 text-sm"
                 >
                   {option.action.text}
                 </a>
@@ -85,7 +81,7 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Office Info & Form */}
       {officeInfo && consultationForm && (
-        <section className="py-16 bg-muted">
+        <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Office Information */}
@@ -211,7 +207,7 @@ export function ContactPage({ content }: ContactPageProps) {
 
       {/* Social Proof */}
       {socialProof && (
-        <section className="py-16 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
+        <section className="py-16 glass relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">{socialProof.title}</h2>

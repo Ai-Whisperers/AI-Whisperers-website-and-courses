@@ -13,7 +13,7 @@ export function ServicesPage({ content }: ServicesPageProps) {
   const { navigation, hero, mainServices, departmentServices, tools, process, pricing, testimonials, contact, footer } = content
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
