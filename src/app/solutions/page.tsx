@@ -1,11 +1,11 @@
 import { getPageContent } from '@/lib/content/server'
-import { ServicesPage } from '@/components/pages/ServicesPage'
+import { SolutionsPage } from '@/components/pages/SolutionsPage'
 import type { Metadata } from 'next'
 
 // Generate metadata from content
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPageContent('servicios')
-  
+  const content = await getPageContent('solutions')
+
   return {
     title: content.meta.title,
     description: content.meta.description,
@@ -17,15 +17,15 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     alternates: {
       languages: {
-        [content.meta.language]: '/servicios',
+        [content.meta.language]: '/solutions',
       },
     },
   }
 }
 
-export default async function ServicesPageRoute() {
+export default async function SolutionsPageRoute() {
   // Load content from YAML file
-  const content = await getPageContent('servicios')
-  
-  return <ServicesPage content={content} />
+  const content = await getPageContent('solutions')
+
+  return <SolutionsPage content={content} />
 }

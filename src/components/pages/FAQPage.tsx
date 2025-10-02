@@ -102,15 +102,14 @@ export function FAQPage({ content }: FAQPageProps) {
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
-              <Link href="/servicios" className="text-gray-600 hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="/sobre-nosotros" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link>
-              <Link href="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">Blog</Link>
-              <Link href="/contacto" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href="/services" className="text-gray-600 hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link>
+              <Link href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</Link>
               <Link href="/faq" className="text-blue-600 font-medium">FAQ</Link>
               <LanguageToggler />
-              <DynamicButton 
+              <DynamicButton
                 content={{
-                  text: "Free Consultation",
+                  text: "Get Started",
                   variant: "default"
                 }}
                 className="bg-blue-600 hover:bg-blue-700"

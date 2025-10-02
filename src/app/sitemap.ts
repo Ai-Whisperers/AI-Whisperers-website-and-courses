@@ -13,19 +13,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/servicios`,
+      url: `${baseUrl}/services`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/sobre-nosotros`,
+      url: `${baseUrl}/about`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contacto`,
+      url: `${baseUrl}/contact`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
@@ -37,69 +37,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/architecture`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-  ]
-
-  // Department solution pages
-  const departmentPages = [
-    'ejecutivos',
-    'ventas', 
-    'finanzas',
-    'rrhh',
-    'operaciones',
-    'atencion-cliente'
-  ].map(dept => ({
-    url: `${baseUrl}/solutions/${dept}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }))
-
-  // Case study pages
-  const caseStudyPages = [
-    'manufacturas-globales-sa',
-    'techcorp-paraguay',
-    'servicios-financieros-sa'
-  ].map(caseStudy => ({
-    url: `${baseUrl}/case-studies/${caseStudy}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
-
-  // Team member pages
-  const teamPages = [
-    'ivan-weiss-van-der-pol',
-    'kiryan-weiss-van-der-pol'
-  ].map(member => ({
-    url: `${baseUrl}/team/${member}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  }))
-
-  // Additional pages
-  const additionalPages = [
-    {
-      url: `${baseUrl}/resources`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/events`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
       priority: 0.6,
     },
     {
@@ -113,14 +53,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.3,
-    }
+    },
   ]
 
-  return [
-    ...corePages,
-    ...departmentPages,
-    ...caseStudyPages,
-    ...teamPages,
-    ...additionalPages
-  ]
+  return corePages
 }
