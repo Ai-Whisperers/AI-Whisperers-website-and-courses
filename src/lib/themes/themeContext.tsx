@@ -16,6 +16,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // Load saved theme from localStorage on mount
   useEffect(() => {
+    // SSR guard: Only access localStorage in browser
+    if (typeof window === 'undefined') return;
+
     const savedTheme = localStorage.getItem('selectedTheme');
     if (savedTheme && COLOR_THEMES[savedTheme as keyof typeof COLOR_THEMES]) {
       setCurrentThemeId(savedTheme);
@@ -25,9 +28,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const setTheme = (themeId: string) => {
     if (COLOR_THEMES[themeId as keyof typeof COLOR_THEMES]) {
       setCurrentThemeId(themeId);
-      localStorage.setItem('selectedTheme', themeId);
-      
+
+      // SSR guard: Only access localStorage in browser
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('selectedTheme', themeId);
+      }
+
       // Apply theme CSS variables to document root
+      // SSR guard: Only access DOM in browser
+      if (typeof window === 'undefined') return;
+
       const theme = COLOR_THEMES[themeId as keyof typeof COLOR_THEMES];
       const root = document.documentElement;
       

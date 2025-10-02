@@ -47,58 +47,152 @@ export const sobre_nosotrosContent: PageContent = {
     }
   },
   "hero": {
-    "title": "Sobre AI Whisperers",
-    "subtitle": "Democratizando la educación en IA para todos",
-    "description": "Estamos en una misión para hacer la inteligencia artificial accesible y comprensible para estudiantes de todos los niveles."
+    "headline": "Sobre AI Whisperers",
+    "subheadline": "Democratizando la educación en IA para todos",
+    "description": "Estamos en una misión para hacer la inteligencia artificial accesible y comprensible para estudiantes de todos los niveles.",
+    "location": "🌍 Disponible en todo el mundo - Aprende a tu ritmo",
+    "primaryCta": {
+      "text": "Comenzar a Aprender",
+      "href": "/courses",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Contáctanos",
+      "href": "/contacto",
+      "variant": "outline"
+    },
+    "benefits": []
+  },
+  "story": {
+    "title": "Nuestra Historia",
+    "content": "En AI Whisperers, creemos que la inteligencia artificial debe ser accesible para todos.\nEstamos construyendo una comunidad de estudiantes y profesionales que están dando forma al futuro con IA.\n"
   },
   "mission": {
     "title": "Nuestra Misión",
-    "content": "En AI Whisperers, creemos que la inteligencia artificial debe ser accesible para todos. \nNuestra misión es proporcionar educación en IA de clase mundial que empodera a individuos \ny organizaciones para aprovechar el poder transformador de la tecnología IA.\n"
+    "description": "Proporcionar educación en IA de clase mundial que empodera a individuos y organizaciones para aprovechar el poder transformador de la tecnología IA."
   },
   "vision": {
     "title": "Nuestra Visión",
-    "content": "Visualizamos un mundo donde la alfabetización en IA sea tan fundamental como la alfabetización tradicional. \nA través de educación completa y entrenamiento práctico, estamos construyendo la próxima \ngeneración de profesionales y empresas potenciadas por IA.\n"
+    "description": "Un mundo donde la alfabetización en IA sea tan fundamental como la alfabetización tradicional, con educación completa construyendo la próxima generación de profesionales potenciados por IA."
   },
-  "values": [
-    {
-      "title": "Excelencia en Educación",
-      "description": "Mantenemos los más altos estándares en contenido de cursos e instrucción"
-    },
-    {
-      "title": "Aplicación Práctica",
-      "description": "Cada lección está diseñada con aplicación del mundo real en mente"
-    },
-    {
-      "title": "Aprendizaje Inclusivo",
-      "description": "Nuestros cursos están diseñados para ser accesibles sin importar el trasfondo"
-    },
-    {
-      "title": "Innovación Continua",
-      "description": "Actualizamos constantemente nuestro contenido para reflejar los últimos desarrollos en IA"
-    }
-  ],
-  "team": [
-    {
-      "name": "Dr. AI Rodríguez",
-      "role": "Instructor Principal de IA",
-      "bio": "Ex-investigador de IA de Google con más de 10 años de experiencia en aprendizaje automático y redes neuronales."
-    },
-    {
-      "name": "Sarah Chen",
-      "role": "Directora de Currículo",
-      "bio": "Especialista en educación enfocada en hacer conceptos técnicos complejos accesibles para todos los estudiantes."
-    },
-    {
-      "name": "Marcus Williams",
-      "role": "Experto en Aplicaciones Empresariales",
-      "bio": "Ex-consultor de McKinsey especializado en estrategia IA y transformación empresarial."
-    }
-  ],
+  "values": {
+    "title": "Nuestros Valores",
+    "items": [
+      {
+        "icon": "Award",
+        "title": "Excelencia en Educación",
+        "description": "Mantenemos los más altos estándares en contenido de cursos e instrucción"
+      },
+      {
+        "icon": "Target",
+        "title": "Aplicación Práctica",
+        "description": "Cada lección está diseñada con aplicación del mundo real en mente"
+      },
+      {
+        "icon": "Heart",
+        "title": "Aprendizaje Inclusivo",
+        "description": "Nuestros cursos están diseñados para ser accesibles sin importar el trasfondo"
+      },
+      {
+        "icon": "Sparkles",
+        "title": "Innovación Continua",
+        "description": "Actualizamos constantemente nuestro contenido para reflejar los últimos desarrollos en IA"
+      }
+    ]
+  },
+  "team": {
+    "title": "Conoce Nuestro Equipo",
+    "members": [
+      {
+        "name": "Dra. Sarah Chen",
+        "role": "Instructora Principal de IA",
+        "bio": "Más de 10 años de experiencia en investigación y educación en IA, especializada en hacer accesibles conceptos complejos para todos los estudiantes.",
+        "expertise": [
+          "Aprendizaje Automático",
+          "Redes Neuronales",
+          "Ética en IA"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Dra. Sarah Chen"
+        }
+      },
+      {
+        "name": "Marcus Johnson",
+        "role": "Director de Currículo",
+        "bio": "Ex ingeniero de IA en Google con pasión por crear experiencias de aprendizaje prácticas y atractivas.",
+        "expertise": [
+          "Diseño Curricular",
+          "Ingeniería en IA",
+          "Tecnología Educativa"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Marcus Johnson"
+        }
+      },
+      {
+        "name": "Dra. Elena Rodríguez",
+        "role": "Experta en Aplicaciones Empresariales",
+        "bio": "Ayudando a empresas a transformarse mediante la adopción de IA con consultoría estratégica y capacitación práctica.",
+        "expertise": [
+          "Estrategia Empresarial",
+          "Implementación de IA",
+          "Gestión del Cambio"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Dra. Elena Rodríguez"
+        }
+      }
+    ]
+  },
   "stats": {
-    "coursesOffered": "Múltiples Niveles",
-    "learningFormat": "Online Autogestionado",
-    "projectBased": "Aprendizaje Práctico",
-    "certificates": "Al Completar"
+    "title": "Nuestro Impacto",
+    "metrics": [
+      {
+        "value": "Múltiples Niveles",
+        "description": "Cursos desde Principiante hasta Experto"
+      },
+      {
+        "value": "Autogestionado",
+        "description": "Aprende a tu Propio Ritmo"
+      },
+      {
+        "value": "Práctico",
+        "description": "Aprendizaje Basado en Proyectos"
+      },
+      {
+        "value": "Certificados",
+        "description": "Al Completar el Curso"
+      }
+    ]
+  },
+  "contact": {
+    "title": "¿Listo para Comenzar tu Viaje en IA?",
+    "description": "Ponte en contacto con nuestro equipo para encontrar el curso perfecto para tus objetivos",
+    "primaryCta": {
+      "text": "Contáctanos",
+      "href": "/contacto",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Ver Cursos",
+      "href": "/courses",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Correo Electrónico",
+        "value": "info@aiwhisperers.com"
+      },
+      {
+        "type": "web",
+        "label": "Sitio Web",
+        "value": "aiwhisperers.com"
+      }
+    ]
   },
   "footer": {
     "brand": {

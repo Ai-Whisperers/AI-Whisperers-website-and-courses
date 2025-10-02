@@ -6,51 +6,121 @@ meta:
     - "AI education team"
     - "mission"
     - "AI instructors"
+  language: "en"
 
 hero:
-  title: "About AI Whisperers"
-  subtitle: "Democratizing AI education for everyone"
+  headline: "About AI Whisperers"
+  subheadline: "Democratizing AI education for everyone"
   description: "We're on a mission to make artificial intelligence accessible and understandable for learners at every level."
+  location: "🌍 Available Worldwide - Learn at Your Own Pace"
+  primaryCta:
+    text: "Start Learning Today"
+    href: "/courses"
+    variant: "default"
+  secondaryCta:
+    text: "Contact Us"
+    href: "/contact"
+    variant: "outline"
+  benefits: []
+
+story:
+  title: "Our Story"
+  content: |
+    At AI Whisperers, we believe that artificial intelligence should be accessible to everyone.
+    We're building a community of learners and practitioners who are shaping the future with AI.
 
 mission:
   title: "Our Mission"
-  content: |
-    At AI Whisperers, we believe that artificial intelligence should be accessible to everyone. 
-    Our mission is to provide world-class AI education that empowers individuals and organizations 
-    to harness the transformative power of AI technology.
+  description: "To provide world-class AI education that empowers individuals and organizations to harness the transformative power of AI technology."
 
 vision:
-  title: "Our Vision"  
-  content: |
-    We envision a world where AI literacy is as fundamental as traditional literacy. 
-    Through comprehensive education and practical training, we're building the next 
-    generation of AI-powered professionals and businesses.
+  title: "Our Vision"
+  description: "A world where AI literacy is as fundamental as traditional literacy, with comprehensive education building the next generation of AI-powered professionals."
 
 values:
-  - title: "Excellence in Education"
-    description: "We maintain the highest standards in course content and instruction"
-  - title: "Practical Application"
-    description: "Every lesson is designed with real-world application in mind"
-  - title: "Inclusive Learning"
-    description: "Our courses are designed to be accessible regardless of background"
-  - title: "Continuous Innovation"
-    description: "We constantly update our content to reflect the latest AI developments"
+  title: "Our Values"
+  items:
+    - icon: "Award"
+      title: "Excellence in Education"
+      description: "We maintain the highest standards in course content and instruction"
+    - icon: "Target"
+      title: "Practical Application"
+      description: "Every lesson is designed with real-world application in mind"
+    - icon: "Heart"
+      title: "Inclusive Learning"
+      description: "Our courses are designed to be accessible regardless of background"
+    - icon: "Sparkles"
+      title: "Continuous Innovation"
+      description: "We constantly update our content to reflect the latest AI developments"
 
 team:
-  - name: "Dr. AI Rodriguez"
-    role: "Lead AI Instructor"
-    bio: "Former Google AI researcher with 10+ years of experience in machine learning and neural networks."
-    
-  - name: "Sarah Chen"
-    role: "Head of Curriculum"
-    bio: "Education specialist focused on making complex technical concepts accessible to all learners."
-    
-  - name: "Marcus Williams"
-    role: "Business Applications Expert"
-    bio: "Former McKinsey consultant specializing in AI strategy and business transformation."
+  title: "Meet Our Team"
+  members:
+    - name: "Dr. Sarah Chen"
+      role: "Lead AI Instructor"
+      bio: "10+ years of experience in AI research and education, specializing in making complex concepts accessible to all learners."
+      expertise:
+        - "Machine Learning"
+        - "Neural Networks"
+        - "AI Ethics"
+      image:
+        src: "/team/placeholder.jpg"
+        alt: "Dr. Sarah Chen"
+
+    - name: "Marcus Johnson"
+      role: "Head of Curriculum"
+      bio: "Former Google AI engineer with a passion for creating engaging, practical learning experiences."
+      expertise:
+        - "Curriculum Design"
+        - "AI Engineering"
+        - "Educational Technology"
+      image:
+        src: "/team/placeholder.jpg"
+        alt: "Marcus Johnson"
+
+    - name: "Dr. Elena Rodriguez"
+      role: "Business Applications Expert"
+      bio: "Helping businesses transform through AI adoption with strategic consulting and hands-on training."
+      expertise:
+        - "Business Strategy"
+        - "AI Implementation"
+        - "Change Management"
+      image:
+        src: "/team/placeholder.jpg"
+        alt: "Dr. Elena Rodriguez"
 
 stats:
-  coursesOffered: "Multiple Levels"
-  learningFormat: "Self-Paced Online"
-  projectBased: "Hands-On Learning"
-  certificates: "Upon Completion"
+  title: "Our Impact"
+  metrics:
+    - value: "Multiple Levels"
+      description: "Courses from Beginner to Expert"
+    - value: "Self-Paced"
+      description: "Learn at Your Own Speed"
+    - value: "Hands-On"
+      description: "Project-Based Learning"
+    - value: "Certificates"
+      description: "Upon Course Completion"
+
+contact:
+  title: "Ready to Start Your AI Journey?"
+  description: "Get in touch with our team to find the perfect course for your goals"
+  primaryCta:
+    text: "Contact Us"
+    href: "/contact"
+    variant: "default"
+  secondaryCta:
+    text: "View Courses"
+    href: "/courses"
+    variant: "outline"
+  info:
+    - type: "email"
+      label: "Email"
+      value: "info@aiwhisperers.com"
+    - type: "web"
+      label: "Website"
+      value: "aiwhisperers.com"
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. All rights reserved."

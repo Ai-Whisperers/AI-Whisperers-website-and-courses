@@ -20,6 +20,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Load saved language preference on mount
   useEffect(() => {
+    // SSR guard: Only access localStorage in browser
+    if (typeof window === 'undefined') {
+      setIsLoading(false)
+      return
+    }
+
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Language
       if (saved && ['en', 'es', 'pt', 'fr'].includes(saved)) {
@@ -34,6 +40,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
+
+    // SSR guard: Only access localStorage in browser
+    if (typeof window === 'undefined') return
+
     try {
       localStorage.setItem(STORAGE_KEY, lang)
     } catch (error) {
