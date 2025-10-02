@@ -44,7 +44,7 @@ yarn-error.log*
 next-env.d.ts
 
 # local reports
-/local-reports
+# /local-reports - Re-enabled to track session reports
 
 # Docker artifacts
 docker-compose.override.yml
