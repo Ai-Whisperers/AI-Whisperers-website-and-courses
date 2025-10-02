@@ -195,18 +195,7 @@ html {
     -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Hide default cursor on desktop */
-  @media (pointer: fine) {
-    body {
-      cursor: none;
-    }
-
-    a, button, input, textarea, select, [role="button"] {
-      cursor: none;
-    }
-  }
-
-  /* Keep default cursor on touch devices */
+  /* Hide custom cursor on touch devices */
   @media (pointer: coarse) {
     .glass-cursor-dot,
     .glass-cursor-ring {
