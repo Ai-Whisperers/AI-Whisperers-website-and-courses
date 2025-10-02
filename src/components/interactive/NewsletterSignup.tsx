@@ -94,21 +94,21 @@ export function NewsletterSignup({
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+    <div className="bg-card rounded-xl p-6 border border-border shadow-sm">
       <div className="grid lg:grid-cols-2 gap-6 items-center">
         {/* Lead Magnet Preview */}
         <div>
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
-              <div className="w-16 h-20 bg-white rounded-lg shadow-md flex items-center justify-center border">
-                <DynamicIcon name="FileText" className="h-8 w-8 text-blue-600" />
+              <div className="w-16 h-20 bg-primary/5 rounded-lg shadow-sm flex items-center justify-center border border-border">
+                <DynamicIcon name="FileText" className="h-8 w-8 text-primary" />
               </div>
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">
+              <h3 className="font-bold text-foreground mb-2">
                 FREE: {leadMagnet.title}
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {leadMagnet.description}
               </p>
             </div>
@@ -116,20 +116,20 @@ export function NewsletterSignup({
 
           {/* Features */}
           <div className="mt-4 space-y-2">
-            <div className="flex items-center text-sm text-gray-600">
-              <DynamicIcon name="Check" className="h-4 w-4 text-green-600 mr-2" />
+            <div className="flex items-center text-sm text-muted-foreground">
+              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
               Step-by-step implementation guide
             </div>
-            <div className="flex items-center text-sm text-gray-600">
-              <DynamicIcon name="Check" className="h-4 w-4 text-green-600 mr-2" />
+            <div className="flex items-center text-sm text-muted-foreground">
+              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
               ROI calculation templates
             </div>
-            <div className="flex items-center text-sm text-gray-600">
-              <DynamicIcon name="Check" className="h-4 w-4 text-green-600 mr-2" />
+            <div className="flex items-center text-sm text-muted-foreground">
+              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
               Department-specific AI tools recommendations
             </div>
-            <div className="flex items-center text-sm text-gray-600">
-              <DynamicIcon name="Check" className="h-4 w-4 text-green-600 mr-2" />
+            <div className="flex items-center text-sm text-muted-foreground">
+              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
               Weekly AI industry insights
             </div>
           </div>
@@ -139,7 +139,7 @@ export function NewsletterSignup({
         <div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
                 Full Name
               </label>
               <input
@@ -148,13 +148,13 @@ export function NewsletterSignup({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
                 placeholder="Your full name"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
                 Email Address
               </label>
               <input
@@ -163,13 +163,13 @@ export function NewsletterSignup({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
                 placeholder="your.email@company.com"
               />
             </div>
 
             <div>
-              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="company" className="block text-sm font-medium text-foreground mb-1">
                 Company (Optional)
               </label>
               <input
@@ -177,13 +177,13 @@ export function NewsletterSignup({
                 id="company"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
                 placeholder="Your company name"
               />
             </div>
 
             {error && (
-              <div className="text-red-600 text-sm flex items-center">
+              <div className="text-destructive text-sm flex items-center">
                 <DynamicIcon name="AlertCircle" className="h-4 w-4 mr-2" />
                 {error}
               </div>
@@ -194,11 +194,11 @@ export function NewsletterSignup({
               disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+              className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
             >
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2"></div>
                   Subscribing...
                 </>
               ) : (
@@ -209,7 +209,7 @@ export function NewsletterSignup({
               )}
             </motion.button>
 
-            <p className="text-xs text-gray-500 text-center">
+            <p className="text-xs text-muted-foreground text-center">
               No spam, ever. Unsubscribe with one click. We respect your privacy.
             </p>
           </form>
@@ -217,18 +217,18 @@ export function NewsletterSignup({
       </div>
 
       {/* Trust Indicators */}
-      <div className="mt-6 pt-4 border-t border-blue-200">
-        <div className="flex items-center justify-center space-x-6 text-xs text-gray-500">
+      <div className="mt-6 pt-4 border-t border-border">
+        <div className="flex items-center justify-center space-x-6 text-xs text-muted-foreground">
           <div className="flex items-center">
-            <DynamicIcon name="Users" className="h-4 w-4 mr-1" />
+            <DynamicIcon name="Users" className="h-4 w-4 mr-1 text-primary" />
             2,500+ subscribers
           </div>
           <div className="flex items-center">
-            <DynamicIcon name="Shield" className="h-4 w-4 mr-1" />
+            <DynamicIcon name="Shield" className="h-4 w-4 mr-1 text-primary" />
             GDPR compliant
           </div>
           <div className="flex items-center">
-            <DynamicIcon name="Star" className="h-4 w-4 mr-1 text-yellow-400" />
+            <DynamicIcon name="Star" className="h-4 w-4 mr-1 text-primary" />
             4.9/5 rating
           </div>
         </div>
