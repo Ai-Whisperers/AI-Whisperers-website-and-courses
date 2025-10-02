@@ -220,16 +220,16 @@ export function NewsletterSignup({
       <div className="mt-6 pt-4 border-t border-border">
         <div className="flex items-center justify-center space-x-6 text-xs text-muted-foreground">
           <div className="flex items-center">
-            <DynamicIcon name="Users" className="h-4 w-4 mr-1 text-foreground" />
-            2,500+ subscribers
-          </div>
-          <div className="flex items-center">
             <DynamicIcon name="Shield" className="h-4 w-4 mr-1 text-foreground" />
-            GDPR compliant
+            Privacy Protected
           </div>
           <div className="flex items-center">
-            <DynamicIcon name="Star" className="h-4 w-4 mr-1 text-foreground" />
-            4.9/5 rating
+            <DynamicIcon name="Zap" className="h-4 w-4 mr-1 text-foreground" />
+            Instant Updates
+          </div>
+          <div className="flex items-center">
+            <DynamicIcon name="Globe" className="h-4 w-4 mr-1 text-foreground" />
+            Global Insights
           </div>
         </div>
       </div>

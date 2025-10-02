@@ -1,0 +1,413 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model allocations {
+  id         Int       @id @default(autoincrement())
+  date       DateTime  @db.Date
+  asset_id   Int
+  weight     Float
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  assets     assets    @relation(fields: [asset_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([asset_id, date], map: "idx_allocation_asset_date")
+  @@index([date], map: "idx_allocation_date")
+  @@index([asset_id], map: "ix_allocations_asset_id")
+  @@index([date], map: "ix_allocations_date")
+}
+
+model asset_news {
+  asset_id        Int
+  article_id      String        @db.Uuid
+  relevance_score Float?
+  sentiment_score Float?
+  created_at      DateTime?     @db.Timestamptz(6)
+  news_articles   news_articles @relation(fields: [article_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  assets          assets        @relation(fields: [asset_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([asset_id, article_id])
+}
+
+model assets {
+  id                        Int               @id @default(autoincrement())
+  symbol                    String            @unique(map: "ix_assets_symbol") @db.VarChar
+  name                      String?           @db.VarChar
+  sector                    String?           @db.VarChar(50)
+  industry                  String?           @db.VarChar(100)
+  market_cap_category       String?           @db.VarChar(20)
+  tags                      Json?             @db.Json
+  esg_score                 Float?
+  environmental_score       Float?
+  social_score              Float?
+  governance_score          Float?
+  supply_chain_dependencies Json?             @db.Json
+  patent_portfolio_size     Int?
+  pe_ratio                  Float?
+  dividend_yield            Float?
+  market_cap                BigInt?
+  volatility_30d            Float?
+  volatility_90d            Float?
+  allocations               allocations[]
+  asset_news                asset_news[]
+  market_cap_data           market_cap_data[]
+  prices                    prices[]
+
+  @@index([esg_score], map: "ix_assets_esg_score")
+  @@index([industry], map: "ix_assets_industry")
+  @@index([market_cap_category], map: "ix_assets_market_cap_category")
+  @@index([sector], map: "ix_assets_sector")
+}
+
+model entity_sentiment_history {
+  id              String    @id @db.Uuid
+  symbol          String    @db.VarChar(20)
+  date            DateTime  @db.Timestamptz(6)
+  sentiment_score Float
+  article_count   Int?
+  positive_count  Int?
+  negative_count  Int?
+  neutral_count   Int?
+  total_mentions  Int?
+  unique_sources  Int?
+  created_at      DateTime? @db.Timestamptz(6)
+  updated_at      DateTime? @db.Timestamptz(6)
+
+  @@unique([symbol, date], map: "uq_entity_sentiment_history_symbol_date")
+  @@index([symbol, date], map: "ix_entity_sentiment_history_symbol_date")
+}
+
+model extreme_events {
+  id                 Int       @id @default(autoincrement())
+  ticker             String    @db.VarChar
+  event_type         String?   @db.VarChar
+  start_date         DateTime  @db.Timestamptz(6)
+  end_date           DateTime? @db.Timestamptz(6)
+  start_price        Float
+  peak_price         Float?
+  total_return       Float?
+  precursor_patterns Json?     @db.Json
+  catalyst           String?   @db.VarChar
+  reddit_mentions    Int?
+  twitter_mentions   Int?
+  tiktok_videos      Int?
+  youtube_videos     Int?
+  mention_velocity   Float?
+  sentiment_velocity Float?
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([id], map: "ix_extreme_events_id")
+  @@index([ticker], map: "ix_extreme_events_ticker")
+}
+
+model index_values {
+  id         Int       @id @default(autoincrement())
+  date       DateTime  @unique(map: "ix_index_values_date") @db.Date
+  value      Float
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+
+  @@index([date], map: "idx_index_value_date")
+}
+
+model information_asymmetry {
+  id                      Int       @id @default(autoincrement())
+  ticker                  String    @db.VarChar
+  retail_sentiment        Float?
+  institutional_sentiment Float?
+  divergence_score        Float?
+  early_source            String?   @db.VarChar
+  mainstream_lag          Int?
+  information_path        Json?     @db.Json
+  propagation_speed       Float?
+  entry_window            String?   @db.VarChar
+  expected_convergence    String?   @db.VarChar
+  detected_at             DateTime? @default(now()) @db.Timestamptz(6)
+  resolved_at             DateTime? @db.Timestamptz(6)
+
+  @@index([id], map: "ix_information_asymmetry_id")
+  @@index([ticker], map: "ix_information_asymmetry_ticker")
+}
+
+model market_cap_data {
+  id                 Int       @id @default(autoincrement())
+  asset_id           Int?
+  date               DateTime? @db.Timestamp(6)
+  market_cap         Float?
+  shares_outstanding Float?
+  free_float         Float?
+  average_volume     Float?
+  created_at         DateTime? @default(now()) @db.Timestamp(6)
+  assets             assets?   @relation(fields: [asset_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([asset_id], map: "ix_market_cap_data_asset_id")
+  @@index([date], map: "ix_market_cap_data_date")
+  @@index([id], map: "ix_market_cap_data_id")
+}
+
+model meme_velocity {
+  id                   Int       @id @default(autoincrement())
+  ticker               String    @db.VarChar
+  timestamp            DateTime  @db.Timestamptz(6)
+  reddit_score         Float?
+  twitter_score        Float?
+  tiktok_score         Float?
+  discord_score        Float?
+  youtube_score        Float?
+  total_score          Float
+  velocity             Float?
+  acceleration         Float?
+  average_sentiment    Float?
+  sentiment_divergence Float?
+  top_influencers      Json?     @db.Json
+  influencer_reach     Int?
+  created_at           DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([id], map: "ix_meme_velocity_id")
+  @@index([ticker], map: "ix_meme_velocity_ticker")
+  @@index([timestamp], map: "ix_meme_velocity_timestamp")
+}
+
+model news_articles {
+  id             String          @id @db.Uuid
+  external_id    String?         @unique(map: "uq_news_articles_external_id") @db.VarChar(255)
+  title          String          @db.VarChar(500)
+  description    String?
+  content        String?
+  url            String          @unique(map: "uq_news_articles_url") @db.VarChar(500)
+  image_url      String?         @db.VarChar(500)
+  source_id      String?         @db.Uuid
+  source_name    String?         @db.VarChar(100)
+  language       String?         @db.VarChar(2)
+  country        String?         @db.VarChar(2)
+  published_at   DateTime        @db.Timestamptz(6)
+  categories     Json?           @db.Json
+  keywords       Json?           @db.Json
+  created_at     DateTime?       @db.Timestamptz(6)
+  updated_at     DateTime?       @db.Timestamptz(6)
+  asset_news     asset_news[]
+  news_sources   news_sources?   @relation(fields: [source_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  news_entities  news_entities[]
+  news_sentiment news_sentiment?
+
+  @@index([external_id], map: "ix_news_articles_external_id")
+  @@index([published_at], map: "ix_news_articles_published_at")
+  @@index([source_id], map: "ix_news_articles_source_id")
+  @@index([url], map: "ix_news_articles_url")
+}
+
+model news_entities {
+  id              String        @id @db.Uuid
+  article_id      String        @db.Uuid
+  symbol          String?       @db.VarChar(20)
+  name            String        @db.VarChar(255)
+  type            String?       @db.VarChar(50)
+  exchange        String?       @db.VarChar(20)
+  country         String?       @db.VarChar(2)
+  industry        String?       @db.VarChar(100)
+  match_score     Float?
+  sentiment_score Float?
+  mention_count   Int?
+  created_at      DateTime?     @db.Timestamptz(6)
+  news_articles   news_articles @relation(fields: [article_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([article_id], map: "ix_news_entities_article_id")
+  @@index([name], map: "ix_news_entities_name")
+  @@index([symbol], map: "ix_news_entities_symbol")
+  @@index([type], map: "ix_news_entities_type")
+}
+
+model news_sentiment {
+  id              String        @id @db.Uuid
+  article_id      String        @unique @db.Uuid
+  sentiment_score Float
+  sentiment_label String?       @db.VarChar(20)
+  confidence      Float?
+  positive_score  Float?
+  negative_score  Float?
+  neutral_score   Float?
+  provider        String?       @db.VarChar(50)
+  analyzed_at     DateTime?     @db.Timestamptz(6)
+  created_at      DateTime?     @db.Timestamptz(6)
+  updated_at      DateTime?     @db.Timestamptz(6)
+  news_articles   news_articles @relation(fields: [article_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([article_id], map: "ix_news_sentiment_article_id")
+  @@index([sentiment_label], map: "ix_news_sentiment_label")
+  @@index([sentiment_score], map: "ix_news_sentiment_score")
+}
+
+model news_sources {
+  id                String          @id @db.Uuid
+  name              String          @unique @db.VarChar(100)
+  domain            String?         @db.VarChar(255)
+  country           String?         @db.VarChar(2)
+  language          String?         @db.VarChar(2)
+  credibility_score Float?
+  is_active         Boolean?
+  created_at        DateTime?       @db.Timestamptz(6)
+  updated_at        DateTime?       @db.Timestamptz(6)
+  news_articles     news_articles[]
+
+  @@index([domain], map: "ix_news_sources_domain")
+  @@index([name], map: "ix_news_sources_name")
+}
+
+model pattern_detections {
+  id                Int       @id @default(autoincrement())
+  pattern_name      String?   @db.VarChar
+  ticker            String?   @db.VarChar
+  confidence        Float?
+  indicators_met    Json?     @db.Json
+  strength          Float?
+  market_context    Json?     @db.Json
+  cross_validation  Json?     @db.Json
+  signal_generated  Boolean?
+  signal_id         Int?
+  outcome_return    Float?
+  outcome_timeframe String?   @db.VarChar
+  detected_at       DateTime? @default(now()) @db.Timestamptz(6)
+  signals           signals?  @relation(fields: [signal_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([detected_at], map: "ix_pattern_detections_detected_at")
+  @@index([id], map: "ix_pattern_detections_id")
+  @@index([pattern_name], map: "ix_pattern_detections_pattern_name")
+  @@index([ticker], map: "ix_pattern_detections_ticker")
+}
+
+model portfolios {
+  id              Int       @id @default(autoincrement())
+  user_id         Int
+  name            String    @db.VarChar
+  description     String?   @db.VarChar
+  total_value     Float?
+  returns         Float?
+  strategy_config Json?     @db.Json
+  created_at      DateTime? @db.Timestamp(6)
+  updated_at      DateTime? @db.Timestamp(6)
+  users           users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([id], map: "ix_portfolios_id")
+}
+
+model prices {
+  id         Int       @id @default(autoincrement())
+  asset_id   Int
+  date       DateTime  @db.Date
+  close      Float
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updated_at DateTime? @default(now()) @db.Timestamp(6)
+  assets     assets    @relation(fields: [asset_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([asset_id, date], map: "_asset_date_uc")
+  @@index([asset_id, date], map: "idx_price_asset_date")
+  @@index([asset_id], map: "idx_price_asset_id")
+  @@index([date], map: "idx_price_date")
+  @@index([asset_id], map: "ix_prices_asset_id")
+  @@index([date], map: "ix_prices_date")
+}
+
+model risk_metrics {
+  id                   Int       @id @default(autoincrement())
+  date                 DateTime? @db.Date
+  total_return         Float?
+  annualized_return    Float?
+  daily_return         Float?
+  volatility           Float?
+  sharpe_ratio         Float?
+  sortino_ratio        Float?
+  max_drawdown         Float?
+  current_drawdown     Float?
+  ai_risk_score        Float?
+  ai_risk_adjusted_roi Float?
+  ai_market_regime     String?   @db.VarChar
+  var_95               Float?
+  var_99               Float?
+  beta_sp500           Float?
+  correlation_sp500    Float?
+  tracking_error       Float?
+  information_ratio    Float?
+  created_at           DateTime? @default(now()) @db.Timestamp(6)
+
+  @@index([date], map: "ix_risk_metrics_date")
+  @@index([id], map: "ix_risk_metrics_id")
+}
+
+model signals {
+  id                   Int                  @id @default(autoincrement())
+  ticker               String               @db.VarChar
+  signal_type          String               @db.VarChar
+  pattern_type         String?              @db.VarChar
+  confidence           Float
+  expected_return      Float
+  timeframe            String               @db.VarChar
+  sources              Json                 @db.Json
+  pattern_stack        Json                 @db.Json
+  detection_metadata   Json?                @db.Json
+  created_at           DateTime?            @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime?            @db.Timestamptz(6)
+  executed             Boolean?
+  execution_price      Float?
+  execution_time       DateTime?            @db.Timestamptz(6)
+  result               Float?
+  exit_price           Float?
+  exit_time            DateTime?            @db.Timestamptz(6)
+  action               String               @db.VarChar
+  stop_loss            Float?
+  take_profit          Float?
+  allocation_percent   Float?
+  volume_spike         Float?
+  momentum_score       Float?
+  sentiment_divergence Float?
+  meme_velocity        Float?
+  user_id              Int?
+  pattern_detections   pattern_detections[]
+  users                users?               @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([created_at], map: "ix_signals_created_at")
+  @@index([id], map: "ix_signals_id")
+  @@index([ticker], map: "ix_signals_ticker")
+}
+
+model strategy_configs {
+  id                    Int       @id @default(autoincrement())
+  momentum_weight       Float?
+  market_cap_weight     Float?
+  risk_parity_weight    Float?
+  daily_drop_threshold  Float?
+  max_daily_return      Float?
+  min_daily_return      Float?
+  min_price_threshold   Float?
+  rebalance_frequency   String?   @db.VarChar
+  last_rebalance        DateTime? @db.Timestamp(6)
+  force_rebalance       Boolean?
+  max_forward_fill_days Int?
+  outlier_std_threshold Float?
+  ai_adjusted           Boolean?
+  ai_adjustment_reason  String?   @db.VarChar
+  ai_confidence_score   Float?
+  created_at            DateTime? @default(now()) @db.Timestamp(6)
+  updated_at            DateTime? @db.Timestamp(6)
+  adjustment_history    Json?     @db.Json
+
+  @@index([id], map: "ix_strategy_configs_id")
+}
+
+model users {
+  id             Int          @id @default(autoincrement())
+  email          String       @unique(map: "ix_users_email") @db.VarChar
+  password_hash  String       @db.VarChar
+  is_google_user Boolean?
+  is_active      Boolean?
+  created_at     DateTime?    @db.Timestamp(6)
+  portfolios     portfolios[]
+  signals        signals[]
+
+  @@index([id], map: "ix_users_id")
+}

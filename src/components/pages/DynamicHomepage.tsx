@@ -385,10 +385,10 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
           <div className="text-sm text-muted-foreground space-y-1">
             {Array.isArray(contact.info) ? contact.info.map((info, index) => (
               <p key={index}>
-                {info.type === 'email' && '📧'} 
-                {info.type === 'whatsapp' && '📱'} 
-                {info.type === 'address' && '📍'} 
-                {info.type === 'web' && '🌐'} 
+                {info.type === 'email' && '✉︎'} 
+                {info.type === 'whatsapp' && '📱︎'} 
+                {info.type === 'address' && '📍︎'} 
+                {info.type === 'web' && '🌐︎'} 
                 {' '}{info.label}: {info.value}
               </p>
             )) : null}
@@ -402,10 +402,10 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <DynamicIcon name="Brain" className="h-6 w-6 text-primary/80" />
-              <span className="text-lg font-bold">{footer.brand?.text || 'AI Paraguay'}</span>
+              <span className="text-lg font-bold">{footer.brand?.text || 'AI Whisperers Paraguay'}</span>
             </div>
             <div className="text-sm text-background/70">
-              {footer.copyright || '© 2025 AI Paraguay'}
+              {footer.copyright || '© 2025 AI Whisperers Paraguay'}
             </div>
           </div>
         </div>
