@@ -108,18 +108,18 @@ export const contactContent: PageContent = {
     ]
   },
   "officeInfo": {
-    "title": "Visit Our Office",
-    "description": "Stop by our headquarters for in-person consultations",
+    "title": "Our Location",
+    "description": "Connect with us for AI consulting and training sessions",
     "address": {
-      "street": "Asunción Tech Hub",
-      "neighborhood": "Tech Valley District",
+      "street": "Av. General Santos",
+      "neighborhood": "Innovation District",
       "city": "Asunción",
       "country": "Paraguay",
       "zipCode": "1209"
     },
     "workingHours": {
-      "weekdays": "Monday - Friday: 9:00 AM - 6:00 PM PST",
-      "saturday": "Saturday: 10:00 AM - 2:00 PM PST",
+      "weekdays": "Monday - Friday: 9:00 AM - 5:00 PM (GMT-4)",
+      "saturday": "Saturday: By appointment only",
       "sunday": "Sunday: Closed"
     },
     "map": {

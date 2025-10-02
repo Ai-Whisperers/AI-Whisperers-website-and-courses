@@ -106,7 +106,7 @@ export const termsContent: PageContent = {
     "methods": {
       "email": "ai.whisperer.wvdp@gmail.com",
       "phone": "+595 981 123456",
-      "address": "Asunción Tech Hub, Asunción, 1209",
+      "address": "Av. General Santos, Asunción, 1209",
       "business_hours": "Monday-Friday: 9 AM - 6 PM PST"
     }
   },

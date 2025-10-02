@@ -75,17 +75,17 @@ contactOptions:
         href: "/schedule"
 
 officeInfo:
-  title: "Visit Our Office"
-  description: "Stop by our headquarters for in-person consultations"
+  title: "Our Location"
+  description: "Connect with us for AI consulting and training sessions"
   address:
     street: "${NEXT_PUBLIC_OFFICE_STREET}"
-    neighborhood: "Tech Valley District"
+    neighborhood: "Innovation District"
     city: "${NEXT_PUBLIC_OFFICE_CITY}"
     country: "${NEXT_PUBLIC_OFFICE_COUNTRY}"
     zipCode: "${NEXT_PUBLIC_OFFICE_ZIP}"
   workingHours:
-    weekdays: "Monday - Friday: 9:00 AM - 6:00 PM PST"
-    saturday: "Saturday: 10:00 AM - 2:00 PM PST"
+    weekdays: "Monday - Friday: 9:00 AM - 5:00 PM (GMT-4)"
+    saturday: "Saturday: By appointment only"
     sunday: "Sunday: Closed"
   map:
     embedUrl: "https://maps.google.com/placeholder"
