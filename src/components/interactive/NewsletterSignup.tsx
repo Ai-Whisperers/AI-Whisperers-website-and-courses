@@ -94,14 +94,14 @@ export function NewsletterSignup({
   }
 
   return (
-    <div className="bg-card rounded-xl p-6 border border-border shadow-sm">
+    <div className="glass-card">
       <div className="grid lg:grid-cols-2 gap-6 items-center">
         {/* Lead Magnet Preview */}
         <div>
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
-              <div className="w-16 h-20 bg-primary/5 rounded-lg shadow-sm flex items-center justify-center border border-border">
-                <DynamicIcon name="FileText" className="h-8 w-8 text-primary" />
+              <div className="w-16 h-20 glass rounded-lg flex items-center justify-center">
+                <DynamicIcon name="FileText" className="h-8 w-8 text-foreground" />
               </div>
             </div>
             <div>
@@ -117,19 +117,19 @@ export function NewsletterSignup({
           {/* Features */}
           <div className="mt-4 space-y-2">
             <div className="flex items-center text-sm text-muted-foreground">
-              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
+              <DynamicIcon name="Check" className="h-4 w-4 text-foreground mr-2" />
               Step-by-step implementation guide
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
-              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
+              <DynamicIcon name="Check" className="h-4 w-4 text-foreground mr-2" />
               ROI calculation templates
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
-              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
+              <DynamicIcon name="Check" className="h-4 w-4 text-foreground mr-2" />
               Department-specific AI tools recommendations
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
-              <DynamicIcon name="Check" className="h-4 w-4 text-primary mr-2" />
+              <DynamicIcon name="Check" className="h-4 w-4 text-foreground mr-2" />
               Weekly AI industry insights
             </div>
           </div>
@@ -148,7 +148,7 @@ export function NewsletterSignup({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
+                className="glass-input w-full"
                 placeholder="Your full name"
               />
             </div>
@@ -163,7 +163,7 @@ export function NewsletterSignup({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
+                className="glass-input w-full"
                 placeholder="your.email@company.com"
               />
             </div>
@@ -177,7 +177,7 @@ export function NewsletterSignup({
                 id="company"
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-ring transition-colors"
+                className="glass-input w-full"
                 placeholder="Your company name"
               />
             </div>
@@ -194,11 +194,11 @@ export function NewsletterSignup({
               disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+              className="glass-button w-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-foreground mr-2"></div>
                   Subscribing...
                 </>
               ) : (
@@ -220,15 +220,15 @@ export function NewsletterSignup({
       <div className="mt-6 pt-4 border-t border-border">
         <div className="flex items-center justify-center space-x-6 text-xs text-muted-foreground">
           <div className="flex items-center">
-            <DynamicIcon name="Users" className="h-4 w-4 mr-1 text-primary" />
+            <DynamicIcon name="Users" className="h-4 w-4 mr-1 text-foreground" />
             2,500+ subscribers
           </div>
           <div className="flex items-center">
-            <DynamicIcon name="Shield" className="h-4 w-4 mr-1 text-primary" />
+            <DynamicIcon name="Shield" className="h-4 w-4 mr-1 text-foreground" />
             GDPR compliant
           </div>
           <div className="flex items-center">
-            <DynamicIcon name="Star" className="h-4 w-4 mr-1 text-primary" />
+            <DynamicIcon name="Star" className="h-4 w-4 mr-1 text-foreground" />
             4.9/5 rating
           </div>
         </div>

@@ -92,7 +92,7 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <AnimatedBackground />
@@ -140,10 +140,10 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 + (index * 0.2) }}
-                  className="bg-card p-6 rounded-lg shadow-sm border border-border"
+                  className="glass-card"
                 >
-                  <DynamicIcon name={benefit.icon} className="h-8 w-8 text-primary mb-3 mx-auto" />
-                  <h3 className="font-semibold text-card-foreground mb-2">{benefit.title}</h3>
+                  <DynamicIcon name={benefit.icon} className="h-8 w-8 text-foreground mb-3 mx-auto" />
+                  <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
                   <p className="text-muted-foreground text-sm">{benefit.description}</p>
                 </motion.div>
               ))}
