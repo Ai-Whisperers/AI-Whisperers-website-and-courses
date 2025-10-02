@@ -9,6 +9,7 @@ import { LanguageProvider } from '@/lib/i18n/context'
 import { ThemeProvider } from '@/lib/themes/themeContext'
 import { Navigation } from '@/components/layout/navigation'
 import { Footer } from '@/components/layout/footer'
+import { GlassCursor } from '@/components/ui/GlassCursor'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -63,6 +64,7 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <AuthProvider>
+              <GlassCursor />
               <div className="flex flex-col min-h-screen">
                 <Navigation />
                 <main className="flex-1">

@@ -165,3 +165,52 @@ html {
     transform: scale(1);
   }
 }
+
+/* Glassmorphism Cursor Styles */
+@layer components {
+  .glass-cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease-out;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-cursor-ring {
+    @apply glass;
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.2s ease-out;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Hide default cursor on desktop */
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+
+    a, button, input, textarea, select, [role="button"] {
+      cursor: none;
+    }
+  }
+
+  /* Keep default cursor on touch devices */
+  @media (pointer: coarse) {
+    .glass-cursor-dot,
+    .glass-cursor-ring {
+      display: none;
+    }
+  }
+}
