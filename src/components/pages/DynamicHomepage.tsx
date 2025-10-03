@@ -6,7 +6,6 @@ import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { AnimatedBackground, FloatingElements, TypewriterText } from "@/components/ui/AnimatedBackground"
 import { NewsletterSignup } from "@/components/interactive/NewsletterSignup"
-import { FloatingThemeSelector } from "@/components/ui/ThemeSelector"
 import { useLanguage } from '@/lib/i18n/context'
 // Removed client-side content loading - now uses server-side compiled content
 import type { PageContent } from "@/types/content"
@@ -410,9 +409,6 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
           </div>
         </div>
       </footer>
-
-      {/* Floating Theme Selector for Testing */}
-      <FloatingThemeSelector />
     </div>
   )
 }
