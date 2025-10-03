@@ -1,4 +1,4 @@
-export type Language = 'en' | 'es' | 'pt' | 'fr'
+export type Language = 'en' | 'es'
 
 export interface LanguageConfig {
   code: Language
@@ -16,21 +16,9 @@ export const LANGUAGES: Record<Language, LanguageConfig> = {
   },
   es: {
     code: 'es',
-    name: 'Spanish', 
+    name: 'Spanish',
     nativeName: 'Español',
     flag: '🇪🇸'
-  },
-  pt: {
-    code: 'pt',
-    name: 'Portuguese',
-    nativeName: 'Português',
-    flag: '🇧🇷'
-  },
-  fr: {
-    code: 'fr',
-    name: 'French',
-    nativeName: 'Français',
-    flag: '🇫🇷'
   }
 }
 

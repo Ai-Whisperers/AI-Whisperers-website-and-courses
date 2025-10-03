@@ -159,7 +159,7 @@ export const homepageContent: PageContent = {
       {
         "type": "email",
         "label": "Email",
-        "value": "contact@aiwhisperers.com"
+        "value": "ai.whisperer.wvdp@gmail.com"
       },
       {
         "type": "web",
