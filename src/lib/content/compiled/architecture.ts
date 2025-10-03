@@ -65,7 +65,7 @@ export const architectureContent: PageContent = {
     "benefits": []
   },
   "methodology": {
-    "title": "Metodología EC4RO-HGN",
+    "title": "EC4RO-HGN Methodology",
     "description": "Extended C4 with Root Orchestration and Hierarchical Graph Navigation",
     "levels": [
       {

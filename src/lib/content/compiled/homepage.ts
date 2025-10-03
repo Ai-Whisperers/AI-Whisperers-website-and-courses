@@ -51,8 +51,8 @@ export const homepageContent: PageContent = {
   "hero": {
     "headline": "Master AI with World-Class Education",
     "subheadline": "Transform your career with comprehensive AI courses from beginner to expert",
-    "description": "Learn artificial intelligence through hands-on projects, real-world applications, and expert instruction. Start your AI journey today with self-paced learning.",
-    "location": "🌍 Available Worldwide - Learn at Your Own Pace",
+    "description": "Learn artificial intelligence through hands-on projects, real-world applications, and instructors. Start your AI journey today with self-paced learning.",
+    "location": " Available Worldwide - Learn at Your Own Pace",
     "primaryCta": {
       "text": "Start Learning Today",
       "href": "/courses",
@@ -83,7 +83,7 @@ export const homepageContent: PageContent = {
   },
   "features": [
     {
-      "title": "Expert-Led Courses",
+      "title": "Expert-led Courses",
       "description": "Learn from industry professionals with real-world AI experience",
       "icon": "graduation-cap"
     },

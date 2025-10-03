@@ -73,45 +73,45 @@ export const aboutContent: PageContent = {
     "title": "Meet Our Team",
     "members": [
       {
-        "name": "Dr. Sarah Chen",
+        "name": "Jonathan Verdun",
         "role": "Lead AI Instructor",
-        "bio": "10+ years of experience in AI research and education, specializing in making complex concepts accessible to all learners.",
+        "bio": "Specializing in making complex concepts accessible to all learners.",
         "expertise": [
-          "Machine Learning",
-          "Neural Networks",
-          "AI Ethics"
+          "Software Development",
+          "Educational Technology",
+          "Machine Learning"
         ],
         "image": {
           "src": "/team/placeholder.jpg",
-          "alt": "Dr. Sarah Chen"
+          "alt": "Jonathan Verdun"
         }
       },
       {
-        "name": "Marcus Johnson",
-        "role": "Head of Curriculum",
-        "bio": "Former Google AI engineer with a passion for creating engaging, practical learning experiences.",
-        "expertise": [
-          "Curriculum Design",
-          "AI Engineering",
-          "Educational Technology"
-        ],
-        "image": {
-          "src": "/team/placeholder.jpg",
-          "alt": "Marcus Johnson"
-        }
-      },
-      {
-        "name": "Dr. Elena Rodriguez",
+        "name": "Kyrian Weiss Van Der Pol",
         "role": "Business Applications Expert",
+        "bio": "Real world expertise with a passion for creating engaging, practical learning experiences.",
+        "expertise": [
+          "Software Development",
+          "AI Engineering",
+          "Business Strategy"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Kyrian Weiss van der Pol"
+        }
+      },
+      {
+        "name": "Ivan Weiss Van Der Pol",
+        "role": "Applications Expert",
         "bio": "Helping businesses transform through AI adoption with strategic consulting and hands-on training.",
         "expertise": [
-          "Business Strategy",
-          "AI Implementation",
-          "Change Management"
+          "Software Engineer",
+          "AI Architect",
+          "Data Scientist"
         ],
         "image": {
           "src": "/team/placeholder.jpg",
-          "alt": "Dr. Elena Rodriguez"
+          "alt": "Ivan Weiss Van Der Pol"
         }
       }
     ]

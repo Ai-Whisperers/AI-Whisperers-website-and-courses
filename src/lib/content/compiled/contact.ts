@@ -208,14 +208,14 @@ export const contactContent: PageContent = {
     ],
     "testimonials": [
       {
-        "quote": "Professional team with deep expertise in AI implementation for business transformation.",
-        "author": "Sarah Johnson",
-        "company": "Tech Startup Founder"
+        "quote": "Placeholder testimonial 1.",
+        "author": "Testimonial 1",
+        "company": "Company 1"
       },
       {
-        "quote": "Clear communication and practical solutions that deliver real business value.",
-        "author": "Michael Chen",
-        "company": "Software Engineer"
+        "quote": "Placeholder testimonial 2.",
+        "author": "Placeholder testimonial 2",
+        "company": "Company 2"
       }
     ]
   },
