@@ -3,7 +3,7 @@
 
 'use client'
 
-import { useLanguage } from './context'
+import { useLanguage } from '@/contexts/i18n'
 import { translations } from './config'
 import type { Language } from './types'
 

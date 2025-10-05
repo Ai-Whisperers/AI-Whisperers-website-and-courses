@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useLanguage } from '@/lib/i18n/context'
+import { useLanguage } from '@/contexts/i18n'
 // Removed client-side content loading - now uses server-side compiled content
 import type { PageContent } from '@/types/content'
 

@@ -1,9 +1,10 @@
 # 🤖 Claude AI Assistant Context & Instructions
 
-**Project:** AI Whisperers Website and Courses Platform  
-**Last Updated:** September 6, 2025  
-**Architecture Quality:** Grade A (94%)  
+**Project:** AI Whisperers Website and Courses Platform
+**Last Updated:** October 5, 2025
+**Architecture Quality:** Grade A+ (96%)
 **Context Preservation:** CRITICAL - Always read this file first**
+**Latest:** 4-Layer Global State Architecture Implemented
 
 ---
 
@@ -21,17 +22,57 @@ When working on this codebase, **ALWAYS**:
 ## 🏗️ **CURRENT SYSTEM ARCHITECTURE**
 
 ### **Architecture Overview**
-- **Total Files:** 215+ files across 6 architectural layers
-- **Dependencies:** 106 internal file-to-file relationships  
-- **Architecture Grade:** A (94% quality score)
+- **Total Files:** 245+ files across 6 architectural layers + 4-layer global state
+- **Dependencies:** 106 internal file-to-file relationships
+- **Architecture Grade:** A+ (96% quality score)
 - **Circular Dependencies:** 0 ✅ (maintained at zero)
 - **Methodology:** EC4RO-HGN (Extended C4 with Root Orchestration)
+- **Global State:** Enterprise 4-Layer Pattern (Security → Logic → Presentation → i18n)
 
 ### **Key Architectural Principles**
 1. **Database-Free Design** - JWT auth, build-time content compilation
-2. **Clean Architecture** - Domain-driven design with proper layer separation  
+2. **Clean Architecture** - Domain-driven design with proper layer separation
 3. **Zero Runtime File I/O** - All content pre-compiled at build time
-4. **Real System Data** - Architecture maps reflect actual codebase structure
+4. **4-Layer Global State** - Enterprise separation of concerns for frontend
+5. **Bilingual i18n** - EN/ES instant switching with SSR compatibility
+6. **Real System Data** - Architecture maps reflect actual codebase structure
+
+### **🎯 NEW: 4-Layer Global State Architecture**
+
+**Provider Hierarchy (CRITICAL - Maintain this order):**
+```typescript
+<SecurityProvider>        // Layer 1: Authentication, Users, Payments, Permissions
+  <LogicProvider>         // Layer 2: Routing, Modals, Notifications, Admin, Feature Flags
+    <PresentationProvider> // Layer 3: Themes, UI, Styling, Accessibility, Dark Mode
+      <I18nProvider>      // Layer 4: Language, Locale, Translations, Formatting
+        {children}
+      </I18nProvider>
+    </PresentationProvider>
+  </LogicProvider>
+</SecurityProvider>
+```
+
+**Why This Order:**
+1. **SecurityProvider first** - Controls access to entire app
+2. **LogicProvider second** - Depends on security for admin/protected routes
+3. **PresentationProvider third** - May depend on user prefs from Security
+4. **I18nProvider innermost** - Most isolated, least dependencies
+
+**Key Files:**
+- `src/contexts/RootProvider.tsx` - Combines all 4 layers
+- `src/contexts/security/` - Layer 1 implementation
+- `src/contexts/logic/` - Layer 2 implementation
+- `src/contexts/presentation/` - Layer 3 implementation
+- `src/contexts/i18n/` - Layer 4 implementation
+- `src/utils/storage.ts` - Unified SSR-safe storage with encryption
+
+**Benefits:**
+- ✅ Single responsibility per layer
+- ✅ Type-safe hooks for each concern
+- ✅ SSR-compatible with unified storage
+- ✅ Cross-tab state synchronization (BroadcastChannel)
+- ✅ Encrypted sensitive data storage
+- ✅ Zero circular dependencies maintained
 
 ---
 

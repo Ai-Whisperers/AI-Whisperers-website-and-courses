@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useLanguage } from '@/lib/i18n/context'
+import { useLanguage } from '@/contexts/i18n'
 import { LANGUAGES } from '@/lib/i18n/types'
 import { DynamicIcon } from '@/components/content/DynamicIcon'
 

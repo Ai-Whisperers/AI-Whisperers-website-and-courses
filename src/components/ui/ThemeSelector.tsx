@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTheme } from '@/lib/themes/themeContext';
+import { useTheme } from '@/contexts/presentation';
 import { ChevronDown, Palette } from 'lucide-react';
 
 export function ThemeSelector() {
