@@ -4,7 +4,7 @@
 'use client'
 
 import { useEffect, ReactNode } from 'react'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/contexts/security'
 import { UserRole } from '@/domain/entities/user'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
