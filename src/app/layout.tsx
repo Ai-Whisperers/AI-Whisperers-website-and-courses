@@ -4,9 +4,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { AuthProvider } from '@/components/providers/auth-provider'
-import { LanguageProvider } from '@/lib/i18n/context'
-import { ThemeProvider } from '@/lib/themes/themeContext'
+import { RootProvider } from '@/contexts'
 import { Navigation } from '@/components/layout/navigation'
 import { Footer } from '@/components/layout/footer'
 import { GlassCursor } from '@/components/ui/GlassCursor'
@@ -61,20 +59,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider>
-          <LanguageProvider>
-            <AuthProvider>
-              <GlassCursor />
-              <div className="flex flex-col min-h-screen">
-                <Navigation />
-                <main className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </AuthProvider>
-          </LanguageProvider>
-        </ThemeProvider>
+        <RootProvider>
+          <GlassCursor />
+          <div className="flex flex-col min-h-screen">
+            <Navigation />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </RootProvider>
       </body>
     </html>
   )

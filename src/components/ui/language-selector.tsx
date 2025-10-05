@@ -4,7 +4,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useLanguage } from '@/lib/i18n/context'
+import { useLanguage } from '@/contexts/i18n'
 import { LANGUAGES, Language } from '@/lib/i18n/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'

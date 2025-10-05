@@ -6,7 +6,7 @@ import { systemStats, criticalComponents } from './RealArchitectureData'
 import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { LanguageToggler } from "@/components/ui/LanguageToggler"
-import { useLanguage } from '@/lib/i18n/context'
+import { useLanguage } from '@/contexts/i18n'
 import type { PageContent } from "@/types/content"
 
 interface ArchitecturePageProps {

@@ -10,7 +10,7 @@
  */
 
 import { useMemo } from 'react'
-import { useLanguage } from '@/lib/i18n/context'
+import { useLanguage } from '@/contexts/i18n'
 import type { PageContent } from '@/types/content'
 import type { LocalizedContent } from '@/lib/content/server-compiled'
 
