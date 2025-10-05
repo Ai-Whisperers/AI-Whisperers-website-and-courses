@@ -3,13 +3,27 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { Difficulty } from '@/domain/entities/course'
+import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const published = searchParams.get('published') === 'true'
-    const featured = searchParams.get('featured') === 'true'
-    const difficulty = searchParams.get('difficulty') as Difficulty | null
+
+    // Validate query parameters
+    const validation = parseQueryParams(searchParams, CourseQuerySchema)
+
+    if (!validation.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid query parameters',
+          details: validation.error.format(),
+        },
+        { status: 400 }
+      )
+    }
+
+    const { published, featured, difficulty, limit = 100, offset = 0 } = validation.data
 
     // Mock course data for initial deployment
     const mockCourses = [
@@ -53,23 +67,29 @@ export async function GET(request: NextRequest) {
       }
     ]
 
-    // Filter courses based on query parameters
+    // Filter courses based on validated query parameters
     let filteredCourses = mockCourses
 
-    if (published) {
-      filteredCourses = filteredCourses.filter(course => course.published)
+    if (published !== undefined) {
+      filteredCourses = filteredCourses.filter(course => course.published === published)
     }
-    if (featured) {
-      filteredCourses = filteredCourses.filter(course => course.featured)
+    if (featured !== undefined) {
+      filteredCourses = filteredCourses.filter(course => course.featured === featured)
     }
     if (difficulty) {
       filteredCourses = filteredCourses.filter(course => course.difficulty === difficulty)
     }
 
+    // Apply pagination
+    const paginatedCourses = filteredCourses.slice(offset, offset + limit)
+
     return NextResponse.json({
       success: true,
-      courses: filteredCourses,
-      count: filteredCourses.length
+      courses: paginatedCourses,
+      count: paginatedCourses.length,
+      total: filteredCourses.length,
+      limit,
+      offset,
     })
 
   } catch (error) {

@@ -12,9 +12,9 @@ declare module 'next-auth' {
   interface User {
     id: string
     role?: UserRole
-    emailVerified?: Date
+    emailVerified?: Date | null
   }
-  
+
   interface Session {
     user: {
       id: string
@@ -22,7 +22,7 @@ declare module 'next-auth' {
       email?: string | null
       image?: string | null
       role?: UserRole
-      emailVerified?: Date
+      emailVerified?: Date | null
     }
   }
 }

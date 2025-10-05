@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPageContent } from '@/lib/content/server'
 import type { Language } from '@/lib/i18n/types'
 import { DEFAULT_LANGUAGE } from '@/lib/i18n/types'
+import { ContentPageSchema } from '@/lib/api-schemas'
 
 export async function GET(
   request: NextRequest,
@@ -9,18 +10,32 @@ export async function GET(
 ) {
   try {
     const resolvedParams = await params
-    const { searchParams } = new URL(request.url)
-    const language = (searchParams.get('lang') as Language) || DEFAULT_LANGUAGE
-    
-    // Validate language parameter
-    if (!['es', 'gn', 'en'].includes(language)) {
+
+    // Validate page name
+    const pageValidation = ContentPageSchema.safeParse({ pageName: resolvedParams.pageName })
+
+    if (!pageValidation.success) {
       return NextResponse.json(
-        { error: 'Invalid language parameter' },
+        {
+          error: 'Invalid page name',
+          details: pageValidation.error.format(),
+        },
         { status: 400 }
       )
     }
 
-    const content = await getPageContent(resolvedParams.pageName, language)
+    const { searchParams } = new URL(request.url)
+    const language = (searchParams.get('lang') as Language) || DEFAULT_LANGUAGE
+
+    // Validate language parameter
+    if (!['es', 'en'].includes(language)) {
+      return NextResponse.json(
+        { error: 'Invalid language parameter. Supported languages: en, es' },
+        { status: 400 }
+      )
+    }
+
+    const content = await getPageContent(pageValidation.data.pageName, language)
     
     return NextResponse.json(content, {
       headers: {
