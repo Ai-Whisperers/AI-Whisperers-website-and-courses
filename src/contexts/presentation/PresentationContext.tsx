@@ -22,8 +22,8 @@ export function usePresentationContext(): PresentationContextState {
 
 // Convenience hooks
 export function useTheme() {
-  const { currentTheme, themeMode, isDarkMode, setTheme, setThemeMode, toggleDarkMode } = usePresentationContext()
-  return { currentTheme, themeMode, isDarkMode, setTheme, setThemeMode, toggleDarkMode }
+  const { currentTheme, themeMode, isDarkMode, availableThemes, setTheme, setThemeMode, toggleDarkMode } = usePresentationContext()
+  return { currentTheme, themeMode, isDarkMode, availableThemes, setTheme, setThemeMode, toggleDarkMode }
 }
 
 export function useUIPreferences() {

@@ -23,14 +23,19 @@ async function getCourseBySlug(slug: string) {
       description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
       slug: 'ai-foundations',
       price: { amount: 29900, formatted: '$299.00' },
-      duration: { formatted: '12 hours' },
+      duration: { formatted: '12 hours', minutes: 720 },
       difficulty: 'BEGINNER',
       published: true,
+      featured: false,
       learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
-      prerequisites: ['Basic computer literacy']
+      prerequisites: ['Basic computer literacy'],
+      // Domain entity methods for UI compatibility
+      canEnroll: () => true,
+      getDifficultyLevel: () => 'Beginner',
+      isFree: () => false
     }
   }
-  
+
   return mockCourses[slug] || null
 }
 
