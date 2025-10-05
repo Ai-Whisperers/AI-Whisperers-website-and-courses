@@ -1,37 +1,126 @@
-// Internationalization Configuration
-// Complete i18n system for the educational platform
+/**
+ * Internationalization (i18n) Configuration
+ * Complete i18n system for the educational platform
+ *
+ * Now powered by environment variables for deployment flexibility
+ * @module i18n/config
+ */
 
-import { Language, LanguageConfig } from './types'
+import { Language, LANGUAGES } from './types'
 
-export const SUPPORTED_LANGUAGES: Record<Language, LanguageConfig> = {
-  en: {
-    code: 'en',
-    name: 'English',
-    nativeName: 'English',
-    flag: '🇺🇸'
+/**
+ * Main i18n configuration object
+ * All values loaded from environment variables with sensible defaults
+ */
+export const i18nConfig = {
+  defaultLanguage: (process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE as Language) || 'en',
+  fallbackLanguage: (process.env.NEXT_PUBLIC_FALLBACK_LANGUAGE as Language) || 'en',
+
+  supportedLanguages: (
+    process.env.NEXT_PUBLIC_SUPPORTED_LANGUAGES?.split(',').map(l => l.trim()) as Language[]
+  ) || ['en', 'es'],
+
+  autoDetect: process.env.NEXT_PUBLIC_AUTO_DETECT_LANGUAGE !== 'false',
+  persist: process.env.NEXT_PUBLIC_PERSIST_LANGUAGE !== 'false',
+
+  features: {
+    spanish: process.env.NEXT_PUBLIC_ENABLE_SPANISH !== 'false',
+    routeLocale: process.env.NEXT_PUBLIC_ENABLE_ROUTE_LOCALE === 'true',
+    showSelector: process.env.NEXT_PUBLIC_SHOW_LANGUAGE_SELECTOR !== 'false',
+    trackChanges: process.env.NEXT_PUBLIC_TRACK_LANGUAGE_CHANGES === 'true',
   },
-  es: {
-    code: 'es', 
-    name: 'Spanish',
-    nativeName: 'Español',
-    flag: '🇪🇸'
-  },
-  pt: {
-    code: 'pt',
-    name: 'Portuguese', 
-    nativeName: 'Português',
-    flag: '🇧🇷'
-  },
-  fr: {
-    code: 'fr',
-    name: 'French',
-    nativeName: 'Français', 
-    flag: '🇫🇷'
-  }
+
+  storageKey: 'ai-whisperers-language',
+
+  locales: {
+    en: 'en-US',
+    es: 'es-ES',
+  } as Record<Language, string>,
+
+  textDirection: {
+    en: 'ltr',
+    es: 'ltr',
+  } as Record<Language, 'ltr' | 'rtl'>,
+
+  dateFormats: {
+    en: 'MM/DD/YYYY',
+    es: 'DD/MM/YYYY',
+  } as Record<Language, string>,
+} as const
+
+// Legacy exports for backward compatibility
+export const DEFAULT_LANGUAGE = i18nConfig.defaultLanguage
+export const FALLBACK_LANGUAGE = i18nConfig.fallbackLanguage
+export const SUPPORTED_LANGUAGES = LANGUAGES
+
+/**
+ * Validate if a value is a supported Language
+ */
+export function isValidLanguage(lang: unknown): lang is Language {
+  return (
+    typeof lang === 'string' &&
+    i18nConfig.supportedLanguages.includes(lang as Language)
+  )
 }
 
-export const DEFAULT_LANGUAGE: Language = 'en'
-export const FALLBACK_LANGUAGE: Language = 'en'
+/**
+ * Check if a language is enabled via feature flags
+ */
+export function isLanguageEnabled(lang: Language): boolean {
+  if (lang === 'en') return true
+  if (lang === 'es') return i18nConfig.features.spanish
+  return false
+}
+
+/**
+ * Get BCP 47 locale code for a language
+ */
+export function getLocale(lang: Language): string {
+  return i18nConfig.locales[lang] || i18nConfig.locales[i18nConfig.defaultLanguage]
+}
+
+/**
+ * Get text direction for a language
+ */
+export function getTextDirection(lang: Language): 'ltr' | 'rtl' {
+  return i18nConfig.textDirection[lang] || 'ltr'
+}
+
+/**
+ * Get date format pattern for a language
+ */
+export function getDateFormat(lang: Language): string {
+  return i18nConfig.dateFormats[lang] || i18nConfig.dateFormats[i18nConfig.defaultLanguage]
+}
+
+/**
+ * Detect browser language preference
+ */
+export function detectBrowserLanguage(): Language {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    return i18nConfig.defaultLanguage
+  }
+
+  const browserLanguages = navigator.languages || [navigator.language]
+
+  for (const browserLang of browserLanguages) {
+    const langCode = browserLang.split('-')[0].toLowerCase() as Language
+    if (isValidLanguage(langCode) && isLanguageEnabled(langCode)) {
+      return langCode
+    }
+  }
+
+  return i18nConfig.defaultLanguage
+}
+
+export type LanguageSource = 'url' | 'localStorage' | 'browser' | 'default'
+
+export interface LanguageChangeEvent {
+  from: Language
+  to: Language
+  source: LanguageSource
+  timestamp: number
+}
 
 // Translation files
 export const translations = {
@@ -197,163 +286,7 @@ export const translations = {
       practicalProjects: 'Proyectos Prácticos',
       communitySupport: 'Soporte Comunitario'
     }
-  },
-  pt: {
-    nav: {
-      home: 'Início',
-      courses: 'Cursos',
-      about: 'Sobre',
-      blog: 'Blog',
-      contact: 'Contato',
-      dashboard: 'Painel',
-      signIn: 'Entrar',
-      signOut: 'Sair'
-    },
-    courses: {
-      title: 'Cursos de IA',
-      subtitle: 'Domine IA com cursos abrangentes do iniciante ao especialista',
-      enrollButton: 'Inscrever-se Agora',
-      viewDetails: 'Ver Detalhes',
-      duration: 'Duração',
-      difficulty: 'Dificuldade',
-      price: 'Preço',
-      free: 'Grátis',
-      featured: 'Destaque',
-      learningObjectives: 'O que você aprenderá',
-      prerequisites: 'Pré-requisitos',
-      allCourses: 'Todos os Cursos',
-      beginner: 'Iniciante',
-      intermediate: 'Intermediário',
-      advanced: 'Avançado',
-      expert: 'Especialista',
-      noCourses: 'Nenhum curso encontrado',
-      noCoursesDescription: 'Nenhum curso corresponde aos seus filtros atuais.'
-    },
-    auth: {
-      signIn: 'Entrar',
-      signUp: 'Cadastrar',
-      signOut: 'Sair',
-      email: 'Email',
-      password: 'Senha',
-      welcomeBack: 'Bem-vindo de volta',
-      createAccount: 'Crie sua conta',
-      continueWithGoogle: 'Continuar com Google',
-      continueWithGitHub: 'Continuar com GitHub',
-      sendMagicLink: 'Enviar link mágico',
-      checkEmail: 'Verifique seu email',
-      magicLinkSent: 'Enviamos um link mágico para seu email',
-      backToSignIn: 'Voltar ao login',
-      noAccount: 'Não tem conta?',
-      haveAccount: 'Já tem conta?',
-      emailVerificationRequired: 'Verificação de email necessária',
-      verifyEmailMessage: 'Por favor verifique seu endereço de email para acessar este conteúdo.'
-    },
-    common: {
-      loading: 'Carregando...',
-      error: 'Erro',
-      success: 'Sucesso',
-      save: 'Salvar',
-      cancel: 'Cancelar',
-      delete: 'Excluir',
-      edit: 'Editar',
-      back: 'Voltar',
-      next: 'Próximo',
-      previous: 'Anterior',
-      close: 'Fechar',
-      ok: 'OK',
-      yes: 'Sim',
-      no: 'Não'
-    },
-    landing: {
-      heroTitle: 'Domine IA com Educação de Classe Mundial',
-      heroSubtitle: 'Do iniciante ao especialista - cursos abrangentes de IA para todos',
-      getStarted: 'Começar',
-      learnMore: 'Saiba Mais',
-      featuredCourses: 'Cursos em Destaque',
-      whyChooseUs: 'Por Que Escolher AI Whisperers?',
-      comprehensiveCurriculum: 'Currículo Abrangente',
-      expertInstructors: 'Instrutores Especialistas',
-      practicalProjects: 'Projetos Práticos',
-      communitySupport: 'Suporte da Comunidade'
-    }
-  },
-  fr: {
-    nav: {
-      home: 'Accueil',
-      courses: 'Cours',
-      about: 'À propos',
-      blog: 'Blog',
-      contact: 'Contact',
-      dashboard: 'Tableau de bord',
-      signIn: 'Se connecter',
-      signOut: 'Se déconnecter'
-    },
-    courses: {
-      title: 'Cours IA',
-      subtitle: 'Maîtrisez l\'IA avec des cours complets du débutant à l\'expert',
-      enrollButton: 'S\'inscrire maintenant',
-      viewDetails: 'Voir les détails',
-      duration: 'Durée',
-      difficulty: 'Difficulté',
-      price: 'Prix',
-      free: 'Gratuit',
-      featured: 'En vedette',
-      learningObjectives: 'Ce que vous apprendrez',
-      prerequisites: 'Prérequis',
-      allCourses: 'Tous les cours',
-      beginner: 'Débutant',
-      intermediate: 'Intermédiaire',
-      advanced: 'Avancé',
-      expert: 'Expert',
-      noCourses: 'Aucun cours trouvé',
-      noCoursesDescription: 'Aucun cours ne correspond à vos filtres actuels.'
-    },
-    auth: {
-      signIn: 'Se connecter',
-      signUp: 'S\'inscrire',
-      signOut: 'Se déconnecter',
-      email: 'Email',
-      password: 'Mot de passe',
-      welcomeBack: 'Bon retour',
-      createAccount: 'Créez votre compte',
-      continueWithGoogle: 'Continuer avec Google',
-      continueWithGitHub: 'Continuer avec GitHub',
-      sendMagicLink: 'Envoyer le lien magique',
-      checkEmail: 'Vérifiez votre email',
-      magicLinkSent: 'Nous avons envoyé un lien magique à votre email',
-      backToSignIn: 'Retour à la connexion',
-      noAccount: 'Pas de compte?',
-      haveAccount: 'Vous avez déjà un compte?',
-      emailVerificationRequired: 'Vérification d\'email requise',
-      verifyEmailMessage: 'Veuillez vérifier votre adresse email pour accéder à ce contenu.'
-    },
-    common: {
-      loading: 'Chargement...',
-      error: 'Erreur',
-      success: 'Succès',
-      save: 'Enregistrer',
-      cancel: 'Annuler',
-      delete: 'Supprimer',
-      edit: 'Modifier',
-      back: 'Retour',
-      next: 'Suivant',
-      previous: 'Précédent',
-      close: 'Fermer',
-      ok: 'OK',
-      yes: 'Oui',
-      no: 'Non'
-    },
-    landing: {
-      heroTitle: 'Maîtrisez l\'IA avec une éducation de classe mondiale',
-      heroSubtitle: 'Du débutant à l\'expert - des cours d\'IA complets pour tous',
-      getStarted: 'Commencer',
-      learnMore: 'En savoir plus',
-      featuredCourses: 'Cours en vedette',
-      whyChooseUs: 'Pourquoi choisir AI Whisperers?',
-      comprehensiveCurriculum: 'Programme complet',
-      expertInstructors: 'Instructeurs experts',
-      practicalProjects: 'Projets pratiques',
-      communitySupport: 'Support communautaire'
-    }
   }
+  // Note: Portuguese and French translations removed
+  // Focus is now exclusively on English and Spanish (EN/ES)
 }

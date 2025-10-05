@@ -1,0 +1,198 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/architecture.yml
+// Language: EN
+
+import type { PageContent } from '@/types/content';
+
+export const architecture_enContent: PageContent = {
+  "meta": {
+    "title": "System Architecture - EC4RO-HGN Visualization | AI Whisperers",
+    "description": "Explore our complete system architecture using EC4RO-HGN methodology - Extended C4 with Root Orchestration and Hierarchical Graph Navigation.",
+    "keywords": [
+      "system architecture",
+      "EC4RO-HGN",
+      "software architecture",
+      "C4 model",
+      "architecture visualization"
+    ],
+    "language": "en"
+  },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Architecture",
+        "href": "/architecture"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
+  "hero": {
+    "headline": "System Architecture",
+    "subheadline": "EC4RO-HGN Interactive Visualization",
+    "description": "Explore our complete system architecture using EC4RO-HGN methodology - Extended C4 with Root Orchestration and Hierarchical Graph Navigation.",
+    "location": "🏗️ Live System Map",
+    "primaryCta": {
+      "text": "Explore Interactive Graph",
+      "href": "#graph",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Documentation",
+      "href": "/docs",
+      "variant": "outline"
+    },
+    "benefits": []
+  },
+  "methodology": {
+    "title": "EC4RO-HGN Methodology",
+    "description": "Extended C4 with Root Orchestration and Hierarchical Graph Navigation",
+    "levels": [
+      {
+        "level": -1,
+        "title": "Orquestación Raíz",
+        "description": "Artefactos de despliegue → Transformación del sistema en funcionamiento",
+        "color": "from-red-500 to-red-600",
+        "components": 4
+      },
+      {
+        "level": 0,
+        "title": "Arquitectura Maestra",
+        "description": "Vista general de componentes del sistema con 78 vértices principales",
+        "color": "from-blue-500 to-blue-600",
+        "components": 25
+      },
+      {
+        "level": 1,
+        "title": "Sub-Grafos de Componentes",
+        "description": "Arquitectura interna de componentes y métodos",
+        "color": "from-green-500 to-green-600",
+        "components": 32
+      },
+      {
+        "level": 2,
+        "title": "Detalle de Implementación",
+        "description": "Granularidad a nivel de función y método",
+        "color": "from-purple-500 to-purple-600",
+        "components": 17
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Beneficios de la Arquitectura",
+    "items": [
+      {
+        "title": "Visibilidad Completa",
+        "description": "Desde la configuración de despliegue hasta los detalles de implementación, vea cada aspecto de nuestro sistema con divulgación progresiva controlada.",
+        "icon": "Eye"
+      },
+      {
+        "title": "Multi-Stakeholder",
+        "description": "Diferentes niveles de detalle sirven a ejecutivos, arquitectos, desarrolladores y equipos DevOps con la profundidad de información apropiada.",
+        "icon": "Users"
+      },
+      {
+        "title": "Análisis Sistemático",
+        "description": "El aislamiento de problemas basado en grafos permite la resolución sistemática de errores y el análisis integral de impacto en todas las capas del sistema.",
+        "icon": "Search"
+      }
+    ]
+  },
+  "statistics": {
+    "title": "Estadísticas de Arquitectura",
+    "metrics": [
+      {
+        "value": "78",
+        "description": "Componentes Totales"
+      },
+      {
+        "value": "0",
+        "description": "Dependencias Circulares"
+      },
+      {
+        "value": "A-",
+        "description": "Calificación de Arquitectura"
+      },
+      {
+        "value": "100%",
+        "description": "Cobertura"
+      }
+    ]
+  },
+  "navigation_help": {
+    "title": "Cómo Navegar",
+    "sections": [
+      {
+        "title": "Navegación por Niveles",
+        "items": [
+          "Haga clic en las pestañas de nivel para cambiar entre niveles de jerarquía",
+          "Cada nivel muestra progresivamente más detalle",
+          "Las migas de pan muestran su ruta de navegación actual"
+        ]
+      },
+      {
+        "title": "Interacción con Componentes",
+        "items": [
+          "Haga clic en los componentes para ver información detallada",
+          "Las líneas punteadas muestran dependencias entre componentes",
+          "La codificación por colores indica complejidad y estado"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Want to Learn More About Our Architecture?",
+    "description": "Discover how we built a scalable, maintainable system using EC4RO-HGN methodology.",
+    "primaryCta": {
+      "text": "Contact Us",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Case Studies",
+      "href": "/about",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "architecture@aiwhisperers.com"
+      },
+      {
+        "type": "web",
+        "label": "Documentation",
+        "value": "Read Full Methodology"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
+} as const;
+
+export default architecture_enContent;

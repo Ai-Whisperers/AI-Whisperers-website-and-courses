@@ -6,25 +6,24 @@ import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { AnimatedBackground, FloatingElements, TypewriterText } from "@/components/ui/AnimatedBackground"
 import { NewsletterSignup } from "@/components/interactive/NewsletterSignup"
-import { useLanguage } from '@/lib/i18n/context'
-// Removed client-side content loading - now uses server-side compiled content
+import { useLocalizedContent } from '@/hooks/use-localized-content'
 import type { PageContent } from "@/types/content"
+import type { LocalizedContent } from '@/lib/content/server-compiled'
 
 interface DynamicHomepageProps {
-  content: PageContent
+  localizedContent: LocalizedContent<PageContent>
 }
 
-export function DynamicHomepage({ content }: DynamicHomepageProps) {
-  const { isLoading: languageLoading } = useLanguage()
-
-  // Note: Content is now server-side compiled and provided via props
-  // Language switching would require page navigation to different routes
+export function DynamicHomepage({ localizedContent }: DynamicHomepageProps) {
+  // Use the localized content hook - automatically switches when language changes!
+  const content = useLocalizedContent(localizedContent)
 
   // Debug logging
   useEffect(() => {
     console.log('[DynamicHomepage] Rendering with content:', {
       hasContent: !!content,
       contentKeys: content ? Object.keys(content) : [],
+      language: content?.meta?.language,
       hero: !!content?.hero,
       features: !!content?.features,
       stats: !!content?.stats,
@@ -32,18 +31,6 @@ export function DynamicHomepage({ content }: DynamicHomepageProps) {
       footer: !!content?.footer,
     })
   }, [content])
-
-  // Show loading state while language is being determined
-  if (languageLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Henyhẽhína tetepy... / Cargando contenido... / Loading content...</p>
-        </div>
-      </div>
-    )
-  }
 
   const { hero, features, stats, contact, footer } = content
 

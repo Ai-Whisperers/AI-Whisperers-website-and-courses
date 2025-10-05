@@ -1,0 +1,148 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/faq.yml
+// Language: EN
+
+import type { PageContent } from '@/types/content';
+
+export const faq_enContent: PageContent = {
+  "meta": {
+    "title": "FAQ - Frequently Asked Questions | AI Whisperers",
+    "description": "Find answers to common questions about our AI courses, enrollment process, and platform features.",
+    "keywords": [
+      "AI course FAQ",
+      "questions",
+      "course information",
+      "enrollment",
+      "support"
+    ],
+    "language": "en"
+  },
+  "navigation": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "items": [
+      {
+        "text": "Home",
+        "href": "/"
+      },
+      {
+        "text": "Services",
+        "href": "/services"
+      },
+      {
+        "text": "Courses",
+        "href": "/courses"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "cta": {
+      "text": "Get Started",
+      "variant": "default"
+    }
+  },
+  "hero": {
+    "headline": "Frequently Asked Questions",
+    "subheadline": "Find answers to common questions about our AI courses and platform",
+    "description": "Get quick answers to your questions about enrollment, course content, support, and more.",
+    "location": "🌍 24/7 Self-Service Support",
+    "primaryCta": {
+      "text": "Contact Support",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Browse Courses",
+      "href": "/courses",
+      "variant": "outline"
+    },
+    "benefits": []
+  },
+  "faq": {
+    "title": "Common Questions",
+    "items": [
+      {
+        "question": "What AI courses do you offer?",
+        "answer": "We offer 4 comprehensive AI courses: AI Foundations (Beginner), Applied AI (Intermediate), AI Web Development (Advanced), and Enterprise AI Business (Expert level)."
+      },
+      {
+        "question": "How long does it take to complete a course?",
+        "answer": "Course durations range from 12 to 21 hours. You can learn at your own pace, with most students completing courses within 4-8 weeks."
+      },
+      {
+        "question": "Do I need programming experience?",
+        "answer": "No programming experience is required for AI Foundations. Each course builds upon the previous, with clear prerequisites listed."
+      },
+      {
+        "question": "How do I enroll in a course?",
+        "answer": "Simply create an account, choose your course, and complete the payment process. You'll get immediate access to course materials."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept PayPal and major credit cards. All payments are processed securely."
+      },
+      {
+        "question": "Is there a refund policy?",
+        "answer": "Yes, we offer a 30-day money-back guarantee if you're not satisfied with your course."
+      },
+      {
+        "question": "What if I need help with the course content?",
+        "answer": "Our support team and community forums are available to help. You can also schedule office hours with instructors."
+      },
+      {
+        "question": "Can I access courses on mobile devices?",
+        "answer": "Yes, our platform is fully responsive and works on all devices including smartphones and tablets."
+      },
+      {
+        "question": "Do I get a certificate upon completion?",
+        "answer": "Yes, you'll receive a verifiable certificate of completion that you can add to your LinkedIn profile."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Still Have Questions?",
+    "description": "Can't find the answer you're looking for? Our support team is here to help.",
+    "primaryCta": {
+      "text": "Contact Support",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Schedule Call",
+      "href": "/schedule",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "support@aiwhisperers.com"
+      },
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (555) 123-4567"
+      },
+      {
+        "type": "web",
+        "label": "Hours",
+        "value": "Monday-Friday: 9 AM - 6 PM PST"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
+} as const;
+
+export default faq_enContent;

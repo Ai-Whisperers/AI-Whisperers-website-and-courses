@@ -1,0 +1,159 @@
+meta:
+  title: "Contáctanos - Ponte en Contacto | AI Whisperers"
+  description: "Contacta al equipo de AI Whisperers para información sobre cursos, soporte u oportunidades de colaboración."
+  keywords:
+    - "contactar AI Whisperers"
+    - "soporte de cursos"
+    - "ayuda educación IA"
+    - "oportunidades de asociación"
+  language: "es"
+
+navigation:
+  brand:
+    text: "AI Whisperers"
+  items:
+    - text: "Inicio"
+      href: "/"
+    - text: "Cursos"
+      href: "/courses"
+    - text: "Acerca de"
+      href: "/about"
+    - text: "Contacto"
+      href: "/contact"
+  cta:
+    text: "Comenzar"
+    variant: "default"
+
+hero:
+  headline: "Ponte en Contacto"
+  subheadline: "Estamos aquí para ayudarte en tu viaje de aprendizaje de IA"
+  description: "¿Tienes preguntas sobre nuestros cursos o necesitas asistencia? Nuestro equipo está listo para ayudarte a tener éxito."
+  location: "🌍 Disponible en Todo el Mundo"
+  primaryCta:
+    text: "Enviar Mensaje"
+    href: "#contact-form"
+    variant: "default"
+  secondaryCta:
+    text: "Ver Preguntas Frecuentes"
+    href: "/faq"
+    variant: "outline"
+  benefits: []
+
+contactOptions:
+  title: "Cómo Contactarnos"
+  description: "Elige tu método de contacto preferido"
+  options:
+    - icon: "Mail"
+      title: "Envíanos un Correo"
+      description: "Obtén respuesta en 24 horas"
+      value: "${NEXT_PUBLIC_CONTACT_EMAIL}"
+      primaryMethod: true
+      action:
+        text: "Enviar Correo"
+        href: "mailto:${NEXT_PUBLIC_CONTACT_EMAIL}"
+        external: true
+    - icon: "Phone"
+      title: "Llámanos"
+      description: "Lunes-Viernes, 9AM-6PM PST"
+      value: "${NEXT_PUBLIC_CONTACT_PHONE}"
+      action:
+        text: "Llamar Ahora"
+        href: "tel:${NEXT_PUBLIC_CONTACT_PHONE}"
+    - icon: "MessageSquare"
+      title: "Chat en Vivo"
+      description: "Chatea con nuestro equipo de soporte"
+      value: "Disponible en horario de oficina"
+      action:
+        text: "Iniciar Chat"
+        href: "#chat"
+    - icon: "Calendar"
+      title: "Agendar Reunión"
+      description: "Reserva una llamada de consulta"
+      value: "Sesiones de 15-30 minutos"
+      action:
+        text: "Reservar Ahora"
+        href: "/schedule"
+
+officeInfo:
+  title: "Nuestra Ubicación"
+  description: "Conéctate con nosotros para sesiones de consultoría y capacitación en IA"
+  address:
+    street: "${NEXT_PUBLIC_OFFICE_STREET}"
+    neighborhood: "Distrito de Innovación"
+    city: "${NEXT_PUBLIC_OFFICE_CITY}"
+    country: "${NEXT_PUBLIC_OFFICE_COUNTRY}"
+    zipCode: "${NEXT_PUBLIC_OFFICE_ZIP}"
+  workingHours:
+    weekdays: "Lunes - Viernes: 9:00 AM - 5:00 PM (GMT-4)"
+    saturday: "Sábado: Solo con cita previa"
+    sunday: "Domingo: Cerrado"
+  map:
+    embedUrl: "https://maps.google.com/placeholder"
+
+consultationForm:
+  title: "Solicitar una Consulta"
+  description: "Completa el formulario a continuación y nos comunicaremos contigo en 24 horas"
+  fields:
+    - name: "name"
+      label: "Nombre Completo"
+      type: "text"
+      required: true
+      placeholder: "Juan Pérez"
+    - name: "email"
+      label: "Correo Electrónico"
+      type: "email"
+      required: true
+      placeholder: "juan@ejemplo.com"
+    - name: "subject"
+      label: "Asunto"
+      type: "select"
+      required: true
+      options:
+        - "Información de Cursos"
+        - "Soporte Técnico"
+        - "Capacitación Corporativa"
+        - "Consulta de Asociación"
+        - "Pregunta General"
+    - name: "message"
+      label: "Mensaje"
+      type: "textarea"
+      required: true
+      rows: 5
+      placeholder: "Cuéntanos cómo podemos ayudarte..."
+  submitButton:
+    text: "Enviar Mensaje"
+    loadingText: "Enviando..."
+  privacyNote: "Respetamos tu privacidad y nunca compartiremos tu información"
+
+faq:
+  title: "Preguntas Frecuentes"
+  items:
+    - question: "¿Cuáles son sus tiempos de respuesta?"
+      answer: "Respondemos a todas las consultas dentro de las 24 horas hábiles."
+    - question: "¿Ofrecen soporte telefónico?"
+      answer: "Sí, el soporte telefónico está disponible de lunes a viernes, 9AM-6PM PST."
+    - question: "¿Puedo agendar una consulta?"
+      answer: "¡Absolutamente! Usa nuestro sistema de reservas para agendar una consulta gratuita de 30 minutos."
+
+socialProof:
+  title: "Consultoría Profesional en IA"
+  description: "Empoderando empresas con soluciones prácticas de inteligencia artificial"
+  stats:
+    - value: "Equipo Experto"
+      label: "Estrategia e Implementación de IA"
+    - value: "Alcance Global"
+      label: "Servicio Mundial"
+    - value: "Respuesta Rápida"
+      label: "Soporte de 24 Horas"
+  testimonials:
+    - quote: "Testimonio de muestra 1."
+      author: "Testimonio 1"
+      company: "Empresa 1"
+    - quote: "Testimonio de muestra 2."
+      author: "Testimonio de muestra 2"
+      company: "Empresa 2"
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. Todos los derechos reservados."

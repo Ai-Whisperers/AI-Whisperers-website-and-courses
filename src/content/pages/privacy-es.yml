@@ -1,0 +1,102 @@
+meta:
+  title: "Política de Privacidad | AI Whisperers"
+  description: "Aprende cómo protegemos tu privacidad y manejamos tu información personal en nuestra plataforma de educación en IA."
+  keywords:
+    - "política de privacidad"
+    - "protección de datos"
+    - "información personal"
+    - "cumplimiento GDPR"
+  language: "es"
+
+navigation:
+  brand:
+    text: "AI Whisperers"
+  items:
+    - text: "Inicio"
+      href: "/"
+    - text: "Servicios"
+      href: "/services"
+    - text: "Cursos"
+      href: "/courses"
+    - text: "Acerca de"
+      href: "/about"
+    - text: "Contacto"
+      href: "/contact"
+  cta:
+    text: "Comenzar"
+    variant: "default"
+
+hero:
+  headline: "Política de Privacidad"
+  subheadline: "Tu privacidad es importante para nosotros"
+  description: "Aprende cómo protegemos tu privacidad y manejamos tu información personal. Última actualización: Septiembre 2025."
+  location: "🔒 Cumplimiento GDPR & CCPA"
+  primaryCta:
+    text: "Contactar Equipo de Privacidad"
+    href: "/contact"
+    variant: "default"
+  secondaryCta:
+    text: "Ver Términos"
+    href: "/terms"
+    variant: "outline"
+  benefits: []
+
+sections:
+  - id: "information-collection"
+    title: "Información que Recopilamos"
+    content: |
+      Recopilamos información que nos proporcionas directamente, como cuando creas una cuenta,
+      te inscribes en cursos o nos contactas para soporte. Esto incluye tu nombre, dirección de
+      correo electrónico e información de pago.
+
+  - id: "information-use"
+    title: "Cómo Usamos tu Información"
+    content: |
+      Usamos tu información para proporcionar nuestros servicios educativos, procesar pagos,
+      comunicarnos contigo sobre tus cursos y mejorar nuestra plataforma. No vendemos tu
+      información personal a terceros.
+
+  - id: "data-security"
+    title: "Seguridad de Datos"
+    content: |
+      Implementamos medidas de seguridad apropiadas para proteger tu información personal
+      contra acceso, alteración, divulgación o destrucción no autorizados. Todo el procesamiento
+      de pagos es manejado por procesadores de pago seguros y compatibles con PCI.
+
+  - id: "user-rights"
+    title: "Tus Derechos"
+    content: |
+      Tienes el derecho de acceder, actualizar o eliminar tu información personal.
+      Puedes gestionar la configuración de tu cuenta o contactarnos para ejercer estos derechos.
+      Cumplimos con GDPR y otras regulaciones de privacidad aplicables.
+
+  - id: "cookies-tracking"
+    title: "Cookies y Seguimiento"
+    content: |
+      Usamos cookies y tecnologías similares para mejorar tu experiencia, analizar el uso
+      y proporcionar contenido personalizado. Puedes controlar las preferencias de cookies
+      en la configuración de tu navegador.
+
+  - id: "contact-privacy"
+    title: "Contáctanos"
+    content: |
+      Si tienes preguntas sobre esta Política de Privacidad o nuestras prácticas de datos,
+      contáctanos en privacy@aiwhisperers.com o a través de nuestros canales de soporte.
+
+contact:
+  title: "¿Preguntas sobre Privacidad?"
+  description: "Contacta a nuestro equipo de privacidad para cualquier pregunta sobre el manejo de datos."
+  methods:
+    email: "${NEXT_PUBLIC_PRIVACY_EMAIL}"
+    phone: "${NEXT_PUBLIC_CONTACT_PHONE}"
+    address: "${NEXT_PUBLIC_OFFICE_STREET}, ${NEXT_PUBLIC_OFFICE_CITY}, ${NEXT_PUBLIC_OFFICE_ZIP}"
+    response_time: "Respondemos dentro de 48 horas"
+
+compliance:
+  title: "Cumplimiento y Certificaciones"
+  content: "Cumplimos con **GDPR**, **CCPA** y otras regulaciones de privacidad importantes. Nuestra plataforma está diseñada con principios de **privacidad por diseño**."
+
+footer:
+  brand:
+    text: "AI Whisperers"
+  copyright: "© 2025 AI Whisperers. Todos los derechos reservados."
