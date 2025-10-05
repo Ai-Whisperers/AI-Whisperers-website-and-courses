@@ -1,6 +1,17 @@
 // Sign In Page
 // Custom authentication page following clean architecture
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Sign In | AI Whisperers',
+  description: 'Sign in to your AI Whisperers account to access courses and exclusive content.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
+
 'use client'
 
 import { useState, Suspense } from 'react'
