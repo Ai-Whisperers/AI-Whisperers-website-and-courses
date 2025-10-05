@@ -1,20 +1,16 @@
 /**
  * Presentation Context Types
- * Layer 2: UI, Themes, Styling, Accessibility
+ * Layer 2B: User UI Preferences and Accessibility
+ * NOTE: Theme management moved to DesignSystemContext (Layer 2A)
  */
 
-import type { ColorTheme } from '@/lib/themes/colorThemes'
-
-// Theme types
-export type ThemeMode = 'light' | 'dark' | 'auto'
-
-// Font size preferences
+// Font size preferences (user-specific)
 export type FontSize = 'small' | 'medium' | 'large' | 'extra-large'
 
-// Contrast mode
+// Contrast mode (user-specific)
 export type ContrastMode = 'normal' | 'high' | 'extra-high'
 
-// Animation preferences
+// Animation preferences (user-specific)
 export type AnimationSpeed = 'none' | 'reduced' | 'normal' | 'fast'
 
 // Layout preferences
@@ -44,20 +40,10 @@ export interface UIPreferences {
 }
 
 // Presentation Context State
+// REFACTORED: Theme management removed (now in DesignSystemContext)
 export interface PresentationContextState {
-  // Theme
-  currentTheme: ColorTheme
-  themeMode: ThemeMode
-  isDarkMode: boolean
-  availableThemes: Record<string, ColorTheme>
-
-  // Preferences
+  // User Preferences (PRIVATE DATA - user-specific)
   preferences: UIPreferences
-
-  // Actions - Theme
-  setTheme: (themeId: string) => void
-  setThemeMode: (mode: ThemeMode) => void
-  toggleDarkMode: () => void
 
   // Actions - Preferences
   setFontSize: (size: FontSize) => void

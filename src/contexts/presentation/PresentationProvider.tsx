@@ -1,6 +1,8 @@
 /**
  * Presentation Provider
- * Layer 2: UI, Themes, Styling, Accessibility
+ * Layer 2B: User UI Preferences and Accessibility
+ * NOTE: Theme management moved to DesignSystemContext (Layer 2A)
+ * PRIVATE DATA - User-specific preferences (requires GDPR compliance)
  */
 
 'use client'
@@ -9,7 +11,6 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 import { PresentationContext } from './PresentationContext'
 import type {
   PresentationContextState,
-  ThemeMode,
   FontSize,
   ContrastMode,
   AnimationSpeed,
@@ -18,7 +19,6 @@ import type {
   UIPreferences,
 } from './types'
 import { DEFAULT_UI_PREFERENCES, FONT_SIZE_MAP, ANIMATION_SPEED_MAP } from './types'
-import { COLOR_THEMES, ColorTheme } from '@/lib/themes/colorThemes'
 import { getStorageItem, setStorageItem } from '@/utils/storage'
 
 interface PresentationProviderProps {
@@ -26,82 +26,15 @@ interface PresentationProviderProps {
 }
 
 export function PresentationProvider({ children }: PresentationProviderProps) {
-  const [currentThemeId, setCurrentThemeId] = useState<string>('blueProfessional')
-  const [themeMode, setThemeModeState] = useState<ThemeMode>('auto')
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  // State: User UI Preferences
   const [preferences, setPreferences] = useState<UIPreferences>(DEFAULT_UI_PREFERENCES)
 
   // Load saved preferences on mount
   useEffect(() => {
-    const savedThemeId = getStorageItem('PRESENTATION', 'themeId', 'blueProfessional')
-    const savedThemeMode = getStorageItem('PRESENTATION', 'themeMode', 'auto')
     const savedPreferences = getStorageItem('PRESENTATION', 'preferences', DEFAULT_UI_PREFERENCES)
-
-    setCurrentThemeId(savedThemeId)
-    setThemeModeState(savedThemeMode)
     setPreferences(savedPreferences)
-
-    // Determine dark mode based on theme mode
-    updateDarkMode(savedThemeMode)
   }, [])
 
-  // Update dark mode based on theme mode
-  const updateDarkMode = useCallback((mode: ThemeMode) => {
-    if (mode === 'dark') {
-      setIsDarkMode(true)
-    } else if (mode === 'light') {
-      setIsDarkMode(false)
-    } else {
-      // Auto mode: check system preference
-      if (typeof window !== 'undefined') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        setIsDarkMode(prefersDark)
-      }
-    }
-  }, [])
-
-  // Listen for system theme changes when in auto mode
-  useEffect(() => {
-    if (themeMode !== 'auto' || typeof window === 'undefined') return
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDarkMode(e.matches)
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [themeMode])
-
-  // Apply theme to document
-  const applyThemeToDOM = useCallback((theme: ColorTheme) => {
-    if (typeof window === 'undefined') return
-
-    const root = document.documentElement
-
-    // Apply color theme CSS variables
-    Object.entries(theme.primary).forEach(([key, value]) => {
-      root.style.setProperty(`--color-primary-${key}`, value)
-    })
-    Object.entries(theme.secondary).forEach(([key, value]) => {
-      root.style.setProperty(`--color-secondary-${key}`, value)
-    })
-    Object.entries(theme.accent).forEach(([key, value]) => {
-      root.style.setProperty(`--color-accent-${key}`, value)
-    })
-    Object.entries(theme.neutral).forEach(([key, value]) => {
-      root.style.setProperty(`--color-neutral-${key}`, value)
-    })
-    Object.entries(theme.success).forEach(([key, value]) => {
-      root.style.setProperty(`--color-success-${key}`, value)
-    })
-    Object.entries(theme.warning).forEach(([key, value]) => {
-      root.style.setProperty(`--color-warning-${key}`, value)
-    })
-    Object.entries(theme.error).forEach(([key, value]) => {
-      root.style.setProperty(`--color-error-${key}`, value)
-    })
-  }, [])
 
   // Apply preferences to document
   const applyPreferencesToDOM = useCallback((prefs: UIPreferences) => {
@@ -135,48 +68,10 @@ export function PresentationProvider({ children }: PresentationProviderProps) {
     }
   }, [])
 
-  // Apply current theme whenever it changes
-  useEffect(() => {
-    const theme = COLOR_THEMES[currentThemeId as keyof typeof COLOR_THEMES]
-    if (theme) {
-      applyThemeToDOM(theme)
-    }
-  }, [currentThemeId, applyThemeToDOM])
-
   // Apply preferences whenever they change
   useEffect(() => {
     applyPreferencesToDOM(preferences)
   }, [preferences, applyPreferencesToDOM])
-
-  // Apply dark mode class
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [isDarkMode])
-
-  // Theme actions
-  const setTheme = useCallback((themeId: string) => {
-    if (COLOR_THEMES[themeId as keyof typeof COLOR_THEMES]) {
-      setCurrentThemeId(themeId)
-      setStorageItem('PRESENTATION', 'themeId', themeId)
-    }
-  }, [])
-
-  const setThemeMode = useCallback((mode: ThemeMode) => {
-    setThemeModeState(mode)
-    setStorageItem('PRESENTATION', 'themeMode', mode)
-    updateDarkMode(mode)
-  }, [updateDarkMode])
-
-  const toggleDarkMode = useCallback(() => {
-    const newMode: ThemeMode = isDarkMode ? 'light' : 'dark'
-    setThemeMode(newMode)
-  }, [isDarkMode, setThemeMode])
 
   // Preference actions
   const setFontSize = useCallback((size: FontSize) => {
@@ -239,14 +134,7 @@ export function PresentationProvider({ children }: PresentationProviderProps) {
   }, [])
 
   const value: PresentationContextState = {
-    currentTheme: COLOR_THEMES[currentThemeId as keyof typeof COLOR_THEMES],
-    themeMode,
-    isDarkMode,
-    availableThemes: COLOR_THEMES,
     preferences,
-    setTheme,
-    setThemeMode,
-    toggleDarkMode,
     setFontSize,
     setContrastMode,
     setAnimationSpeed,
