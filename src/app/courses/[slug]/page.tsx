@@ -3,40 +3,21 @@
 
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-// Removed CourseService imports for build compatibility
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
+import { getMockCourseBySlug, courseToPlainObjectWithMethods } from '@/lib/data/mock-courses'
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>
 }
 
 async function getCourseBySlug(slug: string) {
-  // Mock data for initial deployment
-  const mockCourses: Record<string, any> = {
-    'ai-foundations': {
-      title: 'AI Foundations',
-      description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
-      slug: 'ai-foundations',
-      price: { amount: 29900, formatted: '$299.00' },
-      duration: { formatted: '12 hours', minutes: 720 },
-      difficulty: 'BEGINNER',
-      published: true,
-      featured: false,
-      learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
-      prerequisites: ['Basic computer literacy'],
-      // Domain entity methods for UI compatibility
-      canEnroll: () => true,
-      getDifficultyLevel: () => 'Beginner',
-      isFree: () => false
-    }
-  }
-
-  return mockCourses[slug] || null
+  const course = getMockCourseBySlug(slug)
+  return course ? courseToPlainObjectWithMethods(course) : null
 }
 
 export async function generateMetadata({ params }: CoursePageProps) {

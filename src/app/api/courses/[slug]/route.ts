@@ -2,38 +2,18 @@
 // RESTful API for specific course details
 
 import { NextRequest, NextResponse } from 'next/server'
+import { getMockCourseBySlug, courseToPlainObject } from '@/lib/data/mock-courses'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const resolvedParams = await params
-  
+
   try {
-    // Mock course data for initial deployment
-    const mockCourses: Record<string, any> = {
-      'ai-foundations': {
-        id: 'course-1',
-        title: 'AI Foundations',
-        description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
-        slug: 'ai-foundations',
-        price: { amount: 29900, currency: 'USD', formatted: '$299.00' },
-        duration: { minutes: 720, formatted: '12 hours' },
-        difficulty: 'BEGINNER',
-        difficultyLevel: 'Beginner Friendly',
-        published: true,
-        featured: true,
-        learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
-        prerequisites: ['Basic computer literacy'],
-        canEnroll: true,
-        isFree: false,
-        isAdvanced: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
-      }
-    }
-    
-    const course = mockCourses[resolvedParams.slug]
+    // Get course from centralized mock data
+    const courseEntity = getMockCourseBySlug(resolvedParams.slug)
+    const course = courseEntity ? courseToPlainObject(courseEntity) : null
     
     if (!course) {
       return NextResponse.json(

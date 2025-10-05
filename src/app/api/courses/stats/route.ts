@@ -2,25 +2,21 @@
 // Administrative endpoint for course analytics
 
 import { NextResponse } from 'next/server'
+import { getMockCourseStats } from '@/lib/data/mock-courses'
 
 export async function GET() {
   try {
-    // Mock statistics for initial deployment
-    // TODO: Replace with actual database queries after successful deployment
-    const mockStats = {
-      totalCourses: 4,
-      publishedCourses: 4,
-      featuredCourses: 2,
-      draftCourses: 0
-    }
+    // Get stats from centralized mock data
+    const stats = getMockCourseStats()
 
     return NextResponse.json({
       success: true,
       stats: {
-        total: mockStats.totalCourses,
-        published: mockStats.publishedCourses,
-        featured: mockStats.featuredCourses,
-        draft: mockStats.draftCourses
+        total: stats.total,
+        published: stats.published,
+        featured: stats.featured,
+        draft: stats.total - stats.published,
+        byDifficulty: stats.byDifficulty
       }
     })
 

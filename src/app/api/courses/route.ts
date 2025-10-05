@@ -4,6 +4,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Difficulty } from '@/domain/entities/course'
 import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
+import { getMockCoursesAsPlainObjects } from '@/lib/data/mock-courses'
 
 export async function GET(request: NextRequest) {
   try {
@@ -25,69 +26,21 @@ export async function GET(request: NextRequest) {
 
     const { published, featured, difficulty, limit = 100, offset = 0 } = validation.data
 
-    // Mock course data for initial deployment
-    const mockCourses = [
-      {
-        id: 'course-1',
-        title: 'AI Foundations',
-        description: 'Learn the fundamentals of artificial intelligence with hands-on projects.',
-        slug: 'ai-foundations',
-        price: { amount: 29900, currency: 'USD', formatted: '$299.00' },
-        duration: { minutes: 720, formatted: '12 hours' },
-        difficulty: 'BEGINNER',
-        difficultyLevel: 'Beginner Friendly',
-        published: true,
-        featured: true,
-        learningObjectives: ['Understand AI concepts', 'Learn ML basics'],
-        prerequisites: ['Basic computer literacy'],
-        canEnroll: true,
-        isFree: false,
-        isAdvanced: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
-      },
-      {
-        id: 'course-2',
-        title: 'Applied AI',
-        description: 'Build practical AI applications using modern tools and APIs.',
-        slug: 'applied-ai',
-        price: { amount: 59900, currency: 'USD', formatted: '$599.00' },
-        duration: { minutes: 900, formatted: '15 hours' },
-        difficulty: 'INTERMEDIATE',
-        difficultyLevel: 'Intermediate Level', 
-        published: true,
-        featured: true,
-        learningObjectives: ['Build AI applications', 'Deploy AI solutions'],
-        prerequisites: ['Basic programming knowledge'],
-        canEnroll: true,
-        isFree: false,
-        isAdvanced: false,
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-15')
-      }
-    ]
-
-    // Filter courses based on validated query parameters
-    let filteredCourses = mockCourses
-
-    if (published !== undefined) {
-      filteredCourses = filteredCourses.filter(course => course.published === published)
-    }
-    if (featured !== undefined) {
-      filteredCourses = filteredCourses.filter(course => course.featured === featured)
-    }
-    if (difficulty) {
-      filteredCourses = filteredCourses.filter(course => course.difficulty === difficulty)
-    }
-
-    // Apply pagination
-    const paginatedCourses = filteredCourses.slice(offset, offset + limit)
+    // Get courses from centralized mock data with filtering and pagination
+    const allCourses = getMockCoursesAsPlainObjects({ published, featured, difficulty })
+    const paginatedCourses = getMockCoursesAsPlainObjects({
+      published,
+      featured,
+      difficulty,
+      limit,
+      offset
+    })
 
     return NextResponse.json({
       success: true,
       courses: paginatedCourses,
       count: paginatedCourses.length,
-      total: filteredCourses.length,
+      total: allCourses.length,
       limit,
       offset,
     })
