@@ -3,6 +3,7 @@ import { getPageContent } from '@/lib/content/server'
 import type { Language } from '@/lib/i18n/types'
 import { DEFAULT_LANGUAGE } from '@/lib/i18n/types'
 import { ContentPageSchema } from '@/lib/api-schemas'
+import { logger } from '@/lib/logger'
 
 export async function GET(
   request: NextRequest,
@@ -43,7 +44,7 @@ export async function GET(
       },
     })
   } catch (error) {
-    console.error('Error loading content:', error)
+    logger.apiError('/api/content/[pageName]', error)
     return NextResponse.json(
       { error: 'Failed to load content' },
       { status: 500 }

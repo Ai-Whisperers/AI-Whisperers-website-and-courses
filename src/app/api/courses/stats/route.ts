@@ -3,6 +3,7 @@
 
 import { NextResponse } from 'next/server'
 import { getMockCourseStats } from '@/lib/data/mock-courses'
+import { logger } from '@/lib/logger'
 
 export async function GET() {
   try {
@@ -21,8 +22,8 @@ export async function GET() {
     })
 
   } catch (error) {
-    console.error('Failed to fetch course stats:', error)
-    
+    logger.apiError('/api/courses/stats', error)
+
     return NextResponse.json(
       {
         success: false,

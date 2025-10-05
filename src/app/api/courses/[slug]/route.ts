@@ -3,6 +3,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getMockCourseBySlug, courseToPlainObject } from '@/lib/data/mock-courses'
+import { logger } from '@/lib/logger'
 
 export async function GET(
   request: NextRequest,
@@ -32,8 +33,8 @@ export async function GET(
     })
 
   } catch (error) {
-    console.error(`Failed to fetch course ${resolvedParams.slug}:`, error)
-    
+    logger.apiError(`/api/courses/${resolvedParams.slug}`, error, { slug: resolvedParams.slug })
+
     return NextResponse.json(
       {
         success: false,

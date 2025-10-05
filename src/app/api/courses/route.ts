@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Difficulty } from '@/domain/entities/course'
 import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
 import { getMockCoursesAsPlainObjects } from '@/lib/data/mock-courses'
+import { logger } from '@/lib/logger'
 
 export async function GET(request: NextRequest) {
   try {
@@ -46,8 +47,8 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Failed to fetch courses:', error)
-    
+    logger.apiError('/api/courses', error)
+
     return NextResponse.json(
       {
         success: false,
