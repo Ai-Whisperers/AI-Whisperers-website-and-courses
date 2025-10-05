@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import type { Language } from './types'
-import { DEFAULT_LANGUAGE } from './types'
+import { DEFAULT_LANGUAGE, LANGUAGES } from './types'
 
 interface LanguageContextType {
   language: Language
@@ -28,7 +28,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Language
-      if (saved && ['en', 'es', 'pt', 'fr'].includes(saved)) {
+      // Derive valid languages dynamically from LANGUAGES config
+      const validLanguages = Object.keys(LANGUAGES) as Language[]
+      if (saved && validLanguages.includes(saved)) {
         setLanguageState(saved)
       }
     } catch (error) {

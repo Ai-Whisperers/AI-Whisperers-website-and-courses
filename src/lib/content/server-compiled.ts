@@ -2,43 +2,96 @@
  * Build-time Content Loading System
  * Uses pre-compiled content modules instead of runtime file system access
  * This ensures deployment compatibility and better performance
+ *
+ * Now supports multi-language content loading!
  */
 
 import type { PageContent } from '@/types/content'
 import type { Language } from '@/lib/i18n/types'
-import { getCompiledPageContent } from './compiled'
+import { i18nConfig } from '@/lib/i18n/config'
+import { getCompiledPageContent, getCompiledPageContentWithLang } from './compiled'
 import { getFallbackPageContent } from './compiled/fallback'
 
 /**
- * Load page content using pre-compiled content modules
- * This replaces runtime file system access with build-time compilation
+ * Localized content structure for client-side language switching
  */
-export async function getPageContent(pageName: string, language?: Language): Promise<PageContent> {
+export interface LocalizedContent<T = PageContent> {
+  en: T
+  es: T
+}
+
+/**
+ * Load page content using pre-compiled content modules
+ * NOW USES LANGUAGE PARAMETER! 🎉
+ *
+ * @param pageName - Base page name (e.g., 'homepage', 'about')
+ * @param language - Language code (defaults to 'en')
+ * @returns PageContent for the specified language with fallback to English
+ */
+export async function getPageContent(
+  pageName: string,
+  language: Language = i18nConfig.defaultLanguage
+): Promise<PageContent> {
   try {
-    // Try to get pre-compiled content
-    const content = getCompiledPageContent(pageName)
-    
+    // Use NEW language-aware function from compiled index
+    const content = getCompiledPageContentWithLang(pageName, language)
+
     if (content) {
       // Validate that the content has required structure
       if (isValidPageContent(content)) {
-        console.log(`✅ Loaded compiled content for: ${pageName}`)
+        console.log(`✅ Loaded compiled content for: ${pageName}-${language}`)
         return content
       } else {
-        console.warn(`⚠️  Compiled content for ${pageName} failed validation, using fallback`)
+        console.warn(`⚠️  Compiled content for ${pageName}-${language} failed validation, using fallback`)
         return getFallbackPageContent(pageName)
       }
     }
-    
+
     // Content not found, use fallback
-    console.warn(`⚠️  No compiled content found for ${pageName}, using fallback`)
+    console.warn(`⚠️  No compiled content found for ${pageName}-${language}, using fallback`)
     return getFallbackPageContent(pageName)
-    
+
   } catch (error) {
-    console.error(`❌ Error loading compiled content for ${pageName}:`, error)
+    console.error(`❌ Error loading compiled content for ${pageName}-${language}:`, error)
     console.error('Error details:', error instanceof Error ? error.message : String(error))
-    
+
     // Always return fallback to prevent crashes
     return getFallbackPageContent(pageName)
+  }
+}
+
+/**
+ * Load page content in ALL supported languages for client-side switching
+ * This is the RECOMMENDED method for pages that need language switching
+ *
+ * @param pageName - Base page name (e.g., 'homepage')
+ * @returns Object with content in all supported languages
+ *
+ * @example
+ * ```tsx
+ * // In page.tsx (server component)
+ * const localizedContent = await getLocalizedPageContent('homepage')
+ *
+ * // Pass to client component
+ * <DynamicHomepage localizedContent={localizedContent} />
+ * ```
+ */
+export async function getLocalizedPageContent(
+  pageName: string
+): Promise<LocalizedContent<PageContent>> {
+  try {
+    const [en, es] = await Promise.all([
+      getPageContent(pageName, 'en'),
+      getPageContent(pageName, 'es')
+    ])
+
+    return { en, es }
+  } catch (error) {
+    console.error(`❌ Error loading localized content for ${pageName}:`, error)
+
+    // Return fallback for both languages
+    const fallback = getFallbackPageContent(pageName)
+    return { en: fallback, es: fallback }
   }
 }
 

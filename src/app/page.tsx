@@ -1,12 +1,13 @@
-import { getPageContent } from '@/lib/content/server'
+import { getLocalizedPageContent } from '@/lib/content/server-compiled'
 import { DynamicHomepage } from '@/components/pages/DynamicHomepage'
 import { StructuredData } from '@/components/SEO/StructuredData'
 import type { Metadata } from 'next'
 
-// Generate metadata from content
+// Generate metadata from content (defaults to English for SEO)
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getPageContent('homepage')
-  
+  const localizedContent = await getLocalizedPageContent('homepage')
+  const content = localizedContent.en // Use English for default SEO metadata
+
   return {
     title: content.meta.title,
     description: content.meta.description,
@@ -36,20 +37,21 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: 'https://aiparaguay.com',
       languages: {
-        [content.meta.language]: '/',
+        en: '/',
+        es: '/',
       },
     },
   }
 }
 
 export default async function HomePage() {
-  // Load content from YAML file (default language for SSR)
-  const content = await getPageContent('homepage')
-  
+  // Load both EN and ES content at build time
+  const localizedContent = await getLocalizedPageContent('homepage')
+
   return (
     <>
       <StructuredData pageType="homepage" />
-      <DynamicHomepage content={content} />
+      <DynamicHomepage localizedContent={localizedContent} />
     </>
   )
 }

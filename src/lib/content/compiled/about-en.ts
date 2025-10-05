@@ -1,0 +1,176 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/about.yml
+// Language: EN
+
+import type { PageContent } from '@/types/content';
+
+export const about_enContent: PageContent = {
+  "meta": {
+    "title": "About Us - AI Whisperers Team | AI Whisperers",
+    "description": "Learn about the AI Whisperers team and our mission to democratize AI education through comprehensive, practical courses.",
+    "keywords": [
+      "about AI Whisperers",
+      "AI education team",
+      "mission",
+      "AI instructors"
+    ],
+    "language": "en"
+  },
+  "hero": {
+    "headline": "About AI Whisperers",
+    "subheadline": "Democratizing AI education for everyone",
+    "description": "We're on a mission to make artificial intelligence accessible and understandable for learners at every level.",
+    "location": "🌍 Available Worldwide - Learn at Your Own Pace",
+    "primaryCta": {
+      "text": "Start Learning Today",
+      "href": "/courses",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "Contact Us",
+      "href": "/contact",
+      "variant": "outline"
+    },
+    "benefits": []
+  },
+  "story": {
+    "title": "Our Story",
+    "content": "At AI Whisperers, we believe that artificial intelligence should be accessible to everyone.\nWe're building a community of learners and practitioners who are shaping the future with AI.\n"
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "To provide world-class AI education that empowers individuals and organizations to harness the transformative power of AI technology."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "description": "A world where AI literacy is as fundamental as traditional literacy, with comprehensive education building the next generation of AI-powered professionals."
+  },
+  "values": {
+    "title": "Our Values",
+    "items": [
+      {
+        "icon": "Award",
+        "title": "Excellence in Education",
+        "description": "We maintain the highest standards in course content and instruction"
+      },
+      {
+        "icon": "Target",
+        "title": "Practical Application",
+        "description": "Every lesson is designed with real-world application in mind"
+      },
+      {
+        "icon": "Heart",
+        "title": "Inclusive Learning",
+        "description": "Our courses are designed to be accessible regardless of background"
+      },
+      {
+        "icon": "Sparkles",
+        "title": "Continuous Innovation",
+        "description": "We constantly update our content to reflect the latest AI developments"
+      }
+    ]
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "members": [
+      {
+        "name": "Jonathan Verdun",
+        "role": "Lead AI Instructor",
+        "bio": "Specializing in making complex concepts accessible to all learners.",
+        "expertise": [
+          "Software Development",
+          "Educational Technology",
+          "Machine Learning"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Jonathan Verdun"
+        }
+      },
+      {
+        "name": "Kyrian Weiss Van Der Pol",
+        "role": "Business Applications Expert",
+        "bio": "Real world expertise with a passion for creating engaging, practical learning experiences.",
+        "expertise": [
+          "Software Development",
+          "AI Engineering",
+          "Business Strategy"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Kyrian Weiss van der Pol"
+        }
+      },
+      {
+        "name": "Ivan Weiss Van Der Pol",
+        "role": "Applications Expert",
+        "bio": "Helping businesses transform through AI adoption with strategic consulting and hands-on training.",
+        "expertise": [
+          "Software Engineer",
+          "AI Architect",
+          "Data Scientist"
+        ],
+        "image": {
+          "src": "/team/placeholder.jpg",
+          "alt": "Ivan Weiss Van Der Pol"
+        }
+      }
+    ]
+  },
+  "stats": {
+    "title": "Our Impact",
+    "description": "Delivering quality AI education to learners worldwide",
+    "metrics": [
+      {
+        "value": "Multiple Levels",
+        "description": "Courses from Beginner to Expert"
+      },
+      {
+        "value": "Self-Paced",
+        "description": "Learn at Your Own Speed"
+      },
+      {
+        "value": "Hands-On",
+        "description": "Project-Based Learning"
+      },
+      {
+        "value": "Certificates",
+        "description": "Upon Course Completion"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Ready to Start Your AI Journey?",
+    "description": "Get in touch with our team to find the perfect course for your goals",
+    "primaryCta": {
+      "text": "Contact Us",
+      "href": "/contact",
+      "variant": "default"
+    },
+    "secondaryCta": {
+      "text": "View Courses",
+      "href": "/courses",
+      "variant": "outline"
+    },
+    "info": [
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "info@aiwhisperers.com"
+      },
+      {
+        "type": "web",
+        "label": "Website",
+        "value": "aiwhisperers.com"
+      }
+    ]
+  },
+  "footer": {
+    "brand": {
+      "text": "AI Whisperers"
+    },
+    "copyright": "© 2025 AI Whisperers. All rights reserved."
+  }
+} as const;
+
+export default about_enContent;
