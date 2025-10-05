@@ -1,8 +1,10 @@
 /**
  * Unified Storage Utility
  * Centralized localStorage/sessionStorage management with SSR safety
- * Supports encryption for sensitive data
+ * Supports encryption for sensitive data and LZ-string compression
  */
+
+import { compress, decompress } from 'lz-string'
 
 // Storage namespace prefixes for different contexts
 export const STORAGE_KEYS = {
@@ -27,7 +29,8 @@ export const isBrowser = (): boolean => {
 export function getStorageItem<T>(
   namespace: StorageNamespace,
   key: string,
-  defaultValue: T
+  defaultValue: T,
+  useCompression = false
 ): T {
   if (!isBrowser()) {
     return defaultValue
@@ -35,10 +38,19 @@ export function getStorageItem<T>(
 
   try {
     const namespaceKey = `${STORAGE_KEYS[namespace]}_${key}`
-    const item = localStorage.getItem(namespaceKey)
+    let item = localStorage.getItem(namespaceKey)
 
     if (!item) {
       return defaultValue
+    }
+
+    // Decompress if compression was used
+    if (useCompression) {
+      const decompressed = decompress(item)
+      if (!decompressed) {
+        return defaultValue
+      }
+      item = decompressed
     }
 
     return JSON.parse(item) as T
@@ -49,12 +61,13 @@ export function getStorageItem<T>(
 }
 
 /**
- * Set item in localStorage with SSR safety
+ * Set item in localStorage with SSR safety and optional compression
  */
 export function setStorageItem<T>(
   namespace: StorageNamespace,
   key: string,
-  value: T
+  value: T,
+  useCompression = false
 ): boolean {
   if (!isBrowser()) {
     return false
@@ -62,7 +75,14 @@ export function setStorageItem<T>(
 
   try {
     const namespaceKey = `${STORAGE_KEYS[namespace]}_${key}`
-    localStorage.setItem(namespaceKey, JSON.stringify(value))
+    let serialized = JSON.stringify(value)
+
+    // Compress if requested (useful for large objects)
+    if (useCompression) {
+      serialized = compress(serialized)
+    }
+
+    localStorage.setItem(namespaceKey, serialized)
 
     // Broadcast change to other tabs
     broadcastStorageChange(namespace, key, value)

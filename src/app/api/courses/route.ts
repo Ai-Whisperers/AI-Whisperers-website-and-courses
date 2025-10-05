@@ -6,9 +6,35 @@ import { Difficulty } from '@/domain/entities/course'
 import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
 import { getMockCoursesAsPlainObjects } from '@/lib/data/mock-courses'
 import { logger } from '@/lib/logger'
+import { rateLimit, getIdentifier, RateLimitPresets } from '@/lib/rate-limit'
 
 export async function GET(request: NextRequest) {
   try {
+    // Apply rate limiting
+    const identifier = getIdentifier(request)
+    const rateLimitResult = rateLimit(identifier, RateLimitPresets.GENEROUS)
+
+    // Add rate limit headers to response
+    const headers = {
+      'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+      'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+      'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
+    }
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Too many requests',
+          message: 'Rate limit exceeded. Please try again later.',
+        },
+        {
+          status: 429,
+          headers,
+        }
+      )
+    }
+
     const { searchParams } = new URL(request.url)
 
     // Validate query parameters
@@ -44,6 +70,8 @@ export async function GET(request: NextRequest) {
       total: allCourses.length,
       limit,
       offset,
+    }, {
+      headers,
     })
 
   } catch (error) {
