@@ -1,0 +1,35 @@
+# Robots.txt for AI Whisperers Educational Platform
+# https://aiwhisperers.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://aiwhisperers.com/sitemap.xml
+
+# Disallow sensitive/admin areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /_next/
+Disallow: /auth/
+
+# Allow specific public API endpoints
+Allow: /api/health
+Allow: /api/courses
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1

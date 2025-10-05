@@ -128,7 +128,9 @@ export const translations = {
     // Navigation
     nav: {
       home: 'Home',
-      courses: 'Courses', 
+      courses: 'Courses',
+      services: 'Services',
+      solutions: 'Solutions',
       about: 'About',
       blog: 'Blog',
       contact: 'Contact',
@@ -212,8 +214,10 @@ export const translations = {
     nav: {
       home: 'Inicio',
       courses: 'Cursos',
+      services: 'Servicios',
+      solutions: 'Soluciones',
       about: 'Acerca de',
-      blog: 'Blog', 
+      blog: 'Blog',
       contact: 'Contacto',
       dashboard: 'Panel',
       signIn: 'Iniciar Sesión',

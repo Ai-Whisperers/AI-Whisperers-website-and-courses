@@ -7,8 +7,9 @@ import { useLanguage } from '@/contexts/i18n'
 import { translations } from './config'
 import type { Language } from './types'
 
-type TranslationPath = 
-  | 'nav.home' | 'nav.courses' | 'nav.about' | 'nav.blog' | 'nav.contact' 
+type TranslationPath =
+  | 'nav.home' | 'nav.courses' | 'nav.services' | 'nav.solutions'
+  | 'nav.about' | 'nav.blog' | 'nav.contact'
   | 'nav.dashboard' | 'nav.signIn' | 'nav.signOut'
   | 'courses.title' | 'courses.subtitle' | 'courses.enrollButton' | 'courses.viewDetails'
   | 'courses.duration' | 'courses.difficulty' | 'courses.price' | 'courses.free'

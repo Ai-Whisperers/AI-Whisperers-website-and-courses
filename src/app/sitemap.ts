@@ -1,60 +1,89 @@
+/**
+ * Sitemap Generation for AI Whisperers
+ * Dynamic sitemap for SEO optimization
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
+ */
+
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://aiparaguay.com'
-  const currentDate = new Date().toISOString()
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://aiwhisperers.com'
 
-  // Core pages
-  const corePages = [
+export default function sitemap(): MetadataRoute.Sitemap {
+  const currentDate = new Date()
+
+  // Static pages
+  const staticPages = [
     {
-      url: baseUrl,
+      url: BASE_URL,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${BASE_URL}/about`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/courses`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${BASE_URL}/services`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${BASE_URL}/solutions`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: `${BASE_URL}/contact`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/architecture`,
+      url: `${BASE_URL}/faq`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: `${BASE_URL}/privacy`,
       lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: `${BASE_URL}/terms`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/architecture`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
-      priority: 0.3,
+      priority: 0.5,
     },
   ]
 
-  return corePages
+  // Mock course pages (replace with dynamic data later)
+  const mockCoursePages = [
+    {
+      url: `${BASE_URL}/courses/ai-foundations`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+  ]
+
+  return [...staticPages, ...mockCoursePages]
 }

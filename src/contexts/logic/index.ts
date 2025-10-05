@@ -7,7 +7,7 @@ export { LogicProvider } from './LogicProvider'
 export {
   LogicContext,
   useLogicContext,
-  useRouter,
+  useRouting,
   useModals,
   useNotifications,
   useLoading,

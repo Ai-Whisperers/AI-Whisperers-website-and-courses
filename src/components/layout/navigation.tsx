@@ -22,6 +22,8 @@ export function Navigation() {
   const navigationItems = [
     { href: '/', label: t('nav.home') },
     { href: '/courses', label: t('nav.courses') },
+    { href: '/services', label: t('nav.services') },
+    { href: '/solutions', label: t('nav.solutions') },
     { href: '/about', label: t('nav.about') },
     { href: '/contact', label: t('nav.contact') },
   ]

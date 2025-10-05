@@ -21,7 +21,7 @@ export function useLogicContext(): LogicContextState {
 }
 
 // Convenience hooks
-export function useRouter() {
+export function useRouting() {
   const { currentRoute, navigationHistory, canGoBack, navigate, goBack, clearHistory } = useLogicContext()
   return { currentRoute, navigationHistory, canGoBack, navigate, goBack, clearHistory }
 }
