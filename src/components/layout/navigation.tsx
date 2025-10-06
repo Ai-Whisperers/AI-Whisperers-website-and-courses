@@ -12,20 +12,22 @@ import { Button } from '@/components/ui/button'
 import { LanguageSelector } from '@/components/ui/language-selector'
 import { cn } from '@/lib/utils'
 import { Brain } from 'lucide-react'
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 
 export function Navigation() {
   const pathname = usePathname()
   const { user, isAuthenticated, logout } = useAuth()
   const { t } = useTranslation()
+  const { routes: localRoutes } = useLocalizedRoutes()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navigationItems = [
-    { href: '/', label: t('nav.home') },
-    { href: '/courses', label: t('nav.courses') },
-    { href: '/services', label: t('nav.services') },
-    { href: '/solutions', label: t('nav.solutions') },
-    { href: '/about', label: t('nav.about') },
-    { href: '/contact', label: t('nav.contact') },
+    { href: localRoutes.public.home, label: t('nav.home') },
+    { href: localRoutes.public.courses, label: t('nav.courses') },
+    { href: localRoutes.public.services, label: t('nav.services') },
+    { href: localRoutes.public.solutions, label: t('nav.solutions') },
+    { href: localRoutes.public.about, label: t('nav.about') },
+    { href: localRoutes.public.contact, label: t('nav.contact') },
   ]
 
   const isActive = (href: string) => {
@@ -40,7 +42,7 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href={localRoutes.public.home} className="flex items-center space-x-2">
             <Brain className="h-8 w-8 text-primary" />
             <div className="font-bold text-xl bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
               AI Whisperers
@@ -73,14 +75,14 @@ export function Navigation() {
               <div className="hidden md:flex items-center space-x-3">
                 {user?.canAccessAdmin() && (
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href="/admin">Admin</Link>
+                    <Link href={localRoutes.admin.dashboard}>Admin</Link>
                   </Button>
                 )}
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/dashboard">{t('nav.dashboard')}</Link>
+                  <Link href={localRoutes.protected.dashboard}>{t('nav.dashboard')}</Link>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => logout()}
                 >
@@ -90,10 +92,10 @@ export function Navigation() {
             ) : (
               <div className="hidden md:flex items-center space-x-3">
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/auth/signin">{t('nav.signIn')}</Link>
+                  <Link href={localRoutes.auth.signin}>{t('nav.signIn')}</Link>
                 </Button>
                 <Button size="sm" asChild>
-                  <Link href="/auth/signin">Get Started</Link>
+                  <Link href={localRoutes.auth.signin}>Get Started</Link>
                 </Button>
               </div>
             )}
@@ -155,7 +157,7 @@ export function Navigation() {
                 {isAuthenticated ? (
                   <div className="space-y-1">
                     <Link
-                      href="/dashboard"
+                      href={localRoutes.protected.dashboard}
                       className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -163,7 +165,7 @@ export function Navigation() {
                     </Link>
                     {user?.canAccessAdmin() && (
                       <Link
-                        href="/admin"
+                        href={localRoutes.admin.dashboard}
                         className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -183,14 +185,14 @@ export function Navigation() {
                 ) : (
                   <div className="space-y-1">
                     <Link
-                      href="/auth/signin"
+                      href={localRoutes.auth.signin}
                       className="block px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent rounded-md"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {t('nav.signIn')}
                     </Link>
                     <Link
-                      href="/auth/signin"
+                      href={localRoutes.auth.signin}
                       className="block px-3 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-md"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >

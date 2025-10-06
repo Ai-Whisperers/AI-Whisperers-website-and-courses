@@ -6,6 +6,7 @@ import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { LanguageToggler } from "@/components/ui/LanguageToggler"
 import type { PageContent } from "@/types/content"
+import { routes } from '@/config/routes'
 
 interface TermsPageProps {
   content: PageContent
@@ -76,10 +77,10 @@ export function TermsPage({ content }: TermsPageProps) {
               <span className="text-xl font-bold text-gray-900">AI Paraguay</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
-              <Link href="/services" className="text-gray-600 hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">About</Link>
-              <Link href="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href={routes.public.home} className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
+              <Link href={routes.public.services} className="text-gray-600 hover:text-blue-600 transition-colors">Services</Link>
+              <Link href={routes.public.about} className="text-gray-600 hover:text-blue-600 transition-colors">About</Link>
+              <Link href={routes.public.contact} className="text-gray-600 hover:text-blue-600 transition-colors">Contact</Link>
               <LanguageToggler />
               <DynamicButton
                 content={{

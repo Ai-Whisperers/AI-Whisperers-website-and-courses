@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
 import { getMockCourseBySlug, courseToPlainObjectWithMethods } from '@/lib/data/mock-courses'
+import { routes } from '@/config/routes'
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>
@@ -70,8 +71,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
       {/* Header Section */}
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Link 
-            href="/courses"
+          <Link
+            href={routes.public.courses}
             className="text-primary hover:text-primary/80 font-medium"
           >
             ← Back to Courses
@@ -176,13 +177,13 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
                 <Separator />
 
-                <AuthGuard 
+                <AuthGuard
                   requireAuth={true}
                   requireEmailVerified={true}
                   fallback={
                     <div className="space-y-3">
                       <Button asChild className="w-full" size="lg">
-                        <Link href="/auth/signin">
+                        <Link href={routes.auth.signin}>
                           Sign In to Enroll
                         </Link>
                       </Button>

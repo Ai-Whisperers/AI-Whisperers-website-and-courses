@@ -23,10 +23,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import { routes } from '@/config/routes'
 
 function SignInForm() {
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams?.get('callbackUrl') || '/dashboard'
+  const callbackUrl = searchParams?.get('callbackUrl') || routes.protected.dashboard
   const error = searchParams?.get('error')
   
   const [email, setEmail] = useState('')
@@ -156,7 +157,7 @@ function SignInForm() {
 
           <div className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/signup" className="text-primary hover:underline">
+            <Link href={routes.auth.signup} className="text-primary hover:underline">
               Sign up
             </Link>
           </div>
