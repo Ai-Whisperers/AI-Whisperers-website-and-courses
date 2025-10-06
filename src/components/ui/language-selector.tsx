@@ -4,7 +4,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/contexts/i18n'
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 import { LANGUAGES, Language } from '@/lib/i18n/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -15,15 +17,23 @@ interface LanguageSelectorProps {
   className?: string
 }
 
-export function LanguageSelector({ 
-  variant = 'dropdown', 
-  className 
+export function LanguageSelector({
+  variant = 'dropdown',
+  className
 }: LanguageSelectorProps) {
   const { language, setLanguage, isLoading } = useLanguage()
+  const { switchLocale } = useLocalizedRoutes()
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleLanguageChange = (newLanguage: Language) => {
+    // Update language context
     setLanguage(newLanguage)
+
+    // Navigate to the same page with new locale
+    const newPath = switchLocale(newLanguage)
+    router.push(newPath)
+
     setIsOpen(false)
   }
 

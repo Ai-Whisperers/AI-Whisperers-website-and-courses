@@ -1,10 +1,13 @@
 // Footer Component
 // Site footer with links and information
 
+'use client'
+
 import Link from 'next/link'
-import { routes } from '@/config/routes'
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 
 export function Footer() {
+  const { routes: localRoutes } = useLocalizedRoutes()
   return (
     <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-4 py-12">
@@ -23,19 +26,19 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Courses</h3>
             <nav className="flex flex-col space-y-2">
-              <Link href={routes.public.courses} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.courses} className="text-sm text-muted-foreground hover:text-primary">
                 All Courses
               </Link>
-              <Link href={routes.public.courseDetail('ai-foundations')} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.courseDetail('ai-foundations')} className="text-sm text-muted-foreground hover:text-primary">
                 AI Foundations
               </Link>
-              <Link href={routes.public.courseDetail('applied-ai')} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.courseDetail('applied-ai')} className="text-sm text-muted-foreground hover:text-primary">
                 Applied AI
               </Link>
-              <Link href={routes.public.courseDetail('ai-web-development')} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.courseDetail('ai-web-development')} className="text-sm text-muted-foreground hover:text-primary">
                 AI Web Development
               </Link>
-              <Link href={routes.public.courseDetail('enterprise-ai')} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.courseDetail('enterprise-ai')} className="text-sm text-muted-foreground hover:text-primary">
                 Enterprise AI
               </Link>
             </nav>
@@ -45,16 +48,16 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Company</h3>
             <nav className="flex flex-col space-y-2">
-              <Link href={routes.public.about} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.about} className="text-sm text-muted-foreground hover:text-primary">
                 About Us
               </Link>
-              <Link href={routes.public.blog} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.blog} className="text-sm text-muted-foreground hover:text-primary">
                 Blog
               </Link>
-              <Link href={routes.public.contact} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.contact} className="text-sm text-muted-foreground hover:text-primary">
                 Contact
               </Link>
-              <Link href={routes.public.careers} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.careers} className="text-sm text-muted-foreground hover:text-primary">
                 Careers
               </Link>
             </nav>
@@ -64,16 +67,16 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold">Support</h3>
             <nav className="flex flex-col space-y-2">
-              <Link href={routes.public.help} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.help} className="text-sm text-muted-foreground hover:text-primary">
                 Help Center
               </Link>
-              <Link href={routes.public.privacy} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.privacy} className="text-sm text-muted-foreground hover:text-primary">
                 Privacy Policy
               </Link>
-              <Link href={routes.public.terms} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.terms} className="text-sm text-muted-foreground hover:text-primary">
                 Terms of Service
               </Link>
-              <Link href={routes.public.refund} className="text-sm text-muted-foreground hover:text-primary">
+              <Link href={localRoutes.public.refund} className="text-sm text-muted-foreground hover:text-primary">
                 Refund Policy
               </Link>
             </nav>
@@ -87,7 +90,7 @@ export function Footer() {
           <div className="flex space-x-4 mt-4 md:mt-0">
             {/* Social Links */}
             <Link
-              href={routes.external.twitter}
+              href={localRoutes.external.twitter}
               className="text-muted-foreground hover:text-primary"
               aria-label="Twitter"
             >
@@ -96,7 +99,7 @@ export function Footer() {
               </svg>
             </Link>
             <Link
-              href={routes.external.linkedin}
+              href={localRoutes.external.linkedin}
               className="text-muted-foreground hover:text-primary"
               aria-label="LinkedIn"
             >
@@ -105,7 +108,7 @@ export function Footer() {
               </svg>
             </Link>
             <Link
-              href={routes.external.github}
+              href={localRoutes.external.github}
               className="text-muted-foreground hover:text-primary"
               aria-label="GitHub"
             >
