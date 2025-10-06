@@ -47,7 +47,7 @@ export const spacing = {
 export const semanticSpacing = {
   // Component internal spacing
   component: {
-    2xs: spacing[1],      // 4px
+    '2xs': spacing[1],      // 4px
     xs: spacing[2],       // 8px
     sm: spacing[3],       // 12px
     base: spacing[4],     // 16px
@@ -72,7 +72,7 @@ export const semanticSpacing = {
 
   // Stack spacing (vertical rhythm)
   stack: {
-    2xs: spacing[1],      // 4px
+    '2xs': spacing[1],      // 4px
     xs: spacing[2],       // 8px
     sm: spacing[4],       // 16px
     base: spacing[6],     // 24px
@@ -84,7 +84,7 @@ export const semanticSpacing = {
 
   // Inline spacing (horizontal rhythm)
   inline: {
-    2xs: spacing[1],      // 4px
+    '2xs': spacing[1],      // 4px
     xs: spacing[2],       // 8px
     sm: spacing[3],       // 12px
     base: spacing[4],     // 16px

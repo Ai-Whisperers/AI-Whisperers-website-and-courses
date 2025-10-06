@@ -1,41 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
-// Import design tokens
-const {
-  spacing,
-  semanticSpacing,
-  containerWidth,
-  breakpoints,
-} = require('./src/lib/design-system/tokens/spacing')
-
-const {
-  fontSize,
-  fontWeight,
-  lineHeight,
-  letterSpacing,
-  fontFamily,
-} = require('./src/lib/design-system/tokens/typography')
-
-const {
-  boxShadow,
-  componentShadow,
-} = require('./src/lib/design-system/tokens/shadows')
-
-const {
-  borderRadius,
-  borderWidth,
-  ringWidth,
-  ringOffsetWidth,
-} = require('./src/lib/design-system/tokens/borders')
-
-const {
-  transitionDuration,
-  transitionTimingFunction,
-} = require('./src/lib/design-system/tokens/transitions')
-
-const {
-  zIndex,
-} = require('./src/lib/design-system/tokens/z-index')
+// Design tokens defined inline for Tailwind
+// Full token system available via @/lib/design-system for TypeScript components
 
 module.exports = {
   content: [
@@ -44,13 +10,10 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    // Extend with design tokens
     extend: {
       // === COLORS ===
-      // Keep shadcn/ui color system (CSS variables)
-      // These map to our theme system via DesignSystemContext
       colors: {
-        // shadcn/ui semantic colors (using CSS vars)
+        // shadcn/ui semantic colors (CSS variables)
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -64,7 +27,7 @@ module.exports = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          // Add full color scale from design tokens
+          // Full color scale from design tokens (CSS variables)
           50: "var(--color-primary-50)",
           100: "var(--color-primary-100)",
           200: "var(--color-primary-200)",
@@ -80,7 +43,6 @@ module.exports = {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
-          // Add full color scale
           50: "var(--color-secondary-50)",
           100: "var(--color-secondary-100)",
           200: "var(--color-secondary-200)",
@@ -96,7 +58,6 @@ module.exports = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-          // Add full color scale
           50: "var(--color-accent-50)",
           100: "var(--color-accent-100)",
           200: "var(--color-accent-200)",
@@ -130,7 +91,6 @@ module.exports = {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        // Semantic colors from design tokens
         success: "var(--color-success)",
         warning: "var(--color-warning)",
         error: "var(--color-error)",
@@ -146,46 +106,170 @@ module.exports = {
         },
       },
 
-      // === TYPOGRAPHY ===
-      fontFamily,
-      fontSize,
-      fontWeight,
-      lineHeight,
-      letterSpacing,
-
       // === SPACING ===
-      spacing,
-      gap: semanticSpacing.inline,
+      spacing: {
+        0: '0',
+        px: '1px',
+        0.5: '0.125rem',
+        1: '0.25rem',
+        1.5: '0.375rem',
+        2: '0.5rem',
+        2.5: '0.625rem',
+        3: '0.75rem',
+        3.5: '0.875rem',
+        4: '1rem',
+        5: '1.25rem',
+        6: '1.5rem',
+        7: '1.75rem',
+        8: '2rem',
+        9: '2.25rem',
+        10: '2.5rem',
+        11: '2.75rem',
+        12: '3rem',
+        14: '3.5rem',
+        16: '4rem',
+        20: '5rem',
+        24: '6rem',
+        28: '7rem',
+        32: '8rem',
+        36: '9rem',
+        40: '10rem',
+        44: '11rem',
+        48: '12rem',
+        52: '13rem',
+        56: '14rem',
+        60: '15rem',
+        64: '16rem',
+        72: '18rem',
+        80: '20rem',
+        96: '24rem',
+      },
 
-      // === CONTAINER ===
-      maxWidth: containerWidth,
+      // === TYPOGRAPHY ===
+      fontSize: {
+        '2xs': '0.625rem',
+        xs: '0.75rem',
+        sm: '0.875rem',
+        base: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
+        '6xl': '3.75rem',
+        '7xl': '4.5rem',
+        '8xl': '6rem',
+        '9xl': '8rem',
+      },
 
-      // === SCREENS (Breakpoints) ===
-      screens: breakpoints,
+      fontWeight: {
+        thin: '100',
+        extralight: '200',
+        light: '300',
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
+        black: '900',
+      },
+
+      lineHeight: {
+        none: '1',
+        tight: '1.25',
+        snug: '1.375',
+        normal: '1.5',
+        relaxed: '1.625',
+        loose: '2',
+      },
+
+      letterSpacing: {
+        tighter: '-0.05em',
+        tight: '-0.025em',
+        normal: '0em',
+        wide: '0.025em',
+        wider: '0.05em',
+        widest: '0.1em',
+      },
 
       // === SHADOWS ===
-      boxShadow,
+      boxShadow: {
+        xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        sm: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        DEFAULT: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        md: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        lg: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        xl: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+        '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+        inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
+        none: 'none',
+      },
 
       // === BORDERS ===
       borderRadius: {
-        ...borderRadius,
-        // Keep shadcn/ui dynamic radius
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        none: '0',
+        xs: '0.125rem',
+        sm: '0.25rem',
+        DEFAULT: '0.375rem',
+        md: '0.5rem',
+        lg: '0.75rem',
+        xl: '1rem',
+        '2xl': '1.5rem',
+        '3xl': '2rem',
+        full: '9999px',
+        // shadcn/ui dynamic radius
+        'radius-lg': 'var(--radius)',
+        'radius-md': 'calc(var(--radius) - 2px)',
+        'radius-sm': 'calc(var(--radius) - 4px)',
       },
-      borderWidth,
 
-      // === RINGS (Focus) ===
-      ringWidth,
-      ringOffsetWidth,
+      borderWidth: {
+        0: '0',
+        DEFAULT: '1px',
+        2: '2px',
+        4: '4px',
+        8: '8px',
+      },
 
       // === TRANSITIONS ===
-      transitionDuration,
-      transitionTimingFunction,
+      transitionDuration: {
+        0: '0ms',
+        75: '75ms',
+        100: '100ms',
+        150: '150ms',
+        200: '200ms',
+        300: '300ms',
+        500: '500ms',
+        700: '700ms',
+        1000: '1000ms',
+      },
+
+      transitionTimingFunction: {
+        linear: 'linear',
+        in: 'cubic-bezier(0.4, 0, 1, 1)',
+        out: 'cubic-bezier(0, 0, 0.2, 1)',
+        'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
 
       // === Z-INDEX ===
-      zIndex,
+      zIndex: {
+        0: '0',
+        10: '10',
+        20: '20',
+        30: '30',
+        40: '40',
+        50: '50',
+        auto: 'auto',
+        dropdown: '1000',
+        sticky: '1100',
+        fixed: '1200',
+        overlay: '1300',
+        modal: '1400',
+        popover: '1500',
+        tooltip: '1600',
+        toast: '1700',
+      },
 
       // === ANIMATIONS ===
       keyframes: {
@@ -213,14 +297,6 @@ module.exports = {
           from: { transform: "translateY(-100%)" },
           to: { transform: "translateY(0)" },
         },
-        "slide-in-left": {
-          from: { transform: "translateX(-100%)" },
-          to: { transform: "translateX(0)" },
-        },
-        "slide-in-right": {
-          from: { transform: "translateX(100%)" },
-          to: { transform: "translateX(0)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -229,8 +305,6 @@ module.exports = {
         "fade-out": "fade-out 0.2s ease-out",
         "slide-in-up": "slide-in-up 0.3s ease-out",
         "slide-in-down": "slide-in-down 0.3s ease-out",
-        "slide-in-left": "slide-in-left 0.3s ease-out",
-        "slide-in-right": "slide-in-right 0.3s ease-out",
       },
     },
   },
