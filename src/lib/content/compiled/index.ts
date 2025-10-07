@@ -5,6 +5,8 @@
 import type { PageContent } from '@/types/content';
 import { about_esContent } from './about-es';
 import { about_enContent } from './about-en';
+import { admin_esContent } from './admin-es';
+import { admin_enContent } from './admin-en';
 import { architecture_esContent } from './architecture-es';
 import { architecture_enContent } from './architecture-en';
 import { contact_esContent } from './contact-es';
@@ -27,6 +29,8 @@ import { terms_enContent } from './terms-en';
 export const contentMap: Record<string, PageContent> = {
   'about-es': about_esContent,
   'about-en': about_enContent,
+  'admin-es': admin_esContent,
+  'admin-en': admin_enContent,
   'architecture-es': architecture_esContent,
   'architecture-en': architecture_enContent,
   'contact-es': contact_esContent,
@@ -71,6 +75,8 @@ export function getCompiledPageContentWithLang(
 // Individual content exports
 export { default as about_esContent } from './about-es';
 export { default as about_enContent } from './about-en';
+export { default as admin_esContent } from './admin-es';
+export { default as admin_enContent } from './admin-en';
 export { default as architecture_esContent } from './architecture-es';
 export { default as architecture_enContent } from './architecture-en';
 export { default as contact_esContent } from './contact-es';
