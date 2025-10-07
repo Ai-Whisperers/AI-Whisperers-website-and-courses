@@ -7,7 +7,7 @@ import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { LanguageToggler } from "@/components/ui/LanguageToggler"
 import type { PageContent } from "@/types/content"
-import { routes } from '@/config/routes'
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 
 interface FAQPageProps {
   content: PageContent
@@ -48,6 +48,7 @@ interface FAQContent {
 }
 
 export function FAQPage({ content }: FAQPageProps) {
+  const { routes } = useLocalizedRoutes()
   const [activeCategory, setActiveCategory] = useState<string>('general')
   const [openQuestions, setOpenQuestions] = useState<Set<number>>(new Set())
   const [searchTerm, setSearchTerm] = useState('')

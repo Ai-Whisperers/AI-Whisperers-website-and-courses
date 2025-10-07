@@ -6,7 +6,7 @@ import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import { LanguageToggler } from "@/components/ui/LanguageToggler"
 import type { PageContent } from "@/types/content"
-import { routes } from '@/config/routes'
+import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 
 interface TermsPageProps {
   content: PageContent
@@ -43,6 +43,8 @@ interface TermsContent {
 }
 
 export function TermsPage({ content }: TermsPageProps) {
+  const { routes } = useLocalizedRoutes()
+
   // Safe content validation instead of unsafe casting
   const isValidTermsContent = (content: any): content is TermsContent => {
     return content && 
