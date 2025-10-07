@@ -1,0 +1,115 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/dashboard.yml
+// Language: EN
+
+import type { PageContent } from '@/types/content';
+
+export const dashboard_enContent: PageContent = {
+  "meta": {
+    "title": "Dashboard | AI Whisperers",
+    "description": "Track your learning progress, view enrolled courses, and manage your AI education journey.",
+    "language": "en",
+    "keywords": [
+      "AI",
+      "education"
+    ]
+  },
+  "hero": {
+    "greeting": "Welcome back",
+    "subtitle": "Continue your AI learning journey"
+  },
+  "overview": {
+    "title": "Learning Overview",
+    "stats": [
+      {
+        "label": "Courses Enrolled",
+        "value": "0",
+        "icon": "BookOpen",
+        "color": "blue"
+      },
+      {
+        "label": "Hours Learned",
+        "value": "0",
+        "icon": "Clock",
+        "color": "green"
+      },
+      {
+        "label": "Achievements",
+        "value": "0",
+        "icon": "Award",
+        "color": "purple"
+      },
+      {
+        "label": "Current Streak",
+        "value": "0 days",
+        "icon": "Flame",
+        "color": "orange"
+      }
+    ]
+  },
+  "courses": {
+    "title": "My Courses",
+    "empty": {
+      "message": "You haven't enrolled in any courses yet.",
+      "cta": {
+        "text": "Browse Courses",
+        "href": "/courses"
+      }
+    },
+    "continue_learning": "Continue Learning",
+    "progress_label": "Progress"
+  },
+  "recent_activity": {
+    "title": "Recent Activity",
+    "empty": "No recent activity",
+    "types": {
+      "lesson_completed": "Completed lesson",
+      "quiz_passed": "Passed quiz",
+      "certificate_earned": "Earned certificate",
+      "course_enrolled": "Enrolled in course"
+    }
+  },
+  "achievements": {
+    "title": "Achievements",
+    "empty": "Complete courses and lessons to earn achievements",
+    "view_all": "View All Achievements"
+  },
+  "upcoming": {
+    "title": "Recommended Next Steps",
+    "empty": "Complete a lesson to get personalized recommendations"
+  },
+  "profile": {
+    "title": "Profile",
+    "view_profile": "View Profile",
+    "edit_profile": "Edit Profile",
+    "subscription": "Subscription",
+    "settings": "Settings"
+  },
+  "quick_actions": {
+    "title": "Quick Actions",
+    "actions": [
+      {
+        "label": "Browse Courses",
+        "icon": "Search",
+        "href": "/courses"
+      },
+      {
+        "label": "View Certificates",
+        "icon": "Award",
+        "href": "/dashboard/certificates"
+      },
+      {
+        "label": "Account Settings",
+        "icon": "Settings",
+        "href": "/dashboard/settings"
+      },
+      {
+        "label": "Get Help",
+        "icon": "HelpCircle",
+        "href": "/help"
+      }
+    ]
+  }
+} as const;
+
+export default dashboard_enContent;

@@ -1,0 +1,115 @@
+// Auto-generated content file - Do not edit manually
+// Generated from: src/content/pages/dashboard-es.yml
+// Language: ES
+
+import type { PageContent } from '@/types/content';
+
+export const dashboard_esContent: PageContent = {
+  "meta": {
+    "title": "Panel de Control | AI Whisperers",
+    "description": "Rastrea tu progreso de aprendizaje, ve cursos inscritos y gestiona tu viaje de educación en IA.",
+    "language": "es",
+    "keywords": [
+      "AI",
+      "education"
+    ]
+  },
+  "hero": {
+    "greeting": "Bienvenido de nuevo",
+    "subtitle": "Continúa tu viaje de aprendizaje en IA"
+  },
+  "overview": {
+    "title": "Resumen de Aprendizaje",
+    "stats": [
+      {
+        "label": "Cursos Inscritos",
+        "value": "0",
+        "icon": "BookOpen",
+        "color": "blue"
+      },
+      {
+        "label": "Horas Aprendidas",
+        "value": "0",
+        "icon": "Clock",
+        "color": "green"
+      },
+      {
+        "label": "Logros",
+        "value": "0",
+        "icon": "Award",
+        "color": "purple"
+      },
+      {
+        "label": "Racha Actual",
+        "value": "0 días",
+        "icon": "Flame",
+        "color": "orange"
+      }
+    ]
+  },
+  "courses": {
+    "title": "Mis Cursos",
+    "empty": {
+      "message": "Aún no te has inscrito en ningún curso.",
+      "cta": {
+        "text": "Explorar Cursos",
+        "href": "/es/courses"
+      }
+    },
+    "continue_learning": "Continuar Aprendiendo",
+    "progress_label": "Progreso"
+  },
+  "recent_activity": {
+    "title": "Actividad Reciente",
+    "empty": "Sin actividad reciente",
+    "types": {
+      "lesson_completed": "Lección completada",
+      "quiz_passed": "Quiz aprobado",
+      "certificate_earned": "Certificado obtenido",
+      "course_enrolled": "Inscrito en curso"
+    }
+  },
+  "achievements": {
+    "title": "Logros",
+    "empty": "Completa cursos y lecciones para ganar logros",
+    "view_all": "Ver Todos los Logros"
+  },
+  "upcoming": {
+    "title": "Próximos Pasos Recomendados",
+    "empty": "Completa una lección para obtener recomendaciones personalizadas"
+  },
+  "profile": {
+    "title": "Perfil",
+    "view_profile": "Ver Perfil",
+    "edit_profile": "Editar Perfil",
+    "subscription": "Suscripción",
+    "settings": "Configuración"
+  },
+  "quick_actions": {
+    "title": "Acciones Rápidas",
+    "actions": [
+      {
+        "label": "Explorar Cursos",
+        "icon": "Search",
+        "href": "/es/courses"
+      },
+      {
+        "label": "Ver Certificados",
+        "icon": "Award",
+        "href": "/es/dashboard/certificates"
+      },
+      {
+        "label": "Configuración de Cuenta",
+        "icon": "Settings",
+        "href": "/es/dashboard/settings"
+      },
+      {
+        "label": "Obtener Ayuda",
+        "icon": "HelpCircle",
+        "href": "/es/help"
+      }
+    ]
+  }
+} as const;
+
+export default dashboard_esContent;

@@ -9,6 +9,8 @@ import { architecture_esContent } from './architecture-es';
 import { architecture_enContent } from './architecture-en';
 import { contact_esContent } from './contact-es';
 import { contact_enContent } from './contact-en';
+import { dashboard_esContent } from './dashboard-es';
+import { dashboard_enContent } from './dashboard-en';
 import { faq_esContent } from './faq-es';
 import { faq_enContent } from './faq-en';
 import { homepage_esContent } from './homepage-es';
@@ -29,6 +31,8 @@ export const contentMap: Record<string, PageContent> = {
   'architecture-en': architecture_enContent,
   'contact-es': contact_esContent,
   'contact-en': contact_enContent,
+  'dashboard-es': dashboard_esContent,
+  'dashboard-en': dashboard_enContent,
   'faq-es': faq_esContent,
   'faq-en': faq_enContent,
   'homepage-es': homepage_esContent,
@@ -71,6 +75,8 @@ export { default as architecture_esContent } from './architecture-es';
 export { default as architecture_enContent } from './architecture-en';
 export { default as contact_esContent } from './contact-es';
 export { default as contact_enContent } from './contact-en';
+export { default as dashboard_esContent } from './dashboard-es';
+export { default as dashboard_enContent } from './dashboard-en';
 export { default as faq_esContent } from './faq-es';
 export { default as faq_enContent } from './faq-en';
 export { default as homepage_esContent } from './homepage-es';
