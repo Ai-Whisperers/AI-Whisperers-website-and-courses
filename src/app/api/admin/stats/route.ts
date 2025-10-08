@@ -14,10 +14,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // TODO: Check if user has admin role
-    // if (session.user.role !== 'ADMIN') {
-    //   return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-    // }
+    // Verify user has admin or instructor role (CRITICAL SECURITY CHECK)
+    const userRole = (session.user as any)?.role
+    if (!userRole || (userRole !== 'admin' && userRole !== 'instructor')) {
+      return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 })
+    }
 
     // TODO: Fetch real stats from database
     const stats = {
