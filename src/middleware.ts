@@ -118,7 +118,7 @@ export function middleware(request: NextRequest) {
   // Create response
   let response: NextResponse
 
-  // Case 1: Path has locale prefix already
+  // Case 1: Path has locale prefix already (e.g., /es, /es/courses)
   if (pathnameLocale) {
     // Remove locale prefix from pathname for internal routing
     // /es/courses -> /courses (but keep locale in header)
@@ -127,18 +127,12 @@ export function middleware(request: NextRequest) {
     url.pathname = pathnameWithoutLocale
     response = NextResponse.rewrite(url)
   }
-  // Case 2: Path has no locale prefix
+  // Case 2: Path has no locale prefix (e.g., /, /courses)
   else {
-    // For default locale (en), don't redirect - keep clean URLs
-    if (locale === i18nConfig.defaultLanguage) {
-      response = NextResponse.next()
-    }
-    // For non-default locale, redirect to /{locale}{pathname}
-    else {
-      const url = request.nextUrl.clone()
-      url.pathname = `/${locale}${pathname}`
-      response = NextResponse.redirect(url)
-    }
+    // Never auto-redirect - let users explicitly choose their language
+    // This prevents unwanted redirects based on browser language
+    // Users can switch language via language selector or by visiting /es directly
+    response = NextResponse.next()
   }
 
   // Set locale cookie for persistence
