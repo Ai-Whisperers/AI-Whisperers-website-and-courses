@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
-import { getMockCourseBySlug, courseToPlainObjectWithMethods } from '@/lib/data/mock-courses'
+import { getMockCourseBySlug, courseToPlainObjectWithMethods, getMockCourses } from '@/lib/data/mock-courses'
 import { routes } from '@/config/routes'
 
 interface CoursePageProps {
@@ -21,10 +21,27 @@ async function getCourseBySlug(slug: string) {
   return course ? courseToPlainObjectWithMethods(course) : null
 }
 
+// Static Site Generation (SSG) with Incremental Static Regeneration (ISR)
+// Pre-generate all published course pages at build time for optimal performance
+export async function generateStaticParams() {
+  const courses = getMockCourses({ published: true })
+
+  return courses.map((course) => ({
+    slug: course.slug,
+  }))
+}
+
+// ISR: Revalidate every hour (3600 seconds)
+// Course content doesn't change frequently, so hourly updates are sufficient
+export const revalidate = 3600
+
+// Allow dynamic params for new courses without rebuild
+export const dynamicParams = true
+
 export async function generateMetadata({ params }: CoursePageProps) {
   const resolvedParams = await params
   const course = await getCourseBySlug(resolvedParams.slug)
-  
+
   if (!course) {
     return {
       title: 'Course Not Found | AI Whisperers',

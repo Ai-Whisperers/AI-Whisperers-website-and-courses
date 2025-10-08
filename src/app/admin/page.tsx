@@ -24,10 +24,12 @@ export default async function AdminPage() {
     redirect('/auth/signin?callbackUrl=/admin')
   }
 
-  // TODO: Check if user has admin role
-  // if (session.user.role !== 'ADMIN') {
-  //   redirect('/dashboard')
-  // }
+  // Check if user has admin role (CRITICAL SECURITY CHECK)
+  const userRole = (session.user as any)?.role
+  if (!userRole || (userRole !== 'admin' && userRole !== 'instructor')) {
+    // Redirect unauthorized users to dashboard with error message
+    redirect('/dashboard?error=unauthorized&message=Admin access required')
+  }
 
   const localizedContent = await getLocalizedPageContent('admin')
 

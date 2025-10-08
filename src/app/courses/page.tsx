@@ -9,6 +9,10 @@ export const metadata = {
   description: 'Comprehensive AI courses from beginner to expert. Learn artificial intelligence through hands-on projects and real-world applications.'
 }
 
+// ISR: Revalidate every 30 minutes
+// Course catalog updates more frequently than individual courses
+export const revalidate = 1800
+
 export default async function CoursesPage() {
   // Get courses from centralized mock data
   const coursesData = getMockCoursesAsClientObjects({ published: true })
