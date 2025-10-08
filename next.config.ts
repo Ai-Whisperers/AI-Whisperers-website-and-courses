@@ -33,6 +33,25 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // Turbopack configuration (for dev mode when using --turbopack flag)
+  turbopack: {
+    // File resolution extensions
+    resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.json', '.mjs'],
+
+    // Rules for code transformation
+    rules: {
+      // TypeScript/JavaScript files
+      '*.{ts,tsx,js,jsx}': {
+        loaders: ['builtin:swc-loader'],
+      },
+    },
+
+    // Resolve aliases (matches webpack and tsconfig)
+    resolveAlias: {
+      '@': './src',
+    },
+  },
+
   // Internationalization (for App Router, implement via middleware)
   // i18n config not supported in App Router - use middleware instead
 

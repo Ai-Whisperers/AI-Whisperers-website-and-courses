@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "dev:stable": "next dev",
+    "dev": "next dev",
+    "dev:turbopack": "next dev --turbopack",
     "build": "npm install && node scripts/compile-content.js && npx prisma generate && next build",
     "build:docker": "node scripts/compile-content.js && npx prisma generate && next build",
     "start": "node .next/standalone/server.js",

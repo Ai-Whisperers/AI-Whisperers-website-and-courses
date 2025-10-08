@@ -1,10 +1,144 @@
 # Deployment Guide - AI Whisperers Platform
 **Complete deployment instructions for Render.com**
 
-**Last Updated:** October 1, 2025
-**Platform Version:** Next.js 15.5.2
+**Last Updated:** October 7, 2025
+**Platform:** Render.com (Docker-based deployment)
+**Framework:** Next.js 15.5.2 (App Router)
+**Bundler:** Webpack (Enterprise-grade, production-ready)
 **Database:** PostgreSQL (Render PostgreSQL)
-**Node Version:** 20.x
+**Node Version:** 22.16.0 LTS
+**Runtime:** Node.js standalone server
+
+---
+
+## 🚀 Tech Stack
+
+### Core Technologies
+- **Next.js** 15.5.2 (App Router, Standalone mode)
+- **React** 19.1.0
+- **TypeScript** 5.9.2
+- **Node.js** 22.16.0 LTS
+
+### Build & Bundle
+- **Bundler:** Webpack (Enterprise-grade, production-ready)
+  - **Why Webpack?** Mature, stable, zero parsing errors, full Next.js feature support
+  - **Why not Turbopack?** Experimental, causes React Refresh parsing errors, not production-ready
+- **Transpiler:** SWC (via Next.js built-in)
+- **CSS:** Tailwind CSS 3.4.13 + PostCSS 8.4.49
+
+### Backend & Database
+- **Database:** PostgreSQL (Render managed)
+- **ORM:** Prisma 6.16.3
+- **Auth:** NextAuth.js v4.24.7 (Database sessions via Prisma adapter)
+- **API:** Next.js API Routes (App Router)
+
+### Deployment
+- **Platform:** Render.com
+- **Container:** Docker (multi-stage builds)
+- **Output Mode:** Standalone (optimized production bundle)
+- **Port:** 3000 (container) → 10000 (Render)
+
+### Configuration System
+- **Unified Config:** `config/bootstrap.config.js` (orchestrator)
+- **Env Loading:** `config/env-loader.js` (priority-based)
+- **Database Strategy:** `config/database.config.js` (build vs runtime)
+
+---
+
+## 🏗️ Backend & Frontend Architecture
+
+### Backend Architecture
+
+**API Routes (12 endpoints)** - Located in `src/app/api/`:
+- **Authentication:** `/api/auth/[...nextauth]` - NextAuth.js with Google/GitHub OAuth
+- **Health:** `/api/health` - Health check for Render monitoring
+- **Courses:** `/api/courses`, `/api/courses/[slug]`, `/api/courses/stats`
+- **Content:** `/api/content/[pageName]` - Dynamic i18n-aware content
+- **User Data:** `/api/user/dashboard`, `/api/user/courses/enrolled`, `/api/user/progress`, `/api/user/achievements`
+- **Admin:** `/api/admin/stats` - Admin analytics
+- **Architecture:** `/api/architecture` - Real-time codebase analysis (dev only)
+
+**Server Components (RSC)** - All `page.tsx` files default to Server Components:
+- SEO-optimized pre-rendered HTML
+- Zero client-side JavaScript until hydration
+- Direct database access via Prisma
+- Secure (API keys, secrets never exposed)
+
+**Business Logic Layer** - Located in `src/lib/`:
+- `services/` - Course CRUD operations
+- `repositories/` - Data access patterns
+- `usecases/` - Domain logic (e.g., `enroll-student.usecase.ts`)
+- `auth/config.ts` - NextAuth.js configuration with Prisma adapter
+- `db/prisma.ts` - Prisma client singleton with connection pooling
+
+**Database Schema** - 19 tables across 5 domains:
+- Authentication: `users`, `accounts`, `sessions`, `verification_tokens`
+- LMS Core: `courses`, `course_modules`, `lessons`, `enrollments`, `course_progress`, `lesson_progress`
+- Assessments: `quizzes`, `questions`, `quiz_attempts`
+- Commerce: `transactions`
+- Analytics: `course_analytics`
+- Content: `media`, `certificates`
+
+**Content Management System** - Build-time compilation:
+- Source: `src/content/pages/` (YAML files)
+- Compilation: `scripts/compile-content.js`
+- Output: `src/lib/content/compiled/` (TypeScript modules)
+- Features: Bilingual (EN/ES), Type-safe, Zero runtime file I/O
+
+### Frontend Architecture
+
+**Client Components** - Marked with `'use client'`:
+- **Admin:** `AdminClient.tsx`, `AdminLayout.tsx`
+- **Dashboard:** `DashboardClient.tsx`, `DashboardLayout.tsx`, `CoursesEnrolled.tsx`, `RecentActivity.tsx`
+- **Interactive:** `NewsletterSignup.tsx`, `PricingCalculator.tsx`, `TestimonialsCarousel.tsx`
+- **Pages:** `TermsPage.tsx`, `PrivacyPage.tsx`, `FAQPage.tsx`
+
+**State Management** - 5-Layer Context System (21 context files):
+```typescript
+<SecurityProvider>          // Layer 1: Auth, users, payments
+  <LogicProvider>           // Layer 2: Routing, modals, notifications
+    <DesignSystemProvider>  // Layer 3: Design tokens (public)
+      <PresentationProvider> // Layer 4: UI preferences (private)
+        <I18nProvider>       // Layer 5: Translations, locale
+          {children}
+        </I18nProvider>
+      </PresentationProvider>
+    </DesignSystemProvider>
+  </LogicProvider>
+</SecurityProvider>
+```
+
+**UI Component Library** - Located in `src/components/`:
+- `ui/` - Reusable UI primitives
+- `layout/` - Navigation, Footer
+- `course/` - Course-specific components
+- `admin/`, `dashboard/` - Feature-specific UI
+- `content/` - Dynamic content rendering
+
+**Design System** - Token-based (`src/lib/design-system/`):
+- Design tokens: colors, typography, spacing, shadows, borders, transitions
+- Themes: Multiple theme configurations
+- Integration: CSS Variables + Tailwind + TypeScript autocomplete
+
+**Hybrid Pattern** - RSC Wrapper → Client Component:
+```typescript
+// src/app/dashboard/page.tsx (Server Component)
+export default async function DashboardPage() {
+  const data = await fetch('/api/user/dashboard')
+  return <DashboardClient initialData={data} /> // Client Component
+}
+```
+
+### Data Flows
+
+**Authentication Flow:**
+1. User clicks "Sign in with Google" → 2. Frontend calls `/api/auth/signin` → 3. NextAuth.js → Google OAuth → 4. Callback creates/updates user in DB → 5. Session stored in DB → 6. Secure cookie set → 7. SecurityProvider updates state → 8. UI re-renders
+
+**Course Enrollment Flow:**
+1. User clicks "Enroll" → 2. POST `/api/courses/[slug]/enroll` → 3. API validates session → 4. `enroll-student.usecase.ts` executes → 5. Prisma transaction creates enrollment → 6. API returns data → 7. Frontend updates SecurityProvider → 8. UI shows enrolled status
+
+**Page Rendering Flow (Hybrid):**
+1. User navigates to `/dashboard` → 2. Next.js routes to RSC → 3. Server fetches from API → 4. Server pre-renders HTML → 5. HTML sent to browser (SEO-friendly) → 6. Browser hydrates Client Component → 7. Providers initialize → 8. Interactive UI ready
 
 ---
 

@@ -1,10 +1,21 @@
 # 🤖 Claude AI Assistant Context & Instructions
 
 **Project:** AI Whisperers Website and Courses Platform
-**Last Updated:** October 5, 2025
+**Last Updated:** October 7, 2025
 **Architecture Quality:** Grade A+ (96%)
 **Context Preservation:** CRITICAL - Always read this file first**
-**Latest:** 4-Layer Global State Architecture Implemented
+**Latest:** Backend/Frontend Architecture Documented + Webpack-Only Strategy
+
+## 🚀 **Deployment Stack**
+
+**Platform:** Render.com (Docker-based)
+**Framework:** Next.js 15.5.2 (App Router)
+**Bundler:** Webpack (Enterprise-grade, production-ready)
+**Runtime:** Node.js 22.16.0
+**Database:** PostgreSQL (Prisma ORM)
+**Auth:** NextAuth.js v4 (Database sessions)
+**Styling:** Tailwind CSS + PostCSS
+**Language:** TypeScript 5.9.2
 
 ---
 
@@ -22,48 +33,61 @@ When working on this codebase, **ALWAYS**:
 ## 🏗️ **CURRENT SYSTEM ARCHITECTURE**
 
 ### **Architecture Overview**
-- **Total Files:** 245+ files across 6 architectural layers + 4-layer global state
+- **Total Files:** 245+ files across 6 architectural layers + 5-layer global state
 - **Dependencies:** 106 internal file-to-file relationships
 - **Architecture Grade:** A+ (96% quality score)
 - **Circular Dependencies:** 0 ✅ (maintained at zero)
 - **Methodology:** EC4RO-HGN (Extended C4 with Root Orchestration)
-- **Global State:** Enterprise 4-Layer Pattern (Security → Logic → Presentation → i18n)
+- **Global State:** Enterprise 5-Layer Pattern (Security → Logic → DesignSystem → Presentation → i18n)
+- **Backend/Frontend:** Hybrid SSR/CSR - 12 API routes, Server + Client Components
+- **Documentation:** See ARCHITECTURE.md for detailed backend/frontend breakdown
 
 ### **Key Architectural Principles**
-1. **Database-Free Design** - JWT auth, build-time content compilation
+1. **Database-Backed Architecture** - PostgreSQL + Prisma ORM, NextAuth.js database sessions
 2. **Clean Architecture** - Domain-driven design with proper layer separation
-3. **Zero Runtime File I/O** - All content pre-compiled at build time
-4. **4-Layer Global State** - Enterprise separation of concerns for frontend
+3. **Zero Runtime File I/O** - All content pre-compiled at build time (YAML → TypeScript)
+4. **5-Layer Global State** - Enterprise separation of concerns for frontend
 5. **Bilingual i18n** - EN/ES instant switching with SSR compatibility
 6. **Real System Data** - Architecture maps reflect actual codebase structure
+7. **Hybrid Rendering** - Server Components (SEO) + Client Components (interactivity)
 
-### **🎯 NEW: 4-Layer Global State Architecture**
+### **🎯 5-Layer Global State Architecture**
 
 **Provider Hierarchy (CRITICAL - Maintain this order):**
 ```typescript
-<SecurityProvider>        // Layer 1: Authentication, Users, Payments, Permissions
-  <LogicProvider>         // Layer 2: Routing, Modals, Notifications, Admin, Feature Flags
-    <PresentationProvider> // Layer 3: Themes, UI, Styling, Accessibility, Dark Mode
-      <I18nProvider>      // Layer 4: Language, Locale, Translations, Formatting
-        {children}
-      </I18nProvider>
-    </PresentationProvider>
+<SecurityProvider>          // Layer 0: Authentication, Users, Payments, Permissions
+  <LogicProvider>           // Layer 1: Routing, Modals, Notifications, Admin, Feature Flags
+    <DesignSystemProvider>  // Layer 2A: Design Tokens, Themes (PUBLIC - cacheable)
+      <PresentationProvider> // Layer 2B: UI Preferences (PRIVATE - user-specific)
+        <I18nProvider>      // Layer 3: Language, Locale, Translations, Formatting
+          {children}
+        </I18nProvider>
+      </PresentationProvider>
+    </DesignSystemProvider>
   </LogicProvider>
 </SecurityProvider>
 ```
 
 **Why This Order:**
-1. **SecurityProvider first** - Controls access to entire app
-2. **LogicProvider second** - Depends on security for admin/protected routes
-3. **PresentationProvider third** - May depend on user prefs from Security
-4. **I18nProvider innermost** - Most isolated, least dependencies
+1. **SecurityProvider (Layer 0)** - Controls access to entire app, outermost
+2. **LogicProvider (Layer 1)** - Depends on security for admin/protected routes
+3. **DesignSystemProvider (Layer 2A)** - PUBLIC design tokens (cacheable, versionable)
+4. **PresentationProvider (Layer 2B)** - PRIVATE UI prefs (uses design tokens, user-specific)
+5. **I18nProvider (Layer 3)** - Most isolated, innermost
+
+**Layer 2A/2B Separation Benefits:**
+- Security: Clear data classification (public vs. private)
+- Performance: Static tokens cached separately from user prefs
+- Multi-tenancy: Tenant-specific themes without user data mixing
+- Versioning: Design system versioned independently
 
 **Key Files:**
-- `src/contexts/RootProvider.tsx` - Combines all 4 layers
-- `src/contexts/security/` - Layer 1 implementation
-- `src/contexts/logic/` - Layer 2 implementation
-- `src/contexts/presentation/` - Layer 3 implementation
-- `src/contexts/i18n/` - Layer 4 implementation
+- `src/contexts/RootProvider.tsx` - Combines all 5 layers
+- `src/contexts/security/` - Layer 0 implementation
+- `src/contexts/logic/` - Layer 1 implementation
+- `src/contexts/design-system/` - Layer 2A implementation
+- `src/contexts/presentation/` - Layer 2B implementation
+- `src/contexts/i18n/` - Layer 3 implementation
 - `src/utils/storage.ts` - Unified SSR-safe storage with encryption
 
 **Benefits:**
@@ -73,6 +97,7 @@ When working on this codebase, **ALWAYS**:
 - ✅ Cross-tab state synchronization (BroadcastChannel)
 - ✅ Encrypted sensitive data storage
 - ✅ Zero circular dependencies maintained
+- ✅ Public/private data separation (GDPR-compliant)
 
 ---
 

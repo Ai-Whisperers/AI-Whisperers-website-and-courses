@@ -254,22 +254,10 @@ export function getFallbackPageContent(pageName: string): PageContent {
 async function compileContent() {
   console.log('🔨 Starting content compilation...');
 
-  // Load environment variables from .env.local if it exists
-  const envPath = path.join(process.cwd(), '.env.local');
-  if (fs.existsSync(envPath)) {
-    console.log('📋 Loading environment variables from .env.local...');
-    const envContent = fs.readFileSync(envPath, 'utf-8');
-    envContent.split('\n').forEach(line => {
-      const trimmed = line.trim();
-      if (trimmed && !trimmed.startsWith('#')) {
-        const [key, ...valueParts] = trimmed.split('=');
-        if (key && valueParts.length > 0) {
-          const value = valueParts.join('=').replace(/^["']|["']$/g, '');
-          process.env[key] = value;
-        }
-      }
-    });
-  }
+  // Load environment variables using centralized env-loader
+  const { loadAndApplyEnv } = require('../config/env-loader');
+  console.log('📋 Loading environment variables with priority: .env.local > .env...');
+  loadAndApplyEnv(['.env.local', '.env']);
 
   // Ensure output directory exists
   ensureOutputDir();
