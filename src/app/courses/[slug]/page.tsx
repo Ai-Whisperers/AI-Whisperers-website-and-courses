@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
 import { getMockCourseBySlug, courseToPlainObjectWithMethods, getMockCourses } from '@/lib/data/mock-courses'
@@ -83,17 +84,18 @@ export default async function CoursePage({ params }: CoursePageProps) {
     }
   }
 
+  const breadcrumbItems = [
+    { label: 'Home', href: routes.public.home },
+    { label: 'Courses', href: routes.public.courses },
+    { label: course.title }
+  ]
+
   return (
     <div className="container mx-auto py-12 px-4">
       {/* Header Section */}
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
-          <Link
-            href={routes.public.courses}
-            className="text-primary hover:text-primary/80 font-medium"
-          >
-            ← Back to Courses
-          </Link>
+          <Breadcrumb items={breadcrumbItems} className="mb-4" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
