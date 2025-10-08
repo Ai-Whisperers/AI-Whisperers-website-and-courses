@@ -120,8 +120,12 @@ export function middleware(request: NextRequest) {
 
   // Case 1: Path has locale prefix already
   if (pathnameLocale) {
-    // Just continue, locale is correct
-    response = NextResponse.next()
+    // Remove locale prefix from pathname for internal routing
+    // /es/courses -> /courses (but keep locale in header)
+    const pathnameWithoutLocale = pathname.replace(`/${pathnameLocale}`, '') || '/'
+    const url = request.nextUrl.clone()
+    url.pathname = pathnameWithoutLocale
+    response = NextResponse.rewrite(url)
   }
   // Case 2: Path has no locale prefix
   else {
