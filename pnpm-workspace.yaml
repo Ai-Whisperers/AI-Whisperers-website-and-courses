@@ -1,0 +1,15 @@
+# pnpm Workspace Configuration
+# PHASE 1.1: Turborepo monorepo setup
+#
+# This file defines the workspace structure for the AI Whisperers platform monorepo.
+# All packages in these directories will be part of the workspace.
+
+packages:
+  # Applications (deployable services)
+  - 'apps/*'
+
+  # Shared packages (libraries, utilities, configs)
+  - 'packages/*'
+
+  # Development tools (scripts, utilities)
+  - 'tools/*'

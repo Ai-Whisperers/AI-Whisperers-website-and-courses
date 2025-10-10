@@ -1,21 +1,30 @@
 {
-  "name": "ai-whisperers-website-and-courses",
+  "name": "ai-whisperers-platform",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.18.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tools/*"
+  ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "turbo run dev",
+    "dev:web": "next dev",
     "dev:turbopack": "next dev --turbopack",
-    "build": "npm install && node scripts/compile-content.js && npx prisma generate && next build",
+    "build": "turbo run build",
+    "build:legacy": "npm install && node scripts/compile-content.js && npx prisma generate && next build",
     "build:docker": "node scripts/compile-content.js && npx prisma generate && next build",
     "start": "node .next/standalone/server.js",
     "start:dev": "next start",
     "compile-content": "node scripts/compile-content.js",
-    "lint": "next lint",
-    "test": "jest",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",
-    "typecheck": "tsc --noEmit",
-    "typecheck:watch": "tsc --noEmit --watch"
+    "typecheck": "turbo run typecheck",
+    "typecheck:watch": "tsc --noEmit --watch",
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.2.12",
@@ -55,6 +64,7 @@
     "eslint-config-next": "15.4.4",
     "jest": "^29.7.0",
     "prisma": "^6.16.3",
+    "turbo": "^2.5.8",
     "tsx": "^4.19.2"
   }
 }
