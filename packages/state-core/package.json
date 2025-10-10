@@ -1,0 +1,29 @@
+{
+  "name": "@aiwhisperers/state-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "State management package for AI Whisperers platform (Zustand + React Query)",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./courses": "./courses/src/index.ts",
+    "./ui": "./ui/src/index.ts",
+    "./analytics": "./analytics/src/index.ts",
+    "./query": "./query/src/index.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf node_modules .turbo"
+  },
+  "dependencies": {
+    "zustand": "^5.0.2",
+    "@tanstack/react-query": "^5.64.2",
+    "react": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  }
+}
