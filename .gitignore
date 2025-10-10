@@ -3,9 +3,9 @@
 # IMPORTANT: Never ignore CLAUDE.md - Critical for AI assistant context preservation
 !CLAUDE.md
 
-# dependencies
-/node_modules
-/.pnp
+# dependencies (monorepo - all levels)
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -16,12 +16,12 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# next.js (all apps)
+.next/
+out/
 
-# production
-/build
+# production (all packages)
+build/
 
 # misc
 .DS_Store
@@ -44,8 +44,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local reports
-/local-reports
+# local reports (all levels)
+local-reports/
 
 # Docker artifacts
 docker-compose.override.yml
@@ -67,12 +67,15 @@ docker-volumes/
 Thumbs.db
 desktop.ini
 
-# Build artifacts
+# Build artifacts (all levels)
 dist/
 *.log
 .cache/
 .temp/
 *.tmp
+
+# Turborepo cache
+.turbo/
 
 # Test results and coverage
 test-results/
