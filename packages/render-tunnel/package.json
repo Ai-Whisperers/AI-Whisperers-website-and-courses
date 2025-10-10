@@ -1,0 +1,39 @@
+{
+  "name": "@aiwhisperers/render-tunnel",
+  "version": "0.1.0",
+  "description": "Render-Local Data Tunnel for dev/prod parity",
+  "private": true,
+  "exports": {
+    "./server": "./server/src/index.ts",
+    "./client": "./client/src/index.ts",
+    "./cli": "./cli/src/index.ts",
+    "./types": "./types/src/index.ts"
+  },
+  "scripts": {
+    "dev:server": "tsx watch server/src/index.ts",
+    "dev:client": "tsx watch client/src/index.ts",
+    "build": "tsc -b",
+    "clean": "rm -rf dist",
+    "tunnel": "tsx cli/src/index.ts"
+  },
+  "bin": {
+    "render-tunnel": "./cli/src/index.ts"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "commander": "^12.1.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.12",
+    "tsx": "^4.19.2",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
