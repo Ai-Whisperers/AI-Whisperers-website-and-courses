@@ -1,0 +1,10 @@
+{
+  "name": "@aiwhisperers/config-typescript",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared TypeScript configuration for AI Whisperers monorepo",
+  "main": "tsconfig.base.json",
+  "files": [
+    "tsconfig.base.json"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Whisperers LMS - Next.js Web Application",
+  "scripts": {
+    "dev": "next dev",
+    "dev:turbopack": "next dev --turbopack",
+    "build": "npm run compile-content && npm run db:generate && next build",
+    "start": "next start",
+    "compile-content": "node ../../scripts/compile-content.js",
+    "db:generate": "cd ../../packages/database && pnpm run generate",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^1.2.12",
+    "@ai-sdk/openai": "^1.3.23",
+    "@auth/prisma-adapter": "^2.10.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "ai": "^5.0.64",
+    "bcryptjs": "^2.4.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.9",
+    "js-yaml": "^4.1.0",
+    "lucide-react": "^0.526.0",
+    "lz-string": "^1.5.0",
+    "next": "^15.5.2",
+    "next-auth": "^5.0.0-beta.23",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "schema-dts": "^1.1.5",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.13",
+    "zod": "^3.24.1",
+    "@aiwhisperers/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.12",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/js-yaml": "^4.0.9",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "typescript": "5.9.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.4"
+  }
+}
