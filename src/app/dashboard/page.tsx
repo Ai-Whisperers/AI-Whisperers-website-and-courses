@@ -1,9 +1,13 @@
-// Dashboard Page
-// Protected route - requires authentication
+/**
+ * Dashboard Page
+ * Protected route - requires authentication
+ *
+ * PHASE 0.6C: Migrated to NextAuth v5
+ * - Replaced getServerSession(authOptions) with auth()
+ */
 
 import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth/config'
+import { auth } from '@/lib/auth/auth.config'
 import { getLocalizedPageContent } from '@/lib/content/server-compiled'
 import { DashboardClient } from '@/components/dashboard/DashboardClient'
 
@@ -17,7 +21,7 @@ export const metadata = {
 }
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   // Redirect to signin if not authenticated
   if (!session) {

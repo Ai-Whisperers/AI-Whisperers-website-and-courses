@@ -171,12 +171,12 @@ const nextConfig: NextConfig = {
   // Output file tracing root to fix lockfile warnings
   outputFileTracingRoot: __dirname,
   
-  // Temporarily disable ESLint and TypeScript checking during build to check functionality
+  // ✅ PHASE 0: Re-enabled build quality checks for production safety
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   
   // Skip middleware URL normalization

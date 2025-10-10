@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { i18nConfig } from './lib/i18n/config'
 import type { Language } from './lib/i18n/types'
+import { rateLimit, getIdentifier, RateLimitPresets } from './lib/rate-limit'
 
 const LOCALE_COOKIE_NAME = 'NEXT_LOCALE'
 
@@ -82,11 +83,9 @@ function getLocale(request: NextRequest): Language {
 
 /**
  * Check if pathname should skip i18n middleware
+ * Note: API routes are NOT skipped - they need rate limiting
  */
-function shouldSkipMiddleware(pathname: string): boolean {
-  // Skip API routes
-  if (pathname.startsWith('/api/')) return true
-
+function shouldSkipI18nMiddleware(pathname: string): boolean {
   // Skip Next.js internals
   if (pathname.startsWith('/_next/')) return true
 
@@ -106,8 +105,47 @@ function shouldSkipMiddleware(pathname: string): boolean {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
+  // ============================================
+  // PHASE 0.5: Rate Limiting for API Routes
+  // ============================================
+  if (pathname.startsWith('/api/')) {
+    const identifier = getIdentifier(request)
+    const rateLimitResult = rateLimit(identifier, RateLimitPresets.GENEROUS)
+
+    if (!rateLimitResult.success) {
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Too many requests',
+          message: 'Rate limit exceeded. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': rateLimitResult.reset.toString(),
+            'Retry-After': Math.ceil((rateLimitResult.reset - Date.now()) / 1000).toString(),
+          },
+        }
+      )
+    }
+
+    // Add rate limit headers to successful API requests
+    const response = NextResponse.next()
+    response.headers.set('X-RateLimit-Limit', rateLimitResult.limit.toString())
+    response.headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString())
+    response.headers.set('X-RateLimit-Reset', rateLimitResult.reset.toString())
+    return response
+  }
+
+  // ============================================
+  // i18n Middleware (for non-API routes)
+  // ============================================
+
   // Skip middleware for certain paths
-  if (shouldSkipMiddleware(pathname)) {
+  if (shouldSkipI18nMiddleware(pathname)) {
     return NextResponse.next()
   }
 

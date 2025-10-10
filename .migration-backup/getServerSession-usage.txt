@@ -1,0 +1,14 @@
+src/app/admin/page.tsx:5:import { getServerSession } from 'next-auth'
+src/app/admin/page.tsx:20:  const session = await getServerSession(authOptions)
+src/app/api/admin/stats/route.ts:5:import { getServerSession } from 'next-auth'
+src/app/api/admin/stats/route.ts:10:    const session = await getServerSession(authOptions)
+src/app/api/user/achievements/route.ts:5:import { getServerSession } from 'next-auth'
+src/app/api/user/achievements/route.ts:10:    const session = await getServerSession(authOptions)
+src/app/api/user/courses/enrolled/route.ts:5:import { getServerSession } from 'next-auth'
+src/app/api/user/courses/enrolled/route.ts:10:    const session = await getServerSession(authOptions)
+src/app/api/user/dashboard/route.ts:5:import { getServerSession } from 'next-auth'
+src/app/api/user/dashboard/route.ts:10:    const session = await getServerSession(authOptions)
+src/app/api/user/progress/route.ts:5:import { getServerSession } from 'next-auth'
+src/app/api/user/progress/route.ts:10:    const session = await getServerSession(authOptions)
+src/app/dashboard/page.tsx:5:import { getServerSession } from 'next-auth'
+src/app/dashboard/page.tsx:20:  const session = await getServerSession(authOptions)

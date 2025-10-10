@@ -1,0 +1,4 @@
+src/contexts/security/SecurityProvider.tsx:9:import { SessionProvider, useSession, signIn, signOut } from 'next-auth/react'
+src/contexts/security/SecurityProvider.tsx:32:  const { data: session, status } = useSession()
+src/hooks/use-auth.ts:6:import { useSession, signIn, signOut } from 'next-auth/react'
+src/hooks/use-auth.ts:44:  const { data: session, status } = useSession()

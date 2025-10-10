@@ -1,11 +1,5 @@
-/**
- * Custom Hook: useAuth
- * Authentication state management
- *
- * PHASE 0.6B: Updated for NextAuth v5 compatibility
- * - Type extensions remain the same (fully compatible)
- * - useSession, signIn, signOut from 'next-auth/react' unchanged
- */
+// Custom Hook: useAuth
+// Authentication state management
 
 'use client'
 
@@ -13,10 +7,7 @@ import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { UserRole } from '@/domain/entities/user'
 
-/**
- * Extended NextAuth user type with our custom properties
- * V5 COMPATIBLE: Type extensions work the same way in v5
- */
+// Extended NextAuth user type with our custom properties
 declare module 'next-auth' {
   interface User {
     id: string

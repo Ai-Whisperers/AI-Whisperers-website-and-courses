@@ -1,13 +1,17 @@
-// Enrolled Courses API
-// Returns list of courses the user is enrolled in with progress
+/**
+ * Enrolled Courses API
+ * Returns list of courses the user is enrolled in with progress
+ *
+ * PHASE 0.6C: Migrated to NextAuth v5
+ * - Replaced getServerSession(authOptions) with auth()
+ */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth/config'
+import { auth } from '@/lib/auth/auth.config'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session?.user) {
       return NextResponse.json(

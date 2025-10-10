@@ -1,6 +1,9 @@
 // Root Layout
 // Global layout with providers and navigation
 
+// ✅ PHASE 0.3: Validate environment variables on app startup (fail-fast)
+import '@/config/env'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
