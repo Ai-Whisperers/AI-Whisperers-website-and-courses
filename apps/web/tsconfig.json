@@ -1,10 +1,9 @@
 {
   "extends": "../../packages/config/typescript/tsconfig.base.json",
   "compilerOptions": {
-    // Path Mapping - ✅ PHASE 2B: Frontend/Backend Separation
+    // Path Mapping - ✅ PHASE 1-6: Hybrid Monolith
     "baseUrl": ".",
     "paths": {
-      // Legacy paths (for backward compatibility during migration)
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
@@ -13,12 +12,7 @@
       "@/types/*": ["./src/types/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/config/*": ["./src/config/*"],
-      "@/app/*": ["./src/app/*"],
-
-      // NEW: Frontend/Backend Separation paths
-      "@/frontend/*": ["./src/frontend/*"],
-      "@/backend/*": ["./src/backend/*"],
-      "@/shared/*": ["./src/shared/*"]
+      "@/app/*": ["./src/app/*"]
     },
 
     // Next.js Specific
