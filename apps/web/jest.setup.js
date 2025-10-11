@@ -2,6 +2,145 @@
 import '@testing-library/jest-dom'
 
 // =============================================================================
+// Polyfill Edge Runtime Globals for API Routes
+// =============================================================================
+
+// Mock edge runtime globals for Next.js API routes
+// These are required for testing API route handlers
+if (typeof global.Request === 'undefined') {
+  // Create minimal Request mock
+  global.Request = class Request {
+    constructor(input, init = {}) {
+      this.url = typeof input === 'string' ? input : input.url
+      this.method = init.method || 'GET'
+      this.headers = new Map(Object.entries(init.headers || {}))
+      this.body = init.body
+    }
+  }
+}
+
+if (typeof global.Response === 'undefined') {
+  // Create minimal Response mock
+  global.Response = class Response {
+    constructor(body, init = {}) {
+      this.body = body
+      this.status = init.status || 200
+      this.statusText = init.statusText || 'OK'
+      this.headers = new Map(Object.entries(init.headers || {}))
+    }
+
+    async json() {
+      return typeof this.body === 'string' ? JSON.parse(this.body) : this.body
+    }
+
+    async text() {
+      return typeof this.body === 'string' ? this.body : JSON.stringify(this.body)
+    }
+  }
+}
+
+if (typeof global.Headers === 'undefined') {
+  global.Headers = class Headers extends Map {
+    constructor(init = {}) {
+      super(Object.entries(init))
+    }
+
+    get(name) {
+      return super.get(name.toLowerCase())
+    }
+
+    set(name, value) {
+      return super.set(name.toLowerCase(), String(value))
+    }
+
+    has(name) {
+      return super.has(name.toLowerCase())
+    }
+
+    delete(name) {
+      return super.delete(name.toLowerCase())
+    }
+  }
+}
+
+if (typeof global.FormData === 'undefined') {
+  global.FormData = class FormData extends Map {}
+}
+
+// =============================================================================
+// Mock Next.js Server Components
+// =============================================================================
+
+// Mock NextResponse for API route tests
+jest.mock('next/server', () => {
+  const actual = jest.requireActual('next/server')
+  return {
+    ...actual,
+    NextResponse: class NextResponse extends global.Response {
+      constructor(body, init) {
+        super(body, init)
+      }
+
+      static json(data, init = {}) {
+        const response = new NextResponse(JSON.stringify(data), {
+          ...init,
+          headers: {
+            'content-type': 'application/json',
+            ...(init.headers || {}),
+          },
+        })
+        return response
+      }
+
+      static redirect(url, status = 307) {
+        return new NextResponse(null, {
+          status,
+          headers: {
+            Location: url,
+          },
+        })
+      }
+
+      static rewrite(url) {
+        return new NextResponse(null, {
+          headers: {
+            'x-middleware-rewrite': url,
+          },
+        })
+      }
+
+      static next() {
+        return new NextResponse(null)
+      }
+    },
+    NextRequest: class NextRequest extends global.Request {
+      constructor(input, init) {
+        super(input, init)
+        const url = new URL(typeof input === 'string' ? input : input.url)
+        this.nextUrl = {
+          href: url.href,
+          origin: url.origin,
+          protocol: url.protocol,
+          username: url.username,
+          password: url.password,
+          host: url.host,
+          hostname: url.hostname,
+          port: url.port,
+          pathname: url.pathname,
+          search: url.search,
+          searchParams: url.searchParams,
+          hash: url.hash,
+        }
+        this.url = url.href
+        this.cookies = new Map()
+        this.geo = {}
+        this.ip = '127.0.0.1'
+      }
+    },
+  }
+})
+
+// =============================================================================
 // Mock Next.js Navigation
 // =============================================================================
 
