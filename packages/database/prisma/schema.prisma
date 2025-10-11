@@ -63,7 +63,10 @@ model User {
   enrollments   Enrollment[]
   progress      CourseProgress[]
 
-  @@index([email])
+  // PHASE 4: Optimized indexes
+  @@index([role])
+  @@index([role, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
   @@map("users")
 }
 
@@ -130,9 +133,13 @@ model Course {
   modules             CourseModule[]
   progress            CourseProgress[]
 
-  @@index([slug])
+  // PHASE 4: Optimized indexes
   @@index([published, featured])
+  @@index([published, featured, createdAt(sort: Desc)])
   @@index([instructorId])
+  @@index([difficulty])
+  @@index([price])
+  @@index([createdAt(sort: Desc)])
   @@map("courses")
 }
 
@@ -211,9 +218,11 @@ model CourseProgress {
   lessonProgress    LessonProgress[]
 
   @@unique([userId, courseId])
+  // PHASE 4: Optimized indexes
   @@index([userId])
+  @@index([userId, lastAccessedAt(sort: Desc)])
   @@index([courseId])
-  @@index([progressPercent])
+  @@index([lastAccessedAt(sort: Desc)])
   @@map("course_progress")
 }
 
@@ -230,9 +239,10 @@ model LessonProgress {
   lesson            Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
 
   @@unique([progressId, lessonId])
+  // PHASE 4: Optimized indexes
   @@index([progressId])
   @@index([lessonId])
-  @@index([completed])
+  @@index([lastWatchedAt(sort: Desc)])
   @@map("lesson_progress")
 }
 
@@ -253,10 +263,13 @@ model Transaction {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
+  // PHASE 4: Optimized indexes
   @@index([userId])
+  @@index([userId, createdAt(sort: Desc)])
   @@index([courseId])
   @@index([status])
-  @@index([providerTxnId])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
   @@map("transactions")
 }
 
@@ -355,8 +368,11 @@ model QuizAttempt {
 
   quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
+  // PHASE 4: Optimized indexes
   @@index([quizId])
   @@index([userId])
+  @@index([userId, quizId, startedAt(sort: Desc)])
+  @@index([userId, startedAt(sort: Desc)])
   @@map("quiz_attempts")
 }
 
@@ -373,8 +389,9 @@ model Certificate {
   expiresAt     DateTime?
   pdfUrl        String?
 
+  // PHASE 4: Optimized indexes
   @@index([userId])
+  @@index([userId, issuedAt(sort: Desc)])
   @@index([courseId])
-  @@index([certificateNo])
   @@map("certificates")
 }
