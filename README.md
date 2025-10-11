@@ -65,12 +65,45 @@ A comprehensive AI education platform combining modern web development with **$1
 
 ## 🛠️ Local Development
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL 14+
+### Option 1: Docker Compose (Recommended)
+**Full environment with PostgreSQL + Redis + Management UIs**
+
+```bash
+# Clone repository
+git clone https://github.com/Ai-Whisperers/AI-Whisperers-website-and-courses.git
+cd AI-Whisperers-website-and-courses
+
+# Setup environment
+cp docker/.env.docker.example .env.local
+# Edit .env.local with your NEXTAUTH_SECRET
+
+# Start services (PostgreSQL, Redis, Web, PgAdmin, Redis Commander)
+cd docker
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+# Run migrations (in new terminal)
+docker-compose exec web sh -c "cd packages/database && pnpm run migrate:dev"
+```
+
+**Services available:**
+- **Web App**: http://localhost:3000
+- **PgAdmin** (Database UI): http://localhost:5050
+- **Redis Commander** (Cache UI): http://localhost:8081
+
+**Complete Docker guide:** [DOCKER.md](DOCKER.md) or [docker/README.md](docker/README.md)
+
+---
+
+### Option 2: Local Node.js (Traditional)
+**Requires manual PostgreSQL and Redis installation**
+
+#### Prerequisites
+- Node.js 22+ (22.16.0 recommended)
+- PostgreSQL 16+
+- Redis 7+ (optional)
 - Git
 
-### Setup (2 minutes)
+#### Setup (5 minutes)
 
 ```bash
 # Clone repository
@@ -78,24 +111,24 @@ git clone https://github.com/Ai-Whisperers/AI-Whisperers-website-and-courses.git
 cd AI-Whisperers-website-and-courses
 
 # Install dependencies
-npm install
+pnpm install
 
 # Set up environment
 cp .env.example .env.local
 # Edit .env.local with your database URL
 
 # Database setup
-npm run db:generate
-npm run db:push
-npm run db:seed
+pnpm run db:generate
+pnpm run db:push
+pnpm run db:seed
 
 # Start development server
-npm run dev
+pnpm run dev
 ```
 
 Visit `http://localhost:3000` - **Your platform is ready!** 🎉
 
-Detailed setup guide: [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)
+**Detailed setup guide:** [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)
 
 ## 📚 Course Content ($150,000+ Value)
 
