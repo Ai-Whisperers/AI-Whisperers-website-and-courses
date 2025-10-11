@@ -1,5 +1,5 @@
 // Jest setup for state-core package
-import '@testing-library/jest-dom'
+require('@testing-library/jest-dom')
 
 // Mock localStorage for Zustand persist
 const localStorageMock = (() => {
@@ -23,7 +23,13 @@ global.localStorage = localStorageMock
 global.sessionStorage = localStorageMock
 
 // Suppress Zustand devtools warnings in tests
+const originalWarn = console.warn
 global.console = {
   ...console,
   warn: jest.fn(),
 }
+
+// Restore after tests
+afterAll(() => {
+  console.warn = originalWarn
+})
