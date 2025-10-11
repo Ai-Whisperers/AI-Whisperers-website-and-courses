@@ -1,0 +1,33 @@
+# =============================================================================
+# AI Whisperers Platform - Production-like Overrides
+# =============================================================================
+# Extends docker-compose.yml with production-like configuration
+# For local testing of production builds before deploying to Render
+#
+# Usage:
+#   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+#
+# Features:
+#   - Production build (optimized, minified)
+#   - No source code mounting
+#   - No hot-reload
+#   - Matches Render deployment as closely as possible
+#
+# Note: This is for LOCAL testing only. Actual production uses Render.com
+# =============================================================================
+
+services:
+  # ===========================================================================
+  # Web Application - Production Mode
+  # ===========================================================================
+  # Overrides: Use production runner, different port, no volumes
+
+  web:
+    build:
+      target: runner  # Use production runner stage (minimal runtime)
+    environment:
+      NODE_ENV: production
+    # No command override - uses default CMD from Dockerfile
+    # No volume mounts - uses built application from image
+    ports:
+      - "${WEB_PORT:-3001}:3000"  # Use port 3001 to avoid conflict with dev mode

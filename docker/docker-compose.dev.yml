@@ -1,0 +1,103 @@
+# =============================================================================
+# AI Whisperers Platform - Development Overrides
+# =============================================================================
+# Extends docker-compose.yml with development-specific configuration
+# Enables hot-reload, source code mounting, and management UIs
+#
+# Usage:
+#   docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# Features:
+#   - Hot-reload for code changes (< 2 seconds)
+#   - Source code mounted from host (no rebuild needed)
+#   - PgAdmin for database management
+#   - Redis Commander for cache management
+# =============================================================================
+
+services:
+  # ===========================================================================
+  # Web Application - Development Mode
+  # ===========================================================================
+  # Overrides: Enable hot-reload, mount source code, use dev server
+
+  web:
+    build:
+      target: builder  # Use builder stage to include dev dependencies
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"  # Enable file watching in Docker
+      WATCHPACK_POLLING: "true"    # Enable webpack polling
+    command: sh -c "cd apps/web && pnpm dev"
+    volumes:
+      # Mount source code for hot-reload
+      - ../apps:/app/apps:delegated
+      - ../packages:/app/packages:delegated
+      - ../scripts:/app/scripts:delegated
+      - ../turbo.json:/app/turbo.json:ro
+      - ../pnpm-workspace.yaml:/app/pnpm-workspace.yaml:ro
+
+      # Preserve container's node_modules (don't overwrite with host)
+      - /app/node_modules
+      - /app/apps/web/node_modules
+      - /app/apps/web/.next
+      - /app/packages/database/node_modules
+
+      # Prisma artifacts
+      - /app/packages/database/node_modules/.prisma
+
+  # ===========================================================================
+  # PgAdmin (Database Management UI)
+  # ===========================================================================
+  # Access: http://localhost:5050
+  # Credentials: See .env.local (default: admin@aiwhisperers.local / admin)
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: aiwhisperers-pgadmin
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@aiwhisperers.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_LISTEN_PORT: 80
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - aiwhisperers-network
+
+  # ===========================================================================
+  # Redis Commander (Redis Management UI)
+  # ===========================================================================
+  # Access: http://localhost:8081
+  # No authentication required for local development
+
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    container_name: aiwhisperers-redis-commander
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_HOSTS: local:redis:6379
+      HTTP_USER: ""
+      HTTP_PASSWORD: ""
+    ports:
+      - "${REDIS_COMMANDER_PORT:-8081}:8081"
+    networks:
+      - aiwhisperers-network
+
+# =============================================================================
+# Additional Volumes (Development)
+# =============================================================================
+
+volumes:
+  pgadmin_data:
+    driver: local
+    name: aiwhisperers-pgadmin-data

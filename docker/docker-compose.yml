@@ -1,0 +1,145 @@
+# =============================================================================
+# AI Whisperers Platform - Docker Compose Configuration
+# =============================================================================
+# Base configuration for local development with deploy-local parity
+# Matches Render.com production deployment structure
+#
+# Quick Start:
+#   Development:  docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+#   Production:   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+#
+# Documentation: See README.md in this directory
+# =============================================================================
+
+name: ai-whisperers
+
+services:
+  # ===========================================================================
+  # PostgreSQL Database (Local Development)
+  # ===========================================================================
+  # Matches Render's PostgreSQL 16 managed database
+  # Purpose: Local development database with persistent storage
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: aiwhisperers-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-aiwhisperers}
+      POSTGRES_USER: ${POSTGRES_USER:-aiwhisperers}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-aiwhisperers_dev}
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - aiwhisperers-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-aiwhisperers}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # Redis Cache (Local Development)
+  # ===========================================================================
+  # Purpose: Caching layer and rate limiting (future-proofing for production)
+
+  redis:
+    image: redis:7-alpine
+    container_name: aiwhisperers-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - aiwhisperers-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ===========================================================================
+  # Web Application (Next.js Hybrid - Frontend + Backend API)
+  # ===========================================================================
+  # Architecture: Single service with Frontend (SSR/CSR) + Backend (API routes)
+  # Matches: Render.com production deployment (hybrid Next.js architecture)
+  # Note: Microservices separation happens in Phase 7+, not Phase 5
+
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: runner
+      args:
+        # Build-time DATABASE_URL (placeholder for Prisma generation)
+        - DATABASE_URL=postgresql://${POSTGRES_USER:-aiwhisperers}:${POSTGRES_PASSWORD:-aiwhisperers_dev}@postgres:5432/${POSTGRES_DB:-aiwhisperers}?schema=public
+    container_name: aiwhisperers-web
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # Node environment
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      NEXT_TELEMETRY_DISABLED: 1
+
+      # Database connection (runtime)
+      DATABASE_URL: postgresql://${POSTGRES_USER:-aiwhisperers}:${POSTGRES_PASSWORD:-aiwhisperers_dev}@postgres:5432/${POSTGRES_DB:-aiwhisperers}?schema=public
+
+      # Redis connection
+      REDIS_URL: redis://redis:6379
+
+      # NextAuth.js configuration
+      NEXTAUTH_URL: http://localhost:${WEB_PORT:-3000}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-dev_secret_change_in_production_minimum_32_characters_required}
+
+      # Public URLs
+      NEXT_PUBLIC_SITE_URL: http://localhost:${WEB_PORT:-3000}
+    env_file:
+      - ../.env.local
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    networks:
+      - aiwhisperers-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# =============================================================================
+# Volumes (Persistent Data Storage)
+# =============================================================================
+# Data persists across container restarts
+# Remove with: docker-compose down -v (caution: deletes all data)
+
+volumes:
+  postgres_data:
+    driver: local
+    name: aiwhisperers-postgres-data
+
+  redis_data:
+    driver: local
+    name: aiwhisperers-redis-data
+
+# =============================================================================
+# Networks (Service Communication)
+# =============================================================================
+# Bridge network allows services to communicate by service name
+# Example: web connects to postgres://postgres:5432
+
+networks:
+  aiwhisperers-network:
+    driver: bridge
+    name: aiwhisperers-network
