@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1760201733310" clover="3.2.0">
+  <project timestamp="1760201733310" name="All files">
+    <metrics statements="200" coveredstatements="115" conditionals="55" coveredconditionals="40" methods="141" coveredmethods="117" elements="396" coveredelements="272" complexity="0" loc="200" ncloc="200" packages="6" files="13" classes="13"/>
+    <package name="analytics.src">
+      <metrics statements="45" coveredstatements="44" conditionals="21" coveredconditionals="20" methods="38" coveredmethods="38"/>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\analytics\src\index.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="store.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\analytics\src\store.ts">
+        <metrics statements="44" coveredstatements="44" conditionals="21" coveredconditionals="20" methods="38" coveredmethods="38"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="98" count="4" type="stmt"/>
+        <line num="99" count="4" type="stmt"/>
+        <line num="103" count="4" type="stmt"/>
+        <line num="104" count="4" type="stmt"/>
+        <line num="108" count="5" type="stmt"/>
+        <line num="109" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="110" count="4" type="stmt"/>
+        <line num="114" count="111" type="stmt"/>
+        <line num="115" count="111" type="stmt"/>
+        <line num="117" count="239" type="cond" truecount="2" falsecount="0"/>
+        <line num="118" count="239" type="stmt"/>
+        <line num="122" count="111" type="stmt"/>
+        <line num="123" count="127" type="stmt"/>
+        <line num="124" count="16" type="stmt"/>
+        <line num="129" count="4" type="stmt"/>
+        <line num="130" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="135" count="8" type="stmt"/>
+        <line num="136" count="8" type="stmt"/>
+        <line num="143" count="2" type="stmt"/>
+        <line num="151" count="39" type="stmt"/>
+        <line num="165" count="2" type="stmt"/>
+        <line num="167" count="3" type="cond" truecount="3" falsecount="1"/>
+        <line num="172" count="2" type="stmt"/>
+        <line num="176" count="16" type="stmt"/>
+        <line num="189" count="2" type="stmt"/>
+        <line num="202" count="10" type="stmt"/>
+        <line num="203" count="10" type="stmt"/>
+        <line num="204" count="10" type="stmt"/>
+        <line num="220" count="7" type="stmt"/>
+        <line num="221" count="7" type="stmt"/>
+        <line num="222" count="7" type="stmt"/>
+        <line num="238" count="34" type="stmt"/>
+        <line num="245" count="3" type="stmt"/>
+        <line num="246" count="3" type="stmt"/>
+        <line num="247" count="3" type="stmt"/>
+        <line num="248" count="3" type="stmt"/>
+        <line num="249" count="109" type="stmt"/>
+        <line num="250" count="1" type="stmt"/>
+        <line num="251" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="courses.src">
+      <metrics statements="43" coveredstatements="42" conditionals="16" coveredconditionals="16" methods="44" coveredmethods="44"/>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\courses\src\index.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="store.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\courses\src\store.ts">
+        <metrics statements="42" coveredstatements="42" conditionals="16" coveredconditionals="16" methods="44" coveredmethods="44"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="88" count="6" type="stmt"/>
+        <line num="89" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="113" type="stmt"/>
+        <line num="94" count="113" type="stmt"/>
+        <line num="95" count="116" type="cond" truecount="2" falsecount="0"/>
+        <line num="96" count="114" type="stmt"/>
+        <line num="97" count="228" type="stmt"/>
+        <line num="101" count="6" type="stmt"/>
+        <line num="102" count="6" type="stmt"/>
+        <line num="104" count="6" type="cond" truecount="3" falsecount="0"/>
+        <line num="110" count="3" type="stmt"/>
+        <line num="111" count="3" type="stmt"/>
+        <line num="114" count="3" type="cond" truecount="3" falsecount="0"/>
+        <line num="121" count="111" type="stmt"/>
+        <line num="122" count="221" type="cond" truecount="2" falsecount="0"/>
+        <line num="126" count="110" type="stmt"/>
+        <line num="127" count="328" type="stmt"/>
+        <line num="131" count="20" type="stmt"/>
+        <line num="133" count="14" type="stmt"/>
+        <line num="135" count="7" type="stmt"/>
+        <line num="138" count="9" type="stmt"/>
+        <line num="143" count="3" type="stmt"/>
+        <line num="145" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="150" count="2" type="stmt"/>
+        <line num="151" count="3" type="stmt"/>
+        <line num="154" count="4" type="stmt"/>
+        <line num="156" count="5" type="stmt"/>
+        <line num="158" count="44" type="stmt"/>
+        <line num="163" count="108" type="stmt"/>
+        <line num="174" count="3" type="stmt"/>
+        <line num="175" count="109" type="stmt"/>
+        <line num="176" count="2" type="stmt"/>
+        <line num="177" count="2" type="stmt"/>
+        <line num="178" count="108" type="stmt"/>
+        <line num="179" count="108" type="stmt"/>
+        <line num="180" count="1" type="stmt"/>
+        <line num="181" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="hooks.src">
+      <metrics statements="59" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\hooks\src\index.ts">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+      </file>
+      <file name="useCourses.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\hooks\src\useCourses.ts">
+        <metrics statements="20" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+      </file>
+      <file name="useEnrollCourse.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\hooks\src\useEnrollCourse.ts">
+        <metrics statements="16" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="44" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+      </file>
+      <file name="useEnrollments.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\hooks\src\useEnrollments.ts">
+        <metrics statements="20" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="query.src">
+      <metrics statements="18" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="client.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\query\src\client.ts">
+        <metrics statements="17" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="0"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+      </file>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\query\src\index.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src">
+      <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\src\index.ts">
+        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="ui.src">
+      <metrics statements="30" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="35" coveredmethods="35"/>
+      <file name="index.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\ui\src\index.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
+      </file>
+      <file name="store.ts" path="H:\workbench\PERSONAL CORPUS\AI WHISPERERS CORPORA\AI WHISPERERS REPOS\AI-Whisperers-Website-and-Courses\packages\state-core\ui\src\store.ts">
+        <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="35" coveredmethods="35"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="84" count="9" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="92" count="3" type="stmt"/>
+        <line num="95" count="2" type="stmt"/>
+        <line num="99" count="4" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="108" count="14" type="stmt"/>
+        <line num="114" count="5" type="stmt"/>
+        <line num="115" count="5" type="stmt"/>
+        <line num="116" count="5" type="stmt"/>
+        <line num="123" count="2" type="stmt"/>
+        <line num="130" count="3" type="stmt"/>
+        <line num="133" count="6" type="stmt"/>
+        <line num="136" count="4" type="stmt"/>
+        <line num="138" count="4" type="stmt"/>
+        <line num="141" count="31" type="stmt"/>
+        <line num="146" count="91" type="stmt"/>
+        <line num="161" count="3" type="stmt"/>
+        <line num="162" count="3" type="stmt"/>
+        <line num="163" count="3" type="stmt"/>
+        <line num="164" count="3" type="stmt"/>
+        <line num="165" count="3" type="stmt"/>
+        <line num="166" count="3" type="stmt"/>
+        <line num="167" count="3" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
