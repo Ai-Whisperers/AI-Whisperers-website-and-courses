@@ -3,11 +3,25 @@
   "version": "0.1.0",
   "description": "Render-Local Data Tunnel for dev/prod parity",
   "private": true,
+  "main": "./server/src/index.ts",
+  "types": "./server/src/index.ts",
   "exports": {
-    "./server": "./server/src/index.ts",
-    "./client": "./client/src/index.ts",
-    "./cli": "./cli/src/index.ts",
-    "./types": "./types/src/index.ts"
+    "./server": {
+      "types": "./server/src/index.ts",
+      "default": "./server/src/index.ts"
+    },
+    "./client": {
+      "types": "./client/src/index.ts",
+      "default": "./client/src/index.ts"
+    },
+    "./cli": {
+      "types": "./cli/src/index.ts",
+      "default": "./cli/src/index.ts"
+    },
+    "./types": {
+      "types": "./types/src/index.ts",
+      "default": "./types/src/index.ts"
+    }
   },
   "scripts": {
     "dev:server": "tsx watch server/src/index.ts",

@@ -10,6 +10,10 @@
     // Path aliases for monorepo packages
     "paths": {
       "@aiwhisperers/database": ["./packages/database/src"],
+      "@aiwhisperers/database/*": ["./packages/database/src/*"],
+      "@aiwhisperers/state-core": ["./packages/state-core/src"],
+      "@aiwhisperers/state-core/*": ["./packages/state-core/src/*"],
+      "@aiwhisperers/render-tunnel/*": ["./packages/render-tunnel/*/src"],
       "@aiwhisperers/config-*": ["./packages/config/*"]
     }
   },
@@ -20,6 +24,12 @@
     },
     {
       "path": "./packages/database"
+    },
+    {
+      "path": "./packages/state-core"
+    },
+    {
+      "path": "./packages/render-tunnel"
     }
   ],
   "include": [],

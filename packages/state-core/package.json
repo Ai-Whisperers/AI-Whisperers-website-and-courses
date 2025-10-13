@@ -6,11 +6,26 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./courses": "./courses/src/index.ts",
-    "./ui": "./ui/src/index.ts",
-    "./analytics": "./analytics/src/index.ts",
-    "./query": "./query/src/index.ts"
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./courses": {
+      "types": "./courses/src/index.ts",
+      "default": "./courses/src/index.ts"
+    },
+    "./ui": {
+      "types": "./ui/src/index.ts",
+      "default": "./ui/src/index.ts"
+    },
+    "./analytics": {
+      "types": "./analytics/src/index.ts",
+      "default": "./analytics/src/index.ts"
+    },
+    "./query": {
+      "types": "./query/src/index.ts",
+      "default": "./query/src/index.ts"
+    }
   },
   "scripts": {
     "clean": "rm -rf node_modules .turbo"

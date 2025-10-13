@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../packages/config/typescript/tsconfig.base.json",
+  "compilerOptions": {
+    // Package-specific settings
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+
+    // Module resolution
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/courses/*": ["./courses/src/*"],
+      "@/ui/*": ["./ui/src/*"],
+      "@/analytics/*": ["./analytics/src/*"],
+      "@/query/*": ["./query/src/*"]
+    },
+
+    // React-specific
+    "jsx": "react-jsx",
+    "types": ["react", "node"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "courses/**/*.ts",
+    "courses/**/*.tsx",
+    "ui/**/*.ts",
+    "ui/**/*.tsx",
+    "analytics/**/*.ts",
+    "analytics/**/*.tsx",
+    "query/**/*.ts",
+    "query/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.spec.tsx",
+    "**/*.test.tsx"
+  ]
+}
