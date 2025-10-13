@@ -47,6 +47,9 @@ next-env.d.ts
 # local reports (all levels)
 local-reports/
 
+# courses content (private - not ready for public release)
+courses-content/
+
 # Docker artifacts
 docker-compose.override.yml
 *.dockerignore.swp
