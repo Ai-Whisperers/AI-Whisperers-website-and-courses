@@ -21,6 +21,12 @@
     "@prisma/client": "^6.16.3"
   },
   "devDependencies": {
-    "prisma": "^6.16.3"
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.0",
+    "prisma": "^6.16.3",
+    "tsx": "^4.19.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

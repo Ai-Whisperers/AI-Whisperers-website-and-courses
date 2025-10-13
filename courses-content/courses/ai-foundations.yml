@@ -1,0 +1,286 @@
+# AI Foundations: From Zero to Hero
+# Complete introduction to artificial intelligence for beginners
+
+id: "ai-foundations-001"
+title: "AI Foundations: From Zero to Hero"
+slug: "ai-foundations"
+description: |
+  Master the fundamentals of Artificial Intelligence from the ground up. This comprehensive
+  course takes you from AI basics to building your first machine learning models. Perfect
+  for beginners with basic programming knowledge.
+
+  Learn essential AI concepts, explore machine learning algorithms, work with real datasets,
+  and build practical projects that demonstrate your understanding. By the end of this course,
+  you'll have a solid foundation in AI and be ready to advance to more specialized topics.
+
+# Pricing
+price: 299.00
+currency: "USD"
+
+# Course Metadata
+duration_hours: 720  # 30 days × 24 hours
+difficulty: "BEGINNER"
+published: true
+featured: true
+
+# Learning Outcomes
+learning_objectives:
+  - "Understand core AI concepts and terminology"
+  - "Build your first machine learning model from scratch"
+  - "Master data preprocessing and feature engineering techniques"
+  - "Apply supervised and unsupervised learning algorithms"
+  - "Evaluate model performance using industry-standard metrics"
+  - "Deploy AI models to production environments"
+
+# Requirements
+prerequisites:
+  - "Basic programming knowledge (Python recommended)"
+  - "High school level mathematics (algebra and basic statistics)"
+  - "Familiarity with command line interface"
+  - "Computer with internet connection and 8GB+ RAM"
+
+# Media Assets
+thumbnail_url: "/images/courses/ai-foundations-thumbnail.jpg"
+video_url: "https://player.vimeo.com/video/123456789"
+
+# Instructor Assignment
+instructor_id: "team-lead-001"
+
+# Course Curriculum
+modules:
+  - title: "Introduction to Artificial Intelligence"
+    description: "Explore the history, concepts, and applications of AI in the modern world"
+    order: 1
+    duration: 180  # 3 hours
+    video_url: "https://player.vimeo.com/video/intro-ai"
+
+    lessons:
+      - title: "What is Artificial Intelligence?"
+        order: 1
+        duration: 45  # minutes
+        video_url: "https://player.vimeo.com/video/what-is-ai"
+        content: |
+          Artificial Intelligence (AI) is the simulation of human intelligence processes by
+          machines, especially computer systems. These processes include learning (the acquisition
+          of information and rules for using the information), reasoning (using rules to reach
+          approximate or definite conclusions), and self-correction.
+
+          In this lesson, we'll explore:
+          - The definition and scope of AI
+          - Different types of AI (Narrow AI vs General AI)
+          - Real-world applications across industries
+          - The difference between AI, Machine Learning, and Deep Learning
+
+      - title: "History and Evolution of AI"
+        order: 2
+        duration: 40
+        video_url: "https://player.vimeo.com/video/ai-history"
+        content: |
+          AI has evolved through several distinct phases since its inception in the 1950s.
+          From the Dartmouth Conference to modern deep learning breakthroughs, AI has
+          experienced periods of rapid advancement and "AI winters."
+
+          Key milestones covered:
+          - 1950s: Birth of AI (Alan Turing, Dartmouth Conference)
+          - 1960s-1970s: Early optimism and expert systems
+          - 1980s-1990s: AI winters and resurgence
+          - 2000s-2010s: Big data and deep learning revolution
+          - 2020s: Transformers and large language models
+
+      - title: "Types of AI and Machine Learning"
+        order: 3
+        duration: 50
+        video_url: "https://player.vimeo.com/video/types-of-ai"
+        content: |
+          Understanding the taxonomy of AI helps you choose the right approach for your problems.
+          We'll explore three main categories of machine learning and when to use each.
+
+          Topics:
+          - Supervised Learning: Learning from labeled data
+          - Unsupervised Learning: Finding patterns in unlabeled data
+          - Reinforcement Learning: Learning through trial and error
+          - Semi-supervised and Self-supervised Learning
+
+      - title: "AI Ethics and Responsible AI"
+        order: 4
+        duration: 45
+        video_url: "https://player.vimeo.com/video/ai-ethics"
+        content: |
+          As AI becomes more powerful and pervasive, understanding ethical implications is crucial.
+          Learn about bias, fairness, transparency, and the societal impact of AI systems.
+
+          Key concepts:
+          - Algorithmic bias and fairness
+          - Privacy and data protection
+          - Transparency and explainability
+          - AI governance and regulation
+          - The future of work and AI
+
+  - title: "Python for AI Development"
+    description: "Master the essential Python skills needed for AI and machine learning"
+    order: 2
+    duration: 240  # 4 hours
+    video_url: "https://player.vimeo.com/video/python-for-ai"
+
+    lessons:
+      - title: "Python Fundamentals Refresher"
+        order: 1
+        duration: 60
+        video_url: "https://player.vimeo.com/video/python-basics"
+        content: |
+          Quick refresher on Python essentials with focus on AI-relevant concepts.
+          Variables, data types, control flow, functions, and object-oriented programming.
+
+      - title: "NumPy for Numerical Computing"
+        order: 2
+        duration: 60
+        video_url: "https://player.vimeo.com/video/numpy-intro"
+        content: |
+          NumPy is the foundation of scientific computing in Python. Learn arrays,
+          vectorization, broadcasting, and mathematical operations essential for AI.
+
+      - title: "Pandas for Data Manipulation"
+        order: 3
+        duration: 60
+        video_url: "https://player.vimeo.com/video/pandas-intro"
+        content: |
+          Master Pandas for loading, cleaning, and transforming data. Work with
+          DataFrames, Series, and perform complex data operations efficiently.
+
+      - title: "Matplotlib and Seaborn for Visualization"
+        order: 4
+        duration: 60
+        video_url: "https://player.vimeo.com/video/viz-intro"
+        content: |
+          Data visualization is crucial for understanding datasets and model results.
+          Learn to create professional plots and charts for data exploration.
+
+  - title: "Machine Learning Fundamentals"
+    description: "Deep dive into core machine learning concepts and algorithms"
+    order: 3
+    duration: 360  # 6 hours
+    video_url: "https://player.vimeo.com/video/ml-fundamentals"
+
+    lessons:
+      - title: "The Machine Learning Pipeline"
+        order: 1
+        duration: 45
+        video_url: "https://player.vimeo.com/video/ml-pipeline"
+        content: |
+          Understanding the end-to-end machine learning workflow: data collection,
+          preprocessing, feature engineering, model training, evaluation, and deployment.
+
+      - title: "Linear Regression"
+        order: 2
+        duration: 75
+        video_url: "https://player.vimeo.com/video/linear-regression"
+        content: |
+          Build your first predictive model using linear regression. Understand the
+          mathematics behind the algorithm and implement it from scratch and with scikit-learn.
+
+      - title: "Logistic Regression and Classification"
+        order: 3
+        duration: 75
+        video_url: "https://player.vimeo.com/video/logistic-regression"
+        content: |
+          Move beyond regression to classification problems. Learn binary and multi-class
+          classification, decision boundaries, and probability calibration.
+
+      - title: "Decision Trees and Random Forests"
+        order: 4
+        duration: 90
+        video_url: "https://player.vimeo.com/video/decision-trees"
+        content: |
+          Explore tree-based models that excel at both classification and regression tasks.
+          Understand ensemble methods and their power in production systems.
+
+      - title: "Model Evaluation and Metrics"
+        order: 5
+        duration: 75
+        video_url: "https://player.vimeo.com/video/model-evaluation"
+        content: |
+          Learn how to properly evaluate model performance using accuracy, precision, recall,
+          F1-score, ROC curves, and cross-validation techniques.
+
+  - title: "Deep Learning Introduction"
+    description: "Introduction to neural networks and deep learning"
+    order: 4
+    duration: 300  # 5 hours
+    video_url: "https://player.vimeo.com/video/deep-learning-intro"
+
+    lessons:
+      - title: "Neural Networks Basics"
+        order: 1
+        duration: 75
+        video_url: "https://player.vimeo.com/video/neural-networks"
+        content: |
+          Understand the building blocks of deep learning: neurons, layers, activation
+          functions, forward propagation, and backpropagation.
+
+      - title: "Training Deep Neural Networks"
+        order: 2
+        duration: 75
+        video_url: "https://player.vimeo.com/video/training-dnns"
+        content: |
+          Master the art of training deep networks: optimization algorithms, learning rate
+          scheduling, batch normalization, and regularization techniques.
+
+      - title: "Introduction to TensorFlow and Keras"
+        order: 3
+        duration: 75
+        video_url: "https://player.vimeo.com/video/tensorflow-keras"
+        content: |
+          Get hands-on with industry-standard deep learning frameworks. Build, train, and
+          deploy neural networks using TensorFlow and Keras.
+
+      - title: "Convolutional Neural Networks (CNNs)"
+        order: 4
+        duration: 75
+        video_url: "https://player.vimeo.com/video/cnns-intro"
+        content: |
+          Explore CNNs for computer vision tasks. Learn about convolutions, pooling,
+          and famous architectures like ResNet and VGG.
+
+  - title: "Capstone Project: Build an AI Application"
+    description: "Apply everything you've learned in a comprehensive real-world project"
+    order: 5
+    duration: 240  # 4 hours
+    video_url: "https://player.vimeo.com/video/capstone-project"
+
+    lessons:
+      - title: "Project Overview and Setup"
+        order: 1
+        duration: 30
+        video_url: "https://player.vimeo.com/video/project-setup"
+        content: |
+          Introduction to the capstone project: building an image classification system
+          from scratch. Learn project structure, environment setup, and requirements.
+
+      - title: "Data Collection and Preparation"
+        order: 2
+        duration: 60
+        video_url: "https://player.vimeo.com/video/data-prep"
+        content: |
+          Gather and prepare your dataset. Learn data augmentation, train/val/test splits,
+          and best practices for data organization.
+
+      - title: "Model Development and Training"
+        order: 3
+        duration: 90
+        video_url: "https://player.vimeo.com/video/model-training"
+        content: |
+          Build and train your model. Experiment with architectures, hyperparameters,
+          and optimization strategies to maximize performance.
+
+      - title: "Deployment and Presentation"
+        order: 4
+        duration: 60
+        video_url: "https://player.vimeo.com/video/deployment"
+        content: |
+          Deploy your model as a web application. Learn containerization with Docker,
+          API development with FastAPI, and cloud deployment basics.
+
+# Course Statistics (auto-calculated by seed script)
+# total_modules: 5
+# total_lessons: 20
+# total_duration_minutes: 1300  # ~21.6 hours

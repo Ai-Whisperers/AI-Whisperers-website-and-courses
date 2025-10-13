@@ -1,14 +1,23 @@
-// Repository Index
-// Centralized exports for all repository implementations
-// Note: Currently using in-memory implementations since database is removed
+/**
+ * Repository Index
+ * Centralized exports for all repository implementations
+ *
+ * This module exports factory functions for creating repository instances
+ * that connect the domain layer to the database through Prisma ORM.
+ */
 
-// Repository factory functions would be implemented here when adding persistent storage
-export function createCourseRepository() {
-  // TODO: Implement in-memory or file-based course repository
-  throw new Error('Course repository not implemented without database')
-}
+// Course Repository
+export {
+  PrismaCourseRepository,
+  createPrismaCourseRepository,
+} from './prisma-course-repository'
 
-export function createUserRepository() {
-  // TODO: Implement in-memory or file-based user repository  
-  throw new Error('User repository not implemented without database')
-}
+// User Repository
+export {
+  PrismaUserRepository,
+  createPrismaUserRepository,
+} from './prisma-user-repository'
+
+// Re-export repository interfaces for convenience
+export type { CourseRepository } from '@/domain/interfaces/course-repository'
+export type { UserRepository } from '@/domain/interfaces/user-repository'
