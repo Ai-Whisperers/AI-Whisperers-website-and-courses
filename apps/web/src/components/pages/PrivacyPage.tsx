@@ -1,11 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from "framer-motion"
 import { DynamicIcon } from "@/components/content/DynamicIcon"
 import { DynamicButton } from "@/components/content/DynamicButton"
 import type { PageContent } from "@/types/content"
-import { useLocalizedRoutes } from '@/hooks/useLocalizedRoutes'
 
 interface PrivacyPageProps {
   content: PageContent
@@ -41,8 +39,6 @@ interface PrivacyContent {
 }
 
 export function PrivacyPage({ content }: PrivacyPageProps) {
-  const { routes } = useLocalizedRoutes()
-
   // Safe content validation instead of unsafe casting
   const isValidPrivacyContent = (content: any): content is PrivacyContent => {
     return content &&

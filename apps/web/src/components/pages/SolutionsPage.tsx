@@ -9,13 +9,6 @@ interface SolutionsPageProps {
   content: PageContent
 }
 
-interface Department {
-  title: string
-  description: string
-  solutions: string[]
-  benefits: string[]
-}
-
 export function SolutionsPage({ content }: SolutionsPageProps) {
   const { hero, departments, contact } = content as any
 

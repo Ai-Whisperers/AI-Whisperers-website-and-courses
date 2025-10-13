@@ -290,29 +290,31 @@ export function ServicesPage({ content }: ServicesPageProps) {
       )}
 
       {/* Contact CTA */}
-      <section className="py-16" style={{ background: 'var(--color-bg-secondary)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--color-text-primary)' }}>
-            {contact.title}
-          </h2>
-          <p className="text-lg mb-8" style={{ color: 'var(--color-text-secondary)' }}>
-            {contact.description}
-          </p>
+      {contact && (
+        <section className="py-16" style={{ background: 'var(--color-bg-secondary)' }}>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--color-text-primary)' }}>
+              {contact.title}
+            </h2>
+            <p className="text-lg mb-8" style={{ color: 'var(--color-text-secondary)' }}>
+              {contact.description}
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <DynamicButton
-              content={contact.primaryCta}
-              className="px-8 py-3 text-lg text-white"
-              style={{ background: 'var(--color-primary-600)', hover: 'var(--color-primary-700)' }}
-            />
-            <DynamicButton
-              content={contact.secondaryCta}
-              className="px-8 py-3 text-lg border"
-              style={{ borderColor: 'var(--color-border-default)', color: 'var(--color-text-primary)' }}
-            />
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <DynamicButton
+                content={contact.primaryCta}
+                className="px-8 py-3 text-lg text-white"
+                style={{ background: 'var(--color-primary-600)' }}
+              />
+              <DynamicButton
+                content={contact.secondaryCta}
+                className="px-8 py-3 text-lg border"
+                style={{ borderColor: 'var(--color-border-default)', color: 'var(--color-text-primary)' }}
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   )
 }
