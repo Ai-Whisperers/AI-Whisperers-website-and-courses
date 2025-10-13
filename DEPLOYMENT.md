@@ -1,23 +1,25 @@
 # Deployment Guide - AI Whisperers Platform
 **Complete deployment instructions for Render.com**
 
-**Last Updated:** October 7, 2025
+**Last Updated:** October 13, 2025
 **Platform:** Render.com (Docker-based deployment)
-**Framework:** Next.js 15.5.2 (App Router)
+**Framework:** Next.js 15.5.4 (App Router)
 **Bundler:** Webpack (Enterprise-grade, production-ready)
 **Database:** PostgreSQL (Render PostgreSQL)
 **Node Version:** 22.16.0 LTS
 **Runtime:** Node.js standalone server
+**Status:** ✅ Production-Ready with Database Integration
 
 ---
 
 ## 🚀 Tech Stack
 
 ### Core Technologies
-- **Next.js** 15.5.2 (App Router, Standalone mode)
+- **Next.js** 15.5.4 (App Router, Standalone mode)
 - **React** 19.1.0
 - **TypeScript** 5.9.2
 - **Node.js** 22.16.0 LTS
+- **Turborepo** 2.5.8 (Monorepo management)
 
 ### Build & Bundle
 - **Bundler:** Webpack (Enterprise-grade, production-ready)
@@ -78,6 +80,14 @@
 - Commerce: `transactions`
 - Analytics: `course_analytics`
 - Content: `media`, `certificates`
+
+**Current Database State (Production):**
+- ✅ 4 demo users (Admin, Instructor, 2 Students)
+- ✅ 3 published courses with full content:
+  - **n8n Automation Mastery** - 5 modules, 21 lessons, $499
+  - **AI Foundations: From Zero to Hero** - $299
+  - **Master ALL 21 Agentic AI Design Patterns** - 6 modules, 21 lessons, $999
+- ✅ All course data seeded from YAML content sources
 
 **Content Management System** - Build-time compilation:
 - Source: `src/content/pages/` (YAML files)
@@ -201,12 +211,14 @@ npx prisma --version
 - **Production:** `https://your-domain.com` or `https://your-app.onrender.com`
 - **Important:** Must match Render service URL exactly
 
-#### `DATABASE_URL` (REQUIRED)
+#### `DATABASE_URL` (CRITICAL - REQUIRED)
 - **Description:** PostgreSQL connection string (Render provides this)
 - **Format:** `postgresql://USER:PASSWORD@HOST:PORT/DATABASE`
 - **Render Format:** `postgresql://username:password@hostname.oregon-postgres.render.com/database_name`
 - **Source:** Copy from Render PostgreSQL service "Internal Database URL" or "External Database URL"
 - **Important:** Use **External URL** for development, **Internal URL** for production (Render services)
+- **⚠️ Common Mistake:** If `.env.local` has `DATABASE_URL=postgresql://localhost:5432/...`, you'll get "Can't reach database server" errors. Always use the full Render URL in development.
+- **Example Development URL:** `postgresql://aiwhisperers_admin:password@dpg-xxxxx-a.oregon-postgres.render.com/aiwhisperers_production`
 
 ---
 
@@ -369,6 +381,53 @@ Expected tables (19 total):
 - `quiz_attempts` - Student attempts
 - `certificates` - Course certificates
 
+### Step 4: Seed Database with Initial Data
+
+After migrations, populate the database with demo users and courses.
+
+**Available Seed Scripts:**
+
+```bash
+# 1. Seed basic users (Admin, Instructor, 2 Students)
+npx tsx packages/database/prisma/seed-basic.ts
+
+# 2. Seed n8n Automation Mastery course
+npx tsx packages/database/prisma/seed-n8n-course.ts
+
+# 3. Seed Agentic AI Design Patterns course
+npx tsx packages/database/prisma/seed-agentic-course.ts
+```
+
+**Recommended Seeding Order:**
+
+```bash
+# Set DATABASE_URL first
+export DATABASE_URL="postgresql://user:password@host.oregon-postgres.render.com/database"
+
+# Run seeds in order
+npx tsx packages/database/prisma/seed-basic.ts
+npx tsx packages/database/prisma/seed-n8n-course.ts
+npx tsx packages/database/prisma/seed-agentic-course.ts
+
+# Verify seeding
+npx prisma studio
+# Check: 4 users, 3 courses, 11 modules, 42 lessons
+```
+
+**Current Production Data:**
+- ✅ 4 users: Admin, Instructor, Student1, Student2
+- ✅ 3 courses:
+  - **n8n Automation Mastery** - 5 modules, 21 lessons, $499
+  - **AI Foundations: From Zero to Hero** - $299
+  - **Master ALL 21 Agentic AI Design Patterns** - 6 modules, 21 lessons, $999
+
+**Seed Script Features:**
+- Idempotent (safe to run multiple times)
+- Uses `upsert` to prevent duplicates
+- Validates all data before insertion
+- Populates learning objectives and prerequisites
+- Creates complete module/lesson structure
+
 ---
 
 ## Render Web Service Deployment
@@ -474,7 +533,29 @@ npx prisma db pull --print
 # Should show all 19 tables
 ```
 
-### 2. Test Authentication Flow
+### 2. Seed Production Database
+
+**Important:** Run seed scripts to populate initial data.
+
+```bash
+# From Render Shell tab in dashboard
+npx tsx packages/database/prisma/seed-basic.ts
+npx tsx packages/database/prisma/seed-n8n-course.ts
+npx tsx packages/database/prisma/seed-agentic-course.ts
+
+# Verify seeding succeeded
+npx prisma studio
+```
+
+**Expected Result:**
+```
+✅ 4 users created
+✅ 3 courses created with full content
+✅ 11 modules created
+✅ 42 lessons created
+```
+
+### 3. Test Authentication Flow
 
 1. Visit `https://your-app.onrender.com`
 2. Click "Sign In" (or navigate to `/api/auth/signin`)
@@ -482,7 +563,18 @@ npx prisma db pull --print
 4. Verify successful login and redirect
 5. Check Render logs for any errors
 
-### 3. Verify Prisma Client Generation
+### 4. Verify Courses Pages
+
+1. Visit `https://your-app.onrender.com/courses`
+   - Should display 3 courses
+   - No runtime errors in browser console
+2. Click on a course to view details
+   - Should load course page successfully
+   - Modules and lessons should be visible
+3. Check API endpoint: `https://your-app.onrender.com/api/courses`
+   - Should return JSON array of 3 courses
+
+### 5. Verify Prisma Client Generation
 
 Check build logs for:
 ```
@@ -494,7 +586,7 @@ If missing, rebuild:
 npx prisma generate
 ```
 
-### 4. Set Up Custom Domain (Optional)
+### 6. Set Up Custom Domain (Optional)
 
 1. **In Render Dashboard:**
    - Go to "Settings" tab
@@ -516,13 +608,13 @@ npx prisma generate
    - Render will auto-deploy on env var change
    - Or manually trigger: "Manual Deploy" → "Deploy latest commit"
 
-### 5. Enable HTTPS (Automatic)
+### 7. Enable HTTPS (Automatic)
 
 - Render automatically provisions SSL certificates via Let's Encrypt
 - Happens within 5-10 minutes of custom domain setup
 - Verify at: `https://your-domain.com`
 
-### 6. Set Up Monitoring (Recommended)
+### 8. Set Up Monitoring (Recommended)
 
 **Render Built-in Monitoring:**
 - Go to "Metrics" tab
@@ -624,7 +716,30 @@ npm install && npx prisma generate && node scripts/compile-content.js && next bu
 
 ### Database Issues
 
-**Error:** `P1001: Can't reach database server`
+**Error:** `P1001: Can't reach database server at 'localhost:5432'`
+```bash
+# Solution: DATABASE_URL pointing to localhost instead of Render
+# This is a VERY COMMON error in development
+
+# Root Cause:
+# .env.local has DATABASE_URL=postgresql://localhost:5432/...
+# This overrides the correct Render URL
+
+# Fix:
+# 1. Open apps/web/.env.local
+# 2. Find DATABASE_URL line
+# 3. Replace with full Render External URL:
+DATABASE_URL="postgresql://username:password@dpg-xxxxx-a.oregon-postgres.render.com/database_name"
+
+# 4. Restart dev server
+npm run dev
+
+# Verification:
+curl http://localhost:3002/api/courses
+# Should return 200 OK with course data
+```
+
+**Error:** `P1001: Can't reach database server` (General)
 ```bash
 # Solution: Connection string issue
 # 1. For Render services: Use Internal Database URL
@@ -644,6 +759,34 @@ npx prisma migrate reset --skip-seed
 
 ### Authentication Issues
 
+**Error:** `TypeError: redirectToAuth is not a function`
+```bash
+# Location: src/components/auth/auth-guard.tsx
+# Symptom: Courses pages crash with runtime error
+
+# Root Cause:
+# AuthGuard component using functions that don't exist in useAuth() hook
+
+# Fix:
+# 1. Import both useAuth and usePermissions:
+import { useAuth, usePermissions } from '@/contexts/security'
+
+# 2. Split hook usage:
+const { user, isLoading, isAuthenticated, login } = useAuth()
+const { hasRole } = usePermissions()
+
+# 3. Create local helper functions:
+const canAccessCourse = () => {
+  return isAuthenticated && user?.emailVerified
+}
+
+# 4. Remove non-existent function calls like redirectToAuth()
+
+# Verification:
+# Visit /courses - should load without errors
+# Check browser console - no "redirectToAuth" errors
+```
+
 **Error:** `redirect_uri_mismatch`
 ```bash
 # Solution: OAuth callback URL mismatch
@@ -660,6 +803,47 @@ https://your-actual-domain.com/api/auth/callback/github
 # 1. Verify sessions table exists: npx prisma db pull
 # 2. Check src/lib/auth/config.ts has PrismaAdapter configured
 # 3. Restart service
+```
+
+### Course Data Issues
+
+**Error:** `Course must have at least one learning objective`
+```bash
+# Location: API routes when converting Prisma course to domain entity
+# Symptom: 500 error when fetching courses
+
+# Root Cause:
+# Course in database has empty learningObjectives or prerequisites arrays
+# Domain entity validation requires at least one of each
+
+# Fix Option 1: Update existing course
+npx tsx packages/database/prisma/update-course-objectives.ts
+
+# Fix Option 2: Re-seed courses
+npx tsx packages/database/prisma/seed-n8n-course.ts
+npx tsx packages/database/prisma/seed-agentic-course.ts
+
+# Verification:
+curl http://localhost:3002/api/courses
+# Should return 200 OK with full course data including objectives
+```
+
+**Error:** `Course not found` or empty courses list
+```bash
+# Solution: Database not seeded
+
+# Check if courses exist:
+npx prisma studio
+# Navigate to "courses" table - should have 3 rows
+
+# If empty, run seed scripts:
+npx tsx packages/database/prisma/seed-basic.ts
+npx tsx packages/database/prisma/seed-n8n-course.ts
+npx tsx packages/database/prisma/seed-agentic-course.ts
+
+# Verification:
+curl http://localhost:3002/api/courses | jq length
+# Should return: 3
 ```
 
 ### Performance Issues
@@ -803,6 +987,19 @@ Before going live, ensure:
 
 ## Deployment History
 
+### Version 1.1.0 - October 13, 2025
+- ✅ Database seeding infrastructure complete
+- ✅ 3 production courses with full content:
+  - n8n Automation Mastery (5 modules, 21 lessons)
+  - AI Foundations: From Zero to Hero
+  - Master ALL 21 Agentic AI Design Patterns (6 modules, 21 lessons)
+- ✅ Fixed AuthGuard component (courses pages working)
+- ✅ Fixed DATABASE_URL configuration issues
+- ✅ Added course validation and learning objectives
+- ✅ Repository pattern fully integrated
+- ✅ Frontend-database integration complete
+- ✅ All API endpoints returning real data
+
 ### Version 1.0.0 - October 1, 2025
 - ✅ Initial production deployment
 - ✅ Complete LMS database schema (19 tables)
@@ -836,6 +1033,11 @@ npx prisma migrate deploy
 # Generate Prisma Client
 npx prisma generate
 
+# Seed database (run in order)
+npx tsx packages/database/prisma/seed-basic.ts
+npx tsx packages/database/prisma/seed-n8n-course.ts
+npx tsx packages/database/prisma/seed-agentic-course.ts
+
 # Build locally (test before deploy)
 npm run build
 
@@ -844,12 +1046,25 @@ npm run start
 
 # View database in browser
 npx prisma studio
+
+# Verify API endpoints
+curl http://localhost:3002/api/courses | jq
+curl http://localhost:3002/api/courses/n8n-automation-mastery | jq
 ```
 
 ---
 
-**Deployment Guide Version:** 1.0.0
-**Last Reviewed:** October 1, 2025
-**Next Review:** November 1, 2025
+**Deployment Guide Version:** 1.1.0
+**Last Reviewed:** October 13, 2025
+**Next Review:** November 13, 2025
+
+**Changelog:**
+- **v1.1.0 (Oct 13, 2025):**
+  - Added comprehensive database seeding documentation
+  - Added 3 new troubleshooting sections (localhost connection, AuthGuard errors, course validation)
+  - Updated environment variables section with common mistakes
+  - Added course verification steps to post-deployment
+  - Updated Quick Start Commands with seeding workflow
+  - Documented current production database state (3 courses, 4 users)
 
 For questions or issues, refer to troubleshooting section or create a GitHub issue.
