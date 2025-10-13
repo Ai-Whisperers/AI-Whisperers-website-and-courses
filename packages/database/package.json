@@ -15,6 +15,7 @@
     "studio": "prisma studio",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "db:seed-courses": "tsx prisma/seed-courses-simple.ts",
     "clean": "rm -rf node_modules .turbo"
   },
   "dependencies": {
@@ -22,11 +23,12 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
+    "dotenv": "^16.6.1",
     "js-yaml": "^4.1.0",
     "prisma": "^6.16.3",
     "tsx": "^4.19.0"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed-basic.ts"
   }
 }

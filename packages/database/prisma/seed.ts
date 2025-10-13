@@ -80,9 +80,17 @@ function mapDifficulty(difficulty: string): Difficulty {
 function readCourseFiles(): CourseYAML[] {
   // Determine root directory (handle both monorepo root and packages/database contexts)
   const cwd = process.cwd()
-  const rootDir = cwd.includes('packages/database')
-    ? path.join(cwd, '..', '..')
-    : cwd
+  let rootDir = cwd
+
+  // If running from packages/database, go up two levels to project root
+  if (cwd.endsWith('packages/database') || cwd.endsWith('packages\\database')) {
+    rootDir = path.join(cwd, '..', '..')
+  }
+
+  // If running from packages/database/prisma, go up three levels
+  if (cwd.endsWith('prisma') || cwd.includes('packages/database/prisma')) {
+    rootDir = path.join(cwd, '..', '..', '..')
+  }
 
   const coursesDir = path.join(rootDir, 'courses-content', 'courses')
 
@@ -162,12 +170,14 @@ async function seedCourses() {
     console.log(`   ✓ Course created/updated: ${course.id}`)
 
     // Delete existing modules and lessons for clean re-seed
-    await prisma.lesson.deleteMany({
-      where: { module: { courseId: course.id } },
-    })
-    await prisma.module.deleteMany({
-      where: { courseId: course.id },
-    })
+    // TEMP: Commenting out due to Prisma client generation issue
+    // await prisma.lesson.deleteMany({
+    //   where: { module: { courseId: course.id } },
+    // })
+    // await prisma.module.deleteMany({
+    //   where: { courseId: course.id },
+    // })
+    console.log(`   ℹ️  Skipping delete (will append new modules/lessons)`)
 
     // Create modules with lessons
     for (const moduleData of courseData.modules) {

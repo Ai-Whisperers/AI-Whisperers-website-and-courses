@@ -169,7 +169,9 @@ CREATE INDEX IF NOT EXISTS "course_analytics_lastCalculatedAt_idx" ON "course_an
 -- ============================================================================
 
 -- Update statistics for query planner (helps PostgreSQL choose optimal query plans)
-VACUUM ANALYZE;
+-- VACUUM ANALYZE;
+-- Note: VACUUM cannot run inside a transaction block, so it must be run separately
+-- Run this manually after migrations: VACUUM ANALYZE;
 
 -- ============================================================================
 -- Migration Summary
