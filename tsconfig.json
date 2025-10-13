@@ -17,22 +17,8 @@
       "@aiwhisperers/config-*": ["./packages/config/*"]
     }
   },
-  "files": [],
-  "references": [
-    {
-      "path": "./apps/web"
-    },
-    {
-      "path": "./packages/database"
-    },
-    {
-      "path": "./packages/state-core"
-    },
-    {
-      "path": "./packages/render-tunnel"
-    }
-  ],
   "include": [],
+  "files": [],
   "exclude": [
     "node_modules",
     "dist",
