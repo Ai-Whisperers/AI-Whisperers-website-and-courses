@@ -4,7 +4,7 @@
 'use client'
 
 import { useEffect, ReactNode } from 'react'
-import { useAuth } from '@/contexts/security'
+import { useAuth, usePermissions } from '@/contexts/security'
 import { UserRole } from '@/domain/entities/user'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -24,21 +24,28 @@ export function AuthGuard({
   requireEmailVerified = false,
   fallback
 }: AuthGuardProps) {
-  const { 
-    user, 
-    isLoading, 
-    isAuthenticated, 
-    hasRole, 
-    canAccessCourse, 
-    requireAuth: redirectToAuth,
-    login 
+  const {
+    user,
+    isLoading,
+    isAuthenticated,
+    login
   } = useAuth()
 
+  const { hasRole } = usePermissions()
+
+  // Email verification check: user must be authenticated and have verified email
+  const canAccessCourse = () => {
+    return isAuthenticated && user?.emailVerified
+  }
+
+  // No automatic redirect - just show fallback UI
+  // Users can click "Sign In" button to authenticate
   useEffect(() => {
     if (!isLoading && requireAuth && !isAuthenticated) {
-      redirectToAuth()
+      // Could trigger a notification here if needed
+      console.log('[AuthGuard] Authentication required but user not authenticated')
     }
-  }, [isLoading, requireAuth, isAuthenticated, redirectToAuth])
+  }, [isLoading, requireAuth, isAuthenticated])
 
   // Show loading state
   if (isLoading) {
