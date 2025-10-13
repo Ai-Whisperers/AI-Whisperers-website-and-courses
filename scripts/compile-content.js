@@ -11,9 +11,13 @@ const path = require('path');
 const yaml = require('js-yaml');
 
 // ✅ PHASE 1: Updated paths for monorepo structure (apps/web/src)
-// Use process.cwd() for more predictable path resolution across environments
-const CONTENT_DIR = path.join(process.cwd(), 'apps', 'web', 'src', 'content', 'pages');
-const OUTPUT_DIR = path.join(process.cwd(), 'apps', 'web', 'src', 'lib', 'content', 'compiled');
+// Detect if we're in project root or apps/web directory
+const cwd = process.cwd();
+const isInAppsWeb = cwd.endsWith('apps/web') || cwd.endsWith('apps\\web');
+const baseDir = isInAppsWeb ? cwd : path.join(cwd, 'apps', 'web');
+
+const CONTENT_DIR = path.join(baseDir, 'src', 'content', 'pages');
+const OUTPUT_DIR = path.join(baseDir, 'src', 'lib', 'content', 'compiled');
 
 /**
  * Ensure output directory exists

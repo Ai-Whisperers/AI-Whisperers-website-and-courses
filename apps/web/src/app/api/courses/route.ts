@@ -2,7 +2,7 @@
 // RESTful API for course management following clean architecture
 
 import { NextRequest, NextResponse } from 'next/server'
-import { Difficulty } from '@/domain/entities/course'
+import type { Difficulty } from '@/domain/entities/course'
 import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
 import { getMockCoursesAsPlainObjects } from '@/lib/data/mock-courses'
 import { logger } from '@/lib/logger'
@@ -54,11 +54,11 @@ export async function GET(request: NextRequest) {
     const { published, featured, difficulty, limit = 100, offset = 0 } = validation.data
 
     // Get courses from centralized mock data with filtering and pagination
-    const allCourses = getMockCoursesAsPlainObjects({ published, featured, difficulty })
+    const allCourses = getMockCoursesAsPlainObjects({ published, featured, difficulty: difficulty as Difficulty | undefined })
     const paginatedCourses = getMockCoursesAsPlainObjects({
       published,
       featured,
-      difficulty,
+      difficulty: difficulty as Difficulty | undefined,
       limit,
       offset
     })

@@ -6,7 +6,7 @@ import { getMockCourseBySlug, courseToPlainObject } from '@/lib/data/mock-course
 import { logger } from '@/lib/logger'
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const resolvedParams = await params
