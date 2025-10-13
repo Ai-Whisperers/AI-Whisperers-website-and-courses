@@ -2,8 +2,10 @@
 // RESTful API for specific course details
 
 import { NextRequest, NextResponse } from 'next/server'
-import { getMockCourseBySlug, courseToPlainObject } from '@/lib/data/mock-courses'
+import { courseToPlainObject } from '@/lib/data/mock-courses'
 import { logger } from '@/lib/logger'
+import { prisma } from '@/lib/db/prisma'
+import { createPrismaCourseRepository } from '@/lib/repositories/prisma-course-repository'
 
 export async function GET(
   _request: NextRequest,
@@ -12,11 +14,11 @@ export async function GET(
   const resolvedParams = await params
 
   try {
-    // Get course from centralized mock data
-    const courseEntity = getMockCourseBySlug(resolvedParams.slug)
-    const course = courseEntity ? courseToPlainObject(courseEntity) : null
-    
-    if (!course) {
+    // Get course from database using repository
+    const repository = createPrismaCourseRepository(prisma)
+    const courseEntity = await repository.findBySlug(resolvedParams.slug)
+
+    if (!courseEntity) {
       return NextResponse.json(
         {
           success: false,
@@ -26,6 +28,9 @@ export async function GET(
         { status: 404 }
       )
     }
+
+    // Convert to plain object for API response
+    const course = courseToPlainObject(courseEntity)
 
     return NextResponse.json({
       success: true,

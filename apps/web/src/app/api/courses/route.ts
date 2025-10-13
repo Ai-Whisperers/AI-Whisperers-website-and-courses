@@ -4,9 +4,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { Difficulty } from '@/domain/entities/course'
 import { CourseQuerySchema, parseQueryParams } from '@/lib/api-schemas'
-import { getMockCoursesAsPlainObjects } from '@/lib/data/mock-courses'
+import { courseToPlainObject } from '@/lib/data/mock-courses'
 import { logger } from '@/lib/logger'
 import { rateLimit, getIdentifier, RateLimitPresets } from '@/lib/rate-limit'
+import { prisma } from '@/lib/db/prisma'
+import { createPrismaCourseRepository } from '@/lib/repositories/prisma-course-repository'
 
 export async function GET(request: NextRequest) {
   try {
@@ -53,21 +55,31 @@ export async function GET(request: NextRequest) {
 
     const { published, featured, difficulty, limit = 100, offset = 0 } = validation.data
 
-    // Get courses from centralized mock data with filtering and pagination
-    const allCourses = getMockCoursesAsPlainObjects({ published, featured, difficulty: difficulty as Difficulty | undefined })
-    const paginatedCourses = getMockCoursesAsPlainObjects({
-      published,
-      featured,
-      difficulty: difficulty as Difficulty | undefined,
-      limit,
-      offset
-    })
+    // Get courses from database using repository
+    const repository = createPrismaCourseRepository(prisma)
+
+    let courses;
+    if (featured) {
+      courses = await repository.findFeatured()
+    } else if (published) {
+      courses = await repository.findPublished()
+    } else if (difficulty) {
+      courses = await repository.findByDifficulty(difficulty)
+    } else {
+      courses = await repository.findAll()
+    }
+
+    // Convert to plain objects for API response
+    const allCoursesPlain = courses.map(courseToPlainObject)
+
+    // Apply pagination
+    const paginatedCourses = allCoursesPlain.slice(offset, offset + limit)
 
     return NextResponse.json({
       success: true,
       courses: paginatedCourses,
       count: paginatedCourses.length,
-      total: allCourses.length,
+      total: allCoursesPlain.length,
       limit,
       offset,
     }, {

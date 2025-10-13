@@ -10,22 +10,26 @@ import { Separator } from '@/components/ui/separator'
 import { Breadcrumb } from '@/components/ui/breadcrumb'
 import { formatCurrency, formatDuration } from '@/lib/utils'
 import { AuthGuard } from '@/components/auth/auth-guard'
-import { getMockCourseBySlug, courseToPlainObjectWithMethods, getMockCourses } from '@/lib/data/mock-courses'
+import { courseToPlainObjectWithMethods } from '@/lib/data/mock-courses'
 import { routes } from '@/config/routes'
+import { prisma } from '@/lib/db/prisma'
+import { createPrismaCourseRepository } from '@/lib/repositories/prisma-course-repository'
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>
 }
 
 async function getCourseBySlug(slug: string) {
-  const course = getMockCourseBySlug(slug)
+  const repository = createPrismaCourseRepository(prisma)
+  const course = await repository.findBySlug(slug)
   return course ? courseToPlainObjectWithMethods(course) : null
 }
 
 // Static Site Generation (SSG) with Incremental Static Regeneration (ISR)
 // Pre-generate all published course pages at build time for optimal performance
 export async function generateStaticParams() {
-  const courses = getMockCourses({ published: true })
+  const repository = createPrismaCourseRepository(prisma)
+  const courses = await repository.findPublished()
 
   return courses.map((course) => ({
     slug: course.slug,
